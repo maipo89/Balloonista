@@ -1,5 +1,77 @@
+@import 'blocks/_variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import 'blocks/_block.scss';
+@import 'blocks/_header.scss';
 
-.product_title {
-    color: red;
+h1 {
+    font-size: 54px;
+    font-family: $montserrat;
+    color: brown;
+}
+
+h2 {
+    font-size: 36px;
+    font-family: $montserrat;
+}
+
+h3 {
+    font-size: 22px;
+    font-family: $montserrat;
+}
+
+p {
+    font-size: $p-regular;
+    font-family: $montserrat;
+    font-size: $p-regular-weight;
+}
+
+a {
+    font-family: $montserrat;
+    text-decoration: none;
+    text-transform: none;
+    color: initial;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+
+// Buttons
+
+.primary-button {
+    background-color: $seaFoam;
+    color: $white;
+    border-radius: 10px;
+    font-size: $p-regular;
+    font-weight: $p-regular-weight;
+    padding: 16px 24px;
+
+    &:hover {
+        background-color: $mercury;
+    }
+
+    &:active, &:focus {
+        background-color: $seaFoam;
+    }
+}
+
+.secondary-button {
+    background-color: $white;
+    color: $black;
+    border-radius: 10px;
+    font-size: $p-regular;
+    font-weight: $p-regular-weight;
+    padding: 16px 24px;
+    border: 2px $mercury solid;
+
+    &:hover {
+        background-color: $white;
+        border: 2px $seaFoam solid;
+    }
+
+    &:active, &:focus {
+        background-color: $mercury;
+        border: 2px $mercury solid;
+    }
 }
