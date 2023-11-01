@@ -72,6 +72,10 @@
                         }
                     }
                 }
+
+                svg {
+                    display: none;
+                }
             }
 
             .menu-item-has-children {
@@ -80,11 +84,20 @@
                     transition: font-weight 0.1s ease;
                 }
 
+                svg {
+                    display: block;
+                    position: absolute;
+                    right: 0;
+                    top: 24px;
+                    transition: transform 0.3s ease;
+                    cursor: pointer;
+                }
+
                 &.open {
                     a {
                         font-weight: 600;
                     }
-                    &::before {
+                    svg {
                         transform: rotate(180deg);
                     }
                     .sub-menu {
@@ -100,6 +113,10 @@
                             a {
                                 font-weight: 300;
                             }
+                        }
+
+                        svg {
+                            display: none;
                         }
                     }
                 }

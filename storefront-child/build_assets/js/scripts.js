@@ -11,15 +11,16 @@ $(document).ready(function() {
 
     // Menu Mobile 
 
-    $('.menu-item-has-children').on('click', function(e) {
+    $('.menu-item-has-children svg').on('click', function(e) {
         e.preventDefault();
-        var $clicked = $(this);
+        var $parentElement = $(this).closest('.menu-item-has-children');
+        console.log($parentElement, 'hhhhhhhhhhhhhhh')
 
-        $('.menu-item-has-children').not($clicked).each(function() {
+        $('.menu-item-has-children').not($parentElement).each(function() {
             $(this).removeClass('open');
         });
 
-        $clicked.toggleClass('open');
+        $parentElement.toggleClass('open');
     });
 
 });
