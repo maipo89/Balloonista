@@ -23,4 +23,17 @@ $(document).ready(function() {
         $parentElement.toggleClass('open');
     });
 
+    $('.footer__form .name, .footer__form  .email').on('input', function() {
+        const nameValue = $('.footer__form .name').val().trim();
+        const emailValue = $('.footer__form .email').val().trim();
+
+        console.log(nameValue, emailValue)
+        
+        if (nameValue !== '' && emailValue !== '') {
+            $('.footer__form button').addClass('active');
+        } else {
+            $('.footer__form button').removeClass('active');
+        }
+    });
+
 });

@@ -166,7 +166,7 @@
 
             @media (max-width: $desktop) {
                 display: block;
-                width: 24px;
+                width: 66px;
                 .hamburger {
                     cursor: pointer;
 
@@ -185,10 +185,16 @@
                     }
                 }
             }
+
+            @media (max-width: $mobile) {
+                width: 24px;
+            }
         }
 
         &__logo {
             cursor: pointer;
+
+            svg { height: 60px; }
         }
 
         &__right-container {
