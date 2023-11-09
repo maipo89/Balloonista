@@ -212,23 +212,13 @@ $(document).ready(function() {
     });
 
 
-    // Carousel Image 
+    // Carousel Hero
 
-    $('.gallery').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        asNavFor: '.main-image',
-        dots: true,
-        centerMode: true,
-        focusOnSelect: true
-    });
-
-    $('.main-image').slick({
+    $('.hero__gallery').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: '.gallery'
+        infinite: true,
+        dots: true,
     });
 
 

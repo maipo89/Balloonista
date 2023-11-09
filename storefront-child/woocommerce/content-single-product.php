@@ -66,30 +66,34 @@ if ( post_password_required() ) {
 				<path d="M1 7L6.10557 4.44721C6.4741 4.26295 6.4741 3.73705 6.10557 3.55279L1 1" stroke="#D9E7E1" stroke-linecap="round"/>
 			</svg>
 			<div class="product__info__select__step"><p>Overview</p></div>
-		</div>
+</div>
 
-		<?php 
-			global $product;
+<?php global $product; 
 
-				// Check if the product is variable (has variations)
-				if ($product->is_type('variable')) {
-				// Get variations
-				$variations = $product->get_available_variations();
+// Get product attributes
+$attributes = $product->get_attributes();
 
-				if ($variations) {
-					echo '<label for="variation-select">Select a variation:</label>';
-					echo '<select id="variation-select">';
+if ( ! $attributes ) {
+    echo "No attributes";
+}
 
-					foreach ($variations as $variation) {
-						echo '<option value="' . esc_attr($variation['variation_id']) . '">' . esc_html(implode(' / ', $variation['attributes'])) . '</option>';
-					}
+foreach ( $attributes as $attribute ) {
 
-					echo '</select>';
-				}
-			}
+        echo $attribute['name'] . ": ";
+        $product_attributes = array();
+        $product_attributes = explode('|',$attribute['value']);
 
-		?>
-		
+        $attributes_dropdown = '<select>';
+
+        foreach ( $product_attributes as $pa ) {
+            $attributes_dropdown .= '<option value="' . $pa . '">' . $pa . '</option>';
+        }
+
+        $attributes_dropdown .= '</select>';
+
+        echo $attributes_dropdown;
+} ?>
+
 
 	</div>
 

@@ -6,10 +6,13 @@
 @import 'blocks/_delivery-banner.scss';
 @import 'blocks/_features.scss';
 @import 'blocks/_product.scss';
+@import 'blocks/_hero.scss';
 
 h1 {
     font-size: 54px;
     font-family: $montserrat;
+    line-height: 65px;
+    font-weight: 500;
 }
 
 h2 {
@@ -27,6 +30,7 @@ p {
     font-family: $montserrat;
     font-weight: $p-regular-weight;
     margin: 0;
+    line-height: 20px;
 }
 
 a {
@@ -55,7 +59,10 @@ body{
     border-radius: 10px;
     font-size: $p-regular;
     font-weight: $p-regular-weight;
-    padding: 16px 24px;
+    padding: 9px 24px;
+    display: block;
+    width: fit-content;
+
 
     &:hover {
         background-color: $mercury;
@@ -199,6 +206,34 @@ input[type=text] {
             top: 21px;
         }
 
+    }
+}
+
+// Slick 
+
+.slick-dots {
+    display: flex;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    height: 17px;
+    justify-content: center;
+    position: relative;
+
+    li {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: $mercury;
+        margin-right: 5px;
+        cursor: pointer;
+        button {
+            display: none !important;
+        }
+    }
+
+    li.slick-active {
+        background-color: $seaFoam;
     }
 }
 

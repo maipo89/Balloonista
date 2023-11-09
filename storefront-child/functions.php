@@ -42,11 +42,11 @@ add_filter( 'script_loader_src', 'vc_remove_wp_ver_css_js', 9999 );
 
 // Slick
 
-function enqueue_slick_script() {
-    // Enqueue Slick Slider script
-    wp_enqueue_script('slick-js', get_template_directory_uri() . '/path/to/slick.js', array('jquery'), '1.0', true);
+function enqueue_slick_scripts() {
+    wp_enqueue_style('slick-css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css');
+    wp_enqueue_script('slick-js', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '', true);
 }
-add_action('wp_enqueue_scripts', 'enqueue_slick_script');
+add_action('wp_enqueue_scripts', 'enqueue_slick_scripts');
 
 
 
