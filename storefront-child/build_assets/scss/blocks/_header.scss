@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     position: fixed;
-    z-index: 99;
+    z-index: 97;
     background-color: $white;
     border-bottom: 1px solid transparent;
 
@@ -22,7 +22,7 @@
         top: 96px;
         left: -280px;
         height: 100vh;
-        z-index: 98;
+        z-index: 96;
         bottom: 0;
         transition: left 0.3s ease;
 
@@ -216,7 +216,7 @@
                 a {
                     margin: 0;
                 }
-                .search {
+                .search-icon {
                     display: none;
                 }
 
@@ -326,6 +326,186 @@
 
             @media (max-width: $desktop) {
                 display: none;
+            }
+        }
+    }
+
+    .background-search {
+        background-color: $light-gray;
+        z-index: 98;
+        opacity: 0.8;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: none;
+
+        &.open {
+            display: block;
+        }
+    }
+
+    .search {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+        display: none;
+
+        &.open {
+            display: block;
+        }
+
+        p {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 300;
+            color: $black;
+            margin-bottom: 24px;
+        }
+
+        &__container {
+            width: 626px;
+            height: fit-content;
+            padding: 18px 24px;
+            background-color: $white;
+            border-radius: 16px;
+            position: relative;
+
+            @media (max-width: $tablet) {
+                width: 455px;
+            }
+
+            @media (max-width: $mobile) {
+                width: 300px;
+            }
+
+            @media (max-width: $smaller-screen) {
+                width: 280px;
+            }
+
+            .close-icon {
+               cursor: pointer;
+            }
+
+            svg {
+                position: absolute;
+                top: 24px;
+                right: 24px;
+            }
+
+            .search-input {
+                width: 90%;
+                margin-bottom: 40px;
+
+                @media (max-width: $mobile) {
+                    width: 80%;
+                }
+
+                input {
+                    width: 100%;
+                }
+            }
+
+            &__searching {
+
+                .heading {
+                    text-align: left;
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-bottom: 23px;
+                }
+
+                .product-container{
+                    display: flex;
+    
+                    .product {
+                        display: none;
+                        margin-right: 24px;
+                        width: 136px;
+    
+                        &__image {
+                            height: 136px;
+                            width: 136px;
+                            border-radius: 12px;
+                            background-position: center center;
+                            background-size: cover;
+                            position: relative;
+
+                            .badge-container {
+                                width: fit-content;
+                                position: absolute;
+                                bottom: 15px;
+                                left: 50%; /* Position at 50% from the left */
+                                transform: translate(-50%);
+
+                                .badge {
+                                    padding: 10px 6px;
+                                    background-color: $mercury;
+                                    border-radius: 44px;
+                                    font-size: 6px;
+                                    font-weight: 400;
+                                    color: $black;
+                                    margin-right: 8px;
+
+                                    &:last-child {
+                                        margin-right: 0px;
+                                    }
+                                }
+
+                            }
+                        }
+        
+                        h2 {
+                            font-size: 13px;
+                            font-weight: 600;
+                            text-align: center;
+                            margin-top: 8px;
+                        }
+        
+                        &__price {
+                            font-family: $montserrat;
+                            font-size: 10px;
+                            font-weight: 400;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                    }
+    
+                    .button-container {
+    
+                        a {
+                            margin-top: 60px;
+                            display: none;
+                        }
+
+                        .tertiary-button {
+                            @media (max-width: $smaller-screen) {
+                                font-size: 13px;
+                            }
+                        }
+                    }
+                }
+
+                .pages-container {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    p {
+                        margin-right: 20px;
+                        font-size: 15px;
+                        font-weight: 300;
+                        margin-bottom: 24px;
+                        display: none;
+
+                        &.open {
+                            display: block;
+                        }
+                    }
+                }
             }
         }
     }

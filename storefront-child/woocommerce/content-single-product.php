@@ -32,7 +32,7 @@ if ( post_password_required() ) {
 }
 ?>
 
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
+<div id="product-<?php the_ID(); ?>" class="product" >
 
 	<?php
 	/**
@@ -44,34 +44,55 @@ if ( post_password_required() ) {
 	do_action( 'woocommerce_before_single_product_summary' );
 	?>
 
-	<div class="summary entry-summary">
+	<div class="product__info">
+
 		<?php
-		/**
-		 * Hook: woocommerce_single_product_summary.
-		 *
-		 * @hooked woocommerce_template_single_title - 5
-		 * @hooked woocommerce_template_single_rating - 10
-		 * @hooked woocommerce_template_single_price - 10
-		 * @hooked woocommerce_template_single_excerpt - 20
-		 * @hooked woocommerce_template_single_add_to_cart - 30
-		 * @hooked woocommerce_template_single_meta - 40
-		 * @hooked woocommerce_template_single_sharing - 50
-		 * @hooked WC_Structured_Data::generate_product_data() - 60
-		 */
-		do_action( 'woocommerce_single_product_summary' );
+			global $product;
+        ?>
+		<h1><?php echo $product->get_name() ?></h1>
+		<div class="product__info__price"><?php echo $product->get_price_html(); ?></div>
+
+		<div class="product__info__select">
+			<div class="product__info__select__step"><p>Colours</p></div>
+			<svg width="7" height="8" viewBox="0 0 7 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1 7L6.10557 4.44721C6.4741 4.26295 6.4741 3.73705 6.10557 3.55279L1 1" stroke="#D9E7E1" stroke-linecap="round"/>
+			</svg>
+			<div class="product__info__select__step"><p>Quantity</p></div>
+			<svg width="7" height="8" viewBox="0 0 7 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1 7L6.10557 4.44721C6.4741 4.26295 6.4741 3.73705 6.10557 3.55279L1 1" stroke="#D9E7E1" stroke-linecap="round"/>
+			</svg>
+			<div class="product__info__select__step"><p>Extras</p></div>
+			<svg width="7" height="8" viewBox="0 0 7 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1 7L6.10557 4.44721C6.4741 4.26295 6.4741 3.73705 6.10557 3.55279L1 1" stroke="#D9E7E1" stroke-linecap="round"/>
+			</svg>
+			<div class="product__info__select__step"><p>Overview</p></div>
+		</div>
+
+		<?php 
+			global $product;
+
+				// Check if the product is variable (has variations)
+				if ($product->is_type('variable')) {
+				// Get variations
+				$variations = $product->get_available_variations();
+
+				if ($variations) {
+					echo '<label for="variation-select">Select a variation:</label>';
+					echo '<select id="variation-select">';
+
+					foreach ($variations as $variation) {
+						echo '<option value="' . esc_attr($variation['variation_id']) . '">' . esc_html(implode(' / ', $variation['attributes'])) . '</option>';
+					}
+
+					echo '</select>';
+				}
+			}
+
 		?>
+		
+
 	</div>
 
-	<?php
-	/**
-	 * Hook: woocommerce_after_single_product_summary.
-	 *
-	 * @hooked woocommerce_output_product_data_tabs - 10
-	 * @hooked woocommerce_upsell_display - 15
-	 * @hooked woocommerce_output_related_products - 20
-	 */
-	do_action( 'woocommerce_after_single_product_summary' );
-	?>
 </div>
 
 <?php do_action( 'woocommerce_after_single_product' ); ?>
