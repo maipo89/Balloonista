@@ -40,6 +40,14 @@
             padding: 0 32px 0 32px;
             margin: 0;
 
+            @media (max-width: $mobile) {
+                padding: 0 20px;
+            }
+    
+            @media (max-width: $smaller-screen) {
+                padding: 0 16px;
+            }
+
             li {
                 font-size: 16px;
                 font-weight: 400;
@@ -128,7 +136,7 @@
 
             @media (max-width: $mobile) {
                 display: block;
-                padding: 15px 32px;
+                padding: 15px 20px;
                 color: $black;
                 font-weight: 400;
                 margin-bottom: 50px;
@@ -143,6 +151,10 @@
                     top: 15px;
                     border-radius: 7px;
                 }
+            }
+
+            @media (max-width: $smaller-screen) {
+                padding: 15px 16px;
             }
         }
     }
@@ -159,6 +171,14 @@
 
         @media (max-width: $desktop) {
             padding: 0 32px;
+        }
+
+        @media (max-width: $mobile) {
+            padding: 0 20px;
+        }
+
+        @media (max-width: $smaller-screen) {
+            padding: 0 16px;
         }
 
         &__hamburger {
@@ -421,7 +441,7 @@
                 .product-container{
                     display: flex;
     
-                    .product {
+                    .product-name {
                         display: none;
                         margin-right: 24px;
                         width: 136px;

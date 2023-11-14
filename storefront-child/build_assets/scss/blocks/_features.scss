@@ -1,3 +1,94 @@
 .features {
-    
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 48px 0 48px 0;
+    border: 1px solid black;
+
+    @media (max-width: $desktop) {
+        max-width: 100%;
+        padding: 36px 32px;
+    }
+
+    @media (max-width: 710px) {
+        max-width: 100%;
+        padding: 0 32px;
+    }
+
+    @media (max-width: $tablet) {
+        padding: 32px;
+    }
+
+    @media (max-width: $mobile) {
+        padding: 32px 20px;
+    }
+
+    @media (max-width: $smaller-screen) {
+        padding: 32px 16px;
+    }
+
+    &__container {
+        background-color: $light-mercury;
+        height: 104px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px 0;
+
+        @media (max-width: 710px) {
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            height: fit-content;
+            padding: 24px 16px;
+        }
+
+        &__feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            svg {
+                margin-bottom: 12px;
+            }
+
+            p {
+                font-size: 16px;
+                font-family: $montserrat;
+                font-weight: 400;
+                color: black;
+
+                @media (max-width: 465px) {
+                    font-size: 14px;
+                }
+            }
+
+            @media (max-width: 710px) {
+                width: 33.3%;
+                padding: 9px 0 9px 0;
+            }
+
+            @media (max-width: 395px) {
+                width: 50%;
+                padding: 9px 0 9px 0;
+            }
+        }
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 36px;
+        font-weight: 300;
+        font-family: $montserrat;
+        @media (max-width: $desktop) {
+            font-size: 22px;
+            margin-bottom: 42px;
+        }
+        @media (max-width: $tablet) {
+            margin-bottom: 18px;
+        }
+        @media (max-width: $mobile) {
+            margin-bottom: 32px;
+        }
+    }
 }

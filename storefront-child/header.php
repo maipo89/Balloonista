@@ -156,7 +156,7 @@
 						while ($products->have_posts()) : $products->the_post();
 							global $product;
 							?>
-							<div class="product">
+							<div class="product-name">
 							<a href="<?php echo get_permalink(); ?>">
 								<?php
 								$image_id = $product->get_image_id();
@@ -164,7 +164,7 @@
 									$image_url = wp_get_attachment_image_url($image_id, 'medium'); // Change 'medium' to the desired image size
 									if ($image_url) {
 										?>
-										<div style="background-image: url('<?php echo esc_url($image_url); ?>')" class="product__image">
+										<div style="background-image: url('<?php echo esc_url($image_url); ?>')" class="product-name__image">
 										<?php
 											// Get the badges for the current product
 											$product_terms = get_the_terms(get_the_ID(), 'badge_taxonomy');
@@ -191,7 +191,7 @@
 								}
 								?>
 								<h2><?php echo get_the_title(); ?></h2>
-								<span class="product__price">
+								<span class="product-name__price">
 									<?php
 										$price = $product->get_price();
 

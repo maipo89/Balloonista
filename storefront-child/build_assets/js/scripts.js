@@ -115,7 +115,7 @@ $(document).ready(function() {
             if (screenWidth > 768) {
                 numToShow = 0;
                 showProducts(0);
-                document.querySelectorAll('.header .product-container .product').forEach(function(product) {
+                document.querySelectorAll('.header .product-container .product-name').forEach(function(product) {
                     var title = product.querySelector('h2').textContent.toLowerCase();
                     console.log(title.includes(searchText))
                     if (title.includes(searchText)) {
@@ -135,7 +135,7 @@ $(document).ready(function() {
             } else if (screenWidth <= 768 && screenWidth >= 480) {
                 numToShow = 0;
                 showProducts(0);
-                document.querySelectorAll('.header .product-container .product').forEach(function(product) {
+                document.querySelectorAll('.header .product-container .product-name').forEach(function(product) {
                     var title = product.querySelector('h2').textContent.toLowerCase();
                     if (title.includes(searchText)) {
                         if(numToShow < 2) {
@@ -154,7 +154,7 @@ $(document).ready(function() {
             } else if (screenWidth < 480) {
                 numToShow = 0;
                 showProducts(0);
-                document.querySelectorAll('.header .product-container .product').forEach(function(product) {
+                document.querySelectorAll('.header .product-container .product-name').forEach(function(product) {
                     var title = product.querySelector('h2').textContent.toLowerCase();
                     if (title.includes(searchText)) {
                         if (numToShow < 1) {
@@ -219,6 +219,15 @@ $(document).ready(function() {
         slidesToScroll: 1,
         infinite: true,
         dots: true,
+    });
+
+
+    // Accordion
+
+    $(".product-infos__informations").accordion({
+        collapsible: true,
+        active: false,
+        heightStyle: 'content',
     });
 
 

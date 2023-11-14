@@ -114,6 +114,8 @@
         position: absolute !important;
         right: 0;
         top: 118px;
+        overflow: hidden;
+        border-radius: 40px 0px 0px 40px;
 
         @media (max-width: 1280px) {
             top: 105px;
@@ -148,10 +150,18 @@
         @media (max-width: $smaller-screen) {
             padding: 0 16px;
         }
+        
+        &__image:nth-child(n+1) {
+            display: none;
+        }
+        
+        .slick-initialized,
+        &__image:first-child { 
+            display: block;
+        }
 
         .slick-slide {
             border-radius: 40px 0px 0px 40px;
-
             @media (max-width: 680px) {
                 border-radius: 40px 40px 40px 40px;
             }

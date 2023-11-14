@@ -20,7 +20,7 @@
             while( have_rows('gallery') ) : the_row();
             $image = get_sub_field('image');
             ?>
-                <img src="<?php echo($image["sizes"]["onqor-large"]) ?>" alt="<?php echo($image["alt"]) ?>"/>
+                <img class="hero__gallery__image" src="<?php echo($image["sizes"]["onqor-large"]) ?>" alt="<?php echo($image["alt"]) ?>"/>
             <?php 
             endwhile;
             ?>
