@@ -1,23 +1,133 @@
 <?php $testimonialSection = get_sub_field('testimonial_section'); ?>
+<?php $testimonialTitle = get_sub_field('testimonial_title'); ?>
+<?php $productsTitle = get_sub_field('products_title'); ?>
+<?php $buttonText = get_sub_field('button_text'); ?>
+<?php $buttonLink = get_sub_field('button_link'); ?>
+
 <div class="featured-products">
+    
+    <div class="featured-products__general-container">
+    <?php
+        if (have_rows('products')):
+    ?> 
+        <p class="featured-products__title"><?php echo $productsTitle ?></p>
+        <div class="featured-products__container-products">
+            <?php
+            while (have_rows('products')) : the_row();
 
-<?php
-$related_post_id = get_field('related_post'); // Replace 'related_post' with your actual ACF field name
+                $product_post = get_sub_field('product');
 
-if ($related_post_id) {
-    // Get the title of the related post
-    $related_post_title = get_the_title($related_post_id);
-    echo '<h2>' . esc_html($related_post_title) . '</h2>';
+                if ($product_post instanceof WP_Post): // Check if it's a WP_Post object
 
-    // Get the price from a custom field (replace 'price' with your actual custom field name)
-    $related_post_price = get_field('price', $related_post_id);
-    echo '<p>Price: ' . esc_html($related_post_price) . '</p>';
+                    $product_id = $product_post->ID;
 
-    // Get the featured image of the related post
-    $related_post_thumbnail = get_the_post_thumbnail($related_post_id, 'thumbnail'); // Replace 'thumbnail' with your desired image size
-    echo $related_post_thumbnail;
-}
-?>
+                    // Get product image URL (assuming it's a featured image)
+                    $image_url = get_the_post_thumbnail_url($product_id);
 
+                    // Get product title
+                    $title = get_the_title($product_id);
+
+                    // Get product permalink
+                    $product_permalink = get_permalink($product_id);
+
+                    // Get product price (replace 'price' with your actual custom field name)
+                    $price = get_post_meta($product_id, '_price', true);
+
+                    // Get product badge (replace 'badge_taxonomy' with your actual taxonomy name)
+                    // Get all badges associated with the product (replace 'badge_taxonomy' with your actual taxonomy name)
+                    $badge_terms = wp_get_post_terms($product_id, 'badge_taxonomy');
+
+                    // Output HTML with product information
+                    ?>
+                    <a class="featured-products__product" href="<?php echo $product_permalink ?>" >
+                        <div>
+                            <div class="featured-products__product__image" style="background-image: url(<?php echo $image_url; ?>);">
+                                <ul>
+                                    <?php
+                                        // Display only the first two badges
+                                        $badge_counter = 0;
+                                        foreach ($badge_terms as $badge_term):
+                                            if ($badge_counter >= 2) {
+                                                break;
+                                            }
+                                            ?>
+                                            <li><?php echo $badge_term->name; ?></li>
+                                            <?php
+                                            $badge_counter++;
+                                        endforeach;
+                                    ?>
+                                </ul>
+                            </div>
+                            <div class="featured-products__product__title">
+                                <p><?php echo $title; ?></p>
+                                <p>
+                                    <?php 										
+                                        if ($price) {
+                                            echo 'from £' . number_format($price, 2);
+                                        }
+                                    ?>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <?php
+                endif;
+
+            endwhile;
+            ?>
+        </div>
+        <div class="featured-products__button">
+            <a class="primary-button" href="<?php echo $buttonLink ?>"><?php echo $buttonText ?></a>
+        </div>
+        <?php
+        endif;
+        ?>
+        <?php
+            if ($testimonialSection) :
+        ?>
+        <div class="featured-products__testimonial">
+            <h2><?php echo $testimonialTitle ?></h2>
+                <?php
+
+                    if( have_rows('testimonials') ):
+                ?>
+
+                <div class="featured-products__testimonial__slider">
+                <?php
+
+                        while( have_rows('testimonials') ) : the_row();
+
+                            $author = get_sub_field('author');
+                            $paragraph = get_sub_field('paragraph');
+                            $logo = get_sub_field('logo');
+                            $rating = get_sub_field('rating');
+                ?>
+                    <div class="featured-products__testimonial__slider__slide">
+                        <div class="featured-products__testimonial__slider__author"> 
+                            <h3><?php echo $author ?></h3>
+                            <img src="<?php echo($logo["sizes"]["onqor-large"]) ?>" alt="<?php echo($logo["alt"]) ?>"/>
+                            <img class="rating" src="<?php echo($rating["sizes"]["onqor-large"]) ?>" alt="<?php echo($rating["alt"]) ?>"/>
+                        </div>
+                        <p><?php echo $paragraph ?></p>
+                    </div>
+                <?php
+
+                        endwhile;
+                ?>
+                </div>
+                <?php
+
+                    endif;
+
+                ?>
+            </div>
+        </div>
+        <?php
+            endif;
+        ?>
+        <?php
+        
+    ?>
+    </div>
 
 </div>

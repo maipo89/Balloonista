@@ -93,7 +93,7 @@ $(document).ready(function() {
     });
 
     function showProducts(numToShow) {
-        var products = document.querySelectorAll('.header .product-container .product');
+        var products = document.querySelectorAll('.header .product-container .product-name');
         products.forEach(function(product, index) {
             if (index < numToShow) {
                 product.style.display = 'block';
@@ -222,12 +222,42 @@ $(document).ready(function() {
     });
 
 
-    // Accordion
+    // Carousel Testimonials
 
-    $(".product-infos__informations").accordion({
-        collapsible: true,
-        active: false,
-        heightStyle: 'content',
+    $('.featured-products__testimonial__slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true,
+        dots: true,
+        adaptiveHeight: true
+    });
+
+
+    // Slider Featured
+
+    $(window).on('load resize orientationchange', function() {
+        $('.featured-products__container-products').each(function(){
+            var $carousel = $(this);
+            /* Initializes a slick carousel only on mobile screens */
+            // slick on mobile
+            if ($(window).width() > 1000) {
+                if ($carousel.hasClass('slick-initialized')) {
+                    $carousel.slick('unslick');
+                }
+            }
+            else {
+                if (!$carousel.hasClass('slick-initialized')) {
+                    $carousel.slick({
+                        infinite: true,
+                        dots: true,
+                        variableWidth: true,
+                        slidesToShow: 5,
+                        slidesToScroll: 1,
+                        centerMode: true
+                    });
+                }
+            }
+        });
     });
 
 

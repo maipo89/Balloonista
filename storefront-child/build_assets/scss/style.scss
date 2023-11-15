@@ -10,6 +10,7 @@
 @import 'blocks/_breadcrumb.scss';
 @import 'blocks/_featured-products.scss';
 @import 'blocks/_product-infos.scss';
+@import 'blocks/_baloon-columns.scss';
 
 h1 {
     font-size: 54px;
@@ -224,12 +225,15 @@ input[type=text] {
     position: relative;
 
     li {
-        width: 15px;
-        height: 15px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
         background-color: $mercury;
-        margin-right: 5px;
+        margin-right: 8px;
         cursor: pointer;
+        &:last-of-type {
+            margin-right: 0;
+        }
         button {
             display: none !important;
         }

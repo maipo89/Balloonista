@@ -6,12 +6,21 @@
     margin-bottom: 364px;
     position: relative;
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1281px) {
         height: fit-content;
     }
 
     @media (max-width: 1000px) {
         max-width: 100%;
+        margin-bottom: 257px;
+    }
+
+    @media (max-width: $tablet) {
+        margin-bottom: 196px;
+    }
+
+    @media (max-width: 680px) {
+        margin-bottom: 105px;
     }
 
     &__wrapper {
@@ -22,7 +31,7 @@
         padding-top: 212px;
         padding-bottom: 40px;
 
-        @media (max-width: 1260px) {
+        @media (max-width: 1281px) {
             padding-top: 90px;
             padding-bottom: 90px;
         }
@@ -52,9 +61,14 @@
             h1 {
                margin-bottom: 28px;
 
+                @media (max-width: 1281px) {
+                    white-space: nowrap;
+                }
+
                 @media (max-width: 1000px) {
                     margin-bottom: 23px;
                     text-align: center;
+                    white-space: initial;
                 }
 
                 @media (max-width: $mobile) {
@@ -118,7 +132,7 @@
         border-radius: 40px 0px 0px 40px;
 
         @media (max-width: 1280px) {
-            top: 105px;
+            top: 210px;
         }
 
         @media (max-width: 1000px) {
