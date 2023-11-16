@@ -260,5 +260,38 @@ $(document).ready(function() {
         });
     });
 
+    //Baloon Columns
+
+    $('.baloon-colums__slider__main').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        adaptiveHeight: true,
+        asNavFor: '.baloon-colums__slider__gallery'
+    });
+    $('.baloon-colums__slider__gallery').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    asNavFor: '.baloon-colums__slider__main',
+    dots: false,
+    centerMode: false,
+    focusOnSelect: true,
+    variableWidth: true,
+    infinite: true,
+    nextArrow: '<svg class="next-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 24L19.3019 13.4266C19.6209 13.2317 19.6209 12.7683 19.3019 12.5734L2 2" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
+    prevArrow: '<svg class="prev-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 24L19.3019 13.4266C19.6209 13.2317 19.6209 12.7683 19.3019 12.5734L2 2" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
+    });
+
+    $('.baloon-colums__slider__gallery').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+        let slidesLength = slick.$slides.length - 1,
+            isCurrentFirstOrLast = currentSlide === 0 || currentSlide === slidesLength,
+            isNextFirstOrLast = nextSlide === 0 || nextSlide === slidesLength;
+        if (isCurrentFirstOrLast && isNextFirstOrLast){
+          let nextClone = $(event.currentTarget).find('.slick-cloned.slick-active');
+            nextClone.addClass('slick-current');
+        }
+    });
+    
 
 });

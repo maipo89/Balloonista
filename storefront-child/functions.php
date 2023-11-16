@@ -49,7 +49,6 @@ function enqueue_slick_scripts() {
 add_action('wp_enqueue_scripts', 'enqueue_slick_scripts');
 
 
-
 // Menu
 
 function wpb_custom_new_menu() {
@@ -140,8 +139,3 @@ function remove_image_zoom_support() {
     remove_theme_support( 'wc-product-gallery-zoom' );
 }
 add_action( 'wp', 'remove_image_zoom_support', 100 );
-
-
-// Jquery UI 
-
-wp_enqueue_script('jquery-ui', 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js', array('jquery'), '1.12.1', true);
