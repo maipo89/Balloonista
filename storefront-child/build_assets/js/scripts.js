@@ -1,3 +1,5 @@
+
+$ = jQuery
 $(document).ready(function() {
 
     // Hamburger Menu
@@ -303,5 +305,7 @@ $(document).ready(function() {
         heightStyle: 'content',
     });
     
+
+    $('#product_info').accordion();
 
 });
