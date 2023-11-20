@@ -4,6 +4,7 @@
 <?php $buttonLink = get_sub_field('button_link'); ?>
 
 <div class="baloon-colums">
+        <h2 class="baloon-colums__title-mobile"><?php echo $title ?></h2>
         <div class="baloon-colums__slider">
 
             <div class="baloon-colums__slider__main">
@@ -29,6 +30,13 @@
                 <?php endif; ?>
             </div>
 
+        </div>
+        <div class="baloon-colums__text">
+            <h2><?php echo $title ?></h2>
+            <p><?php echo $text ?></p>
+            <div class="baloon-colums__text__button">
+                <a class="primary-button" href="<?php echo $buttonLink ?>"><?php echo $buttonText ?></a>
+            </div>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 .featured-products {
-    max-width: 1320px;
+    max-width: 1400px;
     width: 100%;
     margin: 0 auto;
     padding: 200px 40px 260px 40px;
@@ -61,13 +61,13 @@
             /* Left gradient */
             &:before {
                 left: -10px;
-                background: linear-gradient(to left, transparent 0%, #FFFFFF 100%);
+                background: linear-gradient(to left, rgba(255,255,255,0) 0%, #FFFFFF 100%);
             }
 
             /* Right gradient */
             &:after {
                 right: -10px;
-                background: linear-gradient(to right, transparent 0%, #FFFFFF 100%);
+                background: linear-gradient(to right, rgba(255,255,255,0) 0%, #FFFFFF 100%);
             }
        }
 
@@ -136,6 +136,13 @@
 
         @media (max-width: $mobile) {
             padding-top: 100px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        @media (max-width: $smaller-screen) {
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
        h2 {
@@ -181,6 +188,10 @@
                     @media (max-width: $mobile) {
                         font-size: 16px;
                         font-weight: 400;
+                    }
+
+                    @media (max-width: $smaller-screen) {
+                        font-size: 11px;
                     }
                 }
 

@@ -113,7 +113,7 @@ if ( post_password_required() ) {
 	} 
 ?>
 
-<?php include get_template_directory() . 'flexibleBlocks.php'; ?>
+<?php include 'flexibleBlocks.php'; ?>
 
 	</div>
 

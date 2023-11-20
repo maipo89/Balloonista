@@ -1,8 +1,11 @@
 <?php
 
-if( have_rows('flexible_content') ):
+// Get the current post ID dynamically
+$post_id = get_the_ID();
 
-    while ( have_rows('flexible_content') ) : the_row();
+if( have_rows('flexible_content', $post_id) ):
+
+    while ( have_rows('flexible_content', $post_id) ) : the_row();
 
         if( get_row_layout() == 'features' ): ?>
             <?php include 'blocks/features.php'; ?>
@@ -22,6 +25,11 @@ if( have_rows('flexible_content') ):
 
         if( get_row_layout() == 'baloon_columns' ): ?>
             <?php include 'blocks/baloon-columns.php'; ?>
+        <?php endif; 
+
+
+        if( get_row_layout() == 'environment' ): ?>
+            <?php include 'blocks/environment.php'; ?>
         <?php endif; 
 
         
