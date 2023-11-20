@@ -120,3 +120,5 @@ if ( post_password_required() ) {
 </div>
 
 <?php do_action( 'woocommerce_after_single_product' ); ?>
+
+<?php include get_stylesheet_directory() . '/flexibleBlocks.php'; ?>
