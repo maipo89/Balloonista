@@ -113,8 +113,6 @@ if ( post_password_required() ) {
 	} 
 ?>
 
-<?php include 'flexibleBlocks.php'; ?>
-
 	</div>
 
 </div>

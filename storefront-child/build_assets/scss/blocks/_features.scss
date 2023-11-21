@@ -1,79 +1,42 @@
 .features {
     max-width: 960px;
-    width: 100%;
+    width: 95%;
     margin: 0 auto;
     padding: 48px 0 48px 0;
-    border: 1px solid black;
-
-    @media (max-width: $desktop) {
-        max-width: 100%;
-        padding: 36px 32px;
-    }
-
-    @media (max-width: 710px) {
-        max-width: 100%;
-        padding: 0 32px;
-    }
-
-    @media (max-width: $tablet) {
-        padding: 32px;
-    }
-
-    @media (max-width: $mobile) {
-        padding: 32px 20px;
-    }
-
-    @media (max-width: $smaller-screen) {
-        padding: 32px 16px;
-    }
-
-    &__container {
-        background-color: $light-mercury;
-        height: 104px;
+    &__container{
+        width: 100%;
+        background-color: #F4F8F6;
+        height: auto;
+        padding: 24px 54px;
         display: flex;
-        justify-content: space-around;
+        flex-direction: row;
         align-items: center;
-        padding: 20px 0;
-
-        @media (max-width: 710px) {
-            justify-content: space-evenly;
-            flex-wrap: wrap;
-            height: fit-content;
-            padding: 24px 16px;
+        justify-content: space-around;
+        border-radius: 10px;
+        flex-wrap: wrap;
+    }
+    &__item{
+        width: max-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        flex-direction: column;
+        img{
+            width: 20px;
+            height: auto;
+            margin-bottom: 12px;
         }
-
-        &__feature {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            svg {
-                margin-bottom: 12px;
-            }
-
-            p {
-                font-size: 16px;
-                font-family: $montserrat;
-                font-weight: 400;
-                color: black;
-
-                @media (max-width: 465px) {
-                    font-size: 14px;
-                }
-            }
-
-            @media (max-width: 710px) {
-                width: 33.3%;
-                padding: 9px 0 9px 0;
-            }
-
-            @media (max-width: 395px) {
-                width: 50%;
-                padding: 9px 0 9px 0;
-            }
+        p{
+            font-family: Montserrat;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px; /* 125% */
+            letter-spacing: -0.64px;
+            color:#000;
         }
     }
-
     h2 {
         text-align: center;
         margin-bottom: 30px;
@@ -90,5 +53,21 @@
         @media (max-width: $mobile) {
             margin-bottom: 32px;
         }
+    }
+}
+
+
+
+@media only screen and (max-width: 720px) {
+    .features__item {
+        width: -moz-max-content;
+        width: max-content;
+        -ms-flex-pack: center;
+        justify-content: center;
+        vertical-align: middle;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        width: 33%;
+        height: 145px;
     }
 }
