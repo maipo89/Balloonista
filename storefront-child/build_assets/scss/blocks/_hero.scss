@@ -15,12 +15,12 @@
         margin-bottom: 257px;
     }
 
-    @media (max-width: $tablet) {
-        margin-bottom: 196px;
-    }
-
     @media (max-width: 680px) {
         margin-bottom: 105px;
+    }
+
+    @media (max-width: $mobile) {
+        margin-bottom: 90px;
     }
 
     &__wrapper {
@@ -187,6 +187,77 @@
 
         .slick-dots {
             bottom: 35px;
+        }
+    }
+
+    &.shorter-margins {
+        margin-bottom: 198px;
+
+        @media (max-width: $desktop) {
+            margin-bottom: 215px;
+        }
+
+        @media (max-width: $tablet) {
+            margin-bottom: 152px;
+        }
+
+        @media (max-width: $mobile) {
+            margin-bottom: 90px;
+        }
+    }
+
+    &.child-pages {
+        height: 590px;
+        margin-bottom: 198px;
+        @media (max-width: 1040px) {
+            height: fit-content;
+        }
+        @media (max-width: $tablet) {
+            margin-bottom: 150px;
+        }
+
+        .hero__wrapper {
+            padding-top: 125px;
+        }
+
+        .hero__gallery {
+            top: 140px;
+            width: 50%;
+
+            @media (max-width: 1280px) {
+                top: 210px;
+            }
+    
+            @media (max-width: 1000px) {
+                width: 80%;
+                top: 490px;
+            }
+    
+            @media (max-width: 905px) {
+                top: 430px;
+            }
+    
+            @media (max-width: 730px) {
+                top: 460px;
+            }
+    
+            @media (max-width: 680px) {
+                position: relative !important;
+                top: 90px;
+                margin: 0 auto;
+                width: 100%;
+                padding: 0 36px;
+                height: fit-content;
+            }
+    
+            @media (max-width: $mobile) {
+                top: 60px;
+                padding: 0 20px;
+            }
+    
+            @media (max-width: $smaller-screen) {
+                padding: 0 16px;
+            }
         }
     }
 }

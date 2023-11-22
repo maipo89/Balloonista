@@ -299,13 +299,59 @@ $(document).ready(function() {
 
     // Accordion Environment Block
 
-    $(".environment__text").accordion({
+    function initializeAccordion() {
+        $(".environment__text-mobile").accordion({
+            collapsible: true,
+            active: false,
+            heightStyle: 'content',
+        });
+    }
+
+    // Check screen width on document ready
+    var screenWidth = $(window).width();
+    if (screenWidth <= 768) {
+        initializeAccordion();
+    }
+
+    // Resize event handler
+    $(window).on('resize', function () {
+        var screenWidth = $(window).width();
+
+        // Check if the screen width is less than 768 pixels
+        if (screenWidth <= 768) {
+            // Reinitialize accordion
+            initializeAccordion();
+        } else {
+            // Destroy accordion if the screen width is 768 pixels or more
+            $(".environment__text-mobile").accordion('destroy');
+        }
+    });
+
+    $('#product_info').accordion();
+
+    // Slider Clients
+
+    $('.baloon-colums__slider-clients').slick({
+        dots: false,
+        infinite: true,
+        autoplay: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: false,
+        variableWidth: true,
+        // "centerMode": true,
+        autoplaySpeed: 0,
+        speed: 6000,
+        cssEase: "linear",
+        loop: true
+    });
+
+    // Faq Accordion
+
+    $(".faq__text").accordion({
         collapsible: true,
         active: false,
         heightStyle: 'content',
     });
-    
-
-    $('#product_info').accordion();
 
 });

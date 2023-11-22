@@ -332,5 +332,95 @@
             }
         }
     }
- 
+
+    &.title-top {
+        .baloon-colums__text {
+            display: none;
+        }
+        .baloon-colums__title-mobile {
+            display: block;
+            margin-bottom: 23px;
+            @media (max-width: $desktop) {
+                font-size: 22px;
+            }
+        }
+    } 
+
+}
+
+.baloon-colums__slider-clients {
+    width: 100%;
+    position: relative;
+    bottom: 6px;
+    padding-bottom: 40px;
+    @media (max-width: $desktop) {
+        bottom: initial;
+        // top: 40px;
+    }
+    @media (max-width: $tablet) {
+        padding-bottom: 32px;
+    }
+    img {
+        max-height: 40px;
+        max-width: 100px;
+        margin: 0 auto;
+    }
+    .slick-slide {
+        margin: 0 20px;
+    }
+    @media (max-width: $desktop) {
+        width: 100%;
+    }
+    .slick-track {
+        display: flex;
+        align-items: flex-end;
+        flex-wrap: nowrap;
+        height: fit-content;
+        justify-content: center;
+        align-items: center;
+    }
+    .slick-list {
+        padding: 0 !important;
+        overflow: hidden;
+        position: relative;
+        display: block;
+        margin: 0;
+        padding: 0;
+        transform: translateZ(0);
+    }
+
+    .slick-slider {
+        width: 100%;
+        .slick-track {
+        display: flex;
+        align-items: flex-end;
+        flex-wrap: nowrap;
+        height: fit-content;
+        justify-content: center;
+        }
+        .slick-slide{
+        float: none;
+        display: inline-block;
+        vertical-align: middle;
+        padding: 10px 0px;
+        width: 100px;
+        margin: 0 30px;
+        transition: all 0.3s ease;
+        height: auto;
+        p {
+            font-size: 20px !important;
+            &::after {
+            content: "•";
+            position: relative;
+            left: 30px;
+            font-size: 20px !important;
+            }
+            @media (max-width: 550px) {
+            font-size: 14px !important;
+            width: fit-content;
+            margin-top: 15px;
+            }
+        }
+        }
+    }
 }

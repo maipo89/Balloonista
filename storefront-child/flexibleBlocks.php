@@ -27,9 +27,20 @@ if( have_rows('flexible_content', $post_id) ):
             <?php include 'blocks/baloon-columns.php'; ?>
         <?php endif; 
 
-
         if( get_row_layout() == 'environment' ): ?>
             <?php include 'blocks/environment.php'; ?>
+        <?php endif; 
+
+        if( get_row_layout() == 'text_image' ): ?>
+            <?php include 'blocks/text-image.php'; ?>
+        <?php endif; 
+
+        if( get_row_layout() == 'faq' ): ?>
+            <?php include 'blocks/faq.php'; ?>
+        <?php endif; 
+
+        if( get_row_layout() == 'map' ): ?>
+            <?php include 'blocks/map.php'; ?>
         <?php endif; 
 
         

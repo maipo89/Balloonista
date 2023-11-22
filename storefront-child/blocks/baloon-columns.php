@@ -1,9 +1,12 @@
 <?php $title = get_sub_field('title'); ?>
 <?php $text = get_sub_field('text'); ?>
+<?php $button = get_sub_field('button'); ?>
 <?php $buttonText = get_sub_field('button_text'); ?>
 <?php $buttonLink = get_sub_field('button_link'); ?>
+<?php $titleTop = get_sub_field('title_top'); ?>
+<?php $sliderClients = get_sub_field('slider_clients'); ?>
 
-<div class="baloon-colums">
+<div class="baloon-colums <?php echo($titleTop ? 'title-top' : '')?>">
         <h2 class="baloon-colums__title-mobile"><?php echo $title ?></h2>
         <div class="baloon-colums__slider">
 
@@ -32,12 +35,31 @@
 
         </div>
         <div class="baloon-colums__text">
-            <h2><?php echo $title ?></h2>
-            <p><?php echo $text ?></p>
-            <div class="baloon-colums__text__button">
-                <a class="primary-button" href="<?php echo $buttonLink ?>"><?php echo $buttonText ?></a>
-            </div>
+            <?php if($title) : ?>
+                <h2><?php echo $title ?></h2>
+            <?php endif; ?>
+            <?php if($text) : ?>
+                <p><?php echo $text ?></p>
+            <?php endif; ?>
+            <?php if($button) : ?>
+                <div class="baloon-colums__text__button">
+                    <a class="primary-button" href="<?php echo $buttonLink ?>"><?php echo $buttonText ?></a>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
+<?php if($sliderClients) : ?>
+    <?php if( have_rows('clients') ): ?>
+        <div class="baloon-colums__slider-clients">
+            <?php while( have_rows('clients') ): the_row(); 
+                $image = get_sub_field('image');
+                ?>
+                <div class="baloon-colums__slider-clients__image">
+                    <img src="<?php echo esc_url($image['sizes']['onqor-large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                </div>
+            <?php endwhile; ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
 
