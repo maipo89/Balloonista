@@ -43,7 +43,14 @@ if( have_rows('flexible_content', $post_id) ):
             <?php include 'blocks/map.php'; ?>
         <?php endif; 
 
-        
+        if( get_row_layout() == 'contact_form' ): ?>
+            <?php include 'blocks/contact-form.php'; ?>
+        <?php endif; 
+
+        if( get_row_layout() == 'get_a_quote' ): ?>
+            <?php include 'blocks/get-quote.php'; ?>
+        <?php endif; 
+                
     endwhile;
 
 endif;

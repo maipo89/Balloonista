@@ -354,4 +354,56 @@ $(document).ready(function() {
         heightStyle: 'content',
     });
 
+    // Forms Contacts 
+
+    $('.getInTouchBtn').on('click',function() {
+        $('.getAQuoteBtn').removeClass('active');
+        $(this).addClass('active');
+
+        $('.contact-form__get-a-quote-title').removeClass('active');
+        $('.contact-form__get-in-touch-title').addClass('active');
+
+        $('.contact-form__get-a-quote').hide();
+        $('.contact-form__get-in-touch').show();
+    });
+
+    $('.getAQuoteBtn').on('click',function() {
+        $('.getInTouchBtn').removeClass('active');
+        $(this).addClass('active');
+
+        $('.contact-form__get-in-touch-title').removeClass('active');
+        $('.contact-form__get-a-quote-title').addClass('active');
+
+        $('.contact-form__get-in-touch').hide();
+        $('.contact-form__get-a-quote').show();
+    });
+
+    // Custom Dropdown 
+
+    $('.select-wrapper').on('click', function() {
+        $(this).children('.select').toggleClass('open');
+    })
+
+    // Input Custom Dropdown
+
+    $('.contact-form .custom-option').on("click", function() {
+        var inputData = $(this).data('value');
+        console.log(inputData);
+        $('.dropdown-contact').val(inputData);
+        $('.contact-form .select__trigger span').html(inputData);
+        });
+    
+        $(document).on("click", function(event) {
+            var ContactFormDropdownList = $(".contact-form .custom-options .custom-option");
+            var ContactFormDropdownListA = $(".contact-form .custom-options a");
+            var ContactFormSelect = $(".contact-form .select");
+            var ContactFormSelectTrigger = $(".contact-form .select__trigger");
+            var ContactFormSelectTriggerSpan = $(".contact-form .select__trigger span");
+            var ContactFormSelectTriggerArrow = $(".contact-form .select__trigger .arrow");
+    
+            if (!ContactFormDropdownList.is(event.target) && !ContactFormDropdownListA.is(event.target) && !ContactFormSelectTrigger.is(event.target) && !ContactFormSelectTriggerArrow.is(event.target) && !ContactFormSelectTriggerSpan.is(event.target)) {
+                ContactFormSelect.removeClass("open");
+            }
+        });
+
 });
