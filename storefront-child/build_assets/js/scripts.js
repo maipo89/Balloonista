@@ -305,7 +305,47 @@ $(document).ready(function() {
         heightStyle: 'content',
     });
     
+    $('.product-image__feature-slider').slick({
+        // options...
+        asNavFor: '.product-image__controls',
+        arrows: false
+    });
+    $('.product-image__controls').slick({
+        // options...
+        asNavFor: '.product-image__feature-slider',
+        variableWidth: true,
+        slidesToShow: 4,
+        focusOnSelect: true,
+        prevArrow: '<button type="button" class="slick-prev"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"> <g id="Chevron Left"> <path id="Chevron Left_2" d="M13 1L1.74038 7.56811C1.40963 7.76105 1.40963 8.23895 1.74038 8.43189L13 15" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg> </button>',
+        nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"><g id="Chevron Right"><path id="Chevron Right_2" d="M1 15L12.2596 8.43189C12.5904 8.23895 12.5904 7.76105 12.2596 7.56811L1 0.999999" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg></button>'
+        // other options such as vertical:true, centerMode:true, etc.
+    });
 
     $('#product_info').accordion();
+
+    $(".product-image .prev").click(function () {
+        alert('click');
+		$(".slick-list").slick("slickPrev");
+	});
+
+	$(".product-image .next").click(function () {
+		$(".slick-list").slick("slickNext");
+	});
+
+
+    $('.variations').addClass('active');
+    $('.product__option-buttons .options').addClass('active');
+    var stepCount = 0;
+    $('.product-next-step').on('click', function() {
+        stepCount++;
+        $('.variations,.wc-pao-addon-container,.wc-pao-addon-container, .wc-pao-addon-container, .product_meta, .single_variation_wrap').removeClass('active');
+        alert(stepCount);
+        if(stepCount = 1){
+            $('.wc-pao-addon-container').addClass('active');
+        }else if(stepCount === 2){
+        } else if (stepCount == 3){
+
+        }
+    });
 
 });

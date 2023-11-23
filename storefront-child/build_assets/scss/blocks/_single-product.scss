@@ -1,0 +1,232 @@
+.product-template-default .site-content{
+    padding-top: 96px;
+}
+.product-container{
+    width: 1320px;
+}
+
+.product-image{
+    max-width: 627px;
+    height: 916px;
+    &__feature{
+        height: 736px;
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 40px;
+        overflow: hidden;
+        position: relative;
+    }
+    &__feature-image{
+        height: 100%;
+        img{
+            width: auto;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+    }
+    &__controls{
+        height: 162px;
+        position: relative;
+        button{
+            position: absolute;
+            background-color: #fff;
+        }
+        .slick-next{
+            right: -28px;
+            width: 12px;
+            top: 50%;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            max-width: inherit;
+            padding: 0px;
+        }
+        .slick-prev{
+            left: 0px;
+            width: 12px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            max-width: inherit;
+            padding: 0px;
+            top:50%;
+            left: -28px;
+        }
+        .slick-slide {
+            margin: 0 5px;
+        }
+      
+        /* the parent */
+        .slick-list {
+            margin: 0 -5px;
+            height: 100%;
+        }
+    }
+    &__controls-item{
+        border-radius: 10px;
+        overflow: hidden;
+        width: 150px !important; 
+        height: 160px !important;
+        img{
+            width: auto;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+    }
+    &__feature-slider{
+        width: 100%;
+        height: 100%;
+    }
+    .badges{
+        position: absolute;
+        padding:32px;
+        width: 100%;
+        z-index: 3;
+        display: flex;
+        bottom: 0px;
+        flex-direction: row;
+        &__item{
+            padding: 4px 6px;
+            margin-right: 12px;
+            background:#D9E7E1;
+            border-radius: 44px;
+            p{
+                color: #000;
+                font-size: 10px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 20px; /* 200% */
+            }
+        }
+    }
+  
+    /* the parent */
+    .slick-list {
+        height: 100%;
+    }
+    .slick-track{
+        height: 100%;
+    }
+}
+.product_title, .price{
+    display: none;
+}
+.product__options{
+    width: 50%;
+}
+.product__options-head{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1{
+        color: #000;
+        text-align: center;
+        /* H2 - Montserrat Light - 36px */
+        font-family: Montserrat;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 300;
+        margin-top: 95px;
+        line-height: normal;
+        letter-spacing: -1.26px;
+        margin-bottom: 15px;
+    }
+}
+.product__option-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 72px;
+    button{
+        display: flex;
+        padding: 7px 6px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        margin-bottom: 0px;
+        height: 24px;
+        width: auto !important;
+        border: 2px solid #D9E7E1;
+        background-color: #fff;
+        p{
+            width: min-content;
+        }
+        &.active{
+            background:#D9E7E1;
+        }
+    }
+}
+.product-next-step{
+    display: inline-flex;
+    height: 42px;
+    padding: 16px 24px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    width: 140px;
+    background: #70B095;
+    margin: 0 auto;
+    left: calc(50% - 70px);
+    position: relative;
+    p{
+        color:#FFF;
+        text-align: center;
+        /* Interactive 1 - Montserrat Regular - 16px */
+        font-family: Montserrat;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.32px;
+    }
+}
+.variations,.wc-pao-addon-container,.wc-pao-addon-container, .wc-pao-addon-container, .product_meta, #product-addons-total, .woocommerce-variation-add-to-cart{
+    display: none !important;
+    &.active{
+        display: block !important;
+    }
+}
+.variations.active{
+    display: flex !important;
+    flex-direction: row;
+    border-collapse: collapse;
+    tbody{
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto;
+        width: 480px;
+        flex-wrap: wrap;
+    }
+    .label{
+        width: auto;
+    }
+    tr{
+        padding: 0 10px;
+        width: 50%;
+    }
+    select{
+        max-width: 100% !important;
+        height: 42px;
+        width: 100%;
+        border-radius: 10px;
+        border: 2px solid #D9E7E1;
+        overflow: hidden;
+        color: #000;
+        text-overflow: ellipsis;
+        /* Body 1 - Montserrat Regular - 16px */
+        font-family: Montserrat;
+        font-size: 16px;
+        font-style: normal;
+        padding: 0px 12px;
+        font-weight: 400;
+        line-height: 20px; /* 125% */
+        letter-spacing: -0.64px;
+    }
+    .reset_variations{
+        display: none;
+    }
+}

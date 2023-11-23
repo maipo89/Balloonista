@@ -135,8 +135,20 @@ function sf_update_woo_flexslider_options( $options ) {
 
 // Remove zoom support
 
+// function custom_remove_all_quantity_fields( $return, $product ) {return true;}
+// add_filter( 'woocommerce_is_sold_individually','custom_remove_all_quantity_fields', 10, 2 );
+
 function remove_image_zoom_support() {
     remove_theme_support( 'wc-product-gallery-zoom' );
 }
 add_action( 'wp', 'remove_image_zoom_support', 100 );
 
+// function custom_remove_quantity_selector() {
+//     remove_action( 'woocommerce_before_add_to_cart_button', 'woocommerce_quantity_input', 10 );
+// }
+// add_action( 'woocommerce_before_single_product', 'custom_remove_quantity_selector', 1 );
+
+// function custom_quantity_selector() {
+//     // [Custom code for the quantity selector]
+// }
+// add_action( 'woocommerce_single_product_summary', 'custom_quantity_selector', 30 );
