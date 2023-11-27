@@ -50,6 +50,10 @@ if( have_rows('flexible_content', $post_id) ):
         if( get_row_layout() == 'get_a_quote' ): ?>
             <?php include 'blocks/get-quote.php'; ?>
         <?php endif; 
+
+        if( get_row_layout() == 'title_paragraph' ): ?>
+            <?php include 'blocks/title-paragraph.php'; ?>
+        <?php endif; 
                 
     endwhile;
 
