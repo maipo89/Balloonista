@@ -391,19 +391,29 @@ $(document).ready(function() {
         console.log(inputData);
         $('.dropdown-contact').val(inputData);
         $('.contact-form .select__trigger span').html(inputData);
-        });
+    });
     
-        $(document).on("click", function(event) {
-            var ContactFormDropdownList = $(".contact-form .custom-options .custom-option");
-            var ContactFormDropdownListA = $(".contact-form .custom-options a");
-            var ContactFormSelect = $(".contact-form .select");
-            var ContactFormSelectTrigger = $(".contact-form .select__trigger");
-            var ContactFormSelectTriggerSpan = $(".contact-form .select__trigger span");
-            var ContactFormSelectTriggerArrow = $(".contact-form .select__trigger .arrow");
-    
-            if (!ContactFormDropdownList.is(event.target) && !ContactFormDropdownListA.is(event.target) && !ContactFormSelectTrigger.is(event.target) && !ContactFormSelectTriggerArrow.is(event.target) && !ContactFormSelectTriggerSpan.is(event.target)) {
-                ContactFormSelect.removeClass("open");
-            }
-        });
+    $(document).on("click", function(event) {
+        var ContactFormDropdownList = $(".contact-form .custom-options .custom-option");
+        var ContactFormDropdownListA = $(".contact-form .custom-options a");
+        var ContactFormSelect = $(".contact-form .select");
+        var ContactFormSelectTrigger = $(".contact-form .select__trigger");
+        var ContactFormSelectTriggerSpan = $(".contact-form .select__trigger span");
+        var ContactFormSelectTriggerArrow = $(".contact-form .select__trigger .arrow");
+        var BlogsDropdownList = $(".blogs .custom-options .custom-option");
+        var BlogsDropdownListA = $(".blogs .custom-options a");
+        var BlogsSelect = $(".blogs .select");
+        var BlogsSelectTrigger = $(".blogs .select__trigger");
+        var BlogsSelectTriggerSpan = $(".blogs .select__trigger span");
+        var BlogsSelectTriggerArrow = $(".blogs .select__trigger .arrow");
+
+        if (!ContactFormDropdownList.is(event.target) && !ContactFormDropdownListA.is(event.target) && !ContactFormSelectTrigger.is(event.target) && !ContactFormSelectTriggerArrow.is(event.target) && !ContactFormSelectTriggerSpan.is(event.target)) {
+            ContactFormSelect.removeClass("open");
+        }
+
+        if (!BlogsDropdownList.is(event.target) && !BlogsDropdownListA.is(event.target) && !BlogsSelectTrigger.is(event.target) && !BlogsSelectTriggerArrow.is(event.target) && !BlogsSelectTriggerSpan.is(event.target)) {
+            BlogsSelect.removeClass("open");
+        }
+    });
 
 });
