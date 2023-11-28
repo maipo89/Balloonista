@@ -147,3 +147,6 @@ function my_acf_init() {
 }
 add_action('acf/init', 'my_acf_init');
 
+//Swiper
+
+wp_enqueue_script( 'swiperesmb', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',array(),'8.4.2',true);

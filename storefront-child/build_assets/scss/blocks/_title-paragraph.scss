@@ -41,4 +41,11 @@
             margin-bottom: 0;
         }
     }
+
+    &.higher-margins {
+        padding-bottom: 126px;
+        @media (max-width: $tablet) {
+            padding-bottom: 64px;
+        }
+    }
 }

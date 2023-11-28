@@ -406,6 +406,12 @@ $(document).ready(function() {
         var BlogsSelectTrigger = $(".blogs .select__trigger");
         var BlogsSelectTriggerSpan = $(".blogs .select__trigger span");
         var BlogsSelectTriggerArrow = $(".blogs .select__trigger .arrow");
+        var LegalDropdownList = $(".legal-categories .custom-options .custom-option");
+        var LegalDropdownListA = $(".legal-categories .custom-options a");
+        var LegalSelect = $(".legal-categories .select");
+        var LegalSelectTrigger = $(".legal-categories .select__trigger");
+        var LegalSelectTriggerSpan = $(".legal-categories .select__trigger span");
+        var LegalSelectTriggerArrow = $(".legal-categories .select__trigger .arrow");
 
         if (!ContactFormDropdownList.is(event.target) && !ContactFormDropdownListA.is(event.target) && !ContactFormSelectTrigger.is(event.target) && !ContactFormSelectTriggerArrow.is(event.target) && !ContactFormSelectTriggerSpan.is(event.target)) {
             ContactFormSelect.removeClass("open");
@@ -414,6 +420,38 @@ $(document).ready(function() {
         if (!BlogsDropdownList.is(event.target) && !BlogsDropdownListA.is(event.target) && !BlogsSelectTrigger.is(event.target) && !BlogsSelectTriggerArrow.is(event.target) && !BlogsSelectTriggerSpan.is(event.target)) {
             BlogsSelect.removeClass("open");
         }
+
+        if (!LegalDropdownList.is(event.target) && !LegalDropdownListA.is(event.target) && !LegalSelectTrigger.is(event.target) && !LegalSelectTriggerArrow.is(event.target) && !LegalSelectTriggerSpan.is(event.target)) {
+            LegalSelect.removeClass("open");
+        }
+    });
+
+    //Swiper Slider
+
+    const swiper = new Swiper('.baloon-colums__swiper', {
+        direction: 'horizontal',
+        slidesPerView: 'auto',
+        mousewheel: false,
+        effect: 'slide',
+        keyboard: {
+            enabled: true,
+            onlyInViewport: false,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        on: {
+            slideChangeTransitionStart: function () {
+                swiper.autoplay.stop();
+            },
+            slideChangeTransitionEnd: function () {
+                swiper.autoplay.start();
+            },
+        },
+        autoplay: {
+            delay: 2000,
+        },
     });
 
 });

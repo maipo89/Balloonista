@@ -54,6 +54,10 @@ if( have_rows('flexible_content', $post_id) ):
         if( get_row_layout() == 'title_paragraph' ): ?>
             <?php include 'blocks/title-paragraph.php'; ?>
         <?php endif; 
+
+        if( get_row_layout() == 'legal_categories' ): ?>
+            <?php include 'blocks/legal-categories.php'; ?>
+        <?php endif; 
                 
     endwhile;
 

@@ -137,7 +137,7 @@
 					<img alt="<?php echo($badge_image["alt"]) ?>" src="<?php echo($badge_image["sizes"]["onqor-large"]) ?>"/>
 				</a>
 				<div class="footer__legal__text" >
-					<p>Copyright © 2023 Balloonista Ltd | Company Registration Number: 10395529 | VAT Registration No: GB345125323 | <a href="<?php echo get_home_url(); ?>/legals">Legals</a>
+					<p>Copyright © 2023 Balloonista Ltd | Company Registration Number: 10395529 | VAT Registration No: GB345125323 | <a href="<?php echo get_home_url(); ?>/privacy-policy">Legals</a>
 					</p>
 					<p>Registered Address: Balloonista Ltd, 1 Kingfisher House, Crayfields Business Park, New Mill Road, London, BR5 3QG</p>
 				</div>

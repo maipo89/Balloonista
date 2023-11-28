@@ -1,7 +1,8 @@
 <?php $image = get_sub_field('image'); ?>
 <?php $title = get_sub_field('title'); ?>
+<?php $marginBottom = get_sub_field('higher_margin_bottom'); ?>
 
-<div class="environment">
+<div class="environment <?php echo($marginBottom ? 'higher-margins' : '') ?>">
     <div class="environment__image" style="background-image: url(<?php echo($image["sizes"]["onqor-large"]) ?>)"></div>
     <h3><?php echo $title ?></h3>
     <?php if( have_rows('text_section') ): ?>
