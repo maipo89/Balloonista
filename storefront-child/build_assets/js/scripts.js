@@ -273,28 +273,17 @@ $(document).ready(function() {
         asNavFor: '.baloon-colums__slider__gallery'
     });
     $('.baloon-colums__slider__gallery').slick({
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         asNavFor: '.baloon-colums__slider__main',
-        dots: false,
+        dots: true,
+        infinite: false,
+        pauseOnFocus: true,
         centerMode: false,
         focusOnSelect: true,
         variableWidth: true,
-        infinite: true,
         nextArrow: '<svg class="next-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 24L19.3019 13.4266C19.6209 13.2317 19.6209 12.7683 19.3019 12.5734L2 2" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
         prevArrow: '<svg class="prev-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 2L2.69814 12.5734C2.37911 12.7683 2.37911 13.2317 2.69814 13.4266L20 24" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
-        responsive: [
-            {
-                breakpoint: 758,
-                settings: {
-                    slidesToShow: 4,
-                    dots: true,
-                    infinite: false,
-                    pauseOnFocus: true
-
-                }
-            },
-        ]
     });
 
     // Accordion Environment Block
@@ -323,7 +312,12 @@ $(document).ready(function() {
             initializeAccordion();
         } else {
             // Destroy accordion if the screen width is 768 pixels or more
-            $(".environment__text-mobile").accordion('destroy');
+            var accordionElement = $(".environment__text-mobile");
+
+            // Check if the accordion is initialized before calling destroy
+            if (accordionElement.hasClass("ui-accordion")) {
+                accordionElement.accordion("destroy");
+            }
         }
     });
 
@@ -426,32 +420,206 @@ $(document).ready(function() {
         }
     });
 
-    //Swiper Slider
+    // Slider Clients
+    function initSlick() {
+        $('.baloon-colums__swiper').slick({
+            dots: false,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            arrows: true,
+            variableWidth: true,
+            infinite: false,
+            waitForAnimate: true,
+            cssEase: 'ease',
+            nextArrow: '<svg class="next-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 24L19.3019 13.4266C19.6209 13.2317 19.6209 12.7683 19.3019 12.5734L2 2" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
+            prevArrow: '<svg class="prev-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 2L2.69814 12.5734C2.37911 12.7683 2.37911 13.2317 2.69814 13.4266L20 24" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
+        });
+    }
 
-    const swiper = new Swiper('.baloon-colums__swiper', {
-        direction: 'horizontal',
-        slidesPerView: 'auto',
-        mousewheel: false,
-        effect: 'slide',
-        keyboard: {
-            enabled: true,
-            onlyInViewport: false,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        on: {
-            slideChangeTransitionStart: function () {
-                swiper.autoplay.stop();
-            },
-            slideChangeTransitionEnd: function () {
-                swiper.autoplay.start();
-            },
-        },
-        autoplay: {
-            delay: 2000,
-        },
+    initSlick();
+
+    // Reinitialize slick on window resize if the width is between 1000px and 1400px
+
+    $(window).on('resize', function() {
+        console.log('res')
+        var windowWidth = $(window).width();
+        
+        if (windowWidth === 1000 ) {
+            console.log('resize1')
+            // Destroy the existing slick slider
+            $('.baloon-colums__swiper').slick('unslick');
+            // Initialize slick again with specific settings
+            initSlick();
+            // Go to the first slide
+            $('.baloon-colums__swiper').slick('slickGoTo', 0);
+        }
+
+        if (windowWidth === 758) {
+            console.log('resize2')
+            // Destroy the existing slick slider
+            $('.baloon-colums__swiper').slick('unslick');
+            // Initialize slick again with specific settings
+            initSlick();
+            $('.baloon-colums__swiper').slick('slickGoTo', 0);
+        }
     });
+
+    $('.baloon-colums__swiper__slide').on('mouseenter', function() {
+        // On hover, remove slick-current class from all slides
+        $('.baloon-colums__swiper__slide.slick-current').removeClass('width');
+        $('.baloon-colums__swiper__slide').removeClass('slick-current');
+        // Add slick-current class to the hovered slide
+        $(this).addClass('slick-current');
+    }).on('mouseleave', function () {
+        $(this).removeClass('width slick-current');
+        // Add 'width' class to the first visible slide on mouse leave
+        $('.baloon-colums__swiper__slide.slick-active').first().addClass('width slick-current');
+    });
+
+    $('.baloon-colums__swiper').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+  
+        // Add the class to the next slide
+        if (nextSlide > currentSlide) {
+            // Remove the class from all slides
+            $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').addClass('width');
+            $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('width');
+        }else{
+            $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').removeClass('width');
+        }
+
+    });
+
+    //Cookie Banner
+
+    var cookieBanner = $('#cookie-banner');
+    var functionalCookies = $('#functional-cookies');
+    var performanceCookies = $('#performance-cookies');
+    var closeCookies = $('#cookie-svg');
+
+    // Function to set a cookie with an expiration date
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+    }
+
+    // Function to get a cookie value by name
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    
+    // Hide empty p tags
+    
+    $('p').each(function() {
+        if ($.trim($(this).text()) === "" && $(this).children().length === 0) {
+            $(this).hide();
+        }
+    });
+
+
+    // Check if the user has previously accepted cookies
+    var cookiesAccepted = getCookie('cookiesAccepted');
+    var performanceCookiesAccepted = getCookie('performanceCookiesAccepted');
+
+    closeCookies.on('click', function () {
+        cookieBanner.hide();
+        
+        // Set a cookie to remember that the user closed the banner
+        setCookie('cookiesAccepted', 'true', 365); // 365 days expiration (adjust as needed)
+    });
+
+    // If cookies have not been accepted, show the banner
+    // Check if cookies are accepted
+if (!localStorage.getItem('cookiesAccepted')) {
+    // Show the cookie banner
+    cookieBanner.show();
+    cookieBanner.addClass('show');
+    functionalCookies.prop('checked', true);
+    performanceCookies.prop('checked', true);
+    if (functionalCookies.prop('checked') || performanceCookies.prop('checked')) {
+        // Set cookiesAccepted to true in local storage for 365 days
+        localStorage.setItem('cookiesAccepted', 'true', 365);
+
+        // Check if performance cookies are checked and not already accepted
+        if (performanceCookies.prop('checked') && !localStorage.getItem('performanceCookiesAccepted')) {
+            // Set performanceCookiesAccepted to true in local storage for 365 days
+            localStorage.setItem('performanceCookiesAccepted', 'true', 365);
+
+            // Load Hotjar script
+            var script = document.createElement('script');
+            script.id = "hotjar-script"
+            script.innerHTML = `(function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:3605603,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`;
+
+            // Append the script element to the head of the document
+            $('head').append(script);
+        }
+    }
+
+    // Handle changes in functional and performance cookies
+    performanceCookies.on('change', function () {
+        if (performanceCookies.prop('checked')) {
+            // Set performanceCookiesAccepted to true in local storage for 365 days
+            localStorage.setItem('performanceCookiesAccepted', 'true', 365);
+
+            // Load Hotjar script
+            var script = document.createElement('script');
+            script.id = "hotjar-script"
+            script.innerHTML = `(function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:3605603,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`;
+
+            // Append the script element to the head of the document
+            $('head').append(script);
+        
+        }else{
+        // Check if either functional or performance cookies are checked
+        // Remove Hotjar script if either functional or performance cookies are unchecked
+            $('#hotjar-script').remove();
+        }
+    });
+
+    } else {
+        cookieBanner.hide();
+        if (performanceCookiesAccepted) {
+            // Load Hotjar script
+            var script = document.createElement('script');
+            script.innerHTML = `(function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:3605603,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`;
+            // Append the script element to the head of the document
+            $('head').append(script);
+        }
+    }
 
 });
