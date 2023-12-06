@@ -68,6 +68,9 @@ $(document).ready(function() {
     $('.search__container .close-icon').on('click', function() {
         $('.background-search').removeClass('open');
         $('.search').removeClass('open');
+        $('.mobile-menu').removeClass('open');
+        $('.close').removeClass('show');
+        $('.hamburger').removeClass('hide');
         enableBodyScroll(); // Call the function to enable scrolling when modal closes
     });
 
@@ -621,5 +624,215 @@ if (!localStorage.getItem('cookiesAccepted')) {
             $('head').append(script);
         }
     }
+    
+    // Gsap animations
+
+    var timeline = gsap.timeline();
+
+    var blocksTextImage = gsap.utils.toArray(".text-image");
+
+    blocksTextImage.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    blocksTextImage.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "800px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var blocksBalloonColumns = gsap.utils.toArray(".baloon-colums");
+
+    blocksBalloonColumns.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    blocksBalloonColumns.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "400px 10%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var blocksEnvironment = gsap.utils.toArray(".environment");
+
+    blocksEnvironment.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    blocksEnvironment.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "1000px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var getQuotes = gsap.utils.toArray(".get-a-quote");
+
+    getQuotes.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    getQuotes.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-250px center",
+                end: "800px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var contactForms = gsap.utils.toArray(".contact-form");
+
+    contactForms.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    contactForms.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "800px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var faqsBlock = gsap.utils.toArray(".faq");
+
+    faqsBlock.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    faqsBlock.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "800px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var titleParagraphs = gsap.utils.toArray(".title-paragraph");
+
+    titleParagraphs.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    titleParagraphs.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "500px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+
+    var ProductTestimonial = gsap.utils.toArray(".featured-products__testimonial");
+
+    ProductTestimonial.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    ProductTestimonial.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "500px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+
+    var BlogCards = gsap.utils.toArray(".blogs__card");
+
+    BlogCards.forEach((block, index) => {
+        setTimeout(function () { 
+            gsap.to(block,{
+                scrollTrigger: {
+                    trigger: block,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true,
+                    markers: true,
+                    toggleClass: "active",
+                    // addName: 'active',
+                },
+            });
+        }, 500 * index);
+    });
+
+
+    if ($('body').hasClass('home')) {
+
+        var HeroWrapper = gsap.utils.toArray(".hero__wrapper");
+        HeroWrapper.forEach((block) => {
+            timeline.fromTo(block, { x: -1000, opacity: 0 }, { x: 0, opacity: 1, duration: 1 });
+        });
+
+        var ProductsContainer = gsap.utils.toArray(".featured-products__general-container");
+        ProductsContainer.forEach((block) => {
+            timeline.fromTo(block, { x: -1000, opacity: 0 }, { x: 0, opacity: 1, duration: 1 });
+        });
+
+        var HeroSliders = gsap.utils.toArray(".hero__gallery");
+        HeroSliders.forEach((block) => {
+            timeline.fromTo(block, { x: 1372, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, '+=0.2');
+        });
+
+        var HeroImages = gsap.utils.toArray(".hero__image");
+        HeroImages.forEach((block) => {
+            timeline.fromTo(block, { x: 1372, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, '+=0.2');
+        });
+
+    }
+
 
 });

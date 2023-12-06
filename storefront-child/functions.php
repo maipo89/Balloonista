@@ -146,3 +146,11 @@ function my_acf_init() {
     acf_update_setting('google_api_key', 'AIzaSyDMqSLoDfBqzu0bVuT1USXebfMK83OX42M');
 }
 add_action('acf/init', 'my_acf_init');
+
+// Gsap
+
+function enqueue_gsap() {
+    wp_enqueue_script('gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.9.0/dist/gsap.min.js', array(), null, true);
+    wp_enqueue_script('gsap-scrolltrigger', 'https://unpkg.com/gsap@3.9.0/dist/ScrollTrigger.min.js', array('gsap'), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_gsap');

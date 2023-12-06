@@ -29,6 +29,46 @@
     &__card {
         width: 300px;
         margin-bottom: 40px;
+        opacity: 0.0;
+        transform: translateY(200px);
+        transition: 1s transform ease, 1s opacity  ease;
+        &:nth-child(4n+1) {  
+            transition-delay: 0s; /* No delay for the first element in each row */
+        }
+        
+        &:nth-child(4n+2) {  
+            transition-delay: 0.2s;
+        }
+        
+        &:nth-child(4n+3) {  
+            transition-delay: 0.3s;
+        }
+        
+        &:nth-child(4n+4) {  
+            transition-delay: 0.4s;
+        }
+        
+        &.active {
+            opacity: 1;
+            transform: translateY(0px);
+            transition: 1.35s transform ease, 2s opacity ease, box-shadow 0.3s;
+        
+            &:nth-child(4n+1) {  
+                transition-delay: 0.1s; /* Adjust the delay for the first element with the "active" class */
+            }
+        
+            &:nth-child(4n+2) {  
+                transition-delay: 0.2s;
+            }
+        
+            &:nth-child(4n+3) {  
+                transition-delay: 0.3s;
+            }
+        
+            &:nth-child(4n+4) {  
+                transition-delay: 0.4s;
+            }
+        }
 
 
         @media (max-width: 1400px) {
