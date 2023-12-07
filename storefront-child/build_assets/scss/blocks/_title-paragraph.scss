@@ -1,0 +1,51 @@
+.title-paragraph {
+    padding: 48px 40px;
+    margin: 0 auto;
+    max-width: 1400px;
+    @media (max-width: $desktop) {
+        max-width: 100%;
+        padding: 48px 32px 48px 32px;
+    }
+    @media (max-width: $tablet) {
+        padding: 32px 32px 32px 32px;
+    }
+    @media (max-width: $mobile) {
+        padding: 32px 20px 32px 20px;
+    }
+    @media (max-width: $smaller-screen) {
+        padding: 32px 16px 32px 16px;
+    }
+    h2, p {
+        text-align: left;
+    }
+
+    h2 {
+        margin: 0 0 32px 0;
+        font-size: 36px;
+        font-weight: 300;
+
+        @media (max-width: $tablet) {
+            font-size: 22px;
+            margin-bottom: 24px;
+            line-height: 25px;
+        }
+    }
+
+    p {
+        margin-bottom: 20px;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 400;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    &.higher-margins {
+        padding-bottom: 126px;
+        @media (max-width: $tablet) {
+            padding-bottom: 64px;
+        }
+    }
+}

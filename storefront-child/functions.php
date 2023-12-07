@@ -158,6 +158,7 @@ function remove_image_zoom_support() {
 }
 add_action( 'wp', 'remove_image_zoom_support', 100 );
 
+
 // function custom_remove_quantity_selector() {
 //     remove_action( 'woocommerce_before_add_to_cart_button', 'woocommerce_quantity_input', 10 );
 // }
@@ -167,3 +168,19 @@ add_action( 'wp', 'remove_image_zoom_support', 100 );
 //     // [Custom code for the quantity selector]
 // }
 // add_action( 'woocommerce_single_product_summary', 'custom_quantity_selector', 30 );
+
+// Google Map
+
+function my_acf_init() {
+    acf_update_setting('google_api_key', 'AIzaSyDMqSLoDfBqzu0bVuT1USXebfMK83OX42M');
+}
+add_action('acf/init', 'my_acf_init');
+
+// Gsap
+
+function enqueue_gsap() {
+    wp_enqueue_script('gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.9.0/dist/gsap.min.js', array(), null, true);
+    wp_enqueue_script('gsap-scrolltrigger', 'https://unpkg.com/gsap@3.9.0/dist/ScrollTrigger.min.js', array('gsap'), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_gsap');
+

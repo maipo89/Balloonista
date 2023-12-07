@@ -1,0 +1,110 @@
+.text-image {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 48px 40px 48px 40px;
+    display: flex;
+    column-gap: 32px;
+    opacity: 0;
+    @media (max-width: $desktop) {
+        max-width: 100%;
+        padding: 48px 32px 48px 32px;
+    }
+    @media (max-width: $tablet) {
+        column-gap: 24px;
+        padding: 32px 32px 32px 32px;
+    }
+    @media (max-width: 680px) {
+        flex-direction: column-reverse;
+        column-gap: none;
+    }
+    @media (max-width: $mobile) {
+        padding: 32px 20px 32px 20px;
+    }
+    @media (max-width: $smaller-screen) {
+        padding: 32px 16px 32px 16px;
+    }
+    &__text {
+       width: calc(58% - 16px);
+       @media (max-width: $tablet) {
+            width: calc(54% - 12px);
+       }
+       @media (max-width: 680px) {
+            width: 100%;
+       }
+       h2 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 23px;
+            @media (max-width: $desktop) {
+                font-size: 22px;
+            }
+            @media (max-width: 680px) {
+                margin-top: 24px;
+                text-align: center;
+            }
+       }
+       p {
+           margin-bottom: 20px;
+       }
+       &__button {
+           margin-top: 4px;
+           @media (max-width: 680px) {
+               display: flex;
+               align-items: center;
+               justify-content: center;
+           }
+        }
+    }
+    &__image {
+        border-radius: 40px;
+        width: calc(42% - 16px);
+        height: 477px;
+        background-position: center center;
+        background-size: cover;
+        border-radius: 40px;
+        @media (max-width: $desktop) {
+            height: auto;
+            border-radius: 30px;
+        }
+        @media (max-width: $tablet) {
+            width: calc(46% - 12px);
+            border-radius: 20px;
+        }
+        @media (max-width: 680px) {
+            width: 100%;
+            border-radius: 16px;
+            height: 308px;
+        }
+    }
+
+    &.left {
+        flex-direction: row-reverse;
+        @media (max-width: 680px) {
+            flex-direction: column-reverse;
+        }
+    }
+    &.central-image-mobile {
+        @media (max-width: $desktop) {
+            flex-direction: column-reverse;
+
+            .text-image__text {
+                width: 100%;
+                h2 {
+                    margin-top: 32px;
+                }
+            }
+
+            .text-image__image {
+                width: 100%;
+                height: 386px;
+            }
+        }
+    }
+    &.higher-margins {
+        padding-bottom: 126px;
+
+        @media (max-width: $tablet) {
+            padding-bottom: 64px;
+        }
+    }
+}

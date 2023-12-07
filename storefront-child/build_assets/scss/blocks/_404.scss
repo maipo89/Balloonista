@@ -1,0 +1,110 @@
+.page-404 {
+    padding: 0p 40px;
+    margin: 0 auto;
+    max-width: 1400px;
+    @media (max-width: $desktop) {
+        max-width: 100%;
+        padding: 0 32px;
+    }
+    @media (max-width: $mobile) {
+        padding: 0 20px;
+    }
+    @media (max-width: $smaller-screen) {
+        padding: 0 16px;
+    }
+
+    &__text {
+        width: 450px;
+        margin: 0 auto;
+        padding-top: 391px;
+        position: relative;
+        @media (max-width: $desktop) {
+            padding-top: 319px;
+        }
+        @media (max-width: $mobile) {
+            width: 85%;
+            padding-top: 311px;
+        }
+        @media (max-width: 330px) {
+            width: 100%;
+        }
+        h1 {
+            font-size: 100px;
+            font-weight: 500;
+            color: $seaFoam;
+            font-family: $montserrat;
+            line-height: 117px;
+            margin-bottom: 0;
+            margin-left: 32px;
+
+            @media (max-width: $mobile) {
+                font-size: 72px;
+                margin-left: 28px;
+                line-height: 84px;
+            }
+            @media (max-width: 330px) {
+                font-size: 58px;
+            }
+        }
+        h2 {
+            font-size: 36px;
+            font-weight: 300;
+            color: $seaFoam;
+            margin-left: 32px;
+            margin-bottom: 30px;
+
+            @media (max-width: $mobile) {
+                font-size: 22px;
+                margin-left: 28px;
+            }
+            @media (max-width: 330px) {
+                font-size: 20px;
+            }
+        }
+        p {
+            margin-bottom: 32px;
+            @media (max-width: $mobile) {
+                text-align: center;
+            }
+        }
+        svg {
+            position: absolute;
+            top: 177px;
+            right: 15px;
+
+            @media (max-width: $desktop) {
+                top: 105px;
+            }
+
+            @media (max-width: $mobile) {
+                width: 150px;
+                top: 70px;
+                right: -14px;
+            }
+            @media (max-width: 375px) {
+                top: 55px;
+                right: -42px;
+            }
+            @media (max-width: 330px) {
+                top: 52px;
+                right: -25px;
+            }
+        }
+    }
+
+    &__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 126px;
+        @media (max-width: $desktop) {
+            margin-bottom: 96px;
+        }
+        @media (max-width: $mobile) {
+            margin-bottom: 64px;
+        }
+        .primary-button {
+            padding: 9px 35px;
+        }
+    }
+}

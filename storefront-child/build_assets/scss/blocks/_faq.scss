@@ -1,0 +1,107 @@
+.faq {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 48px 40px;
+
+    @media (max-width: $desktop) {
+        padding: 48px 32px 48px 32px;
+    }
+
+    @media (max-width: $tablet) {
+        padding: 32px 32px 32px 32px;
+    }
+    @media (max-width: $mobile) {
+        padding: 32px 20px 32px 20px;
+    }
+    @media (max-width: $smaller-screen) {
+        padding: 32px 16px 32px 16px;
+    }
+
+    h3 {
+        font-size: 36px;
+        font-weight: 300;
+        margin-bottom: 24px;
+
+        @media (max-width: $desktop) {
+            font-size: 22px;
+        }
+    }
+    &__text {
+
+        &__title {
+            &.ui-accordion-header {
+                padding: 0;
+                background-color: transparent;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 0;
+                border: none;
+                border-radius: 10px;
+                padding: 16px;
+                background-color: $light-mercury;
+                margin-bottom: 24px;
+
+                &:focus {
+                    outline: none !important;
+                    text-decoration: none;
+                }
+            }
+            &.ui-accordion-header-active {
+                margin-bottom: 0px;
+                border-radius: 10px 10px 0 0;
+                p {
+                    color: black;
+                }
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+            &__icon {
+                display: flex;
+                align-items: center;
+            }
+            .icon {
+                width: 15px;
+                svg {
+                    cursor: pointer;
+                    transition: transform 0.2s ease-in;
+                }
+
+            }
+        }
+
+        .ui-accordion-header-icon {
+            display: none;
+        }
+
+        &__text {
+
+            &.ui-accordion-content {
+                background-color: transparent;
+                border: none;
+                margin: 0;
+                opacity: 0;
+                padding: 27px 16px 19px 16px;
+                transition: opacity 0.3s ease-in;
+            }
+
+            &.ui-accordion-content-active {
+                padding: 27px 16px 19px 16px;
+                opacity: 1 !important;
+                transition: opacity 0.3s ease-in;
+                background-color: $light-mercury;
+                margin-bottom: 24px;
+                border-radius: 0 0 10px 10px;
+            }
+        }
+
+    }
+
+    &.higher-margins {
+        padding-bottom: 126px;
+        @media (max-width: $tablet) {
+            padding-bottom: 64px;
+        }
+    }
+}

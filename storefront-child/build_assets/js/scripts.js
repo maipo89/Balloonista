@@ -68,6 +68,9 @@ $(document).ready(function() {
     $('.search__container .close-icon').on('click', function() {
         $('.background-search').removeClass('open');
         $('.search').removeClass('open');
+        $('.mobile-menu').removeClass('open');
+        $('.close').removeClass('show');
+        $('.hamburger').removeClass('hide');
         enableBodyScroll(); // Call the function to enable scrolling when modal closes
     });
 
@@ -273,38 +276,80 @@ $(document).ready(function() {
         asNavFor: '.baloon-colums__slider__gallery'
     });
     $('.baloon-colums__slider__gallery').slick({
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         asNavFor: '.baloon-colums__slider__main',
-        dots: false,
+        dots: true,
+        infinite: false,
+        pauseOnFocus: true,
         centerMode: false,
         focusOnSelect: true,
         variableWidth: true,
-        infinite: true,
         nextArrow: '<svg class="next-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 24L19.3019 13.4266C19.6209 13.2317 19.6209 12.7683 19.3019 12.5734L2 2" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
         prevArrow: '<svg class="prev-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 2L2.69814 12.5734C2.37911 12.7683 2.37911 13.2317 2.69814 13.4266L20 24" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
-        responsive: [
-            {
-                breakpoint: 758,
-                settings: {
-                    slidesToShow: 4,
-                    dots: true,
-                    infinite: false,
-                    pauseOnFocus: true
-
-                }
-            },
-        ]
     });
 
     // Accordion Environment Block
 
-    $(".environment__text").accordion({
+    function initializeAccordion() {
+        $(".environment__text-mobile").accordion({
+            collapsible: true,
+            active: false,
+            heightStyle: 'content',
+        });
+    }
+
+    // Check screen width on document ready
+    var screenWidth = $(window).width();
+    if (screenWidth <= 768) {
+        initializeAccordion();
+    }
+
+    // Resize event handler
+    $(window).on('resize', function () {
+        var screenWidth = $(window).width();
+
+        // Check if the screen width is less than 768 pixels
+        if (screenWidth <= 768) {
+            // Reinitialize accordion
+            initializeAccordion();
+        } else {
+            // Destroy accordion if the screen width is 768 pixels or more
+            var accordionElement = $(".environment__text-mobile");
+
+            // Check if the accordion is initialized before calling destroy
+            if (accordionElement.hasClass("ui-accordion")) {
+                accordionElement.accordion("destroy");
+            }
+        }
+    });
+
+    $('#product_info').accordion();
+
+    // Slider Clients
+
+    $('.baloon-colums__slider-clients').slick({
+        dots: false,
+        infinite: true,
+        autoplay: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: false,
+        variableWidth: true,
+        // "centerMode": true,
+        autoplaySpeed: 0,
+        speed: 6000,
+        cssEase: "linear",
+        loop: true
+    });
+
+    // Faq Accordion
+
+    $(".faq__text").accordion({
         collapsible: true,
         active: false,
         heightStyle: 'content',
-    });
-    
+    });    
     $('.product-image__feature-slider').slick({
         // options...
         asNavFor: '.product-image__controls',
@@ -320,8 +365,489 @@ $(document).ready(function() {
         nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"><g id="Chevron Right"><path id="Chevron Right_2" d="M1 15L12.2596 8.43189C12.5904 8.23895 12.5904 7.76105 12.2596 7.56811L1 0.999999" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg></button>'
         // other options such as vertical:true, centerMode:true, etc.
     });
+    // Forms Contacts 
 
-    $('#product_info').accordion();
+    $('.getInTouchBtn').on('click',function() {
+        $('.getAQuoteBtn').removeClass('active');
+        $(this).addClass('active');
+
+        $('.contact-form__get-a-quote-title').removeClass('active');
+        $('.contact-form__get-in-touch-title').addClass('active');
+
+        $('.contact-form__get-a-quote').hide();
+        $('.contact-form__get-in-touch').show();
+    });
+
+    $('.getAQuoteBtn').on('click',function() {
+        $('.getInTouchBtn').removeClass('active');
+        $(this).addClass('active');
+
+        $('.contact-form__get-in-touch-title').removeClass('active');
+        $('.contact-form__get-a-quote-title').addClass('active');
+
+        $('.contact-form__get-in-touch').hide();
+        $('.contact-form__get-a-quote').show();
+    });
+
+    // Custom Dropdown 
+
+    $('.select-wrapper').on('click', function() {
+        $(this).children('.select').toggleClass('open');
+    })
+
+    // Input Custom Dropdown
+
+    $('.contact-form .custom-option').on("click", function() {
+        var inputData = $(this).data('value');
+        console.log(inputData);
+        $('.dropdown-contact').val(inputData);
+        $('.contact-form .select__trigger span').html(inputData);
+    });
+    
+    $(document).on("click", function(event) {
+        var ContactFormDropdownList = $(".contact-form .custom-options .custom-option");
+        var ContactFormDropdownListA = $(".contact-form .custom-options a");
+        var ContactFormSelect = $(".contact-form .select");
+        var ContactFormSelectTrigger = $(".contact-form .select__trigger");
+        var ContactFormSelectTriggerSpan = $(".contact-form .select__trigger span");
+        var ContactFormSelectTriggerArrow = $(".contact-form .select__trigger .arrow");
+        var BlogsDropdownList = $(".blogs .custom-options .custom-option");
+        var BlogsDropdownListA = $(".blogs .custom-options a");
+        var BlogsSelect = $(".blogs .select");
+        var BlogsSelectTrigger = $(".blogs .select__trigger");
+        var BlogsSelectTriggerSpan = $(".blogs .select__trigger span");
+        var BlogsSelectTriggerArrow = $(".blogs .select__trigger .arrow");
+        var LegalDropdownList = $(".legal-categories .custom-options .custom-option");
+        var LegalDropdownListA = $(".legal-categories .custom-options a");
+        var LegalSelect = $(".legal-categories .select");
+        var LegalSelectTrigger = $(".legal-categories .select__trigger");
+        var LegalSelectTriggerSpan = $(".legal-categories .select__trigger span");
+        var LegalSelectTriggerArrow = $(".legal-categories .select__trigger .arrow");
+
+        if (!ContactFormDropdownList.is(event.target) && !ContactFormDropdownListA.is(event.target) && !ContactFormSelectTrigger.is(event.target) && !ContactFormSelectTriggerArrow.is(event.target) && !ContactFormSelectTriggerSpan.is(event.target)) {
+            ContactFormSelect.removeClass("open");
+        }
+
+        if (!BlogsDropdownList.is(event.target) && !BlogsDropdownListA.is(event.target) && !BlogsSelectTrigger.is(event.target) && !BlogsSelectTriggerArrow.is(event.target) && !BlogsSelectTriggerSpan.is(event.target)) {
+            BlogsSelect.removeClass("open");
+        }
+
+        if (!LegalDropdownList.is(event.target) && !LegalDropdownListA.is(event.target) && !LegalSelectTrigger.is(event.target) && !LegalSelectTriggerArrow.is(event.target) && !LegalSelectTriggerSpan.is(event.target)) {
+            LegalSelect.removeClass("open");
+        }
+    });
+
+    // Slider Clients
+    function initSlick() {
+        $('.baloon-colums__swiper').slick({
+            dots: false,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            arrows: true,
+            variableWidth: true,
+            infinite: false,
+            waitForAnimate: true,
+            cssEase: 'ease',
+            nextArrow: '<svg class="next-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 24L19.3019 13.4266C19.6209 13.2317 19.6209 12.7683 19.3019 12.5734L2 2" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
+            prevArrow: '<svg class="prev-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 2L2.69814 12.5734C2.37911 12.7683 2.37911 13.2317 2.69814 13.4266L20 24" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
+        });
+    }
+
+    initSlick();
+
+    // Reinitialize slick on window resize if the width is between 1000px and 1400px
+
+    $(window).on('resize', function() {
+        console.log('res')
+        var windowWidth = $(window).width();
+        
+        if (windowWidth === 1000 ) {
+            console.log('resize1')
+            // Destroy the existing slick slider
+            $('.baloon-colums__swiper').slick('unslick');
+            // Initialize slick again with specific settings
+            initSlick();
+            // Go to the first slide
+            $('.baloon-colums__swiper').slick('slickGoTo', 0);
+        }
+
+        if (windowWidth === 758) {
+            console.log('resize2')
+            // Destroy the existing slick slider
+            $('.baloon-colums__swiper').slick('unslick');
+            // Initialize slick again with specific settings
+            initSlick();
+            $('.baloon-colums__swiper').slick('slickGoTo', 0);
+        }
+    });
+
+    $('.baloon-colums__swiper__slide').on('mouseenter', function() {
+        // On hover, remove slick-current class from all slides
+        $('.baloon-colums__swiper__slide.slick-current').removeClass('width');
+        $('.baloon-colums__swiper__slide').removeClass('slick-current');
+        // Add slick-current class to the hovered slide
+        $(this).addClass('slick-current');
+    }).on('mouseleave', function () {
+        $(this).removeClass('width slick-current');
+        // Add 'width' class to the first visible slide on mouse leave
+        $('.baloon-colums__swiper__slide.slick-active').first().addClass('width slick-current');
+    });
+
+    $('.baloon-colums__swiper').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+  
+        // Add the class to the next slide
+        if (nextSlide > currentSlide) {
+            // Remove the class from all slides
+            $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').addClass('width');
+            $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('width');
+        }else{
+            $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').removeClass('width');
+        }
+
+    });
+
+    //Cookie Banner
+
+    var cookieBanner = $('#cookie-banner');
+    var functionalCookies = $('#functional-cookies');
+    var performanceCookies = $('#performance-cookies');
+    var closeCookies = $('#cookie-svg');
+
+    // Function to set a cookie with an expiration date
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+    }
+
+    // Function to get a cookie value by name
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    
+    // Hide empty p tags
+    
+    $('p').each(function() {
+        if ($.trim($(this).text()) === "" && $(this).children().length === 0) {
+            $(this).hide();
+        }
+    });
+
+
+    // Check if the user has previously accepted cookies
+    var cookiesAccepted = getCookie('cookiesAccepted');
+    var performanceCookiesAccepted = getCookie('performanceCookiesAccepted');
+
+    closeCookies.on('click', function () {
+        cookieBanner.hide();
+        
+        // Set a cookie to remember that the user closed the banner
+        setCookie('cookiesAccepted', 'true', 365); // 365 days expiration (adjust as needed)
+    });
+
+    // If cookies have not been accepted, show the banner
+    // Check if cookies are accepted
+if (!localStorage.getItem('cookiesAccepted')) {
+    // Show the cookie banner
+    cookieBanner.show();
+    cookieBanner.addClass('show');
+    functionalCookies.prop('checked', true);
+    performanceCookies.prop('checked', true);
+    if (functionalCookies.prop('checked') || performanceCookies.prop('checked')) {
+        // Set cookiesAccepted to true in local storage for 365 days
+        localStorage.setItem('cookiesAccepted', 'true', 365);
+
+        // Check if performance cookies are checked and not already accepted
+        if (performanceCookies.prop('checked') && !localStorage.getItem('performanceCookiesAccepted')) {
+            // Set performanceCookiesAccepted to true in local storage for 365 days
+            localStorage.setItem('performanceCookiesAccepted', 'true', 365);
+
+            // Load Hotjar script
+            var script = document.createElement('script');
+            script.id = "hotjar-script"
+            script.innerHTML = `(function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:3605603,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`;
+
+            // Append the script element to the head of the document
+            $('head').append(script);
+        }
+    }
+
+    // Handle changes in functional and performance cookies
+    performanceCookies.on('change', function () {
+        if (performanceCookies.prop('checked')) {
+            // Set performanceCookiesAccepted to true in local storage for 365 days
+            localStorage.setItem('performanceCookiesAccepted', 'true', 365);
+
+            // Load Hotjar script
+            var script = document.createElement('script');
+            script.id = "hotjar-script"
+            script.innerHTML = `(function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:3605603,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`;
+
+            // Append the script element to the head of the document
+            $('head').append(script);
+        
+        }else{
+        // Check if either functional or performance cookies are checked
+        // Remove Hotjar script if either functional or performance cookies are unchecked
+            $('#hotjar-script').remove();
+        }
+    });
+
+    } else {
+        cookieBanner.hide();
+        if (performanceCookiesAccepted) {
+            // Load Hotjar script
+            var script = document.createElement('script');
+            script.innerHTML = `(function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:3605603,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`;
+            // Append the script element to the head of the document
+            $('head').append(script);
+        }
+    }
+    
+    // Gsap animations
+
+    var timeline = gsap.timeline();
+
+    var blocksTextImage = gsap.utils.toArray(".text-image");
+
+    blocksTextImage.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    blocksTextImage.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "800px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var blocksBalloonColumns = gsap.utils.toArray(".baloon-colums");
+
+    blocksBalloonColumns.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    blocksBalloonColumns.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "400px 10%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var blocksEnvironment = gsap.utils.toArray(".environment");
+
+    blocksEnvironment.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    blocksEnvironment.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "1000px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var getQuotes = gsap.utils.toArray(".get-a-quote");
+
+    getQuotes.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    getQuotes.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-250px center",
+                end: "800px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var contactForms = gsap.utils.toArray(".contact-form");
+
+    contactForms.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    contactForms.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "800px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var faqsBlock = gsap.utils.toArray(".faq");
+
+    faqsBlock.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    faqsBlock.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "800px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+    var titleParagraphs = gsap.utils.toArray(".title-paragraph");
+
+    titleParagraphs.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    titleParagraphs.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "500px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+
+    var ProductTestimonial = gsap.utils.toArray(".featured-products__testimonial");
+
+    ProductTestimonial.forEach((block) => {
+        gsap.set(block, { opacity: 0, y: 50 });
+    });
+
+    ProductTestimonial.forEach((block) => {
+        gsap.to(block, {
+            scrollTrigger: {
+                trigger: block,
+                start: "-200px center",
+                end: "500px 50%",
+                markers: true, // Remove this in production
+                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+            }
+        })
+    });
+
+
+    var BlogCards = gsap.utils.toArray(".blogs__card");
+
+    BlogCards.forEach((block, index) => {
+        setTimeout(function () { 
+            gsap.to(block,{
+                scrollTrigger: {
+                    trigger: block,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true,
+                    markers: true,
+                    toggleClass: "active",
+                    // addName: 'active',
+                },
+            });
+        }, 500 * index);
+    });
+
+
+    if ($('body').hasClass('home')) {
+
+        var HeroWrapper = gsap.utils.toArray(".hero__wrapper");
+        HeroWrapper.forEach((block) => {
+            timeline.fromTo(block, { x: -1000, opacity: 0 }, { x: 0, opacity: 1, duration: 1 });
+        });
+
+        var ProductsContainer = gsap.utils.toArray(".featured-products__general-container");
+        ProductsContainer.forEach((block) => {
+            timeline.fromTo(block, { x: -1000, opacity: 0 }, { x: 0, opacity: 1, duration: 1 });
+        });
+
+        var HeroSliders = gsap.utils.toArray(".hero__gallery");
+        HeroSliders.forEach((block) => {
+            timeline.fromTo(block, { x: 1372, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, '+=0.2');
+        });
+
+        var HeroImages = gsap.utils.toArray(".hero__image");
+        HeroImages.forEach((block) => {
+            timeline.fromTo(block, { x: 1372, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, '+=0.2');
+        });
+
+    }
+
 
     $(".product-image .prev").click(function () {
 		$(".slick-list").slick("slickPrev");

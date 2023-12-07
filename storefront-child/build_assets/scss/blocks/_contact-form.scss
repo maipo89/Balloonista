@@ -1,0 +1,344 @@
+.contact-form {
+    padding: 48px 40px 48px 40px;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    @media (max-width: $desktop) {
+        padding: 48px 32px 48px 32px;
+    }
+    @media (max-width: $tablet) {
+        padding: 32px 32px 32px 32px;
+    }
+    @media (max-width: $mobile) {
+        padding: 32px 20px 32px 20px;
+    }
+    @media (max-width: $smaller-screen) {
+        padding: 32px 16px 32px 16px;
+    }
+
+    &__get-a-quote, &__get-a-quote-title, &__get-in-touch-title {
+        display: none;
+    }
+
+    &__get-a-quote-title {
+        &.active {
+            display: block;
+        }
+    }
+
+    &__get-in-touch-title {
+        &.active {
+            display: block;
+        }
+    }
+
+    h2 {
+        font-size: 36px;
+        font-weight: 300;
+        color: black;
+        margin-bottom: 23px;
+
+        @media (max-width: $desktop) {
+            font-size: 22px;
+        }
+    }
+
+    &__buttons {
+        button {
+            height: 42px;
+            font-size: 16px;
+            font-family: $montserrat;
+            padding: 7px 24px;
+            margin-right: 17px;
+            outline: none;
+
+            @media (max-width: 375px) {
+                margin-right: 0;
+            }
+
+            @media (max-width: 300px) {
+                padding: 7px 9px;
+            }
+        }
+        .active {
+            pointer-events: none;
+        }
+    }
+
+    form {
+        margin: 0;
+    }
+
+    &__get-in-touch {
+        h3 {
+            margin: 0;
+            margin-top: 32px;
+            @media (max-width: $desktop) {
+                margin-top: 24px;
+                font-size: 18px;
+            }
+        }
+        input {
+            width: 232px;
+            margin-right: 25px;
+            margin-top: 24px;
+            &:nth-child(3) {
+                width: 309px;
+                @media (max-width: 700px) {
+                    width: 100%;
+                }
+            }
+            &:last-child {
+                margin: 0;
+                margin-top: 24px;
+            }
+            @media (max-width: 700px) {
+                width: 100%;
+            }
+
+        }
+        textarea {
+            margin-top: 24px;
+            height: 96px;
+        }
+        p {
+            width: 50%;
+            font-size: 10px;
+            font-weight: 400;
+            color: black;
+            line-height: 12px;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 16px;
+            margin-bottom: 24px;
+
+            @media (max-width: 1000px) {
+                width: 80%;
+            }
+            @media (max-width: 700px) {
+                width: 100%;
+            }
+
+            a {
+                color: $seaFoam;
+
+                &:hover {
+                    text-decoration: underline;
+                    text-underline-offset: 3px;
+                }
+
+                &:active, &:focus {
+                    text-decoration: underline;
+                    text-underline-offset: 3px;
+                    color: $vineyard;
+                }
+            }
+        }
+        .inputs-container {
+            @media (max-width: 700px) {
+                display: block;
+            }
+        }
+    }
+    &__get-a-quote {
+        h3 {
+            margin: 0;
+            margin-top: 32px;
+            @media (max-width: $desktop) {
+                margin-top: 24px;
+                font-size: 18px;
+            }
+        }
+        .name {
+            @media (max-width: 580px) {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                column-gap: 16px;
+                input[type=text] {
+                    width: calc(50% - 8px);
+                    margin-right: 0;
+                    &:nth-child(3) {
+                        width: calc(65% - 8px);
+                    }
+                    &:nth-child(4) {
+                        width: calc(35% - 8px);
+                    }
+                }
+            }
+            @media (max-width: 375px) {
+                display: block;
+                input[type=text] {
+                    width: 100%;
+                    &:nth-child(3) {
+                        width: 100%;
+                    }
+                    &:nth-child(4) {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        input[type=text] {
+            width: 232px;
+            margin-right: 25px;
+            margin-top: 24px;
+            @media (max-width: 1200px) {
+                width: 180px;
+            }
+            &:nth-child(3) {
+                width: 309px;
+            }
+            &:last-of-type {
+                margin: 0;
+                margin-top: 24px;
+            }
+        }
+        .requirements {
+            width: 70%;
+            color: black;
+            margin: 24px 0 24px 0;
+            @media (max-width: 890px) {
+                width: 100%;
+            }
+        }
+
+        textarea {
+            height: 96px;
+        }
+
+        .policy {
+            width: 50%;
+            font-size: 10px;
+            font-weight: 400;
+            color: black;
+            line-height: 12px;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 16px;
+            margin-bottom: 24px;
+
+            @media (max-width: 1000px) {
+                width: 80%;
+            }
+            @media (max-width: 700px) {
+                width: 100%;
+            }
+
+            a {
+                color: $seaFoam;
+
+                &:hover {
+                    text-decoration: underline;
+                    text-underline-offset: 3px;
+                }
+
+                &:active, &:focus {
+                    text-decoration: underline;
+                    text-underline-offset: 3px;
+                    color: $vineyard;
+                }
+            }
+        }
+        .event {
+            display: flex;
+
+            @media (max-width: $mobile) {
+                justify-content: space-between;
+                column-gap: 16px;
+            }
+
+            @media (max-width: 375px) {
+                column-gap: initial;
+                display: block;
+            }
+
+            .select-wrapper {
+                margin-top: 24px;
+                width: 234px;
+                margin-right: 25px;
+
+                @media (max-width: $mobile) {
+                    width: calc(50% - 8px);
+                    margin: 0;
+                    margin-top: 24px;
+                }
+
+                @media (max-width: 375px) {
+                    width: 100%;
+                }
+            }
+
+            .dropdown-contact {
+                display: none;
+            }
+
+            input {
+                width: 232px;
+
+                @media (max-width: $mobile) {
+                    width: calc(50% - 8px);
+                }
+
+                @media (max-width: 375px) {
+                    width: 100%;
+                }
+            }
+        }
+        .newsletter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 70%;
+            margin: 0 auto;
+            margin-top: 8px;
+            @media (max-width: 1000px) {
+                width: 100%;
+            }
+            @media (max-width: 300px) {
+                display: block;
+            }
+            p {
+                font-family: $montserrat;
+                font-size: 10px;
+                line-height: 12px;
+                font-weight: 400;
+                color: black;
+                margin-left: 16px;
+                margin-right: 16px;
+                margin-top: 16px;
+                @media (max-width: $smaller-screen) {
+                    margin-left: 0;
+                }
+            }
+            &__checkbox {
+                width: fit-content;
+                display: flex;
+                margin-right: 16px;
+                margin-top: 16px;
+
+                label {
+                    margin: 0;
+                    font-family: $montserrat;
+                    font-size: 10px;
+                    line-height: 12px;
+                    font-weight: 400;
+                    color: black;
+
+                    @media (max-width: $mobile) {
+                        font-size: 8px;
+                    }
+
+                    @media (max-width: $smaller-screen) {
+                        font-size: 5px;
+                    }
+                }
+            }
+        }
+    }
+    button[type=submit] {
+        margin: 0 auto;
+        padding: 7px 24px;
+        height: 42px;
+    }
+}
