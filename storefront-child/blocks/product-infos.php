@@ -1,7 +1,6 @@
 <?php ?>
 
 <div class="product-infos">
-    qdqwdqwdqw
     <?php
     if( have_rows('informations') ): ?>
         <div class="product-infos__informations" id="product_info">
@@ -15,15 +14,12 @@
             <div class="product-infos__button-ui">
                 <div class="line"></div>
                 <div class="circle">
-                    <svg width="20" height="2" viewBox="0 0 20 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="20" height="2" rx="1" fill="white"/>
-                    </svg>
+                    <div class="line"></div>
                 </div>
-                <div class="line"></div>
             </div>
         </div>
         <div>
-            <p><?php echo $text ?></p>
+            <?php echo $text ?>
         </div>
         <?php
         endwhile;

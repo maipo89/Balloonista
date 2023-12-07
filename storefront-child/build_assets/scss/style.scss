@@ -12,6 +12,7 @@
 @import 'blocks/_product-infos.scss';
 @import 'blocks/_baloon-columns.scss';
 @import 'blocks/_environment.scss';
+@import 'blocks/_single-product.scss';
 @import 'blocks/_text-image.scss';
 @import 'blocks/_faq.scss';
 @import 'blocks/_map.scss';
@@ -130,31 +131,30 @@ body{
     }
 }
 
-button[type=submit] {
-    background-color: $dark-accent;
-    color: $white;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 400;
-    padding: 0;
-    font-family: $montserrat;
-    pointer-events: none;
-    &.active {
-        background-color: $seaFoam;
-        pointer-events: initial;
+// button[type=submit] {
+//     background-color: $dark-accent;
+//     color: $white;
+//     border-radius: 10px;
+//     font-size: 16px;
+//     font-weight: 400;
+//     padding: 0;
+//     font-family: $montserrat;
+//     pointer-events: none;
+//     &.active {
+//         background-color: $seaFoam;
+//         pointer-events: initial;
+//         &:hover {
+//             background-color: $mercury;
+//             color: $black;
+//         }
 
-        &:hover {
-            background-color: $mercury;
-            color: $black;
-        }
-
-        &:active, &:focus {
-            background-color: $seaFoam;
-            color: $white;
-            outline: none;
-        }
-    }
-}
+//         &:active, &:focus {
+//             background-color: $seaFoam;
+//             color: $white;
+//             outline: none;
+//         }
+//     }
+// }
 
 // Inputs 
 
