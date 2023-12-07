@@ -105,13 +105,13 @@ if ( post_password_required() ) {
 			<h1><?php echo $title; ?></h1>
 			<p><?php echo $price; ?></p>
 			<div class="product__option-buttons">
-				<button class="options">
+				<button class="options" data-count="0">
 					<p>Options</p>
 				</button>
-				<button class="extras">
+				<button class="extras" data-count="1">
 					<p>Extras</p>
 				</button>
-				<button class="summary">
+				<button class="summary" data-count="2">
 					<p>Summry</p>
 				</button>
 			</div>

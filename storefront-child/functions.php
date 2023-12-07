@@ -138,6 +138,21 @@ function sf_update_woo_flexslider_options( $options ) {
 // function custom_remove_all_quantity_fields( $return, $product ) {return true;}
 // add_filter( 'woocommerce_is_sold_individually','custom_remove_all_quantity_fields', 10, 2 );
 
+
+
+// Customize the display of multiple-choice addons in WooCommerce.
+// Add this code to your theme's functions.php file or a custom plugin
+
+// Hook into WooCommerce to modify the display of multiple choice fields
+
+
+add_filter('woocommerce_cart_item_thumbnail', 'custom_cart_item_thumbnail_size', 10, 3);
+
+function custom_cart_item_thumbnail_size($thumbnail, $cart_item, $cart_item_key) {
+    $_product = $cart_item['data'];
+    return $_product->get_image('medium'); // Replace 'medium' with your desired size
+}
+
 function remove_image_zoom_support() {
     remove_theme_support( 'wc-product-gallery-zoom' );
 }

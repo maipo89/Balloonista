@@ -324,7 +324,6 @@ $(document).ready(function() {
     $('#product_info').accordion();
 
     $(".product-image .prev").click(function () {
-        alert('click');
 		$(".slick-list").slick("slickPrev");
 	});
 
@@ -338,14 +337,61 @@ $(document).ready(function() {
     var stepCount = 0;
     $('.product-next-step').on('click', function() {
         stepCount++;
-        $('.variations,.wc-pao-addon-container,.wc-pao-addon-container, .wc-pao-addon-container, .product_meta, .single_variation_wrap').removeClass('active');
-        alert(stepCount);
-        if(stepCount = 1){
+        $('.variations,.wc-pao-addon-container,.wc-pao-addon-container, .wc-pao-addon-container, .product_meta,#product-addons-total, .single_variation_wrap, .woocommerce-variation-add-to-cart').removeClass('active');
+        console.log(stepCount);
+        if(stepCount == 1){
             $('.wc-pao-addon-container').addClass('active');
-        }else if(stepCount === 2){
-        } else if (stepCount == 3){
-
+            $('.product__option-buttons button').removeClass('active');
+            $('.extras').addClass('active');
+            $('.addons-slider-button.slick-prev').click();
+            $('.addons-slider-button.slick-next').click();
+        }
+        if(stepCount == 2){
+            $('#product-addons-total, .woocommerce-variation-add-to-cart').addClass('active');
+            $('.product__option-buttons button').removeClass('active');
+            $('.summary').addClass('active');
+            $('.product-next-step').hide();
         }
     });
 
+    $('.wc-pao-addon-wrap').each(function() {
+        console.log('this o0', $(this));
+        if ($(this).has('a').length > 0) {
+            console.log('this', $(this));
+            $(this).addClass('addon-slider');
+        }
+    });
+    $('.product__option-buttons button').on('click', function() {
+        stepCount = $(this).data('count');
+
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+        $('.variations,.wc-pao-addon-container,.wc-pao-addon-container, .wc-pao-addon-container,#product-addons-total, .product_meta, .single_variation_wrap,.woocommerce-variation-add-to-cart').removeClass('active');
+        if(stepCount == 0){
+            $('.variations').addClass('active');
+            $('.product-next-step').show();
+        }
+        if(stepCount == 1){
+            $('.wc-pao-addon-container').addClass('active');
+            $('.addons-slider-button.slick-prev').click();
+            $('.addons-slider-button.slick-next').click();
+            $('.product-next-step').show();
+        }
+        if(stepCount == 2){
+            $('#product-addons-total, .woocommerce-variation-add-to-cart, .price').addClass('active');
+            $('.product-next-step').hide();
+            
+        }
+    });
+    // $('.addon-slider').slick({
+    //     slidesToShow: 3,
+    //     slidesToScroll: 1,
+    //     dots: true,
+    //     prevArrow: '<button type="button" class="addons-slider-button slick-prev"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"> <g id="Chevron Left"> <path id="Chevron Left_2" d="M13 1L1.74038 7.56811C1.40963 7.76105 1.40963 8.23895 1.74038 8.43189L13 15" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg> </button>',
+    //     nextArrow: '<button type="button" class="addons-slider-button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"><g id="Chevron Right"><path id="Chevron Right_2" d="M1 15L12.2596 8.43189C12.5904 8.23895 12.5904 7.76105 12.2596 7.56811L1 0.999999" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg></button>',
+    //     customPaging: function(slider, i) {
+    //         return (i + 1); // Display numbers starting from 1
+    //         // If you want to start from 0, you can use: return i;
+    //       },
+    // });
 });
