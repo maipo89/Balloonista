@@ -641,7 +641,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
                 trigger: block,
                 start: "-200px center",
                 end: "800px 50%",
-                markers: true, // Remove this in production
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -661,7 +660,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
                 trigger: block,
                 start: "-200px center",
                 end: "400px 10%",
-                markers: true, // Remove this in production
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -681,7 +679,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
                 trigger: block,
                 start: "-200px center",
                 end: "1000px 50%",
-                markers: true, // Remove this in production
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -701,7 +698,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
                 trigger: block,
                 start: "-250px center",
                 end: "800px 50%",
-                markers: true, // Remove this in production
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -721,7 +717,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
                 trigger: block,
                 start: "-200px center",
                 end: "800px 50%",
-                markers: true, // Remove this in production
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -741,7 +736,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
                 trigger: block,
                 start: "-200px center",
                 end: "800px 50%",
-                markers: true, // Remove this in production
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -761,7 +755,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
                 trigger: block,
                 start: "-200px center",
                 end: "500px 50%",
-                markers: true, // Remove this in production
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -782,7 +775,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
                 trigger: block,
                 start: "-200px center",
                 end: "500px 50%",
-                markers: true, // Remove this in production
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -801,7 +793,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
                     start: "top bottom",
                     end: "bottom top",
                     scrub: true,
-                    markers: true,
                     toggleClass: "active",
                     // addName: 'active',
                 },
