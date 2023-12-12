@@ -911,4 +911,16 @@ if (!localStorage.getItem('cookiesAccepted')) {
     //         // If you want to start from 0, you can use: return i;
     //       },
     // });
+
+    // Filter shop page
+    
+    $('.filter-button__button').on('click', function () {
+        $('.filter-button').toggleClass('open');
+        $('.shadow').toggleClass('open');
+    });
+
+    $('.filter-button__filters svg').on('click', function () {
+        $('.filter-button').removeClass('open');
+        $('.shadow').removeClass('open');
+    });
 });
