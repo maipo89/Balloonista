@@ -40,30 +40,109 @@ get_header( 'shop' );
             <p>All Products</p>
         </div>
     </div>
-
     <?php
-    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-    $args = array(
-        'post_type'      => 'product', // WooCommerce product post type
-        'posts_per_page' => 12,        // Number of products per page
-        'order'          => 'DESC',
-        'orderby'        => 'date',
-        'paged'          => $paged,
-    );
+        $args = array(
+            'post_type'      => 'product',
+            'posts_per_page' => 12,
+            'paged' => ( get_query_var('page') ? get_query_var('page') : 1),
+        );
 
-    $query = new WP_Query($args);
+        // Check if the orderby parameter is set to 'popularity'
+        if (isset($_GET['orderby']) && $_GET['orderby'] === 'popularity') {
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = 'total_sales';
+            $args['order']    = 'desc';
+        }
+
+        else if (isset($_GET['orderby']) && $_GET['orderby'] === 'price_low_to_high') {
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = '_price';
+            $args['order']    = 'asc';
+        }
+
+        else if (isset($_GET['orderby']) && $_GET['orderby'] === 'price_high_to_low') {
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = '_price';
+            $args['order']    = 'desc';
+        }
+
+        else if (isset($_GET['orderby']) && $_GET['orderby'] === 'best_selling') {
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = 'total_sales';
+            $args['order']    = 'desc';
+        }
+
+        else if (isset($_GET['orderby']) && $_GET['orderby'] === 'featured') {
+            $args['meta_key']   = '_featured';
+            $args['meta_value'] = 'yes';
+            $args['order']      = 'desc';
+        }
+
+        else if (isset($_GET['orderby']) && $_GET['orderby'] === 'name_a_to_z') {
+            $args['orderby']  = 'title';
+            $args['order']    = 'asc';
+        }
+
+        if (isset($_GET['category'])) {
+            // Get the category parameter from the URL
+            $category_param = $_GET['category'];
+        
+            // Split the category parameter into an array of category slugs
+            $category_slugs = explode(',', $category_param);
+        
+            // Use tax_query to filter products by category
+            $tax_query = array(
+                'relation' => 'AND', // Use AND for filtering by multiple categories
+            );
+        
+            foreach ($category_slugs as $category_slug) {
+                if ($category_slug) {
+                    $tax_query[] = array(
+                        'taxonomy' => 'product_cat',
+                        'field'    => 'slug',
+                        'terms'    => $category_slug,
+                        'operator' => 'IN',
+                    );
+                }
+            }
+        
+            $args['tax_query'] = $tax_query;
+        }
+        
+
+        $query = new WP_Query($args);
+
+        $product_categories = get_terms(array(
+            'taxonomy'   => 'product_cat',
+            'hide_empty' => true, // Exclude empty categories
+            'object_ids' => $query->posts ? wp_list_pluck($query->posts, 'ID') : array(),
+
+        ));
     ?>
 
     <div class="shop">
         <div class="shop__filter">
-            <p class="subtitle">Balloon Type:</p>
+            <?php
+                if (!empty($product_categories) && !is_wp_error($product_categories)) {
+                    // Loop through each category
+                    foreach ($product_categories as $category) {
+                ?>
+                        <div>
+                            <input type="checkbox" id="<?php echo $category->slug ?>" name="<?php echo $category->slug ?>" <?php echo strpos($_SERVER['REQUEST_URI'], $category->slug) !== false ? 'checked' : ''; ?>>
+                            <label for="<?php echo $category->slug ?>"><?php echo $category->name ?></label>            
+                        </div>
+            <?php
+                    }
+                }
+            ?>
+            <!-- <p class="subtitle">Balloon Type:</p> -->
             <div>
                 <input type="checkbox" id="helium-balloons" name="helium-balloons">
                 <label for="helium-balloons">Helium Balloons</label>            
             </div>
-            <p class="subtitle">Occasion:</p>
-            <p class="subtitle">By Product:</p>
+            <!-- <p class="subtitle">Occasion:</p>
+            <p class="subtitle">By Product:</p> -->
         </div>
         <div class="shop__container">
             <div class="shop__container__top">
@@ -93,33 +172,44 @@ get_header( 'shop' );
                 </div>
             <?php endif; ?>
             <div class="shadow"></div>
-            <div class="filter-button">
-                <div class="filter-button__button">
-                    <span>
-                        Filter
-                    </span>
-                    <svg class="filter-icon" width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect y="1.63672" width="20" height="1.63636" rx="0.818182" fill="#D9E7E1"/>
-                        <rect y="8.18262" width="20" height="1.63636" rx="0.818182" fill="#D9E7E1"/>
-                        <rect y="14.7275" width="20" height="1.63636" rx="0.818182" fill="#D9E7E1"/>
-                        <path d="M5.91602 2.45455C5.91602 3.38303 5.14555 4.15909 4.16602 4.15909C3.18648 4.15909 2.41602 3.38303 2.41602 2.45455C2.41602 1.52607 3.18648 0.75 4.16602 0.75C5.14555 0.75 5.91602 1.52607 5.91602 2.45455Z" fill="white" stroke="#D9E7E1" stroke-width="1.5"/>
-                        <path d="M17.584 9.00044C17.584 9.92892 16.8135 10.705 15.834 10.705C14.8545 10.705 14.084 9.92892 14.084 9.00044C14.084 8.07196 14.8545 7.2959 15.834 7.2959C16.8135 7.2959 17.584 8.07196 17.584 9.00044Z" fill="white" stroke="#D9E7E1" stroke-width="1.5"/>
-                        <path d="M5.91602 15.5454C5.91602 16.4738 5.14555 17.2499 4.16602 17.2499C3.18648 17.2499 2.41602 16.4738 2.41602 15.5454C2.41602 14.6169 3.18648 13.8408 4.16602 13.8408C5.14555 13.8408 5.91602 14.6169 5.91602 15.5454Z" fill="white" stroke="#D9E7E1" stroke-width="1.5"/>
-                    </svg>
-                    <svg class="close-button" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="18.9684" height="1.89684" rx="0.948422" transform="matrix(0.746936 -0.664896 0.746936 0.664896 0.414062 12.6123)" fill="#70B095"/>
-                        <rect width="18.9684" height="1.89684" rx="0.948422" transform="matrix(0.746936 0.664896 -0.746936 0.664896 1.41797 0.126953)" fill="#70B095"/>
-                    </svg>
+            <div class="shop__container__buttons">
+                <div class="filter-button">
+                    <div class="filter-button__button">
+                        <span>
+                            Filter
+                        </span>
+                        <svg class="filter-icon" width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect y="1.63672" width="20" height="1.63636" rx="0.818182" fill="#D9E7E1"/>
+                            <rect y="8.18262" width="20" height="1.63636" rx="0.818182" fill="#D9E7E1"/>
+                            <rect y="14.7275" width="20" height="1.63636" rx="0.818182" fill="#D9E7E1"/>
+                            <path d="M5.91602 2.45455C5.91602 3.38303 5.14555 4.15909 4.16602 4.15909C3.18648 4.15909 2.41602 3.38303 2.41602 2.45455C2.41602 1.52607 3.18648 0.75 4.16602 0.75C5.14555 0.75 5.91602 1.52607 5.91602 2.45455Z" fill="white" stroke="#D9E7E1" stroke-width="1.5"/>
+                            <path d="M17.584 9.00044C17.584 9.92892 16.8135 10.705 15.834 10.705C14.8545 10.705 14.084 9.92892 14.084 9.00044C14.084 8.07196 14.8545 7.2959 15.834 7.2959C16.8135 7.2959 17.584 8.07196 17.584 9.00044Z" fill="white" stroke="#D9E7E1" stroke-width="1.5"/>
+                            <path d="M5.91602 15.5454C5.91602 16.4738 5.14555 17.2499 4.16602 17.2499C3.18648 17.2499 2.41602 16.4738 2.41602 15.5454C2.41602 14.6169 3.18648 13.8408 4.16602 13.8408C5.14555 13.8408 5.91602 14.6169 5.91602 15.5454Z" fill="white" stroke="#D9E7E1" stroke-width="1.5"/>
+                        </svg>
+                        <svg class="close-button" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18.9684" height="1.89684" rx="0.948422" transform="matrix(0.746936 -0.664896 0.746936 0.664896 0.414062 12.6123)" fill="#70B095"/>
+                            <rect width="18.9684" height="1.89684" rx="0.948422" transform="matrix(0.746936 0.664896 -0.746936 0.664896 1.41797 0.126953)" fill="#70B095"/>
+                        </svg>
+                    </div>
                 </div>
                 <div class="filter-button__filters">
-                    <p class="subtitle">Balloon Type:</p>
+                    <!-- <p class="subtitle">Balloon Type:</p> -->
                     <div class="filter-button__filters__filter">
-                        <div>
-                            <input type="checkbox" id="helium-balloons" name="helium-balloons">
-                            <label for="helium-balloons">Helium Balloons</label>            
-                        </div>
+                    <?php
+                            if (!empty($product_categories) && !is_wp_error($product_categories)) {
+                                // Loop through each category
+                                foreach ($product_categories as $category) {
+                            ?>
+                                    <div>
+                                        <input type="checkbox" id="<?php echo $category->slug ?>" name="<?php echo $category->slug ?>" <?php echo strpos($_SERVER['REQUEST_URI'], $category->slug) !== false ? 'checked' : ''; ?>>
+                                        <label for="<?php echo $category->slug ?>"><?php echo $category->name ?></label>            
+                                    </div>
+                        <?php
+                                }
+                            }
+                        ?>
                     </div>
-                    <p class="subtitle">Occasion:</p>
+                    <!-- <p class="subtitle">Occasion:</p>
                     <div class="filter-button__filters__filter">
                         <div>
                             <input type="checkbox" id="helium-balloons" name="helium-balloons">
@@ -132,67 +222,70 @@ get_header( 'shop' );
                             <input type="checkbox" id="helium-balloons" name="helium-balloons">
                             <label for="helium-balloons">Helium Balloons</label>            
                         </div>
-                    </div>
+                    </div> -->
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="25.2641" height="2.52641" rx="1.2632" transform="matrix(0.701006 -0.713155 0.701006 0.713155 0.519531 18.0176)" fill="#70B095"/>
                         <rect width="25.2641" height="2.52641" rx="1.2632" transform="matrix(0.701006 0.713155 -0.701006 0.713155 1.77148 0.180664)" fill="#70B095"/>
                     </svg>
                 </div>
-            </div>
-            <div class="select-wrapper">
-                <div class="select">
-                    <input class="sort-input" type="text" name="referral" value=""/>
-                    <div class="select__trigger">
-                        <span>
-                            Sort
-                        </span>
-                        <div class="arrow"></div>
-                    </div>
-                        <div class="custom-options">
-                            <a>
-                                <span class="custom-option" data-value="Popularity">Popularity</span>
-                            </a>
-                            <a>
-                                <span class="custom-option" data-value="Best Selling">Best Selling</span>
-                            </a>
-                            <a>
-                                <span class="custom-option" data-value="Featured">Featured</span>
-                            </a>
-                            <a>
-                                <span class="custom-option" data-value="Price: Low to High">Price: Low to High</span>
-                            </a>
-                            <a>
-                                <span class="custom-option" data-value="Price: High to Low">Price: High to Low</span>
-                            </a>
-                            <a>
-                                <span class="custom-option" data-value="Name: A to Z">Name: A to Z</span>
-                            </a>
+                <div class="select-wrapper">
+                    <div class="select">
+                        <input class="sort-input" type="text" name="sort-input" value=""/>
+                        <div class="select__trigger">
+                            <span>
+                                <?php
+                                if (isset($_GET['orderby']) && $_GET['orderby'] === 'popularity') {
+                                    echo 'Popularity';
+                                }
+                        
+                                else if (isset($_GET['orderby']) && $_GET['orderby'] === 'price_low_to_high') {
+                                    echo 'Low to High';
+                                }
+                        
+                                else if (isset($_GET['orderby']) && $_GET['orderby'] === 'price_high_to_low') {
+                                    echo 'High to Low';
+                                }
+                        
+                                else if (isset($_GET['orderby']) && $_GET['orderby'] === 'best_selling') {
+                                    echo 'Best Selling';
+                                }
+                        
+                                else if (isset($_GET['orderby']) && $_GET['orderby'] === 'featured') {
+                                    echo 'Featured';
+                                }
+                        
+                                else if (isset($_GET['orderby']) && $_GET['orderby'] === 'name_a_to_z') {
+                                    echo 'Name: A to Z';
+                                }
+                                else {
+                                    echo 'Sort';
+                                }
+                                ?>
+                            </span>
+                            <div class="arrow"></div>
                         </div>
+                            <div class="custom-options">
+                                <a>
+                                    <span class="custom-option" data-value="popularity">Popularity</span>
+                                </a>
+                                <a>
+                                    <span class="custom-option" data-value="best_selling">Best Selling</span>
+                                </a>
+                                <a>
+                                    <span class="custom-option" data-value="featured">Featured</span>
+                                </a>
+                                <a>
+                                    <span class="custom-option" data-value="price_low_to_high">Price: Low to High</span>
+                                </a>
+                                <a>
+                                    <span class="custom-option" data-value="price_high_to_low">Price: High to Low</span>
+                                </a>
+                                <a>
+                                    <span class="custom-option" data-value="name_a_to_z">Name: A to Z</span>
+                                </a>
+                            </div>
+                    </div>
                 </div>
-            </div>
-            <div class="shop__container__dropdown">
-                <form class="woocommerce-ordering" method="get">
-                    <select name="orderby" class="orderby">
-                        <?php
-                        $orderby_options = apply_filters('woocommerce_catalog_orderby', array(
-                            'popularity' => __('Popularity', 'woocommerce'),
-                            'best_selling' => __('Best Selling', 'woocommerce'),
-                            'featured' => __('Featured', 'woocommerce'),
-                            'price_low_to_high' => __('Price: Low to High', 'woocommerce'),
-                            'price_high_to_low' => __('Price: High to Low', 'woocommerce'),
-                            'name_a_to_z' => __('Name: A to Z', 'woocommerce'),
-                        ));
-
-                        foreach ($orderby_options as $id => $label) {
-                            echo "<option value=\"$id\"";
-                            selected($_GET['orderby'], $id);
-                            echo ">$label</option>";
-                        }
-                        ?>
-                    </select>
-                    <input type="hidden" name="paged" value="1" />
-                    <?php wc_query_string_form_fields(null, array('orderby', 'submit', 'paged', 'product-page')); ?>
-                </form>
             </div>
             <div class="shop__container__content">
                 <?php if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>

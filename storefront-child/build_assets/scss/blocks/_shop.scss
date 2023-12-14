@@ -128,7 +128,11 @@
                 }
             }
             .select-wrapper {
-                width: 180px;
+                width: 200px;
+                margin-bottom: 32px;
+                .sort-input {
+                    display: none;
+                }
             }
             &__button-mobile {
                 display: none;
@@ -144,17 +148,45 @@
                 }
             }
             .shadow {
-                position: fixed;
-                top: 0;
-                bottom: 0;
-                right: 0;
-                left: 0;
-                background-color: $light-gray;
-                opacity: 0.8;
-                z-index: 9;
                 display: none;
+                @media (max-width: 1008px) {
+                    position: fixed;
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                    background-color: $light-gray;
+                    opacity: 0.8;
+                    z-index: 9;
+                    display: none;
+                    &.open {
+                        display: block;
+                    }
+                }
+            }
+            &__buttons {
+                display: flex;
+                justify-content: center;
+                position: relative;
                 &.open {
-                    display: block;
+                    .filter-button__button {
+                        background-color: $mercury;
+                    }
+                    .filter-button__filters {
+                        display: none;
+                        @media (max-width: 1008px) {
+                            display: block;
+                        }
+                    }
+                    .filter-button__button .filter-icon {
+                        display: none;
+                    }
+                    .filter-button__button .close-button {
+                        display: block;
+                    }
+                    .filter-button__button svg {
+                        bottom: 3px;
+                    }
                 }
             }
             .filter-button {
@@ -162,6 +194,8 @@
                 z-index: 10;
                 display: none;
                 cursor: pointer;
+                width: 200px;
+                margin-right: 24px;
                 @media (max-width: 1008px) {
                     display: block;
                 }
@@ -173,7 +207,6 @@
                     line-height: 24px;
                     display: flex;
                     justify-content: space-between;
-                    width: 188px;
                     border: 2px solid #d9e7e1;
                     border-radius: 10px;
                     background-color: white;
@@ -192,107 +225,91 @@
                     }
                     .close-button {
                         display: none;
+                        cursor: pointer;
                     }
                 }
-                &__filters {
-                    position: absolute;
-                    top: 54px;
-                    height: 479px;
-                    width: 100%;
-                    background-color: $mercury;
-                    border-radius: 20px;
-                    padding: 32px 28px;
-                    display: none;
+            }
+            .filter-button__filters {
+                position: absolute;
+                top: 54px;
+                height: fit-content;
+                width: 100%;
+                background-color: $mercury;
+                border-radius: 20px;
+                padding: 32px 28px;
+                display: none;
+                z-index: 10;
+                @media (max-width: 630px) {
+                    height: fit-content;
+                    top: -54px;
+                }
+
+                .subtitle {
+                    font-size: 18px;
+                    font-weight: 500;
+                    margin-top: 32px;
+                    margin-bottom: 23px;
+                    color: black;
+
+                    &:first-of-type {
+                        margin-top: 0;
+                    }
+                }
+
+                label {
+                    font-size: 16px;
+                    font-weight: 400;
                     position: relative;
+                    bottom: 2px;
+                    font-family: $montserrat;
+                    color: black;
+                }
+
+                svg {
+                    display: none;
                     @media (max-width: 630px) {
-                        height: fit-content;
-                        top: -54px;
-                    }
-
-                    .subtitle {
-                        font-size: 18px;
-                        font-weight: 500;
-                        margin-top: 32px;
-                        margin-bottom: 23px;
-                        color: black;
-
-                        &:first-of-type {
-                            margin-top: 0;
-                        }
-                    }
-
-                    label {
-                        font-size: 16px;
-                        font-weight: 400;
-                        position: relative;
-                        bottom: 2px;
-                        font-family: $montserrat;
-                        color: black;
-                    }
-
-                    svg {
-                        display: none;
-                        @media (max-width: 630px) {
-                            display: block;
-                            position: absolute;
-                            top: 32px;
-                            right: 28px;
-                        }
-                    }
-        
-                    input[type=checkbox] {
-                        width: 16px;
-                        height: 16px;
-                        margin: 0;
-                        &::before {
-                            content: "";
-                            position: absolute;
-                            right: 36%;
-                            top: 55%;
-                            border-radius: 1px;
-                            width: 6px;
-                            height: 10px;
-                            border: solid #fff;
-                            border-width: 0 2px 2px 0;
-                            margin: -1px -1px 0;
-                            transform: rotate(45deg) translate(-50%,-50%);
-                            z-index: 2;
-                        }
-                    }
-
-                    &__filter {
-                        display: flex;
-                        flex-wrap: wrap;
-                        @media (max-width: 630px) {
-                            display: block;
-                        }
-                        div {
-                            width: 33.3%;
-                            @media (max-width: 630px) {
-                                width: 100%;
-                            }
-                        }
-                        &.product {
-                            display: block;
-                            padding: 0;
-                        }
+                        display: block;
+                        position: absolute;
+                        top: 32px;
+                        right: 28px;
                     }
                 }
-                &.open {
-                    .filter-button__button {
-                        background-color: $mercury;
+    
+                input[type=checkbox] {
+                    width: 16px;
+                    height: 16px;
+                    margin: 0;
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        right: 36%;
+                        top: 55%;
+                        border-radius: 1px;
+                        width: 6px;
+                        height: 10px;
+                        border: solid #fff;
+                        border-width: 0 2px 2px 0;
+                        margin: -1px -1px 0;
+                        transform: rotate(45deg) translate(-50%,-50%);
+                        z-index: 2;
                     }
-                    .filter-button__filters {
+                }
+
+                &__filter {
+                    display: flex;
+                    flex-wrap: wrap;
+                    @media (max-width: 630px) {
                         display: block;
                     }
-                    .filter-icon {
-                        display: none;
+                    div {
+                        width: 33.3%;
+                        @media (max-width: 630px) {
+                            width: 100%;
+                        }
                     }
-                    .close-button {
+                    &.product {
                         display: block;
-                    }
-                    .filter-button__button svg {
-                        bottom: 3px;
+                        padding: 0;
                     }
                 }
             }
@@ -300,13 +317,17 @@
 
         &__filter {
             width: calc(24% - 24px);
-            height: 831px;
+            height: fit-content;
             background-color: $mercury;
             border-radius: 20px;
             padding: 32px;
             color: black;
             font-size: 18px;
             font-weight: 500;
+
+            @media (max-width: 1048px) {
+                padding: 32px 18px;
+            }
 
             .subtitle {
                 font-size: 18px;

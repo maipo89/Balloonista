@@ -915,12 +915,92 @@ if (!localStorage.getItem('cookiesAccepted')) {
     // Filter shop page
     
     $('.filter-button__button').on('click', function () {
-        $('.filter-button').toggleClass('open');
+        $('.shop__container__buttons').toggleClass('open');
         $('.shadow').toggleClass('open');
     });
 
     $('.filter-button__filters svg').on('click', function () {
-        $('.filter-button').removeClass('open');
+        $('.shop__container__buttons').removeClass('open');
         $('.shadow').removeClass('open');
     });
+    
+
+    // Custom button Sort in shop page
+
+    $('.custom-option').on('click', function () {
+        // Get the data-vaslue of the clicked option
+        var selectedValue = $(this).data('value');
+
+        // Update sort-input with the new value
+        $('.sort-input').val(selectedValue);
+
+        // Update the span inside select__trigger with the new value
+        var formattedValue = selectedValue.replace(/_/g, ' ');
+        $('.select__trigger span').text(formattedValue);
+        console.log(selectedValue)
+
+    });
+
+    // Filters shop Page
+
+    $('.shop .custom-option').on('click', function() {
+        var selectedOption = $(this).data('value');
+        
+        if (selectedOption) {
+            var shopUrl = window.location.origin + '/shop';
+
+            var newUrl = updateQueryStringParameter(shopUrl, 'orderby', selectedOption);
+
+            window.location.href = newUrl;
+        }
+    });
+
+    function updateQueryStringParameter(uri, key, value) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        } else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+
+    $('.shop__filter input[type="checkbox"]').on('change', function() {
+        var selectedCategories = [];
+    
+        // Retrieve existing categories from the URL
+        var currentUrl = window.location.href;
+        var existingCategories = getParameterByName('category', currentUrl);
+        if (existingCategories) {
+            selectedCategories = existingCategories.split(',');
+        }
+    
+        // Add the newly selected category
+        $('.shop__filter input[type="checkbox"]:checked').each(function() {
+            var category = $(this).attr('id');
+            if (selectedCategories.indexOf(category) === -1) {
+                selectedCategories.push(category);
+            }
+        });
+    
+        // Update the URL with selected categories
+        var newUrl = updateQueryStringParameter(currentUrl, 'category', selectedCategories.join(','));
+        window.location.href = newUrl;
+    });
+    
+    function getParameterByName(name, url) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+    
+    function updateQueryStringParameter(uri, key, value) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+    
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        } else {
+            return uri + separator + key + "=" + value;
+        }
+    }
 });

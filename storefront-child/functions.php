@@ -186,54 +186,18 @@ add_action('wp_enqueue_scripts', 'enqueue_gsap');
 
 // Add custom sorting options
 
-function custom_woocommerce_catalog_orderby($orderby_options)
+function custom_woocommerce_catalog_orderby($sortby)
 {
-    $orderby_options['popularity'] = 'Popularity';
-    $orderby_options['best_selling'] = 'Best Sellers';
-    $orderby_options['featured'] = 'Featured';
-    $orderby_options['price_low_to_high'] = 'Price: Low to High';
-    $orderby_options['price_high_to_low'] = 'Price: High to Low';
-    $orderby_options['name_a_to_z'] = 'Name: A - Z';
+    $sortby['popularity'] = __('Popularity', 'woocommerce');
+    $sortby['best_selling'] = __('Best Selling', 'woocommerce');
+    $sortby['featured'] = __('Featured', 'woocommerce');
+    $sortby['price_low_to_high'] = __('Price: Low to High', 'woocommerce');
+    $sortby['price_high_to_low'] = __('Price: High to Low', 'woocommerce');
+    $sortby['name_a_to_z'] = __('Name: A to Z', 'woocommerce');
 
-    return $orderby_options;
+    return $sortby;
 }
+add_filter('woocommerce_default_catalog_orderby_options', 'custom_woocommerce_catalog_orderby');
 add_filter('woocommerce_catalog_orderby', 'custom_woocommerce_catalog_orderby');
 
-
-// Handle the custom sorting options
-function custom_woocommerce_get_catalog_ordering_args($args)
-{
-    if (isset($_GET['orderby'])) {
-        switch ($_GET['orderby']) {
-            case 'popularity':
-                $args['orderby'] = 'popularity';
-                break;
-            case 'best_selling':
-                $args['orderby'] = 'meta_value_num'; // You need to change this to a valid meta key used for best-selling calculation
-                $args['order'] = 'desc'; // Assuming best selling is sorted in descending order
-                break;
-            case 'featured':
-                $args['meta_key'] = '_featured';
-                $args['orderby'] = 'meta_value_num';
-                break;
-            case 'price_low_to_high':
-                $args['orderby'] = 'meta_value_num';
-                $args['order'] = 'asc';
-                $args['meta_key'] = '_price';
-                break;
-            case 'price_high_to_low':
-                $args['orderby'] = 'meta_value_num';
-                $args['order'] = 'desc';
-                $args['meta_key'] = '_price';
-                break;
-            case 'name_a_to_z':
-                $args['orderby'] = 'title';
-                $args['order'] = 'asc';
-                break;
-        }
-    }
-
-    return $args;
-}
-add_filter('woocommerce_get_catalog_ordering_args', 'custom_woocommerce_get_catalog_ordering_args');
 
