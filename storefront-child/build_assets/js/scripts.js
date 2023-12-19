@@ -943,64 +943,125 @@ if (!localStorage.getItem('cookiesAccepted')) {
 
     // Filters shop Page
 
+    // Function to update the URL parameters
+    function updateUrlParameter(key, value, url) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = url.indexOf('?') !== -1 ? "&" : "?";
+
+        if (url.match(re)) {
+            return url.replace(re, '$1' + key + "=" + value + '$2');
+        } else {
+            return url + separator + key + "=" + value;
+        }
+    }
+
+    // Click event for sorting options
     $('.shop .custom-option').on('click', function() {
         var selectedOption = $(this).data('value');
         
         if (selectedOption) {
-            var shopUrl = window.location.origin + '/shop';
+            var shopUrl = window.location.href;;
 
-            var newUrl = updateQueryStringParameter(shopUrl, 'orderby', selectedOption);
+            var newUrl = updateUrlParameter('orderby', selectedOption, shopUrl);
 
             window.location.href = newUrl;
         }
     });
 
-    function updateQueryStringParameter(uri, key, value) {
-        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-        if (uri.match(re)) {
-            return uri.replace(re, '$1' + key + "=" + value + '$2');
-        } else {
-            return uri + separator + key + "=" + value;
-        }
-    }
-
+    // Change event for category checkboxes
     $('.shop__filter input[type="checkbox"]').on('change', function() {
         var selectedCategories = [];
-    
+
         // Retrieve existing categories from the URL
         var currentUrl = window.location.href;
         var existingCategories = getParameterByName('category', currentUrl);
         if (existingCategories) {
             selectedCategories = existingCategories.split(',');
         }
-    
-        // Add the newly selected category
+
+        // Update the selected categories based on the checked checkboxes
         $('.shop__filter input[type="checkbox"]:checked').each(function() {
             var category = $(this).attr('id');
             if (selectedCategories.indexOf(category) === -1) {
                 selectedCategories.push(category);
             }
         });
-    
-        // Update the URL with selected categories
-        var newUrl = updateQueryStringParameter(currentUrl, 'category', selectedCategories.join(','));
+
+        // Remove the unchecked categories from the selectedCategories array
+        $('.shop__filter input[type="checkbox"]:not(:checked)').each(function() {
+            var category = $(this).attr('id');
+            var index = selectedCategories.indexOf(category);
+            if (index !== -1) {
+                selectedCategories.splice(index, 1);
+            }
+        });
+
+        // Update the URL with the selected categories
+        var newUrl = updateUrlParameter('category', selectedCategories.join(','), currentUrl);
         window.location.href = newUrl;
     });
-    
+
+    $('.filter-button__filters input[type="checkbox"]').on('change', function() {
+        var selectedCategories = [];
+
+        // Retrieve existing categories from the URL
+        var currentUrl = window.location.href;
+        var existingCategories = getParameterByName('category', currentUrl);
+        if (existingCategories) {
+            selectedCategories = existingCategories.split(',');
+        }
+
+        // Update the selected categories based on the checked checkboxes
+        $('.filter-button__filters input[type="checkbox"]:checked').each(function() {
+            var category = $(this).attr('id');
+            if (selectedCategories.indexOf(category) === -1) {
+                selectedCategories.push(category);
+            }
+        });
+
+        // Remove the unchecked categories from the selectedCategories array
+        $('.filter-button__filters input[type="checkbox"]:not(:checked)').each(function() {
+            var category = $(this).attr('id');
+            var index = selectedCategories.indexOf(category);
+            if (index !== -1) {
+                selectedCategories.splice(index, 1);
+            }
+        });
+
+        // Update the URL with the selected categories
+        var newUrl = updateUrlParameter('category', selectedCategories.join(','), currentUrl);
+        window.location.href = newUrl;
+    });
+
+    // Helper function to get URL parameters
     function getParameterByName(name, url) {
         var match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
         return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
     }
+
+    // Filter Button Category
+
+    $('#categoryButton').on('click', function () {
+        // Get the category slug and path from the data attributes
+        var categorySlug = $(this).data('value');
     
+        // Build the new URL with base URL, path, and category parameter
+        var baseUrl = window.location.origin;
+        var newUrl = baseUrl + '/' + 'shop' + '/?category=' + categorySlug;
+    
+        // Redirect to the new URL
+        window.location.href = newUrl;
+    });
+    
+    // Function to update query parameters in the URL
     function updateQueryStringParameter(uri, key, value) {
         var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
         var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-    
         if (uri.match(re)) {
             return uri.replace(re, '$1' + key + "=" + value + '$2');
         } else {
             return uri + separator + key + "=" + value;
         }
     }
+
 });

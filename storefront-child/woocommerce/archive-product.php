@@ -41,12 +41,32 @@ get_header( 'shop' );
         </div>
     </div>
     <?php
+        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+        $term = get_queried_object();
 
         $args = array(
             'post_type'      => 'product',
             'posts_per_page' => 12,
-            'paged' => ( get_query_var('page') ? get_query_var('page') : 1),
+            'paged'          => $paged,
         );
+
+        if ($term instanceof WP_Term && 'product_cat' === $term->taxonomy) {
+            $taxonomy_slug = $term->slug;
+        
+            // Custom query to get products from the current taxonomy.
+            $args = array(
+                'post_type'      => 'product',
+                'posts_per_page' => 12,
+                'paged'          => $paged,
+                'tax_query'      => array(
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field'    => 'slug',
+                        'terms'    => $taxonomy_slug,
+                    ),
+                ),
+            );
+        }
 
         // Check if the orderby parameter is set to 'popularity'
         if (isset($_GET['orderby']) && $_GET['orderby'] === 'popularity') {
@@ -123,26 +143,55 @@ get_header( 'shop' );
 
     <div class="shop">
         <div class="shop__filter">
-            <?php
-                if (!empty($product_categories) && !is_wp_error($product_categories)) {
-                    // Loop through each category
-                    foreach ($product_categories as $category) {
-                ?>
-                        <div>
-                            <input type="checkbox" id="<?php echo $category->slug ?>" name="<?php echo $category->slug ?>" <?php echo strpos($_SERVER['REQUEST_URI'], $category->slug) !== false ? 'checked' : ''; ?>>
-                            <label for="<?php echo $category->slug ?>"><?php echo $category->name ?></label>            
-                        </div>
-            <?php
-                    }
+        <?php
+        if (!empty($product_categories) && !is_wp_error($product_categories)) {
+            // Create an array to store categories grouped by parent
+            $grouped_categories = array();
+
+            // Group categories by parent
+            foreach ($product_categories as $category) {
+                $parent_id = $category->parent;
+                if (!isset($grouped_categories[$parent_id])) {
+                    $grouped_categories[$parent_id] = array();
                 }
-            ?>
-            <!-- <p class="subtitle">Balloon Type:</p> -->
-            <div>
-                <input type="checkbox" id="helium-balloons" name="helium-balloons">
-                <label for="helium-balloons">Helium Balloons</label>            
-            </div>
-            <!-- <p class="subtitle">Occasion:</p>
-            <p class="subtitle">By Product:</p> -->
+                $grouped_categories[$parent_id][] = $category;
+            }
+
+            // Loop through each group
+            foreach ($grouped_categories as $parent_id => $categories) {
+                // Skip Uncategorized parent category
+                if ($parent_id == 0) {
+                    continue;
+                }
+
+                // Output parent category name in a p tag with class "subtitle"
+                $parent_category = get_term($parent_id);
+                if ($parent_category && !is_wp_error($parent_category)) {
+                    echo '<p class="subtitle">' . $parent_category->name . '</p>';
+                }
+
+                // Loop through each category in the group
+                foreach ($categories as $category) {
+        ?>
+                    <div>
+                        <?php
+
+                        $is_parent = ($parent_id == 0) ? true : false;
+
+                        $category_checked = false;
+                        if (isset($_GET['category'])) {
+                            $selected_categories = explode(',', $_GET['category']);
+                            $category_checked = in_array($category->slug, $selected_categories);
+                        }
+                        ?>
+                        <input type="checkbox" id="<?php echo $category->slug ?>" name="<?php echo $category->slug ?>" <?php echo $category_checked ? 'checked' : ''; ?>  <?php echo $is_parent ? 'style="display:none;"' : ''; ?>>
+                        <label for="<?php echo $category->slug ?>"><?php echo $category->name ?></label>
+                    </div>
+        <?php
+                }
+            }
+        }
+        ?>
         </div>
         <div class="shop__container">
             <div class="shop__container__top">
@@ -151,7 +200,15 @@ get_header( 'shop' );
                 <?php $text = get_field('text', 'option'); ?>
                 <?php $button = get_field('button', 'option'); ?>
                 <?php $buttonText = get_field('button_text', 'option'); ?>
-                <?php $buttonLink = get_field('button_link', 'option'); ?>
+                <?php $buttonCategory = get_field('button_category', 'option'); ?>
+                <?php $hideSeasonalCat = get_field('hide_seasonal_categories', 'option'); ?>
+                <?php
+                    $hiddenCategoryNames = array();
+                    foreach ($hideSeasonalCat as $category) {
+                        $hiddenCategoryNames[] = $category->name;
+                    }
+                ?>
+                <?php var_dump($hiddenCategoryNames); ?>
                 <div class="shop__container__top__image" style="background-image: url(<?php echo($image["sizes"]["onqor-large"]) ?>">
                 </div>
                 <div class="shop__container__top__text-button">
@@ -161,14 +218,14 @@ get_header( 'shop' );
                     </div>
                     <?php if($button): ?>
                         <div class="shop__container__top__text-button__button">
-                            <a class="primary-button" href="<?php echo $buttonLink ?>" ><?php echo $buttonText ?></a>
+                            <a class="primary-button" id="categoryButton" data-value="<?php echo $buttonCategory[0]->slug ?>"><?php echo $buttonText ?></a>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
             <?php if($button): ?>
                 <div class="shop__container__button-mobile">
-                    <a class="primary-button" href="<?php echo $buttonLink ?>" ><?php echo $buttonText ?></a>
+                    <a class="primary-button" ><?php echo $buttonText ?></a>
                 </div>
             <?php endif; ?>
             <div class="shadow"></div>
@@ -193,36 +250,62 @@ get_header( 'shop' );
                     </div>
                 </div>
                 <div class="filter-button__filters">
-                    <!-- <p class="subtitle">Balloon Type:</p> -->
-                    <div class="filter-button__filters__filter">
                     <?php
-                            if (!empty($product_categories) && !is_wp_error($product_categories)) {
-                                // Loop through each category
-                                foreach ($product_categories as $category) {
-                            ?>
-                                    <div>
-                                        <input type="checkbox" id="<?php echo $category->slug ?>" name="<?php echo $category->slug ?>" <?php echo strpos($_SERVER['REQUEST_URI'], $category->slug) !== false ? 'checked' : ''; ?>>
-                                        <label for="<?php echo $category->slug ?>"><?php echo $category->name ?></label>            
-                                    </div>
-                        <?php
-                                }
+                    if (!empty($product_categories) && !is_wp_error($product_categories)) {
+                        // Create an array to store categories grouped by parent
+                        $grouped_categories = array();
+
+                        // Group categories by parent
+                        foreach ($product_categories as $category) {
+                            $parent_id = $category->parent;
+                            if (!isset($grouped_categories[$parent_id])) {
+                                $grouped_categories[$parent_id] = array();
                             }
-                        ?>
-                    </div>
-                    <!-- <p class="subtitle">Occasion:</p>
-                    <div class="filter-button__filters__filter">
-                        <div>
-                            <input type="checkbox" id="helium-balloons" name="helium-balloons">
-                            <label for="helium-balloons">Helium Balloons</label>            
-                        </div>
-                    </div>
-                    <p class="subtitle">By Product:</p>
-                    <div class="filter-button__filters__filter product">
-                        <div>
-                            <input type="checkbox" id="helium-balloons" name="helium-balloons">
-                            <label for="helium-balloons">Helium Balloons</label>            
-                        </div>
-                    </div> -->
+                            $grouped_categories[$parent_id][] = $category;
+                        }
+
+                        // Loop through each group
+                        foreach ($grouped_categories as $parent_id => $categories) {
+                            // Skip Uncategorized parent category
+                            if ($parent_id == 0) {
+                                continue;
+                            }
+                            ?>
+                            <div class="filter-button__filters__filter">
+                                <?php
+                                // Output parent category name in a p tag with class "subtitle"
+                                $parent_category = get_term($parent_id);
+                                if ($parent_category && !is_wp_error($parent_category)) {
+                                    echo '<p class="subtitle">' . $parent_category->name . '</p>';
+                                }
+
+                                // Loop through each category in the group
+                                echo '<div class="filter" >';
+                                foreach ($categories as $category) {
+                                ?>
+                                    <div>
+                                        <?php
+
+                                        $is_parent = ($parent_id == 0) ? true : false;
+
+                                        $category_checked = false;
+                                        if (isset($_GET['category'])) {
+                                            $selected_categories = explode(',', $_GET['category']);
+                                            $category_checked = in_array($category->slug, $selected_categories);
+                                        }
+                                        ?>
+                                        <input type="checkbox" id="<?php echo $category->slug ?>" name="<?php echo $category->slug ?>" <?php echo $category_checked ? 'checked' : ''; ?> <?php echo $is_parent ? 'style="display:none;"' : ''; ?>>
+                                        <label for="<?php echo $category->slug ?>"><?php echo $category->name ?></label>
+                                    </div>
+                                <?php
+                                }
+                                echo '</div>';
+                                ?>
+                            </div>
+                        <?php
+                        }
+                    }
+                    ?>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="25.2641" height="2.52641" rx="1.2632" transform="matrix(0.701006 -0.713155 0.701006 0.713155 0.519531 18.0176)" fill="#70B095"/>
                         <rect width="25.2641" height="2.52641" rx="1.2632" transform="matrix(0.701006 0.713155 -0.701006 0.713155 1.77148 0.180664)" fill="#70B095"/>
@@ -332,6 +415,7 @@ get_header( 'shop' );
                 <?php
                 echo paginate_links(array(
                     'total'      => $query->max_num_pages,
+                    'mid_size'  => 2,
                     'prev_text'  => '<svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L1.78885 6.10557C1.05181 6.4741 1.05181 7.5259 1.78885 7.89443L12 13" stroke="#D9E7E1" stroke-width="2" stroke-linecap="round"/></svg>',
                     'next_text'  => '<svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.999999 13L11.2111 7.89443C11.9482 7.5259 11.9482 6.4741 11.2111 6.10557L1 0.999999" stroke="#D9E7E1" stroke-width="2" stroke-linecap="round"/></svg>',
                 ));

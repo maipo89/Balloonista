@@ -121,6 +121,7 @@
                     &__button {
                         position: relative;
                         top: -4px;
+                        cursor: pointer;
                         @media (max-width: 650px) {
                             display: none;
                         }
@@ -296,15 +297,20 @@
                 }
 
                 &__filter {
-                    display: flex;
-                    flex-wrap: wrap;
-                    @media (max-width: 630px) {
-                        display: block;
-                    }
-                    div {
-                        width: 33.3%;
+                    .filter {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        column-gap: 10px;
+                        margin-bottom: 32px;
                         @media (max-width: 630px) {
-                            width: 100%;
+                            display: block;
+                        }
+                        div {
+                            width: calc(33.3% - 10px);
+                            @media (max-width: 630px) {
+                                width: 100%;
+                            }
                         }
                     }
                     &.product {
@@ -313,6 +319,10 @@
                     }
                 }
             }
+
+            .filter-button__filters__filter:last-of-type .filter {
+                margin-bottom: 0;
+            }
         }
 
         &__filter {
@@ -320,14 +330,10 @@
             height: fit-content;
             background-color: $mercury;
             border-radius: 20px;
-            padding: 32px;
+            padding: 18px;
             color: black;
             font-size: 18px;
             font-weight: 500;
-
-            @media (max-width: 1048px) {
-                padding: 32px 18px;
-            }
 
             .subtitle {
                 font-size: 18px;
