@@ -142,8 +142,16 @@ get_header( 'shop' );
     ?>
 
     <div class="shop">
-        <div class="shop__filter">
+        <?php $hideSeasonalCat = get_field('hide_seasonal_categories', 'option'); ?>
         <?php
+            $hiddenCategoryNames = array();
+            foreach ($hideSeasonalCat as $category) {
+                $hiddenCategoryNames[] = $category->name;
+            }
+        ?>
+        <div class="shop__filter" data-hidden-categories="<?php echo esc_attr(json_encode($hiddenCategoryNames)); ?>">
+        <?php
+
         if (!empty($product_categories) && !is_wp_error($product_categories)) {
             // Create an array to store categories grouped by parent
             $grouped_categories = array();
@@ -201,14 +209,6 @@ get_header( 'shop' );
                 <?php $button = get_field('button', 'option'); ?>
                 <?php $buttonText = get_field('button_text', 'option'); ?>
                 <?php $buttonCategory = get_field('button_category', 'option'); ?>
-                <?php $hideSeasonalCat = get_field('hide_seasonal_categories', 'option'); ?>
-                <?php
-                    $hiddenCategoryNames = array();
-                    foreach ($hideSeasonalCat as $category) {
-                        $hiddenCategoryNames[] = $category->name;
-                    }
-                ?>
-                <?php var_dump($hiddenCategoryNames); ?>
                 <div class="shop__container__top__image" style="background-image: url(<?php echo($image["sizes"]["onqor-large"]) ?>">
                 </div>
                 <div class="shop__container__top__text-button">

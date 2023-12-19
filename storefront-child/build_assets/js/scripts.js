@@ -1064,4 +1064,19 @@ if (!localStorage.getItem('cookiesAccepted')) {
         }
     }
 
+    // Hidden Seasonal Categories
+
+    var hiddenCategories = JSON.parse(document.querySelector('.shop__filter').dataset.hiddenCategories);
+
+    // Loop through each checkbox in shop__filter
+    document.querySelectorAll('.shop__filter input').forEach(function (checkbox) {
+        var label = checkbox.nextElementSibling; // Assuming the label is the next sibling
+        // Check if the label text is in the hidden list
+        if (label && hiddenCategories.includes(label.textContent.trim())) {
+            // Hide the entire checkbox
+            checkbox.style.display = 'none';
+            label.style.display = 'none';
+        }
+    });
+
 });
