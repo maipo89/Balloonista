@@ -359,7 +359,7 @@ $(document).ready(function() {
         // options...
         asNavFor: '.product-image__feature-slider',
         variableWidth: true,
-        slidesToShow: 7,
+        slidesToShow: 4,
         focusOnSelect: true,
         prevArrow: '<button type="button" class="slick-prev"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"> <g id="Chevron Left"> <path id="Chevron Left_2" d="M13 1L1.74038 7.56811C1.40963 7.76105 1.40963 8.23895 1.74038 8.43189L13 15" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg> </button>',
         nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"><g id="Chevron Right"><path id="Chevron Right_2" d="M1 15L12.2596 8.43189C12.5904 8.23895 12.5904 7.76105 12.2596 7.56811L1 0.999999" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg></button>'
@@ -775,10 +775,14 @@ if (!localStorage.getItem('cookiesAccepted')) {
             }
         })
     });
+
+
     var ProductTestimonial = gsap.utils.toArray(".featured-products__testimonial");
+
     ProductTestimonial.forEach((block) => {
         gsap.set(block, { opacity: 0, y: 50 });
     });
+
     ProductTestimonial.forEach((block) => {
         gsap.to(block, {
             scrollTrigger: {
@@ -791,7 +795,10 @@ if (!localStorage.getItem('cookiesAccepted')) {
             }
         })
     });
+
+
     var BlogCards = gsap.utils.toArray(".blogs__card");
+
     BlogCards.forEach((block, index) => {
         setTimeout(function () { 
             gsap.to(block,{
@@ -806,6 +813,8 @@ if (!localStorage.getItem('cookiesAccepted')) {
             });
         }, 500 * index);
     });
+
+
     if ($('body').hasClass('home')) {
 
         var HeroWrapper = gsap.utils.toArray(".hero__wrapper");
@@ -829,12 +838,17 @@ if (!localStorage.getItem('cookiesAccepted')) {
         });
 
     }
+
+
     $(".product-image .prev").click(function () {
 		$(".slick-list").slick("slickPrev");
 	});
+
 	$(".product-image .next").click(function () {
 		$(".slick-list").slick("slickNext");
 	});
+
+
     $('.variations').addClass('active');
     $('.product__option-buttons .options').addClass('active');
     var stepCount = 0;
@@ -856,6 +870,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
             $('.product-next-step').hide();
         }
     });
+
     $('.wc-pao-addon-wrap').each(function() {
         console.log('this o0', $(this));
         if ($(this).has('a').length > 0) {
@@ -885,16 +900,183 @@ if (!localStorage.getItem('cookiesAccepted')) {
             
         }
     });
-    $('.addon-slider').slick({
-        slidesToShow: 3,
-        infinite: false,
-        slidesToScroll: 1,
-        dots: true,
-        prevArrow: '<button type="button" class="addons-slider-button slick-prev"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"> <g id="Chevron Left"> <path id="Chevron Left_2" d="M13 1L1.74038 7.56811C1.40963 7.76105 1.40963 8.23895 1.74038 8.43189L13 15" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg> </button>',
-        nextArrow: '<button type="button" class="addons-slider-button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"><g id="Chevron Right"><path id="Chevron Right_2" d="M1 15L12.2596 8.43189C12.5904 8.23895 12.5904 7.76105 12.2596 7.56811L1 0.999999" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg></button>',
-        customPaging: function(slider, i) {
-            return (i + 1); // Display numbers starting from 1
-            // If you want to start from 0, you can use: return i;
-          },
+    // $('.addon-slider').slick({
+    //     slidesToShow: 3,
+    //     slidesToScroll: 1,
+    //     dots: true,
+    //     prevArrow: '<button type="button" class="addons-slider-button slick-prev"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"> <g id="Chevron Left"> <path id="Chevron Left_2" d="M13 1L1.74038 7.56811C1.40963 7.76105 1.40963 8.23895 1.74038 8.43189L13 15" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg> </button>',
+    //     nextArrow: '<button type="button" class="addons-slider-button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"><g id="Chevron Right"><path id="Chevron Right_2" d="M1 15L12.2596 8.43189C12.5904 8.23895 12.5904 7.76105 12.2596 7.56811L1 0.999999" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg></button>',
+    //     customPaging: function(slider, i) {
+    //         return (i + 1); // Display numbers starting from 1
+    //         // If you want to start from 0, you can use: return i;
+    //       },
+    // });
+
+    // Filter shop page
+    
+    $('.filter-button__button').on('click', function () {
+        $('.shop__container__buttons').toggleClass('open');
+        $('.shadow').toggleClass('open');
     });
+
+    $('.filter-button__filters svg').on('click', function () {
+        $('.shop__container__buttons').removeClass('open');
+        $('.shadow').removeClass('open');
+    });
+    
+
+    // Custom button Sort in shop page
+
+    $('.custom-option').on('click', function () {
+        // Get the data-vaslue of the clicked option
+        var selectedValue = $(this).data('value');
+
+        // Update sort-input with the new value
+        $('.sort-input').val(selectedValue);
+
+        // Update the span inside select__trigger with the new value
+        var formattedValue = selectedValue.replace(/_/g, ' ');
+        $('.select__trigger span').text(formattedValue);
+        console.log(selectedValue)
+
+    });
+
+    // Filters shop Page
+
+    // Function to update the URL parameters
+    function updateUrlParameter(key, value, url) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = url.indexOf('?') !== -1 ? "&" : "?";
+
+        if (url.match(re)) {
+            return url.replace(re, '$1' + key + "=" + value + '$2');
+        } else {
+            return url + separator + key + "=" + value;
+        }
+    }
+
+    // Click event for sorting options
+    $('.shop .custom-option').on('click', function() {
+        var selectedOption = $(this).data('value');
+        
+        if (selectedOption) {
+            var shopUrl = window.location.href;;
+
+            var newUrl = updateUrlParameter('orderby', selectedOption, shopUrl);
+
+            window.location.href = newUrl;
+        }
+    });
+
+    // Change event for category checkboxes
+    $('.shop__filter input[type="checkbox"]').on('change', function() {
+        var selectedCategories = [];
+
+        // Retrieve existing categories from the URL
+        var currentUrl = window.location.href;
+        var existingCategories = getParameterByName('category', currentUrl);
+        if (existingCategories) {
+            selectedCategories = existingCategories.split(',');
+        }
+
+        // Update the selected categories based on the checked checkboxes
+        $('.shop__filter input[type="checkbox"]:checked').each(function() {
+            var category = $(this).attr('id');
+            if (selectedCategories.indexOf(category) === -1) {
+                selectedCategories.push(category);
+            }
+        });
+
+        // Remove the unchecked categories from the selectedCategories array
+        $('.shop__filter input[type="checkbox"]:not(:checked)').each(function() {
+            var category = $(this).attr('id');
+            var index = selectedCategories.indexOf(category);
+            if (index !== -1) {
+                selectedCategories.splice(index, 1);
+            }
+        });
+
+        // Update the URL with the selected categories
+        var newUrl = updateUrlParameter('category', selectedCategories.join(','), currentUrl);
+        window.location.href = newUrl;
+    });
+
+    $('.filter-button__filters input[type="checkbox"]').on('change', function() {
+        var selectedCategories = [];
+
+        // Retrieve existing categories from the URL
+        var currentUrl = window.location.href;
+        var existingCategories = getParameterByName('category', currentUrl);
+        if (existingCategories) {
+            selectedCategories = existingCategories.split(',');
+        }
+
+        // Update the selected categories based on the checked checkboxes
+        $('.filter-button__filters input[type="checkbox"]:checked').each(function() {
+            var category = $(this).attr('id');
+            if (selectedCategories.indexOf(category) === -1) {
+                selectedCategories.push(category);
+            }
+        });
+
+        // Remove the unchecked categories from the selectedCategories array
+        $('.filter-button__filters input[type="checkbox"]:not(:checked)').each(function() {
+            var category = $(this).attr('id');
+            var index = selectedCategories.indexOf(category);
+            if (index !== -1) {
+                selectedCategories.splice(index, 1);
+            }
+        });
+
+        // Update the URL with the selected categories
+        var newUrl = updateUrlParameter('category', selectedCategories.join(','), currentUrl);
+        window.location.href = newUrl;
+    });
+
+    // Helper function to get URL parameters
+    function getParameterByName(name, url) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+
+    // Filter Button Category
+
+    $('#categoryButton').on('click', function () {
+        // Get the category slug and path from the data attributes
+        var categorySlug = $(this).data('value');
+    
+        // Build the new URL with base URL, path, and category parameter
+        var baseUrl = window.location.origin;
+        var newUrl = baseUrl + '/' + 'shop' + '/?category=' + categorySlug;
+    
+        // Redirect to the new URL
+        window.location.href = newUrl;
+    });
+    
+    // Function to update query parameters in the URL
+    function updateQueryStringParameter(uri, key, value) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        } else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+
+    // Hidden Seasonal Categories
+
+    var hiddenCategories = JSON.parse(document.querySelector('.shop__filter').dataset.hiddenCategories);
+
+    // Loop through each checkbox in shop__filter
+    document.querySelectorAll('.shop__filter input').forEach(function (checkbox) {
+        var label = checkbox.nextElementSibling; // Assuming the label is the next sibling
+        // Check if the label text is in the hidden list
+        if (label && hiddenCategories.includes(label.textContent.trim())) {
+            // Hide the entire checkbox
+            checkbox.style.display = 'none';
+            label.style.display = 'none';
+        }
+    });
+
 });

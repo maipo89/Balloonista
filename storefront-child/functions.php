@@ -184,3 +184,20 @@ function enqueue_gsap() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_gsap');
 
+// Add custom sorting options
+
+function custom_woocommerce_catalog_orderby($sortby)
+{
+    $sortby['popularity'] = __('Popularity', 'woocommerce');
+    $sortby['best_selling'] = __('Best Selling', 'woocommerce');
+    $sortby['featured'] = __('Featured', 'woocommerce');
+    $sortby['price_low_to_high'] = __('Price: Low to High', 'woocommerce');
+    $sortby['price_high_to_low'] = __('Price: High to Low', 'woocommerce');
+    $sortby['name_a_to_z'] = __('Name: A to Z', 'woocommerce');
+
+    return $sortby;
+}
+add_filter('woocommerce_default_catalog_orderby_options', 'custom_woocommerce_catalog_orderby');
+add_filter('woocommerce_catalog_orderby', 'custom_woocommerce_catalog_orderby');
+
+
