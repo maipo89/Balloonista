@@ -98,7 +98,7 @@ add_action('init', 'badge_taxonomy');
 
 // Categories 
 
-wp_enqueue_script('my-scripts', get_template_directory_uri() . 'build_assets/js/scripts.js', array('jquery'), '1.0', true);
+// wp_enqueue_script('my-scripts', get_template_directory_uri() . 'build_assets/js/scripts.js', array('jquery'), '1.0', true);
 
 
 add_action('wp_enqueue_scripts', 'add_categories_to_js');
