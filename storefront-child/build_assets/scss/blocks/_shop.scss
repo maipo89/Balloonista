@@ -1,4 +1,9 @@
 .shop-page {
+    margin-bottom: 126px;
+
+    @media (max-width: $tablet) {
+        margin-bottom: 64px;
+    }
     .breadcrumb {
         padding: 72px 0 32px;
         @media (max-width: $tablet) {
@@ -562,11 +567,6 @@
             margin-top: 14px;
             border: none;
             padding: 0;
-            margin-bottom: 126px;
-
-            @media (max-width: $tablet) {
-                margin-bottom: 64px;
-            }
 
             &__container {
                 margin: 0 auto;

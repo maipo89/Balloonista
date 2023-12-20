@@ -5,8 +5,9 @@
 <?php $buttonLink = get_sub_field('button_link'); ?>
 <?php $titleTop = get_sub_field('title_top'); ?>
 <?php $sliderClients = get_sub_field('slider_clients'); ?>
+<?php $marginBottom = get_sub_field('higher_margin_bottom'); ?>
 
-<div class="baloon-colums <?php echo($titleTop ? 'title-top' : '')?>">
+<div class="baloon-colums <?php echo($titleTop ? 'title-top' : '')?> <?php echo($marginBottom ? 'higher-margins' : '') ?>">
         <h2 class="baloon-colums__title-mobile"><?php echo $title ?></h2>
         <div class="baloon-colums__slider">
 

@@ -23,6 +23,12 @@
     @media (max-width: $smaller-screen) {
         padding: 32px 16px;
     }
+    &.higher-margins {
+        padding-bottom: 126px;
+        @media (max-width: $tablet) {
+            padding-bottom: 64px;
+        }
+    }
     &__title-mobile {
         display: none;
         @media (max-width: 758px) {

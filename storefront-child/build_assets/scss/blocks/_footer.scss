@@ -209,9 +209,26 @@
             button[type=submit] {
                 width: 72px;
                 height: 38px;
+                background-color: $seaFoam;
+                color: $white;
+                border-radius: 10px;
+                font-size: $p-regular;
+                font-weight: $p-regular-weight;
+                padding: 7px 17px;
+            
+                &:hover {
+                    background-color: $white;
+                    color: $seaFoam;
+                }
+
+                &:focus {
+                    outline: none;
+                }
+            
                 &.active {
                     &:hover {
                         background-color: $white;
+                        color: $seaFoam;
                     }
                 }
 
