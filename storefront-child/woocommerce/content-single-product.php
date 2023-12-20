@@ -146,3 +146,6 @@ if ( post_password_required() ) {
 
 
 <?php include get_stylesheet_directory() . '/flexibleBlocks.php'; ?>
+<?php include get_stylesheet_directory() . '/blocks/featured-products-and-upsell.php'; ?>
+
+

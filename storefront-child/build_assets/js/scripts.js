@@ -359,7 +359,7 @@ $(document).ready(function() {
         // options...
         asNavFor: '.product-image__feature-slider',
         variableWidth: true,
-        slidesToShow: 4,
+        slidesToShow: 7,
         focusOnSelect: true,
         prevArrow: '<button type="button" class="slick-prev"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"> <g id="Chevron Left"> <path id="Chevron Left_2" d="M13 1L1.74038 7.56811C1.40963 7.76105 1.40963 8.23895 1.74038 8.43189L13 15" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg> </button>',
         nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"><g id="Chevron Right"><path id="Chevron Right_2" d="M1 15L12.2596 8.43189C12.5904 8.23895 12.5904 7.76105 12.2596 7.56811L1 0.999999" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg></button>'
@@ -775,14 +775,10 @@ if (!localStorage.getItem('cookiesAccepted')) {
             }
         })
     });
-
-
     var ProductTestimonial = gsap.utils.toArray(".featured-products__testimonial");
-
     ProductTestimonial.forEach((block) => {
         gsap.set(block, { opacity: 0, y: 50 });
     });
-
     ProductTestimonial.forEach((block) => {
         gsap.to(block, {
             scrollTrigger: {
@@ -795,10 +791,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
             }
         })
     });
-
-
     var BlogCards = gsap.utils.toArray(".blogs__card");
-
     BlogCards.forEach((block, index) => {
         setTimeout(function () { 
             gsap.to(block,{
@@ -813,8 +806,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
             });
         }, 500 * index);
     });
-
-
     if ($('body').hasClass('home')) {
 
         var HeroWrapper = gsap.utils.toArray(".hero__wrapper");
@@ -838,17 +829,12 @@ if (!localStorage.getItem('cookiesAccepted')) {
         });
 
     }
-
-
     $(".product-image .prev").click(function () {
 		$(".slick-list").slick("slickPrev");
 	});
-
 	$(".product-image .next").click(function () {
 		$(".slick-list").slick("slickNext");
 	});
-
-
     $('.variations').addClass('active');
     $('.product__option-buttons .options').addClass('active');
     var stepCount = 0;
@@ -870,7 +856,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
             $('.product-next-step').hide();
         }
     });
-
     $('.wc-pao-addon-wrap').each(function() {
         console.log('this o0', $(this));
         if ($(this).has('a').length > 0) {
@@ -900,15 +885,16 @@ if (!localStorage.getItem('cookiesAccepted')) {
             
         }
     });
-    // $('.addon-slider').slick({
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1,
-    //     dots: true,
-    //     prevArrow: '<button type="button" class="addons-slider-button slick-prev"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"> <g id="Chevron Left"> <path id="Chevron Left_2" d="M13 1L1.74038 7.56811C1.40963 7.76105 1.40963 8.23895 1.74038 8.43189L13 15" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg> </button>',
-    //     nextArrow: '<button type="button" class="addons-slider-button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"><g id="Chevron Right"><path id="Chevron Right_2" d="M1 15L12.2596 8.43189C12.5904 8.23895 12.5904 7.76105 12.2596 7.56811L1 0.999999" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg></button>',
-    //     customPaging: function(slider, i) {
-    //         return (i + 1); // Display numbers starting from 1
-    //         // If you want to start from 0, you can use: return i;
-    //       },
-    // });
+    $('.addon-slider').slick({
+        slidesToShow: 3,
+        infinite: false,
+        slidesToScroll: 1,
+        dots: true,
+        prevArrow: '<button type="button" class="addons-slider-button slick-prev"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"> <g id="Chevron Left"> <path id="Chevron Left_2" d="M13 1L1.74038 7.56811C1.40963 7.76105 1.40963 8.23895 1.74038 8.43189L13 15" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg> </button>',
+        nextArrow: '<button type="button" class="addons-slider-button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" fill="none"><g id="Chevron Right"><path id="Chevron Right_2" d="M1 15L12.2596 8.43189C12.5904 8.23895 12.5904 7.76105 12.2596 7.56811L1 0.999999" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></g></svg></button>',
+        customPaging: function(slider, i) {
+            return (i + 1); // Display numbers starting from 1
+            // If you want to start from 0, you can use: return i;
+          },
+    });
 });
