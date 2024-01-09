@@ -79,13 +79,13 @@
             }
         }
         input {
-            width: 232px;
+            width: 232px !important;
             margin-right: 25px;
             margin-top: 24px;
             &:nth-child(3) {
                 width: 309px;
                 @media (max-width: 700px) {
-                    width: 100%;
+                    width: 100% !important;
                 }
             }
             &:last-child {
@@ -93,7 +93,7 @@
                 margin-top: 24px;
             }
             @media (max-width: 700px) {
-                width: 100%;
+                width: 100% !important;
             }
 
         }
@@ -136,7 +136,7 @@
         }
         .inputs-container {
             @media (max-width: 700px) {
-                display: block;
+                display: block !important;
             }
         }
     }
@@ -156,35 +156,35 @@
                 flex-wrap: wrap;
                 column-gap: 16px;
                 input[type=text] {
-                    width: calc(50% - 8px);
+                    width: calc(50% - 8px) !important;
                     margin-right: 0;
                     &:nth-child(3) {
-                        width: calc(65% - 8px);
+                        width: calc(65% - 8px) !important;
                     }
                     &:nth-child(4) {
-                        width: calc(35% - 8px);
+                        width: calc(35% - 8px) !important;
                     }
                 }
             }
             @media (max-width: 375px) {
                 display: block;
                 input[type=text] {
-                    width: 100%;
+                    width: 100% !important;
                     &:nth-child(3) {
-                        width: 100%;
+                        width: 100% !important;
                     }
                     &:nth-child(4) {
-                        width: 100%;
+                        width: 100% !important;
                     }
                 }
             }
         }
         input[type=text] {
-            width: 232px;
+            width: 232px !important;
             margin-right: 25px;
             margin-top: 24px;
             @media (max-width: 1200px) {
-                width: 180px;
+                width: 180px !important;
             }
             &:nth-child(3) {
                 width: 309px;

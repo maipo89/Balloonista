@@ -654,7 +654,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
             scrollTrigger: {
                 trigger: block,
                 start: "-200px center",
-                end: "800px 50%",
+                end: "1300px 50%",
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -673,7 +673,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
             scrollTrigger: {
                 trigger: block,
                 start: "-200px center",
-                end: "400px 10%",
+                end: "800px 10%",
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -692,7 +692,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
             scrollTrigger: {
                 trigger: block,
                 start: "-200px center",
-                end: "1280px 50%",
+                end: "1500px 50%",
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -711,7 +711,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
             scrollTrigger: {
                 trigger: block,
                 start: "-250px center",
-                end: "800px 50%",
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -730,7 +729,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
             scrollTrigger: {
                 trigger: block,
                 start: "-200px center",
-                end: "800px 50%",
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -749,7 +747,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
             scrollTrigger: {
                 trigger: block,
                 start: "-200px center",
-                end: "800px 50%",
+                end: "1000px 50%",
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -768,7 +766,6 @@ if (!localStorage.getItem('cookiesAccepted')) {
             scrollTrigger: {
                 trigger: block,
                 start: "-200px center",
-                end: "500px 50%",
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -788,7 +785,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
             scrollTrigger: {
                 trigger: block,
                 start: "-200px center",
-                end: "500px 50%",
+                end: "600px 50%",
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -1063,20 +1060,5 @@ if (!localStorage.getItem('cookiesAccepted')) {
             return uri + separator + key + "=" + value;
         }
     }
-
-    // Hidden Seasonal Categories
-
-    var hiddenCategories = JSON.parse(document.querySelector('.shop__filter').dataset.hiddenCategories);
-
-    // Loop through each checkbox in shop__filter
-    document.querySelectorAll('.shop__filter input').forEach(function (checkbox) {
-        var label = checkbox.nextElementSibling; // Assuming the label is the next sibling
-        // Check if the label text is in the hidden list
-        if (label && hiddenCategories.includes(label.textContent.trim())) {
-            // Hide the entire checkbox
-            checkbox.style.display = 'none';
-            label.style.display = 'none';
-        }
-    });
 
 });

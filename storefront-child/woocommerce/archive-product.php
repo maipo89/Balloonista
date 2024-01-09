@@ -142,16 +142,10 @@ get_header( 'shop' );
     ?>
 
     <div class="shop">
-        <?php $hideSeasonalCat = get_field('hide_seasonal_categories', 'option'); ?>
-        <?php
-            $hiddenCategoryNames = array();
-            foreach ($hideSeasonalCat as $category) {
-                $hiddenCategoryNames[] = $category->name;
-            }
-        ?>
-        <div class="shop__filter" data-hidden-categories="<?php echo esc_attr(json_encode($hiddenCategoryNames)); ?>">
-        <?php
 
+        <div class="shop__filter">
+
+        <?php
         if (!empty($product_categories) && !is_wp_error($product_categories)) {
             // Create an array to store categories grouped by parent
             $grouped_categories = array();
@@ -180,13 +174,19 @@ get_header( 'shop' );
 
                 // Loop through each category in the group
                 foreach ($categories as $category) {
-        ?>
+                    // Check if the category should be hidden
+                    $hide_category = get_term_meta($category->term_id, 'hide', true); // Assuming 'hide' is a custom field
+                    if ($hide_category === '1') {
+                        continue; // Skip to the next iteration if the category should be hidden
+                    }
+
+                    // Output category checkbox and label
+                    ?>
                     <div>
                         <?php
-
                         $is_parent = ($parent_id == 0) ? true : false;
-
                         $category_checked = false;
+
                         if (isset($_GET['category'])) {
                             $selected_categories = explode(',', $_GET['category']);
                             $category_checked = in_array($category->slug, $selected_categories);
@@ -195,7 +195,7 @@ get_header( 'shop' );
                         <input type="checkbox" id="<?php echo $category->slug ?>" name="<?php echo $category->slug ?>" <?php echo $category_checked ? 'checked' : ''; ?>  <?php echo $is_parent ? 'style="display:none;"' : ''; ?>>
                         <label for="<?php echo $category->slug ?>"><?php echo $category->name ?></label>
                     </div>
-        <?php
+                    <?php
                 }
             }
         }
