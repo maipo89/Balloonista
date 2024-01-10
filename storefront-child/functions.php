@@ -224,3 +224,9 @@ add_filter('request', function( $vars ) {
     return $vars;
 });
 
+
+function my_custom_action() { 
+    echo '<p>This is my custom action function</p>';
+};     
+add_action( 'woocommerce_single_product_summary', 'my_custom_action', 15 ); 
+

@@ -1061,4 +1061,15 @@ if (!localStorage.getItem('cookiesAccepted')) {
         }
     }
 
+    $('form.variations_form').on('change', 'select', function() {
+
+        console.log($(this).attr('name'));
+        var selectedText = $(this).find("option:selected").text();
+        
+        var selectedValue = $(this).val();
+
+        $('#' + $(this).attr('name') + '-' + selectedValue.toLowerCase()).click();
+        console.log('Selected text:', selectedValue);
+    });
+
 });
