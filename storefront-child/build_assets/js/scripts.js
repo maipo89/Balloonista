@@ -1072,4 +1072,5 @@ if (!localStorage.getItem('cookiesAccepted')) {
         console.log('Selected text:', selectedValue);
     });
 
+    
 });
