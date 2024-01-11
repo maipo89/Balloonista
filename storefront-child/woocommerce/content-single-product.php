@@ -24,7 +24,7 @@ global $product;
  *
  * @hooked woocommerce_output_all_notices - 10
  */
-// do_action( 'woocommerce_before_single_product' );
+do_action( 'woocommerce_before_single_product' );
 
 if ( post_password_required() ) {
 	echo get_the_password_form(); // WPCS: XSS ok.
@@ -53,6 +53,21 @@ if ( post_password_required() ) {
 	
 	?> -->
 
+
+	<?php
+
+	// Check rows exists.
+	if( have_rows('product_gallery', $product_id) ):
+		// Loop through rows.
+		while( have_rows('product_gallery', $product_id) ) : the_row();
+			// Load sub field value.
+			$sub_value = get_sub_field('product_image');
+			// var_dump($sub_value);
+			// Do something...
+		// End loop.
+		endwhile;
+	endif; 
+	?>
 	<div class="product-image">
 		<div class="product-image__feature">
 			<div class="badges">
@@ -73,28 +88,45 @@ if ( post_password_required() ) {
 				?>
 			</div>
 			<div class="product-image__feature-slider">
-				<?php 
-					foreach($gallery_ids as $id) {
-						$image_url = wp_get_attachment_url($id); ?>
+				<?php
+					// Check rows exists.
+					if( have_rows('product_gallery', $product_id) ):
+						// Loop through rows.
+						while( have_rows('product_gallery', $product_id) ) : the_row();
+							// Load sub field value.
+							$sub_value = get_sub_field('product_image');
+							
+							// Do something...
+							?>
 							<div class="product-image__feature-image">
-								<img src="<?php echo esc_url($image_url) ?>" />
+								<img src="<?php echo $sub_value['url'] ?>" />
 							</div>
-						<?php 
-					}
+
+						<?php // End loop.
+						endwhile;
+					endif; 
 				?>
 			</div>
 		</div>
 		<div class="product-image__controls">
-			<?php 
-				foreach($gallery_ids as $id) {
-					$image_url = wp_get_attachment_url($id); ?>
-						<div class="product-image__controls-item">
-							<?php  echo '<img src="' . esc_url($image_url) . '" alt="">'; ?>
+			<?php
+				// Check rows exists.
+				if( have_rows('product_gallery', $product_id) ):
+					// Loop through rows.
+					while( have_rows('product_gallery', $product_id) ) : the_row();
+						// Load sub field value.
+						$sub_value = get_sub_field('product_image');
+						$imageId = get_sub_field('link_to_variation');
+							
+						?>
+						<div class="product-image__controls-item" id="<?php echo 'attribute_' . $imageId ?>">
+							<img src="<?php echo $sub_value['url'] ?>" alt="">';
 						</div>
-					<?php 
-				}
-				?>
-			</div>
+					<?php // End loop.
+					endwhile;
+				endif; 
+			?>
+		</div>
 	</div>
 	<div class="product__options">
 		<div class="product__options-head">
@@ -135,6 +167,14 @@ if ( post_password_required() ) {
 		<button class="product-next-step">
 			<p>Next</p>
 		</button>
+		<?php 
+			$product = new WC_Product_Variable( $product_id );
+			$variations = $product->get_available_variations();
+
+			foreach ( $variations as $variation ) {
+			echo "<div class='variation-store' data-image='". $variation['image']['thumb_src'] ."' ></div>";
+			}
+		?>
 	</div>
 
 	<?php
