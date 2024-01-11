@@ -345,11 +345,21 @@ $(document).ready(function() {
 
     // Faq Accordion
 
-    $(".faq__text").accordion({
-        collapsible: true,
-        active: false,
-        heightStyle: 'content',
-    });    
+    $(".faq__text__container").each(function(index, element) {
+        // Get the value of the data-value attribute
+        var dataValue = $(element).data('value');
+
+        // Convert the data-value to a boolean
+        var isActive = (dataValue === true);
+
+        // Initialize accordion with collapsible, heightStyle, and set the active option
+        $(element).accordion({
+            collapsible: true,
+            active: isActive ? 0 : false,
+            heightStyle: 'content'
+        });
+    });   
+
     $('.product-image__feature-slider').slick({
         // options...
         asNavFor: '.product-image__controls',
@@ -480,18 +490,52 @@ $(document).ready(function() {
             $('.baloon-colums__swiper').slick('slickGoTo', 0);
         }
     });
-
+    
     $('.baloon-colums__swiper__slide').on('mouseenter', function() {
         // On hover, remove slick-current class from all slides
         $('.baloon-colums__swiper__slide.slick-current').removeClass('width');
         $('.baloon-colums__swiper__slide').removeClass('slick-current');
+        
         // Add slick-current class to the hovered slide
-        $(this).addClass('slick-current');
-    }).on('mouseleave', function () {
-        $(this).removeClass('width slick-current');
-        // Add 'width' class to the first visible slide on mouse leave
-        $('.baloon-colums__swiper__slide.slick-active').first().addClass('width slick-current');
+        $(this).addClass('width slick-current');
+    
+        // Check if the current slide's index matches the data-index of the corresponding baloon-colums__text__item
+        var currentSlideIndex = $(this).data('slick-index');
+        $('.baloon-colums__text__item').each(function() {
+            var dataIndex = $(this).data('index');
+            if (currentSlideIndex === dataIndex) {
+                $(this).show();
+            }else{
+                $(this).hide();
+            }
+        });
     });
+
+    $('.baloon-colums__slider-container').on('mouseleave', function (e) {
+        // Check if the mouse leave event is triggexred by the slider container,
+        // not the next or prev arrows inside baloon-colums__swiper
+        if (!$(e.target).hasClass('next-arrow') && !$(e.target).hasClass('prev-arrow')) {
+            // On mouse leave baloon-colums__slider-container, remove class width slick-current
+            $('.baloon-colums__swiper__slide.slick-active').removeClass('width slick-current');
+    
+            // Add 'width' class to the first visible slide on mouse leave
+            $('.baloon-colums__swiper__slide.slick-active').first().addClass('width slick-current');
+    
+            // Check if the first visible slide's index matches the data-index of the corresponding baloon-colums__text__item
+            var visibleSlideIndex = $('.baloon-colums__swiper__slide.slick-active').first().data('slick-index');
+            $('.baloon-colums__text__item').each(function () {
+                var dataIndex = $(this).data('index');
+                if (visibleSlideIndex === dataIndex) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    });
+    
+    
+    
 
     $('.baloon-colums__swiper').on('beforeChange', function(event, slick, currentSlide, nextSlide){
   
@@ -504,6 +548,21 @@ $(document).ready(function() {
             $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').removeClass('width');
         }
 
+    });
+
+    $('.baloon-colums__swiper').on('afterChange', function(event, slick, currentSlide){
+        var slickCurrentIndex = currentSlide;
+        
+        // Assuming baloon-colums__text__item has a common class, adjust the selector accordingly
+        $('.baloon-colums__text__item').each(function() {
+            var dataIndex = $(this).data('index');
+            
+            if (slickCurrentIndex === dataIndex) {
+                $(this).show(); // Show the baloon-colums__text__item
+            } else {
+                $(this).hide(); // Hide the baloon-colums__text__item if not matching
+            }
+        });
     });
 
     //Cookie Banner
@@ -673,7 +732,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
             scrollTrigger: {
                 trigger: block,
                 start: "-200px center",
-                end: "800px 10%",
+                end: "1100px 10%",
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
@@ -1060,5 +1119,20 @@ if (!localStorage.getItem('cookiesAccepted')) {
             return uri + separator + key + "=" + value;
         }
     }
+
+    // Balloons Columns text hide or show
+
+    var slickCurrentIndex = $('.slick-current').data('slickIndex');
+    
+    // Assuming baloon-colums__text__item has a common class, adjust the selector accordingly
+    $('.baloon-colums__text__item').each(function() {
+        var dataIndex = $(this).data('index');
+        
+        if (slickCurrentIndex === dataIndex) {
+            $(this).show(); // Show the baloon-colums__text__item
+        } else {
+            $(this).hide(); // Hide the baloon-colums__text__item if not matching
+        }
+    });
 
 });

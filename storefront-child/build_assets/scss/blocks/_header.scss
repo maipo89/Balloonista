@@ -32,7 +32,7 @@
 
         &__scrollable {
             overflow: auto;
-            max-height: calc(100vh - 96px); 
+            height: fit-content;
         }
 
         ul {

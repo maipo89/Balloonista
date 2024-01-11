@@ -324,6 +324,10 @@
                 align-items: center;
             }
         }
+
+        &__item {
+            display: none;
+        }
     }
 
     &.title-top {
@@ -340,11 +344,17 @@
     } 
 
     &__swiper {
+        opacity: 0;
         // transition: opacity 0.5s ease;
         // &.hide-slider {
         //     opacity: 0;
         //     pointer-events: none; /* Prevent interaction with hidden elements */
         // } 
+        transition: opacity 0.4s ease-in-out;
+        &.slick-initialized {
+            opacity: 1;
+        }
+
         display: block !important;
         @media (max-width: 758px) {
             display: none !important;
