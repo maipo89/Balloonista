@@ -36,32 +36,49 @@
 
         </div>
 
-        <div class="baloon-colums__swiper">
+        <div class="baloon-colums__slider-container">
 
-                <?php if( have_rows('slider') ): ?>
-                    <?php while( have_rows('slider') ): the_row(); 
-                        $image = get_sub_field('image');
-                        ?>
-                        <div class="baloon-colums__swiper__slide">
-                            <img src="<?php echo esc_url($image['sizes']['onqor-large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+            <div class="baloon-colums__swiper">
+
+                    <?php if( have_rows('slider') ): ?>
+                        <?php while( have_rows('slider') ): the_row(); 
+                            $image = get_sub_field('image');
+                            ?>
+                            <div class="baloon-colums__swiper__slide">
+                                <img src="<?php echo esc_url($image['sizes']['onqor-large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+                            </div>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
+
+            </div>
+            
+            <div class="baloon-colums__text">
+                    <?php if( have_rows('slider') ) : $index = 0;  ?>
+                        <?php while( have_rows('slider') ): the_row(); 
+                            $title = get_sub_field('title');
+                            $text = get_sub_field('text');
+                            $button = get_sub_field('button');
+                            $buttonLink = get_sub_field('button_link');
+                            $buttonText = get_sub_field('button_text');
+                            ?>
+                        <div class="baloon-colums__text__item" data-index="<?php echo $index; ?>">
+                            <?php if($title) : ?>
+                                <h2><?php echo $title ?></h2>
+                            <?php endif; ?>
+                            <?php if($text) : ?>
+                                <p><?php echo $text ?></p>
+                            <?php endif; ?>
+                            <?php if($button) : ?>
+                                <div class="baloon-colums__text__button">
+                                    <a class="primary-button" href="<?php echo $buttonLink ?>"><?php echo $buttonText ?></a>
+                                </div>
+                            <?php endif; ?>
                         </div>
-                    <?php endwhile; ?>
-                <?php endif; ?>
+                        <?php $index++; ?>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
+            </div>
 
-        </div>
-        
-        <div class="baloon-colums__text">
-            <?php if($title) : ?>
-                <h2><?php echo $title ?></h2>
-            <?php endif; ?>
-            <?php if($text) : ?>
-                <p><?php echo $text ?></p>
-            <?php endif; ?>
-            <?php if($button) : ?>
-                <div class="baloon-colums__text__button">
-                    <a class="primary-button" href="<?php echo $buttonLink ?>"><?php echo $buttonText ?></a>
-                </div>
-            <?php endif; ?>
         </div>
     </div>
 </div>

@@ -9,8 +9,9 @@
         <?php while( have_rows('faqs') ): the_row(); 
             $title = get_sub_field('title');
             $text = get_sub_field('text');
+            $open = get_sub_field('open');
             ?>
-            <!-- <div class="environment__text__option-mobile"> -->
+            <div class="faq__text__container" data-value="<?php echo $open ? 'true' : 'false'; ?>">
                 <div class="faq__text__title">
                     <div class="faq__text__title__icon">
                         <p><?php echo $title ?></p>
@@ -22,9 +23,10 @@
                     </div>
                 </div>
                 <div class="faq__text__text"><p><?php echo $text ?></p></div>
-            <!-- </div> -->
+            </div>
         <?php endwhile; ?>
     </div>
     <?php endif; ?>
+    
 </div>
 
