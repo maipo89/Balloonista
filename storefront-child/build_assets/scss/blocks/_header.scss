@@ -31,8 +31,8 @@
         }
 
         &__scrollable {
-            overflow: auto;
-            height: fit-content;
+            overflow-y: auto;
+            height: calc(100vh - 196px);
         }
 
         ul {
