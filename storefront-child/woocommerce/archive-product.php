@@ -140,7 +140,7 @@ get_header( 'shop' );
 
         ));
     ?>
-
+    
     <div class="shop">
 
         <div class="shop__filter">
