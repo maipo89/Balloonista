@@ -1072,5 +1072,63 @@ if (!localStorage.getItem('cookiesAccepted')) {
         console.log('Selected text:', selectedValue);
     });
 
+    var numItems = $('.global-featured-products__item').length;
+
+    if(numItems > 5){
+        $('.global-featured-products__container').slick({
+            infinite: true,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            dots: true,       
+            arrows: false      
+        });
+    }
+    if($(window).width() < 1260){
+        $('.global-featured-products__container').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            dots: true,       
+            arrows: false      
+        });
+    }
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    }
     
+    var handleResize = debounce(function() {
+        var screenWidth = $(window).width();
+        console.log("Screen resized to: " + screenWidth);
+        var slider = $('.global-featured-products__container');
+        var sliderInitialized = slider.hasClass('slick-initialized');
+        // Add your resize-dependent code here
+        if (screenWidth < 1260) {
+            $('.global-featured-products__container').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                dots: true,       
+                arrows: false      
+            });
+        } else {
+            if (sliderInitialized && numItems < 5) {
+                alert('hello');
+                slider.slick('unslick');
+            }
+        }
+    }, 250); // 250 milliseconds
+    
+    $(window).resize(handleResize);
+
 });

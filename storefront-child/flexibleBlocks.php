@@ -58,6 +58,10 @@ if( have_rows('flexible_content', $post_id) ):
         if( get_row_layout() == 'legal_categories' ): ?>
             <?php include 'blocks/legal-categories.php'; ?>
         <?php endif; 
+
+        if( get_row_layout() == 'featured_products_for_product' ): ?>
+            <?php include 'blocks/featured-products-and-upsell.php'; ?>
+        <?php endif; 
                 
     endwhile;
 

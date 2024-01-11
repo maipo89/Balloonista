@@ -11,12 +11,35 @@
         justify-content: space-around;
         margin: 0 auto;
     }
+    &__CTA{
+        text-align: center;
+        font-family: Montserrat;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding: 16px 24px;
+        color:#fff;
+        background-color: #70B095;
+        border-radius: 10px;
+        margin: 0 auto;
+        margin-top: 32px;
+    }
+    &__button-container{
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .slick-dots{
+        margin-top: 32px;
+    }
     &__item{
         width: 232px;
         height: auto;
         border-radius: 15px;
         cursor: pointer;
         position: relative;
+        margin: 0px 14px;
         transition: filter 0.7s;
         filter: grayscale(0%);
         img{
@@ -56,6 +79,11 @@
         &:hover{
             transition: filter 0.7s;
             filter: grayscale(100%);
+        }
+        &--custom{
+            p{
+                text-align: center;
+            }
         }
     }
     h3{
