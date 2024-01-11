@@ -167,14 +167,6 @@ if ( post_password_required() ) {
 		<button class="product-next-step">
 			<p>Next</p>
 		</button>
-		<?php 
-			$product = new WC_Product_Variable( $product_id );
-			$variations = $product->get_available_variations();
-
-			foreach ( $variations as $variation ) {
-			echo "<div class='variation-store' data-image='". $variation['image']['thumb_src'] ."' ></div>";
-			}
-		?>
 	</div>
 
 	<?php
@@ -186,6 +178,5 @@ if ( post_password_required() ) {
 
 
 <?php include get_stylesheet_directory() . '/flexibleBlocks.php'; ?>
-<?php include get_stylesheet_directory() . '/blocks/featured-products-and-upsell.php'; ?>
 
 
