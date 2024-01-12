@@ -158,7 +158,7 @@
         }
     }
 }
-.product-next-step{
+.product-next-step, .product-next-step--summary{
     display: inline-flex;
     height: 42px;
     padding: 16px 24px;
@@ -218,6 +218,10 @@
 }
 .woocommerce-Price-amount{
     display: none !important;
+}
+.woocommerce-variation .woocommerce-Price-amount{
+    display: block !important;
+    text-align: center;
 }
 .product__options-head{ 
     p{
