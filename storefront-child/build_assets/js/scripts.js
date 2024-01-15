@@ -534,14 +534,15 @@ $(document).ready(function() {
     });
 
     $('.baloon-colums__swiper').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-console.log(currentSlide)
-console.log(nextSlide)
-        // Add the class to the next slide
+        // Add the class to the next slidex
         if (nextSlide > currentSlide) {
             // Remove the class from all slides
             $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').addClass('width');
             $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('width');
         }else{
+            // var currentElement = $('.baloon-colums__swiper .slick-current');
+            // var firstActive = document.querySelectorAll(".baloon-colums__swiper .slick-active")[0];
+            // console.log(currentElement)
             $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').removeClass('width');
         }
 
@@ -549,7 +550,6 @@ console.log(nextSlide)
 
     $('.baloon-colums__swiper').on('afterChange', function(event, slick, currentSlide){
         var firstActive = document.querySelectorAll(".baloon-colums__swiper .slick-active")[0];
-        console.log(firstActive)
         if (!firstActive.classList.contains('slick-current')) {
             $('.baloon-colums__swiper .slick-slide.slick-current').removeClass('width');
             $('.baloon-colums__swiper .slick-slide.slick-current').removeClass('slick-current');
