@@ -990,6 +990,14 @@ if (!localStorage.getItem('cookiesAccepted')) {
         }
     });
 
+    console.log( 'find:' +  $(".summary").length );
+
+
+    if($(".summary").length === 0){
+            $('#product-addons-total, .woocommerce-variation-add-to-cart').addClass('active');
+            $('.product__option-buttons button').removeClass('active');
+    };
+
     $('.wc-pao-addon-wrap').each(function() {
         console.log('this o0', $(this));
         if ($(this).has('a').length > 0) {
@@ -1006,6 +1014,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
         if(stepCount == 0){
             $('.variations').addClass('active');
             $('.product-next-step').show();
+            $('.product-next-step--summary').show();
         }
         if(stepCount == 1){
             $('.wc-pao-addon-container').addClass('active');
@@ -1016,6 +1025,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
         if(stepCount == 2){
             $('#product-addons-total, .woocommerce-variation-add-to-cart, .price').addClass('active');
             $('.product-next-step').hide();
+            $('.product-next-step--summary').hide();
             
         }
     });

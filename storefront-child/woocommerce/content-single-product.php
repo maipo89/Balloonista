@@ -33,41 +33,16 @@ if ( post_password_required() ) {
 ?>
 <div class="product" id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
 
-	<!-- <?php 
+	<?php 
 	
 	$product_id = $product->get_id();
 	$product = wc_get_product($product_id);
-
-	if($product) {
-		$gallery_ids = $product->get_gallery_image_ids();
-
-		if(!empty($gallery_ids)) {
-			echo '<div class="product-gallery">';
-			foreach($gallery_ids as $id) {
-				$image_url = wp_get_attachment_url($id);
-				echo '<img src="' . esc_url($image_url) . '" alt="">';
-			}
-			echo '</div>';
-		}
-	}
 	
-	?> -->
+	$title = $product->get_name();
+    $price = $product->get_price_html(); 
 
-
-	<?php
-
-	// Check rows exists.
-	if( have_rows('product_gallery', $product_id) ):
-		// Loop through rows.
-		while( have_rows('product_gallery', $product_id) ) : the_row();
-			// Load sub field value.
-			$sub_value = get_sub_field('product_image');
-			// var_dump($sub_value);
-			// Do something...
-		// End loop.
-		endwhile;
-	endif; 
 	?>
+
 	<div class="product-image">
 		<div class="product-image__feature">
 			<div class="badges">
@@ -130,22 +105,31 @@ if ( post_password_required() ) {
 	</div>
 	<div class="product__options">
 		<div class="product__options-head">
-			<?php 
-				 $title = get_the_title(); // Get the product title
-				 $price = $product->get_price_html(); // Get the product price with HTML formatting
-			?>
 			<h1><?php echo $title; ?></h1>
 			<p><?php echo $price; ?></p>
+	
 			<div class="product__option-buttons">
-				<button class="options" data-count="0">
-					<p>Options</p>
-				</button>
-				<button class="extras" data-count="1">
-					<p>Extras</p>
-				</button>
-				<button class="summary" data-count="2">
-					<p>Summry</p>
-				</button>
+				<?php 
+
+				// Get add-ons data from the product meta
+				$add_ons = get_post_meta($product_id, '_product_addons', true);
+
+				// Check if there are any add-ons
+				if (!empty($add_ons)) { ?>
+					<button class="options" data-count="0">
+						<p>Options</p>
+					</button>
+					<button class="extras" data-count="1">
+						<p>Extras</p>
+					</button>
+					<button class="summary" data-count="2">
+						<p>Summry</p>
+					</button>
+				<?php } else { ?>
+					<button class="options" data-count="0">
+						<p>Options</p>
+					</button>
+				<?php } ?> 
 			</div>
 		</div>
 		<?php
@@ -164,9 +148,13 @@ if ( post_password_required() ) {
 			do_action( 'woocommerce_single_product_summary' );
 		?>
 		<!-- <?php echo woocommerce_quantity_input(); ?> -->
-		<button class="product-next-step">
-			<p>Next</p>
-		</button>
+		<?php if (!empty($add_ons)) { ?>
+			<button class="product-next-step">
+				<p>Next</p>
+			</button>
+		<?php }else{ ?>
+
+		<?php } ?>
 	</div>
 
 	<?php
