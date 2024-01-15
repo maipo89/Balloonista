@@ -8,7 +8,14 @@
 <?php $marginBottom = get_sub_field('higher_margin_bottom'); ?>
 
 <div class="baloon-colums <?php echo($titleTop ? 'title-top' : '')?> <?php echo($marginBottom ? 'higher-margins' : '') ?>">
-        <h2 class="baloon-colums__title-mobile"><?php echo $title ?></h2>
+        <?php if( have_rows('slider') ) : $index = 0;  ?>
+            <?php while( have_rows('slider') ): the_row(); 
+                $title = get_sub_field('title');
+        ?>
+                <h2 data-index="<?php echo $index; ?>" class="baloon-colums__title-mobile"><?php echo $title ?></h2>
+            <?php $index++; ?>
+           <?php endwhile; ?>
+        <?php endif; ?>
         <div class="baloon-colums__slider">
 
             <div class="baloon-colums__slider__main">
