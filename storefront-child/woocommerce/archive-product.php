@@ -133,14 +133,24 @@ get_header( 'shop' );
 
         $query = new WP_Query($args);
 
+        if (strpos($_SERVER['REQUEST_URI'], 'category') !== false) {
+            // Filter categories based on the visible products
+            $object_ids = $query->posts ? wp_list_pluck($query->posts, 'ID') : array();
+        } else {
+            // No filtering, include all products
+            $object_ids = array();
+        }
+
         $product_categories = get_terms(array(
             'taxonomy'   => 'product_cat',
             'hide_empty' => true, // Exclude empty categories
-            'object_ids' => $query->posts ? wp_list_pluck($query->posts, 'ID') : array(),
+            'object_ids' => $object_ids
 
         ));
     ?>
-    
+    <?php
+    ?>
+
     <div class="shop">
 
         <div class="shop__filter">
@@ -425,7 +435,8 @@ get_header( 'shop' );
     </div>
 </div>
 
-<?php wp_reset_postdata(); // Reset post data after the loop ?>
+<?php wp_reset_postdata();
+      wp_reset_query(); // Reset post data after the loop ?>
 
 
 <?php
