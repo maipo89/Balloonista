@@ -224,12 +224,25 @@
 
             a {
                 margin-left: 24px;
+                position: relative;
             }
 
             svg {
                 cursor: pointer;
             }
+            p{
+                position: absolute;
+                background-color: #d9e7e1;
+                width: 16px;
+                height: 16px;
+                border-radius: 50px;
 
+                text-align: center;
+                right: -11px;
+                top: 11px;
+                font-size: 11px;
+                line-height: 17px;
+            }
             @media (max-width: $mobile) {
                 width: 24px;
                 display: block;

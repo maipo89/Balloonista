@@ -21,13 +21,14 @@ function my_child_theme_enqueue_styles() {
         array( $parent_style ),
         wp_get_theme()->get('Version')
     );
-
-	wp_enqueue_script( 'storefront-child-script',
-		get_stylesheet_directory_uri() . '/dist/scripts/all.min.min.js',
-		array(), // Add any script dependencies here, for example, array('jquery')
-		wp_get_theme()->get('Version'),
-		true // Set to true to load the script in the footer
-	);
+    if ( ! is_checkout() ) {
+        wp_enqueue_script( 'storefront-child-script',
+            get_stylesheet_directory_uri() . '/dist/scripts/all.min.min.js',
+            array(), // Add any script dependencies here, for example, array('jquery')
+            wp_get_theme()->get('Version'),
+            true // Set to true to load the script in the footer
+        );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'my_child_theme_enqueue_styles' );
 
