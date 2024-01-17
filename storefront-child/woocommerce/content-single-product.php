@@ -42,7 +42,10 @@ if ( post_password_required() ) {
     $price = $product->get_price_html(); 
 
 	?>
-
+    <div class="product__mobile-title">
+		<h2><?php echo $title; ?></h1>
+        <p><?php echo $price; ?></p>
+	</div>
 	<div class="product-image">
 		<div class="product-image__feature">
 			<div class="badges">
@@ -123,7 +126,7 @@ if ( post_password_required() ) {
 						<p>Extras</p>
 					</button>
 					<button class="summary" data-count="2">
-						<p>Summry</p>
+						<p>Summary</p>
 					</button>
 				<?php } else { ?>
 					<button class="options" data-count="0">
