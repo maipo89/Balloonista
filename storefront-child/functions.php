@@ -225,6 +225,7 @@ add_filter('request', function( $vars ) {
     return $vars;
 });
 
+<<<<<<< HEAD
 // Before Checkout
 
 add_action('woocommerce_before_checkout_form', 'custom_content_before_checkout');
@@ -309,4 +310,14 @@ add_action('woocommerce_review_order_before_payment', 'custom_payment_heading_be
 
 
 
+=======
+function custom_excerpt_length( $length ) {
+    return 8; 
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+>>>>>>> 1b47e431ba048ac047afdc5f74c7d072a5c9c46c
 
+function new_excerpt_more($more) {
+    return '';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
