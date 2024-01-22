@@ -129,7 +129,6 @@ get_header( 'shop' );
         
             $args['tax_query'] = $tax_query;
         }
-        
 
         $query = new WP_Query($args);
 
