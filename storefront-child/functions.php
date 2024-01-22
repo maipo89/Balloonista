@@ -225,4 +225,12 @@ add_filter('request', function( $vars ) {
     return $vars;
 });
 
+function custom_excerpt_length( $length ) {
+    return 8; 
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
+function new_excerpt_more($more) {
+    return '';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
