@@ -1265,4 +1265,11 @@ if (!localStorage.getItem('cookiesAccepted')) {
     
     $(window).resize(handleResize);
 
+    // Change Title Basket Checkout
+
+    var orderReviewHeading = document.getElementById("order_review_heading");
+    console.log(orderReviewHeading)
+
+    orderReviewHeading.innerHTML = "Basket";
+
 });

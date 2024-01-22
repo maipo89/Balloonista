@@ -7,6 +7,8 @@
 <?php $leftImage = get_sub_field('left_image'); ?>
 <?php $centralImageMobile = get_sub_field('central_image_mobile'); ?>
 <?php $higherMarginsBottom = get_sub_field('higher_margins_bottom'); ?>
+<?php $customLink = get_sub_field('custom_link'); ?>
+<?php $linkSlug = get_sub_field('link_slug'); ?>
 
 <div class="text-image<?php echo ($leftImage ? ' left' : ''); ?><?php echo ($centralImageMobile ? ' central-image-mobile' : ''); ?><?php echo ($higherMarginsBottom ? ' higher-margins' : ''); ?>">
       <div class="text-image__text">
@@ -14,7 +16,7 @@
           <p><?php echo $text ?></p>
           <?php if($button) : ?>
             <div class="text-image__text__button">
-                <a class="primary-button" href="<?php echo $buttonLink ?>"><?php echo $buttonText ?></a>
+                <a class="primary-button" href="<?php echo $customLink ? get_home_url() . $linkSlug : $buttonLink; ?>"><?php echo $buttonText ?></a>
             </div>
           <?php endif; ?>
       </div>
