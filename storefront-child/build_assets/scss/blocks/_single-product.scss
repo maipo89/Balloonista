@@ -469,6 +469,21 @@
     line-height: normal;
     margin-top: 72px;
     margin-bottom: 96px;
+    @media (max-width: 1024px) {
+        font-size: 36px;
+        margin-bottom: 64px;
+        padding: 0 32px;
+    }
+    @media (max-width: 768px) {
+        margin-top: 56px;
+        margin-bottom: 28px;
+    }
+    @media (max-width: 450px) {
+        font-size: 32px;
+        margin-top: 32px;
+        margin-bottom: 32px;
+
+    }
 }
 
 .basket-info-mobile {
@@ -706,7 +721,7 @@
             font-style: normal;
             font-weight: 500;
             line-height: normal;
-            padding-bottom: 20px;
+            padding-bottom: 16px;
             @media (max-width: 1350px) {
                 text-align: center;
             }
@@ -720,6 +735,7 @@
             font-size: 16px !important;
             font-weight: 400 !important;
             color: black !important;
+            padding-bottom: 12px;
             strong {
                 font-weight: 400 !important;
             }
