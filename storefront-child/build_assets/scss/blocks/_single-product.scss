@@ -456,17 +456,64 @@
     display: flex!important; // sorry 
 }
 .basket-title{
-    max-width: 1320px;
-    width: 95%;
-    display: block;
     margin: 0 auto;
+    max-width: 1400px;
+    width: 100%;
+    padding: 0 40px;
+    display: block;
     color: #000;
     font-family: Montserrat;
     font-size: 54px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+    margin-top: 72px;
     margin-bottom: 96px;
+}
+
+.basket-info-mobile {
+    display: none;
+    @media (max-width: 1060px) {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 65px;
+        font-size: 16px;
+        font-weight: 400;
+        color: black;
+        font-family: $montserrat;
+        .cart-total-excluding-delivery {
+            width: fit-content;
+            p {
+                display: flex;
+            }
+            bdi {
+                margin-left: 20px;
+            }
+            .woocommerce-Price-amount {
+                display: block !important;
+            }
+        }
+        .proceed-to-checkout-button {
+            width: fit-content;
+            margin-left: 40px;
+            @media (max-width: 610px) {
+                margin-top: 24px;
+                margin-left: initial;
+            }
+            a {
+                position: relative;
+                bottom: 11px;
+                @media (max-width: 610px) {
+                    bottom: initial;
+                }
+            }
+        }
+    }
+    @media (max-width: 610px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .onqor-cart{
@@ -538,6 +585,13 @@
             font-size: 22px;
         }
     }
+    .product-name span {
+        font-size: 16px;
+        font-weight: 400;
+        color: black;
+        font-family: $montserrat;
+        margin-top: 8px;
+    }
     // .shop_table tbody{
     //     display: flex;
     //     flex-direction: row;
@@ -603,7 +657,7 @@
         width: 100% !important;
         background-color: #D9E7E1;
         border-radius: 20px;
-        min-height: 481px;
+        // min-height: 481px;
         height: auto;
         padding: 32px;
         float: initial !important;
@@ -611,14 +665,40 @@
         @media (max-width: 1060px) {
             width: 100%;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             background-color: white;
             min-height: 0px;
+        }
+        @media (max-width: 555px) {
+            flex-direction: column;
         }
         .cart-subtotal {
             @media (max-width: 1060px) {
                 display: none;
             }
+            td {
+                @media (max-width: 1350px) {
+                    text-align: right;
+                }
+            }
+        }
+        .order-total {
+            td {
+                @media (max-width: 1350px) {
+                    text-align: right;
+                }
+            }
+        }
+        .wc-proceed-to-checkout {
+            margin-bottom: 0;
+            @media (max-width: 1350px) {
+                display: flex;
+                justify-content: center;
+            }
+        }
+        .hentry .entry-content a.button {
+            margin-top: 10px;
         }
         h2{
             color: #000;
@@ -626,15 +706,31 @@
             font-style: normal;
             font-weight: 500;
             line-height: normal;
+            padding-bottom: 20px;
+            @media (max-width: 1350px) {
+                text-align: center;
+            }
             @media (max-width: 1060px) {
                 display: none;
             }
         }
         tbody td{
             background-color: #D9E7E1 !important;
+            font-family: $montserrat !important;
+            font-size: 16px !important;
+            font-weight: 400 !important;
+            color: black !important;
+            strong {
+                font-weight: 400 !important;
+            }
         }
         th{
-            background-color: #D9E7E1;
+            background-color: #D9E7E1 !important;
+            font-family: $montserrat !important;
+            font-size: 16px !important;
+            font-weight: 400 !important;
+            padding-left: 0;
+            color: black !important;
         }
         table.shop_table_responsive tbody th {
             @media (max-width: 1060px) {
@@ -656,6 +752,7 @@
                 font-family: $montserrat;
             }
         }
+
         .woocommerce-Price-amount {
             @media (max-width: 1060px) {
                 font-weight: 400 !important;
@@ -666,7 +763,7 @@
             @media (max-width: 1060px) {
                 font-family: $montserrat;
                 font-size: 16px;
-                width: 60%;
+                width: 63%;
                 background-color: white !important;
             }
             &::before {
@@ -681,6 +778,76 @@
                 margin-right: 40px;
                 position: relative;
                 bottom: 10px;
+            }
+            @media (max-width: 555px) {
+                width: initial;
+                display: flex;
+                justify-content: center;
+                margin-right: 0;
+                bottom: initial;
+                .order-total {
+                    td {
+                        padding-right: 0;
+                    }
+                }
+            }
+            
+        }
+        .go-to-store {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 16px;
+            @media (max-width: 1060px) {
+                position: relative;
+            }
+            a {
+                font-size: 16px;
+                font-weight: 400;
+                text-decoration: none;
+                @media (max-width: 1060px) {
+                    position: absolute;
+                    top: 40px;
+                    right: 26px;
+                    white-space: nowrap;
+                }
+                @media (max-width: 555px) {
+                    position: relative;
+                    top: initial;
+                    right: initial;
+                }
+            }
+        }
+        .credit-card-images {
+            padding-top: 31px;
+            width: 95%;
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 0 auto;
+            @media (max-width: 1350px) {
+                width: 80%;
+            }
+            @media (max-width: 1090px) {
+                width: 82%;
+            }
+            @media (max-width: 555px) {
+                padding-top: 35px;
+                width: 60%;
+            }
+            @media (max-width: 555px) {
+                padding-top: 35px;
+                width: 90%;
+            }
+            @media (max-width: 450px) {
+                padding-top: 35px;
+                width: 50%;
+            }
+            img {
+                width: 45px;
+                height: 29px;
+
             }
         }
     }

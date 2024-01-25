@@ -1272,4 +1272,10 @@ if (!localStorage.getItem('cookiesAccepted')) {
 
     orderReviewHeading.innerHTML = "Basket";
 
+    // Checkout Page
+
+    $('#billing_first_name').attr('placeholder', 'Enter your first name');
+    $('#billing_last_name').attr('placeholder', 'Enter your last name');
+
+
 });
