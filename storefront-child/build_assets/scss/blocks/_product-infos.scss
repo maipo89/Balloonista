@@ -2,7 +2,16 @@
     max-width: 1320px;
     width: 100%;
     margin: 0 auto;
-    padding: 0px 40px;
+    padding: 48px 40px;
+    @media (max-width: 1024px) {
+        padding: 36px 32px;
+    }
+    @media (max-width: 768px) {
+        padding: 32px;
+    }
+    @media (max-width: 45px) {
+        padding: 32px 20px;
+    }
     &__button{
         display: flex !important;
         align-items: center !important;
@@ -17,6 +26,9 @@
             font-weight: 300;
             line-height: normal;
             letter-spacing: -1.26px;
+            @media (max-width: 1024px) {
+                font-size: 22px;
+            }
         }
     }
     &__button-ui{

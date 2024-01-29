@@ -3,6 +3,13 @@
     width: 95%;
     margin: 0 auto;
     padding: 48px 0 48px 0;
+    @media (max-width: 1024px) {
+        width: 100%;
+        padding: 36px 32px;
+    }
+    @media (max-width: 450px) {
+        padding: 32px 20px;
+    }
     &__container{
         width: 100%;
         background-color: #F4F8F6;
@@ -14,6 +21,23 @@
         justify-content: space-around;
         border-radius: 10px;
         flex-wrap: wrap;
+        @media (max-width: 670px) {
+            padding: 24px;
+            gap: 18px;
+        }
+        &__feature {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+            height: 56px;
+            @media (max-width: 670px) {
+                width: 30%;
+            }
+            @media (max-width: 520px) {
+                width: 45%;
+            }
+        }
     }
     &__item{
         width: max-content;

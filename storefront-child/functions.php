@@ -355,3 +355,38 @@ function custom_content_after_proceed_to_checkout() {
 }
 
 add_action('woocommerce_after_cart_totals', 'custom_content_after_proceed_to_checkout');
+
+// Add the following code to your theme's functions.php file or a custom plugin
+
+function custom_display_products_in_cart_totals() {
+    // Get the products in the cart
+    $cart_items = WC()->cart->get_cart();
+
+    // Check if there are products in the cart
+    if (!empty($cart_items)) {
+        echo '<h2 class="le-form">Summary</h2>';
+
+        // Display a table with product details
+        echo '<table class="shop_table_products">';
+        echo '<thead><tr><th>Product</th><th>Quantity</th><th>Total</th></tr></thead>';
+        echo '<tbody>';
+
+        foreach ($cart_items as $cart_item_key => $cart_item) {
+            $_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
+
+            echo '<tr>';
+            echo '<th>' . $_product->get_name() . '</th>';
+            echo '<th>' . $cart_item['quantity'] . '</th>';
+            echo '<td>' . wc_price($cart_item['line_total']) . '</td>';
+            echo '</tr>';
+        }
+
+        echo '</tbody>';
+        echo '</table>';
+        echo '<p class="delivery-checkout">Delivery options at checkout</p>';
+        echo '<div class="line">';
+        echo '</div>';
+    }
+}
+
+add_action('woocommerce_before_cart_totals', 'custom_display_products_in_cart_totals');

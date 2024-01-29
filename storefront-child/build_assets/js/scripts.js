@@ -1208,7 +1208,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
 
     var numItems = $('.global-featured-products__item').length;
 
-    if(numItems > 5){
+    if(numItems > 5 && $(window).width() > 1260){
         $('.global-featured-products__container').slick({
             infinite: true,
             slidesToShow: 5,
@@ -1217,14 +1217,28 @@ if (!localStorage.getItem('cookiesAccepted')) {
             arrows: false      
         });
     }
-    if($(window).width() < 1260){
-        $('.global-featured-products__container').slick({
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            dots: true,       
-            arrows: false      
-        });
+    if($(window).width() < 1260 ){
+        if(numItems > 3) {
+            $('.global-featured-products__container').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                centerMode: true,
+                variableWidth: true,
+                dots: true,       
+                arrows: false      
+            });
+        } else {
+            $('.global-featured-products__container').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                centerMode: true,
+                variableWidth: true,
+                dots: true,       
+                arrows: false      
+            });
+        }
     }
     function debounce(func, wait, immediate) {
         var timeout;
@@ -1248,16 +1262,29 @@ if (!localStorage.getItem('cookiesAccepted')) {
         var sliderInitialized = slider.hasClass('slick-initialized');
         // Add your resize-dependent code here
         if (screenWidth < 1260) {
-            $('.global-featured-products__container').slick({
-                infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                dots: true,       
-                arrows: false      
-            });
+            if(numItems > 3) {
+                $('.global-featured-products__container').slick({
+                    infinite: true,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    variableWidth: true,
+                    dots: true,       
+                    arrows: false      
+                });
+            } else {
+                $('.global-featured-products__container').slick({
+                    infinite: true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    variableWidth: true,
+                    dots: true,       
+                    arrows: false      
+                });
+            }
         } else {
             if (sliderInitialized && numItems < 5) {
-                alert('hello');
                 slider.slick('unslick');
             }
         }
