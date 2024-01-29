@@ -32,13 +32,13 @@
 
             /* Left gradient */
             &:before {
-                left: -10px;
+                left: 0px;
                 background: linear-gradient(to left, rgba(255,255,255,0) 0%, #FFFFFF 100%);
             }
 
             /* Right gradient */
             &:after {
-                right: -10px;
+                right: 0px;
                 background: linear-gradient(to right, rgba(255,255,255,0) 0%, #FFFFFF 100%);
             }
         }
@@ -62,6 +62,12 @@
         border-radius: 10px;
         margin: 0 auto;
         margin-top: 32px;
+        &:hover {
+            background-color: $mercury;
+        }
+        &:focus {
+            outline: none !important;
+        }
     }
     &__button-container{
         width: 100%;

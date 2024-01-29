@@ -4,6 +4,7 @@
     // var_dump($prods[0]);
     $title = get_sub_field('title');
     $CTAlink = get_sub_field('cta');
+    $CTAtitle = get_sub_field('cta_title');
     
     ?>
     <h3><?php echo $title ?></h3>
@@ -52,8 +53,8 @@
     </div>
     <?php if($CTAlink['title']){ ?>
         <div class="global-featured-products__button-container" >
-            <a class="global-featured-products__CTA" href=" <?php echo $CTAlink['url']; ?>">
-                <?php echo $CTAlink['title']; ?>
+            <a class="global-featured-products__CTA" href=" <?php echo $CTAlink; ?>">
+                <?php echo $CTAtitle; ?>
             </a>
         </div>
     <?php } ?>
