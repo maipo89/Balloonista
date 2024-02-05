@@ -1,0 +1,104 @@
+.legal {
+    &__categories {
+        padding: 160px 40px 96px 40px;
+        margin: 0 auto;
+        max-width: 1400px;
+        @media (max-width: $desktop) {
+            max-width: 100%;
+            padding: 160px 32px 96px 32px;
+        }
+        @media (max-width: $tablet) {
+            padding: 152px 32px 96px 32px;
+        }
+        @media (max-width: $mobile) {
+            padding: 144px 20px 64px 20px;
+        }
+        @media (max-width: $smaller-screen) {
+            padding: 144px 16px 64px 16px;
+        }
+    
+        .select-wrapper {
+            width: 228px;
+            margin: 0 auto;
+        }
+    }
+    &__privacy {
+        display: block;
+    }
+    &__terms, &__cookie {
+        display: none;
+    }
+    &__privacy, &__terms, &__cookie {
+        &__title {
+            padding: 0px 40px;
+            margin: 0 auto;
+            max-width: 1400px;
+            @media (max-width: $desktop) {
+                max-width: 100%;
+                padding: 0px 32px 0px 32px;
+            }
+            @media (max-width: $tablet) {
+                padding: 0px 32px 0px 32px;
+                font-size: 22px;
+                margin-bottom: 24px;
+                line-height: 25px;
+            }
+            @media (max-width: $mobile) {
+                padding: 0px 20px 0px 20px;
+            }
+            @media (max-width: $smaller-screen) {
+                padding: 0px 16px 0px 16px;
+            }
+        }
+        &__text {
+            padding: 48px 40px;
+            margin: 0 auto;
+            max-width: 1400px;
+            @media (max-width: $desktop) {
+                max-width: 100%;
+                padding: 48px 32px 48px 32px;
+            }
+            @media (max-width: $tablet) {
+                padding: 32px 32px 32px 32px;
+            }
+            @media (max-width: $mobile) {
+                padding: 32px 20px 32px 20px;
+            }
+            @media (max-width: $smaller-screen) {
+                padding: 32px 16px 32px 16px;
+            }
+            h2, p {
+                text-align: left;
+            }
+        
+            h2 {
+                margin: 0 0 32px 0;
+                font-size: 36px;
+                font-weight: 300;
+        
+                @media (max-width: $tablet) {
+                    font-size: 22px;
+                    margin-bottom: 24px;
+                    line-height: 25px;
+                }
+            }
+        
+            p {
+                margin-bottom: 20px;
+                font-size: 16px;
+                line-height: 20px;
+                font-weight: 400;
+        
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    &.higher-margins {
+        padding-bottom: 126px;
+        @media (max-width: $tablet) {
+            padding-bottom: 64px;
+        }
+    }
+}

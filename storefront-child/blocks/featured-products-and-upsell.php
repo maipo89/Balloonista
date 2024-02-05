@@ -20,7 +20,7 @@
                             <img src="<?php echo $customItem["image"]["sizes"]["medium"]; ?>" />
                         </div>
                         <p><?php echo $customItem['title'] ?></p>
-                        <a href="<?php echo $customItem["page"] ?>"></a>
+                        <a href="<?php echo $customItem['page']['url'] ?>"></a>
                     </div> <?php
                 } else { 
                     $product_post_object = get_sub_field('products');

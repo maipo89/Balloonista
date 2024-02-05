@@ -384,6 +384,12 @@
                 object-position: center center;
                 border-radius: 40px;
                 z-index: -1;
+                @media (max-width: 1400px) {
+                    border-radius: 30px;
+                }
+                @media (max-width: 1000px) {
+                    border-radius: 20px;
+                }
             }
 
             &.width {

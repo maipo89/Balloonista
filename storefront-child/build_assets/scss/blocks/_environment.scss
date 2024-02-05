@@ -27,9 +27,11 @@
         }
         @media (max-width: $mobile) {
             height: 308px;
+            border-radius: 30px;
         }
         @media (max-width: $smaller-screen) {
             height: 252px;
+            border-radius: 30px;
         }
     }
     h3 {
@@ -82,7 +84,7 @@
                         border: none;
                         border-radius: 10px;
                         padding: 16px;
-                        background-color: $light-mercury;
+                        background-color: $light-mercury !important;
                         margin-bottom: 24px;
 
                         &:focus {
@@ -105,6 +107,7 @@
                         align-items: center;
                         p {
                             margin-left: 13px;
+                            margin-right: 13px;
                         }
                     }
                     .icon {

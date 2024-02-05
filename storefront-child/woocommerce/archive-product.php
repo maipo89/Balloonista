@@ -37,7 +37,6 @@ get_header( 'shop' );
             ?>
             <a href="<?php echo get_home_url(); ?>">Home</a>
             <a href="<?php echo get_home_url(); ?>/shop">Shop</a>
-            <p>All Products</p>
         </div>
     </div>
     <?php

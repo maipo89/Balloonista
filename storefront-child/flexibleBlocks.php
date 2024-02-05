@@ -15,10 +15,6 @@ if( have_rows('flexible_content', $post_id) ):
             <?php include 'blocks/hero.php'; ?>
         <?php endif; 
 
-        if( get_row_layout() == 'featured_products' ): ?>
-            <?php include 'blocks/featured-products.php'; ?>
-        <?php endif; 
-
         if( get_row_layout() == 'product_infos' ): ?>
             <?php include 'blocks/product-infos.php'; ?>
         <?php endif; 
@@ -53,14 +49,14 @@ if( have_rows('flexible_content', $post_id) ):
 
         if( get_row_layout() == 'title_paragraph' ): ?>
             <?php include 'blocks/title-paragraph.php'; ?>
-        <?php endif; 
-
-        if( get_row_layout() == 'legal_categories' ): ?>
-            <?php include 'blocks/legal-categories.php'; ?>
-        <?php endif; 
+        <?php endif;
 
         if( get_row_layout() == 'featured_products_for_product' ): ?>
             <?php include 'blocks/featured-products-and-upsell.php'; ?>
+        <?php endif; 
+
+        if( get_row_layout() == 'legal' ): ?>
+            <?php include 'blocks/legal.php'; ?>
         <?php endif; 
                 
     endwhile;

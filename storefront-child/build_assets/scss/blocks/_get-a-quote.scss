@@ -208,6 +208,10 @@
                 margin-right: 16px;
                 margin-top: 16px;
 
+                input[type=checkbox] {
+                    margin: 0 0.2em 0 0;
+                }
+
                 label {
                     margin: 0;
                     font-family: $montserrat;

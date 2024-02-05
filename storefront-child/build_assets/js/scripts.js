@@ -219,11 +219,43 @@ $(document).ready(function() {
 
     // Carousel Hero
 
-    $('.hero__gallery').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: true,
-        dots: true,
+    if ($(window).width() > 450) {
+        $('.hero__gallery').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true,
+            variableWidth: true
+        });
+    }else{
+        $('.hero__gallery').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true,
+        });
+    }
+
+    $(window).on('resize orientationchange', function () {
+        // Adjust Slick slider on resize or orientation change
+        if ($(window).width() > 450) {
+            $('.hero__gallery').slick('unslick');
+            $('.hero__gallery').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true,
+                variableWidth: true
+            });
+        } else {
+            $('.hero__gallery').slick('unslick');
+            $('.hero__gallery').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true,
+            });
+        }
     });
 
 
@@ -280,7 +312,7 @@ $(document).ready(function() {
         slidesToScroll: 1,
         asNavFor: '.baloon-colums__slider__main',
         dots: true,
-        infinite: false,
+        infinite: true,
         pauseOnFocus: true,
         centerMode: false,
         focusOnSelect: true,
@@ -588,15 +620,19 @@ $(document).ready(function() {
             }
         });
 
-        $('.baloon-colums__title-mobile').each(function() {
-            var dataIndex = $(this).data('index');
-            
-            if (slickCurrentIndex === dataIndex) {
-                $(this).show(); // Show the baloon-colums__text__item
-            } else {
-                $(this).hide(); // Hide the baloon-colums__text__item if not matching
-            }
-        });
+        if ($(window).width() < 758) {
+
+            $('.baloon-colums__title-mobile').each(function() {
+                var dataIndex = $(this).data('index');
+                
+                if (slickCurrentIndex === dataIndex) {
+                    $(this).show(); // Show the baloon-colums__text__item
+                } else {
+                    $(this).hide(); // Hide the baloon-colums__text__item if not matching
+                }
+            });
+
+        }
     });
 
 
@@ -921,15 +957,19 @@ if (!localStorage.getItem('cookiesAccepted')) {
         }
     });
 
-    $('.baloon-colums__title-mobile').each(function() {
-        var dataIndex = $(this).data('index');
-        
-        if (dataIndex === 0) {
-            $(this).show(); // Show the baloon-colums__text__item
-        } else {
-            $(this).hide(); // Hide the baloon-colums__text__item if not matching
-        }
-    });
+    if ($(window).width() < 758) {
+
+        $('.baloon-colums__title-mobile').each(function() {
+            var dataIndex = $(this).data('index');
+            
+            if (dataIndex === 0) {
+                $(this).show(); // Show the baloon-colums__text__item
+            } else {
+                $(this).hide(); // Hide the baloon-colums__text__item if not matching
+            }
+        });
+
+    }
     
     
 
@@ -1262,6 +1302,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
         var sliderInitialized = slider.hasClass('slick-initialized');
         // Add your resize-dependent code here
         if (screenWidth < 1260) {
+            slider.slick('unslick');
             if(numItems > 3) {
                 $('.global-featured-products__container').slick({
                     infinite: true,
@@ -1297,12 +1338,68 @@ if (!localStorage.getItem('cookiesAccepted')) {
     var orderReviewHeading = document.getElementById("order_review_heading");
     console.log(orderReviewHeading)
 
-    orderReviewHeading.innerHTML = "Basket";
+    // orderReviewHeading.innerHTML = "Basket";
 
-    // Checkout Page
+    // Privacy Page
+    $('.legal .custom-option').on('click', function(){
+        // Get the clicked pageName
+        var clickedPage = $(this).data('value');
+        console.log(clickedPage);
+        
+        // Check if the clickedPage matches any of the section titles
+        if (clickedPage === $('.legal__privacy__title').text()) {
+            // Show the corresponding legal section
+            $('.legal__privacy').show();
+            $('.legal__terms, .legal__cookie').hide();
+        } else if (clickedPage === $('.legal__terms__title').text()) {
+            // Show the corresponding legal section
+            $('.legal__terms').show();
+            $('.legal__privacy, .legal__cookie').hide();
+        } else if (clickedPage === $('.legal__cookie__title').text()) {
+            // Show the corresponding legal section
+            $('.legal__cookie').show();
+            $('.legal__privacy, .legal__terms').hide();
+        }
+    });
 
-    $('#billing_first_name').attr('placeholder', 'Enter your first name');
-    $('#billing_last_name').attr('placeholder', 'Enter your last name');
+    // Hero text overflowing
+
+    $(window).on('resize load', function() {
+        if ($(window).width() > 1000) {
+            if ($('.hero').hasClass('child-pages')) {
+                var heroWrapperHeight = $('.hero__wrapper').height();
+                var heroElement = $('.hero');
+                $('.hero__wrapper').css('padding-bottom', '40px');
+        
+                if (heroWrapperHeight > 425) {
+                heroElement.css('height', 'fit-content');
+                } else {
+                // Set a default height or any other style if needed
+                heroElement.css('height', '590px');
+                }
+            }else{
+                var heroWrapperHeight = $('.hero__wrapper').height();
+                var heroElement = $('.hero');
+        
+                if (heroWrapperHeight > 385) {
+                    heroElement.css('height', 'fit-content');
+                    if ($(window).width() > 1280) {
+                        $('.hero__wrapper').css('padding-bottom', '125px');
+                    } else {
+                        $('.hero__wrapper').css('padding-bottom', '98px');
+                    }
+                } else {
+                // Set a default height or any other style if needed
+                   heroElement.css('height', '696px');
+                   $('.hero__wrapper').css('padding-bottom', '40px');
+                }
+            }
+        }else{
+            var heroElement = $('.hero');
+            heroElement.css('height', 'fit-content');
+            $('.hero__wrapper').css('padding-bottom', '0px');
+        }
+    });
 
 
 });

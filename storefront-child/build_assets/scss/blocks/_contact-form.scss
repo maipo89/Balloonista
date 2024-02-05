@@ -298,6 +298,9 @@
             @media (max-width: 300px) {
                 display: block;
             }
+            input[type=checkbox] {
+                margin: 0 0.2em 0 0;
+            }
             p {
                 font-family: $montserrat;
                 font-size: 10px;

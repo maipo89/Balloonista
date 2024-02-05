@@ -12,6 +12,15 @@
         @media (max-width: $mobile) {
             padding: 32px 0 40px;
         }
+        &__wrapper {
+            a {
+                &:last-of-type {
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+        }
     }
     .shop {
         display: flex;
@@ -172,7 +181,7 @@
             }
             &__buttons {
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
                 position: relative;
                 &.open {
                     .filter-button__button {
@@ -423,7 +432,7 @@
                 width: calc(33.3% - 11px);
             }
 
-            @media (max-width: $mobile) {
+            @media (max-width: 660px) {
                 width: calc(50% - 8px);
             }
             

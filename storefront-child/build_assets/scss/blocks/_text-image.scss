@@ -44,7 +44,25 @@
             }
        }
        p {
-           margin-bottom: 20px;
+            margin-bottom: 20px;
+            a {
+                font-family: $montserrat;
+                font-weight: 400;
+                font-size: 16px;
+                color: $seaFoam;
+                cursor: pointer;
+        
+                &:hover {
+                    text-decoration: underline;
+                    text-underline-offset: 3px;
+                }
+            
+                &:active, &:focus {
+                    text-decoration: underline;
+                    text-underline-offset: 3px;
+                    color: $vineyard;
+                }
+            }
        }
        &__button {
            margin-top: 4px;

@@ -152,6 +152,12 @@
             top: 23px;
             cursor: pointer;
 
+            &:hover {
+                rect {
+                    fill: $gray;
+                }
+            }
+
             @media (max-width: 1241px) {
                 right: 20px;
             }

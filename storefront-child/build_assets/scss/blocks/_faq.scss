@@ -39,8 +39,12 @@
                 border: none;
                 border-radius: 10px;
                 padding: 16px;
-                background-color: $light-mercury;
+                background-color: $light-mercury !important;
                 margin-bottom: 24px;
+
+                p {
+                    font-weight: 500 !important;
+                }
 
                 &:focus {
                     outline: none !important;

@@ -1,4 +1,4 @@
-<?php $title = get_sub_field('title'); ?>
+<?php $mainTitle = get_sub_field('title'); ?>
 <?php $text = get_sub_field('text'); ?>
 <?php $button = get_sub_field('button'); ?>
 <?php $buttonText = get_sub_field('button_text'); ?>

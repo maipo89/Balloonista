@@ -4,6 +4,14 @@
     user-select: none;
     width: 100%;
 
+    &:hover {
+        svg {
+            path {
+                stroke: $seaFoam;
+            }
+        }
+    }
+
     .select {
         position: relative;
         display: flex;
@@ -154,14 +162,13 @@
     border-bottom: 0;
 }
 
-.arrow::before {
-    left: -5px;
-    transform: rotate(-45deg);
-}
-
-.arrow::after {
-    left: 5px;
-    transform: rotate(45deg);
+.select.open {
+    svg {
+        transform: rotate(180deg);
+        path {
+            stroke: $seaFoam;
+        }
+    }
 }
 
 .active-dropdown {
