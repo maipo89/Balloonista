@@ -387,7 +387,8 @@ get_header( 'shop' );
                     
                     <div class="shop__card">
                         <a href="<?php the_permalink() ?>">
-                            <div class="shop__card__image" style="background-image: url('<?php echo esc_url($image[0]); ?>');">
+                            <div class="shop__card__image">
+                                <div class="shop__card__image__img" style="background-image: url('<?php echo esc_url($image[0]); ?>');"></div>
                                 <ul>
                                     <?php
                                         // Display only the first two badges

@@ -225,7 +225,9 @@ add_filter('request', function( $vars ) {
     return $vars;
 });
 
-// Before Checkout
+
+
+// CART HOOKS
 
 add_action('woocommerce_before_checkout_form', 'custom_content_before_checkout');
 
@@ -249,22 +251,6 @@ function custom_content_before_checkout() {
         // echo '</div>';
     echo '</div>';
 }
-
-function add_content_before_billing_details() {
-    echo '<p>Please select your billing details:</p>';
-    // echo '<div class="collection-delivery__buttons">';
-    //    echo '<p>Collection</p>';
-    //    echo '<p>Delivery</p>';
-    // echo '</div>';
-
-}
-
-add_action('woocommerce_before_checkout_billing_form', 'add_content_before_billing_details');
-function change_order_review_title_checkout() {
-    echo '<h3 class="heading-checkout-review">Basket</h3>';
-}
-
-add_action('woocommerce_checkout_before_order_review_heading', 'change_order_review_title_checkout');
 
 function custom_content_inside_review_order() {
     // Get the current order
@@ -291,21 +277,6 @@ function custom_content_inside_review_order() {
     }
 }
 add_action('woocommerce_checkout_review_order', 'custom_content_inside_review_order');
-
-
-// Add a container with a button after the order review heading in WooCommerce checkout page
-function custom_button_after_order_review_heading() {
-    echo '<div class="edit-basket-container"><a href="' . wc_get_cart_url() . '" class="button">Edit Basket</a></div>';
-}
-add_action('woocommerce_review_order_before_payment', 'custom_button_after_order_review_heading');
-
-// Add a payment heading before the payment section in WooCommerce checkout page
-function custom_payment_heading_before_payment() {
-    echo '<h3 class="custom-payment-heading">Payment Information</h3><p class="custom-payment-infos">Please fill out your payment details:</p>';
-}
-add_action('woocommerce_review_order_before_payment', 'custom_payment_heading_before_payment');
-
-
 
 
 function custom_excerpt_length( $length ) {
@@ -390,3 +361,117 @@ function custom_display_products_in_cart_totals() {
 }
 
 add_action('woocommerce_before_cart_totals', 'custom_display_products_in_cart_totals');
+
+
+// CHECKOUT HOOKS
+
+add_filter( 'wp_footer', 'custom_checkout_script' );
+function custom_checkout_script( ){
+    if( ! is_checkout() ) return;
+    ?>
+    <script type="text/javascript">
+    jQuery(function($){
+        $('#view-billing').click(function() {
+           $('.woocommerce-billing-fields__field-wrapper').toggleClass('open');
+           $('.title-billing-address').toggleClass('open');
+        });
+        var deliveryAccordion = $('<div class="delivery-address-accordion"><h3>Delivery option</h3><p id="view-delivery">View</p></div><div class="title-delivery-address"><h3>Delivery option</h3><p>Please select a day for delivery:</p></div>');
+
+        // Insert the deliveryAccordion element before the orddd-checkout-fields section
+        $('.orddd-checkout-fields').before(deliveryAccordion);
+
+        var additionalAccordion = $('<div class="additional-accordion"><h3>Additional option</h3><p id="view-additional">View</p></div>');
+        $('.woocommerce-additional-fields').before(additionalAccordion);
+
+        $('#view-delivery').click(function() {
+           $('.orddd-checkout-fields').toggleClass('open');
+           $('.title-delivery-address').toggleClass('open');
+        });
+
+        $('#view-payment').click(function() {
+           $('#payment').toggleClass('open');
+           $('.title-payment').toggleClass('open');
+        });
+
+        $('#view-additional').click(function() {
+           $('.woocommerce-additional-fields').toggleClass('open');
+        });
+    });
+    </script>
+    <?php
+}
+
+function add_content_before_billing_fields() {
+    echo '<div class="billing-address-accordion">';
+        echo '<h3>Billing details</h3>';
+        echo '<p id="view-billing">View</p>';
+    echo '</div>';
+    echo '<div class="title-billing-address">';
+        echo '<h3>Billing details</h3>';
+        echo '<p>Please fill out your billing address:</p>';
+    echo '</div>';
+
+}
+add_action( 'woocommerce_before_checkout_billing_form', 'add_content_before_billing_fields' );
+
+add_action('woocommerce_before_checkout_form', 'add_review_order_section_with_images_after_submit');
+
+function add_review_order_section_with_images_after_submit() {
+    // Output a heading for the review order section
+    echo '<div class="checkout-review-order">';
+    echo '<div class="checkout-review-order__container">';
+    echo '<h2>Basket</h2>';
+    
+    // Get cart items
+    $cart_items = WC()->cart->get_cart();
+    
+    // Loop through cart items
+    foreach ($cart_items as $cart_item_key => $cart_item) {
+        // Get product object
+        $product = $cart_item['data'];
+        
+        // Output product name
+        echo '<div class="checkout-review-order__container__product">';
+
+        // Output product image
+        echo $product->get_image();
+        echo '<div>';
+            echo '<p class="name-checkout-product">' . $product->get_name() . '</p>';
+            
+            // Output product quantity
+            echo '<p>' . $cart_item['quantity'] . '</p>';
+        echo '</div>';
+
+        echo '<p class="price-checkout-product">£' . number_format($product->get_price() * $cart_item['quantity'], 2) . '</p>';
+
+        echo '</div>';
+    }
+    
+    // Output total amount
+    echo '<div class="line"></div>';
+    echo '<div class="total-checkout-product">';
+        echo '<p>Basket Total:</p>';
+        echo '<p>' . WC()->cart->get_cart_total() . '</p>';
+    echo '</div>';
+    
+    // Output "Back to Basket" button
+    echo '<div class="button-container">';
+        echo '<a href="' . wc_get_cart_url() . '" class="button wc-backward">Edit Basket</a>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+}
+
+// Add a payment heading before the payment section in WooCommerce checkout page
+function custom_payment_heading_before_payment() {
+    echo '<div class="payment-accordion">';
+        echo '<h3>Payment details</h3>';
+        echo '<p id="view-payment">View</p>';
+    echo '</div>';
+    echo '<div class="title-payment">';
+        echo '<h3>Payment details</h3>';
+        echo '<p>Please fill out your payment address:</p>';
+    echo '</div>';
+}
+add_action('woocommerce_review_order_before_payment', 'custom_payment_heading_before_payment');
+

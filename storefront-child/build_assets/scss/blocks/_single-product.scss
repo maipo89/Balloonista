@@ -504,6 +504,9 @@ div.product-addon-totals ul li{
         outline: none !important;
     }
 }
+.woocommerce-variation {
+    display: none !important;
+}
 .woocommerce-variation-add-to-cart{
     margin: 0 auto; 
     align-items: center;

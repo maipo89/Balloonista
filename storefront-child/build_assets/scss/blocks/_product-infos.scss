@@ -107,5 +107,12 @@
         letter-spacing: -0.64px;
         padding-left: 0 !important;
         padding-right: 0 !important;
+
+        p {
+            margin-bottom: 15px;
+            &:last-child {
+                margin-bottom: 0px;
+            }
+        }
     }
 }

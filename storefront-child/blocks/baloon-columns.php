@@ -88,17 +88,19 @@
 
         </div>
     </div>
-</div>
+</div> 
 <?php if($sliderClients) : ?>
     <?php if( have_rows('clients') ): ?>
-        <div class="baloon-colums__slider-clients">
-            <?php while( have_rows('clients') ): the_row(); 
-                $image = get_sub_field('image');
-                ?>
-                <div class="baloon-colums__slider-clients__image">
-                    <img src="<?php echo esc_url($image['sizes']['onqor-large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
-                </div>
-            <?php endwhile; ?>
+        <div class="baloon-colums__slider-clients__wrapper">
+            <div class="baloon-colums__slider-clients__inner">
+                <?php while( have_rows('clients') ): the_row(); 
+                    $image = get_sub_field('image');
+                    ?>
+                    <div class="baloon-colums__slider-clients__image">
+                        <img src="<?php echo esc_url($image['sizes']['onqor-large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                    </div>
+                <?php endwhile; ?>
+            </div>
         </div>
     <?php endif; ?>
 <?php endif; ?>

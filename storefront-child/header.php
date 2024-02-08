@@ -159,27 +159,28 @@
 									$image_url = wp_get_attachment_image_url($image_id, 'medium'); // Change 'medium' to the desired image size
 									if ($image_url) {
 										?>
-										<div style="background-image: url('<?php echo esc_url($image_url); ?>')" class="product-name__image">
-										<?php
-											// Get the badges for the current product
-											$product_terms = get_the_terms(get_the_ID(), 'badge_taxonomy');
+										<div class="product-name__image">
+											<div style="background-image: url('<?php echo esc_url($image_url); ?>')" class="product-name__image__img"></div>
+											<?php
+												// Get the badges for the current product
+												$product_terms = get_the_terms(get_the_ID(), 'badge_taxonomy');
 
-											if ($product_terms && ! is_wp_error($product_terms)) {
-												?>
-												<div class="badge-container">
-													<?php
-													$count = 0;
-													foreach ($product_terms as $term) {
-														if ($count < 2) { // Display only the first two badges
-															echo '<span class="badge">' . $term->name . '</span>';
-															$count++;
-														}
-													}
+												if ($product_terms && ! is_wp_error($product_terms)) {
 													?>
-												</div>
-												<?php
-											}
-											?>
+													<div class="badge-container">
+														<?php
+														$count = 0;
+														foreach ($product_terms as $term) {
+															if ($count < 2) { // Display only the first two badges
+																echo '<span class="badge">' . $term->name . '</span>';
+																$count++;
+															}
+														}
+														?>
+													</div>
+													<?php
+												}
+												?>
 										</div>
 										<?php
 									}

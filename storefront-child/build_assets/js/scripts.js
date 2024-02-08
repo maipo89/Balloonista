@@ -356,23 +356,68 @@ $(document).ready(function() {
         }
     });
 
-    $('#product_info').accordion();
+    $('#product_info').accordion({
+        collapsible: true,
+        active: false,
+        heightStyle: 'content',
+    });
 
     // Slider Clients
 
-    $('.baloon-colums__slider-clients').slick({
-        dots: false,
-        infinite: true,
-        autoplay: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        arrows: false,
-        variableWidth: true,
-        // "centerMode": true,
-        autoplaySpeed: 0,
-        speed: 6000,
-        cssEase: "linear",
-        loop: true
+    $(window).on('load resize orientationchange', function() {
+
+        const recalculateSlider = function() {
+
+            const $wrapper = $('.baloon-colums__slider-clients__wrapper');
+            const $inner = $('.baloon-colums__slider-clients__inner');
+            const $items = $('.baloon-colums__slider-clients__image');
+            
+            let wrapWidth = 0;
+            let viewWidth = 0;
+            let widths = [];
+            
+            // Check if wrapper exists before accessing its width
+            if ($wrapper.length > 0) {
+                viewWidth = $wrapper.width();
+            }
+            
+            // get total wrap width, and set items at initial positions
+            $items.each(function() {
+                const $item = $(this);
+                const width = $item.width();
+                const widthBefore = wrapWidth;
+                widths.push(width);
+                
+                $item.css('transform', 'translateX(' + widthBefore + 'px)');
+                
+                wrapWidth += width;
+            });
+            
+            // get longest width of item widths and set inner position based off value
+            const longestWidth = Math.max(...widths);
+            $inner.css('left', -longestWidth);
+            
+            // setup animation
+            const animation = gsap.to($items, 60, {
+                x: "+=" + wrapWidth,
+                ease: 'none',
+                paused: false,
+                repeat: -1, // Infinite repeat
+                modifiers: {
+                    x: function(x, target) {
+                        x = parseFloat(x) % wrapWidth;
+                        
+                        $(target).css('visibility', x - longestWidth > viewWidth ? 'hidden' : 'visible');
+                        
+                        return x + 'px';
+                    }
+                }
+            });
+
+        };
+
+        recalculateSlider();
+
     });
 
     // Faq Accordion
