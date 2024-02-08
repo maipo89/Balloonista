@@ -371,7 +371,16 @@ function custom_checkout_script( ){
     ?>
     <script type="text/javascript">
     jQuery(function($){
+        $('.title-billing-address').addClass('open');
+        $('.woocommerce-billing-fields__field-wrapper').addClass('open');
+        $('#view-billing').text('Hide');
         $('#view-billing').click(function() {
+           $('#view-billing').toggleClass('hide');
+           if ($('#view-billing').hasClass('hide')) {
+            $('#view-billing').text('View');
+           }else{
+            $('#view-billing').text('Hide');
+           }
            $('.woocommerce-billing-fields__field-wrapper').toggleClass('open');
            $('.title-billing-address').toggleClass('open');
         });
@@ -384,16 +393,34 @@ function custom_checkout_script( ){
         $('.woocommerce-additional-fields').before(additionalAccordion);
 
         $('#view-delivery').click(function() {
+           $('#view-delivery').toggleClass('open');
+           if ($('#view-delivery').hasClass('open')) {
+            $('#view-delivery').text('Hide');
+           }else{
+            $('#view-delivery').text('View');
+           }
            $('.orddd-checkout-fields').toggleClass('open');
            $('.title-delivery-address').toggleClass('open');
         });
 
         $('#view-payment').click(function() {
+           $('#view-payment').toggleClass('open');
+           if ($('#view-payment').hasClass('open')) {
+            $('#view-payment').text('Hide');
+           }else{
+            $('#view-payment').text('View');
+           }
            $('#payment').toggleClass('open');
            $('.title-payment').toggleClass('open');
         });
 
         $('#view-additional').click(function() {
+           $('#view-additional').toggleClass('open');
+           if ($('#view-additional').hasClass('open')) {
+            $('#view-additional').text('Hide');
+           }else{
+            $('#view-additional').text('View');
+           }
            $('.woocommerce-additional-fields').toggleClass('open');
         });
     });
@@ -474,4 +501,20 @@ function custom_payment_heading_before_payment() {
     echo '</div>';
 }
 add_action('woocommerce_review_order_before_payment', 'custom_payment_heading_before_payment');
+
+function add_basket_info_and_view_button() {
+    // Get the number of items in the cart
+    $cart_count = WC()->cart->get_cart_contents_count();
+    // Get the cart URL
+    $cart_url = wc_get_cart_url();
+    $item_text = ($cart_count == 1) ? 'item' : 'items';
+
+    // Output the basket info and view button
+    echo '<div class="back-to-cart-mobile">';
+        echo '<p class="basket-info">Basket (<span class="basket-quantity">' . $cart_count . '</span> ' . $item_text . ')</p>';
+        echo '<a href="' . $cart_url . '" class="tertiary-button">View</a>';
+    echo '</div>';
+}
+
+add_action( 'woocommerce_before_checkout_form', 'add_basket_info_and_view_button', 10 );
 
