@@ -32,7 +32,7 @@
 	<div class="mobile-menu">
 		<div class="mobile-menu__scrollable">
 
-			<?php $arrow_svg = '<svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.999999 1L6.62037 7.5571C6.81992 7.78991 7.18008 7.78991 7.37963 7.5571L13 1" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></svg>'; ?>
+			<?php $arrow_svg = '<div class="svg-container"><svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.999999 1L6.62037 7.5571C6.81992 7.78991 7.18008 7.78991 7.37963 7.5571L13 1" stroke="#70B095" stroke-width="2" stroke-linecap="round"/></svg></div>'; ?>
 
 			<?php
 

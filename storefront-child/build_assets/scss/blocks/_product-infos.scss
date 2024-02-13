@@ -53,6 +53,9 @@
             align-items: center;
             justify-content: center;
             left: calc(50% - 16px);
+            &:hover {
+                background-color: $seaFoam;
+            }
         }
         p{
             color:#fff;

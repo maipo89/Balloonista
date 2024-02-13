@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     // Menu Mobile 
 
-    $('.menu-item-has-children svg').on('click', function(e) {
+    $('.menu-item-has-children .svg-container').on('click', function(e) {
         e.preventDefault();
         var $parentElement = $(this).closest('.menu-item-has-children');
 
@@ -614,8 +614,8 @@ $(document).ready(function() {
         // Add the class to the next slidex
         if (nextSlide > currentSlide) {
             // Remove the class from all slides
-            $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').addClass('width');
-            $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('width');
+                $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').addClass('width');
+                $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('width');
         }else{
             // var currentElement = $('.baloon-colums__swiper .slick-current');
             // var firstActive = document.querySelectorAll(".baloon-colums__swiper .slick-active")[0];
@@ -651,6 +651,40 @@ $(document).ready(function() {
         });
     });
 
+    $('.baloon-colums__no-slider__image').on('mouseenter', function() {
+        // Remove active class from all images
+        $('.baloon-colums__no-slider__image').removeClass('active');
+        // Add active class to hovered image
+        $(this).addClass('active');
+        var currentSlideIndex = $(this).data('index');
+        $('.baloon-colums__text__item').each(function() {
+            var dataIndex = $(this).data('index');
+            if (currentSlideIndex === dataIndex) {
+                $(this).show();
+            }else{
+                $(this).hide();
+            }
+        });
+        $('.baloon-colums__slider-container__top-title').each(function() {
+            var dataIndex = $(this).data('index');
+            if (currentSlideIndex === dataIndex) {
+                $(this).show();
+            }else{
+                $(this).hide();
+            }
+        });
+    })
+    $('.baloon-colums__no-slider').on('mouseleave', function() {
+        $('.baloon-colums__slider-container__top-title').hide();
+        $('.baloon-colums__slider-container__top-title[data-index="0"]').show();
+    });
+    $('.baloon-colums__slider-container').on('mouseleave', function() {
+        // Add active class to the first image on mouse leave
+        $('.baloon-colums__no-slider__image').removeClass('active');
+        $('.baloon-colums__no-slider__image:first-child').addClass('active');
+        $('.baloon-colums__text__item[data-index="0"]').show();
+    });
+
     $('.baloon-colums__slider__gallery').on('afterChange', function(event, slick, currentSlide){
         var slickCurrentIndex = currentSlide;
         
@@ -665,9 +699,19 @@ $(document).ready(function() {
             }
         });
 
-        if ($(window).width() < 758) {
+        if ($(window).width() <= 758) {
 
             $('.baloon-colums__title-mobile').each(function() {
+                var dataIndex = $(this).data('index');
+                
+                if (slickCurrentIndex === dataIndex) {
+                    $(this).show(); // Show the baloon-colums__text__item
+                } else {
+                    $(this).hide(); // Hide the baloon-colums__text__item if not matching
+                }
+            });
+
+            $('.baloon-colums__slider-container__top-title').each(function() {
                 var dataIndex = $(this).data('index');
                 
                 if (slickCurrentIndex === dataIndex) {
@@ -988,33 +1032,51 @@ if (!localStorage.getItem('cookiesAccepted')) {
 
 
     // Balloons Columns text hide or show
+    $(window).on('load', function() {
 
-    var slickCurrentIndex = $('.slick-current').data('slickIndex');
+        var slickCurrentIndex = $('.slick-current').data('slickIndex');
 
-    // Assuming baloon-colums__text__item has a common class, adjust the selector accordingly
-    $('.baloon-colums__text__item').each(function() {
-        var dataIndex = $(this).data('index');
-        
-        if (slickCurrentIndex === dataIndex) {
-            $(this).show(); // Show the baloon-colums__text__item
-        } else {
-            $(this).hide(); // Hide the baloon-colums__text__item if not matching
-        }
-    });
-
-    if ($(window).width() < 758) {
-
-        $('.baloon-colums__title-mobile').each(function() {
+        // Assuming baloon-colums__text__item has a common class, adjust the selector accordingly
+        $('.baloon-colums__text__item').each(function() {
             var dataIndex = $(this).data('index');
             
-            if (dataIndex === 0) {
+            if (slickCurrentIndex === dataIndex) {
                 $(this).show(); // Show the baloon-colums__text__item
             } else {
                 $(this).hide(); // Hide the baloon-colums__text__item if not matching
             }
         });
+    });
 
-    }
+    $(window).on('load', function() {
+        $('.baloon-colums__slider-container__top-title').each(function() {
+            var dataIndex = $(this).data('index');
+            var activeImageIndex = $('.baloon-colums__no-slider__image.active').data('index');
+            if (activeImageIndex === dataIndex) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
+    $(window).on('load resize', function() {
+
+        if ($(window).width() <= 758) {
+
+            $('.baloon-colums__title-mobile').each(function() {
+                var dataIndex = $(this).data('index');
+                
+                if (dataIndex === 0) {
+                    $(this).show(); // Show the baloon-colums__text__item
+                } else {
+                    $(this).hide(); // Hide the baloon-colums__text__item if not matching
+                }
+            });
+
+        }
+
+    });
     
     
 
@@ -1129,11 +1191,13 @@ if (!localStorage.getItem('cookiesAccepted')) {
     // Filter shop page
     
     $('.filter-button__button').on('click', function () {
+        $('.filter-button').addClass('open');
         $('.shop__container__buttons').toggleClass('open');
         $('.shadow').toggleClass('open');
     });
 
     $('.filter-button__filters svg').on('click', function () {
+        $('.filter-button').removeClass('open');
         $('.shop__container__buttons').removeClass('open');
         $('.shadow').removeClass('open');
     });

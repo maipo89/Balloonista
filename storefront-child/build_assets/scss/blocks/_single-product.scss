@@ -208,6 +208,7 @@
         line-height: normal;
         letter-spacing: -1.26px;
         margin-bottom: 15px;
+        width: 80%;
         @media (max-width: 930px) {
             display: none;
         }
@@ -406,6 +407,9 @@ div.product-addon-totals ul li{
 .stock.in-stock{
     display: none;
 }
+.reset_variations {
+    display: none !important;
+}
 .wc-pao-addon-container{
     margin-bottom: 32px;
 }
@@ -447,6 +451,7 @@ div.product-addon-totals ul li{
     width: 130px;
     height: 100px;
     border-radius: 16px;
+    border: 3px solid $seaFoam;
     overflow: hidden;
     @media (max-width: 975px) {
         margin-right: 5px;

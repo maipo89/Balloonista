@@ -54,10 +54,6 @@
                 padding: 15px 0 15px 0;
                 position: relative;
 
-                a {
-                    margin-left: 50px;
-                }
-
                 &::after {
                     content: '';
                     width: 100%;
@@ -95,14 +91,21 @@
                 a {
                     transition: font-weight 0.1s ease;
                 }
-
-                svg {
+                .svg-container {
+                    width: 40%;
+                    height: 100%;
+                    position: absolute;
                     display: block;
+                    right: 0;
+                    top: 0;
+                }
+                svg {
+                    transition: transform 0.3s ease;
+                    cursor: pointer;
                     position: absolute;
                     right: 0;
                     top: 24px;
-                    transition: transform 0.3s ease;
-                    cursor: pointer;
+                    display: block;
                 }
 
                 &.open {
@@ -329,7 +332,7 @@
                             display: block;
                             position: absolute;
                             height: fit-content;
-                            width: 171px;
+                            width: 178px;
                             top: 32px;
                             display: block;
                             left: 50%;
@@ -337,6 +340,20 @@
                             border-radius: 0px 0px 16px 16px;
                             padding: 8px;
                             background-color: $white;
+                            border: 3px solid $seaFoam;
+                            border-top: none;
+
+                            &::after {
+                                content: '';
+                                background-color: white;
+                                width: 178px;
+                                height: 30px;
+                                position: absolute;
+                                z-index: -1;
+                                top: 0;
+                                left: -3px;
+                            }
+                            
 
                             li {
 

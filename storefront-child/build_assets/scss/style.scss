@@ -266,6 +266,10 @@ input[type=checkbox]:checked {
     background-color: $seaFoam;
 }
 
+input[type=checkbox]:not(:checked) {
+    background-color: white !important;
+}
+
 input[type=checkbox]:before {
     content: "";
     position: absolute;
