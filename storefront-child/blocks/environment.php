@@ -30,7 +30,7 @@
             $title = get_sub_field('title');
             $text = get_sub_field('text');
             ?>
-            <!-- <div class="environment__text__option-mobile"> -->
+            <div class="environment__text-mobile__option-mobile">
                 <div class="environment__text-mobile__title">
                     <div class="environment__text-mobile__title__icon">
                         <img src="<?php echo($logo["sizes"]["onqor-large"]) ?>" alt="<?php echo esc_attr($logo['alt']); ?>" class="environment__text__option__image" />
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="environment__text-mobile__text"><p><?php echo $text ?></p></div>
-            <!-- </div> -->
+            </div>
         <?php endwhile; ?>
     </div>
     <?php endif; ?>

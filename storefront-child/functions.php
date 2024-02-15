@@ -229,6 +229,27 @@ add_filter('request', function( $vars ) {
 
 // CART HOOKS
 
+add_action( 'wp_print_scripts', 'custom_cart_script' );
+function custom_cart_script() {
+    if ( is_cart() ) {
+        ?>
+        <script type="text/javascript">
+            // Check if jQuery is loaded
+            if (typeof jQuery !== 'undefined') {
+                // jQuery is loaded, run your script
+                jQuery(function($){
+                    console.log('condolllllll');
+                });
+            } else {
+                // jQuery is not loaded, handle the error or load jQuery
+                console.error('jQuery is not loaded');
+            }
+        </script>
+        <?php
+    }
+}
+
+
 add_action('woocommerce_before_checkout_form', 'custom_content_before_checkout');
 
 function custom_content_before_checkout() {
@@ -361,6 +382,47 @@ function custom_display_products_in_cart_totals() {
 }
 
 add_action('woocommerce_before_cart_totals', 'custom_display_products_in_cart_totals');
+
+// Add variations after the price in the basket page
+function add_variations_after_price_in_basket( $item_data, $cart_item ) {
+    // Get the product ID
+    $product_id = $cart_item['product_id'];
+    
+    // Check if the product is a variation
+    if ( $cart_item['variation_id'] ) {
+        $product_id = $cart_item['variation_id'];
+    }
+    
+    // Get the product
+    $product = wc_get_product( $product_id );
+
+    // Check if the product is variable
+    if ( $product && $product->is_type( 'variable' ) ) {
+        // Get variations
+        $variations = $product->get_available_variations();
+
+        // Loop through variations
+        foreach ( $variations as $variation ) {
+            // Get variation attributes
+            $attributes = array();
+            foreach ( $variation['attributes'] as $key => $value ) {
+                $attributes[] = ucfirst( str_replace( 'attribute_', '', $key ) ) . ': ' . $value;
+            }
+
+            // Get variation price
+            $variation_price = wc_price( $variation['display_price'] );
+
+            // Add variation to item data
+            $item_data[] = array(
+                'key'     => __('Variation', 'woocommerce'),
+                'value'   => implode(', ', $attributes) . ' (' . $variation_price . ')'
+            );
+        }
+    }
+    return $item_data;
+}
+add_filter( 'woocommerce_get_item_data', 'add_variations_after_price_in_basket', 10, 2 );
+
 
 
 // CHECKOUT HOOKS

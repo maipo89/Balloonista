@@ -324,7 +324,7 @@ $(document).ready(function() {
     // Accordion Environment Block
 
     function initializeAccordion() {
-        $(".environment__text-mobile").accordion({
+        $(".environment__text-mobile__option-mobile").accordion({
             collapsible: true,
             active: false,
             heightStyle: 'content',
@@ -356,10 +356,26 @@ $(document).ready(function() {
         }
     });
 
-    $('#product_info').accordion({
-        collapsible: true,
-        active: false,
-        heightStyle: 'content',
+
+    // Accordion Product Infos
+
+    $(".product-infos__informations").each(function(index, element) {
+        if (index === 0) {
+            console.log(true)
+            $(element).accordion({
+                collapsible: true,
+                active: 0,
+                heightStyle: 'content'
+            });
+        }else{
+            console.log(false)
+            $(element).accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: 'content'
+            });
+        }
+
     });
 
     // Slider Clients
@@ -533,7 +549,6 @@ $(document).ready(function() {
             arrows: true,
             variableWidth: true,
             infinite: false,
-            waitForAnimate: true,
             cssEase: 'ease',
             nextArrow: '<svg class="next-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 24L19.3019 13.4266C19.6209 13.2317 19.6209 12.7683 19.3019 12.5734L2 2" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
             prevArrow: '<svg class="prev-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 2L2.69814 12.5734C2.37911 12.7683 2.37911 13.2317 2.69814 13.4266L20 24" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
@@ -600,9 +615,12 @@ $(document).ready(function() {
             // Check if the first visible slide's index matches the data-index of the corresponding baloon-colums__text__item
             var visibleSlideIndex = $('.baloon-colums__swiper__slide.slick-active').first().data('slick-index');
             $('.baloon-colums__text__item').each(function () {
+
                 var dataIndex = $(this).data('index');
+
                 if (visibleSlideIndex === dataIndex) {
                     $(this).show();
+                    console.log(true)
                 } else {
                     $(this).hide();
                 }
@@ -919,41 +937,40 @@ if (!localStorage.getItem('cookiesAccepted')) {
         })
     });
 
-    var getQuotes = gsap.utils.toArray(".get-a-quote");
+    // var getQuotes = gsap.utils.toArray(".get-a-quote");
 
-    getQuotes.forEach((block) => {
-        gsap.set(block, { opacity: 0, y: 50 });
-    });
+    // getQuotes.forEach((block) => {
+    //     gsap.set(block, { opacity: 1, y: 0 });
+    // });
 
-    getQuotes.forEach((block) => {
-        gsap.to(block, {
-            scrollTrigger: {
-                trigger: block,
-                start: "-250px center",
-                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
-                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
-                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
-            }
-        })
-    });
+    // getQuotes.forEach((block) => {
+    //     gsap.to(block, {
+    //         scrollTrigger: {
+    //             trigger: block,
+    //             start: "-250px center",
+    //             onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+    //             onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+    //         }
+    //     })
+    // });
 
-    var contactForms = gsap.utils.toArray(".contact-form");
+    // var contactForms = gsap.utils.toArray(".contact-form");
 
-    contactForms.forEach((block) => {
-        gsap.set(block, { opacity: 0, y: 50 });
-    });
+    // contactForms.forEach((block) => {
+    //     gsap.set(block, { opacity: 1, y: 50 });
+    // });
 
-    contactForms.forEach((block) => {
-        gsap.to(block, {
-            scrollTrigger: {
-                trigger: block,
-                start: "-200px center",
-                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
-                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
-                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
-            }
-        })
-    });
+    // contactForms.forEach((block) => {
+    //     gsap.to(block, {
+    //         scrollTrigger: {
+    //             trigger: block,
+    //             start: "-200px center",
+    //             onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+    //             onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+    //             onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+    //         }
+    //     })
+    // });
 
     var faqsBlock = gsap.utils.toArray(".faq");
 
@@ -1411,36 +1428,60 @@ if (!localStorage.getItem('cookiesAccepted')) {
         var sliderInitialized = slider.hasClass('slick-initialized');
         // Add your resize-dependent code here
         if (screenWidth < 1260) {
-            slider.slick('unslick');
-            if(numItems > 3) {
-                $('.global-featured-products__container').slick({
-                    infinite: true,
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    centerMode: true,
-                    variableWidth: true,
-                    dots: true,       
-                    arrows: false      
-                });
-            } else {
-                $('.global-featured-products__container').slick({
-                    infinite: true,
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    centerMode: true,
-                    variableWidth: true,
-                    dots: true,       
-                    arrows: false      
-                });
+            if (sliderInitialized) {
+                slider.slick('unslick');
+                if(numItems > 3) {
+                    $('.global-featured-products__container').slick({
+                        infinite: true,
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        variableWidth: true,
+                        dots: true,       
+                        arrows: false      
+                    });
+                } else {
+                    $('.global-featured-products__container').slick({
+                        infinite: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        variableWidth: true,
+                        dots: true,       
+                        arrows: false      
+                    });
+                }
+            }else{
+                if(numItems > 3) {
+                    $('.global-featured-products__container').slick({
+                        infinite: true,
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        variableWidth: true,
+                        dots: true,       
+                        arrows: false      
+                    });
+                } else {
+                    $('.global-featured-products__container').slick({
+                        infinite: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        variableWidth: true,
+                        dots: true,       
+                        arrows: false      
+                    });
+                }
             }
         } else {
-            if (sliderInitialized && numItems < 5) {
+            if (sliderInitialized && numItems <= 5) {
                 slider.slick('unslick');
             }
         }
     }, 250); // 250 milliseconds
     
-    $(window).resize(handleResize);
+    $(window).on('resize', handleResize);
 
     // Change Title Basket Checkout
 

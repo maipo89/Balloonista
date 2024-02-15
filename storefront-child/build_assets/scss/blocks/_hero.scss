@@ -32,8 +32,24 @@
             margin-bottom: 70px;
         }
 
+        &::before {
+            content: '';
+            display: block;
+            height: 98px;
+            width: 100%;
+            top: -98px;
+            left: 0;
+            background-color: $mercury;
+            position: absolute;
+
+            @media (max-width: 1024px) {
+                display: none;
+            }
+        }
+
         &__wrapper {
             max-width: 1400px;
+            position: relative;
             width: 100%;
             margin: 0 auto;
             padding: 0 40px;
@@ -113,11 +129,13 @@
                 margin-bottom: 28px;
                 color: #525354;
                 font-weight: 400;
+                width: 95%;
 
                     @media (max-width: 1000px) {
                         margin-bottom: 23px;
                         text-align: center;
                         white-space: initial;
+                        width: 100%;
                     }
 
                     @media (max-width: $tablet) {
@@ -243,7 +261,10 @@
             }
 
             @media (max-width: $mobile) {
-                height: auto;
+                height: 308px;
+            }
+            @media (max-width: $smaller-screen) {
+                height: 252px;
             }
             
             // &__image:nth-child(n+1) {
@@ -255,13 +276,12 @@
             //     display: block;
             // }
 
-            .slick-slide {
-                max-width: 100%;
-                max-height: 100%;
+            &__image {
+                width: 987px;
+                height: 842px;
+                background-size: cover;
+                background-position: center center;
                 border-radius: 40px 0px 0px 40px;
-                img {
-                    object-fit: cover;
-                }
                 // @media (max-width: 1600px) {
                 //     width: 842px;
                 // }
@@ -270,12 +290,12 @@
                     height: 640px;
                 }
                 @media (max-width: 1000px) {
-                    height: auto;
+                    height: 578px;
                     width: 810px;
                 }
                 @media (max-width: $tablet) {
                     width: 660px;
-                    height: auto;
+                    height: 476px;
                 }
                 @media (max-width: 680px) {
                     border-radius: 24px;
@@ -284,9 +304,12 @@
                 }
                 @media (max-width: 450px) {
                     width: initial;
-                    height: initial;
-                    padding-left: 5px;
-                    padding-right: 5px;
+                    height: 308px;
+                    margin-left: 5px;
+                    margin-right: 5px;
+                }
+                @media (max-width: $smaller-screen) {
+                    height: 252px;
                 }
             }
 
@@ -338,41 +361,53 @@
         &__image {
             background-position: center center;
             background-size: cover;
-            width: 954px;
-            height: 614px;
+            width: 987px;
+            height: 842px;
             position: absolute;
-            top: 145px;
+            bottom: -264px;
+            border-radius: 40px 0 0 40px;
             right: 0;
+            z-index: 1;
 
-            @media (max-width: 1800px) {
+            @media (max-width: 1980px) {
                 width: 50%;
-                border-radius: 40px 0 0 40px;
             }
 
             @media (max-width: 1280px) {
-                top: 230px;
-                width: 70%;
+                height: 640px;
+                bottom: -100px;
+            }
+
+            @media (max-width: 1281px) {
+                top: 150px;
+                bottom: unset;
             }
 
             @media (max-width: 1000px) {
-                height: 623px;
-                width: 90%;
-                top: 275px;
+                width: 80%;
+                height: 578px;
+                bottom: -60px;
+                top: initial;
+                position: relative !important;
             }
 
             @media (max-width: $tablet) {
-                height: 476px; 
-                top: 255px;
-                border-radius: 30px 0 0 30px;
+                position: relative !important;
+                width: 660px;
+                height: 476px;
+                border-radius: 30px;
             }
 
             @media (max-width: 680px) {
-                height: 308px;
                 top: 40px;
-                width: 90%;
                 position: relative;
                 margin: 0 auto;
                 border-radius: 20px;
+                width: 90%;
+            }
+
+            @media (max-width: $mobile) {
+                height: 308px;
             }
 
             @media (max-width: $smaller-screen) {
@@ -457,21 +492,23 @@
                 }
     
                 @media (max-width: $mobile) {
-                    height: auto;
+                    height: 308px;
                 }
 
                 .slick-slide {
+                    width: 954px;
+                    height: 614px;
                     @media (max-width: 1300px) {
                         width: 690px;
-                        height: 540px;
+                        height: 541px;
                     }
                     @media (max-width: 1000px) {
-                        height: auto;
+                        height: 578px;
                         width: 900px;
                     }
                     @media (max-width: $tablet) {
                         width: 750px;
-                        height: auto;
+                        height: 476px;
                     }
                     @media (max-width: 680px) {
                         border-radius: 24px;
@@ -480,9 +517,9 @@
                     }
                     @media (max-width: 450px) {
                         width: initial;
-                        height: initial;
-                        padding-left: 5px;
-                        padding-right: 5px;
+                        height: 308px;
+                        margin-left: 5px;
+                        margin-right: 5px;
                     }
                 }
 
@@ -494,6 +531,56 @@
                     transform: translate(-50%, -50%);
                 }
             }
+
+            .hero__image {
+                width: 954px;
+                height: 614px;
+                position: absolute;
+                bottom: initial;
+                top: 130px;
+                border-radius: 40px 0 0 40px;
+                right: 0;
+                z-index: 1;
+    
+                @media (max-width: 1800px) {
+                    width: 50%;
+                }
+    
+                @media (max-width: 1300px) {
+                    height: 541px;
+                }
+    
+                @media (max-width: 1000px) {
+                    width: 80%;
+                    height: 578px;
+                    position: relative !important;
+                    bottom: -60px;
+                    top: initial;
+                }
+    
+                @media (max-width: $tablet) {
+                    position: relative !important;
+                    width: 660px;
+                    height: 476px;
+                    border-radius: 30px;
+                }
+    
+                @media (max-width: 680px) {
+                    position: relative !important;
+                    margin: 0 auto;
+                    width: 90%;
+                    border-radius: 24px;
+                }
+    
+                @media (max-width: $mobile) {
+                    height: 308px;
+                }
+    
+                @media (max-width: $smaller-screen) {
+                    height: 252px;
+                }
+            }
+    
         }
 
         &.blog-pages {
@@ -784,7 +871,7 @@
             height: fit-content;
             width: 224px;
             margin-bottom: 32px;
-            margin: 0 8px;
+            margin: 0 8px 32px 0;
 
             @media (max-width: 1400px) {
                 width: 45%;

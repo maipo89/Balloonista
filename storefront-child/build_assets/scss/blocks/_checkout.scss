@@ -143,6 +143,12 @@ textarea#order_comments {
     font-family: $montserrat !important;
     background-color: $seaFoam !important;
     margin-top: 32px;
+    &:hover {
+        background-color: $mercury !important;
+    }
+    &:focus {
+        outline: none !important;
+    }
     @media (max-width: 900px) {
         width: 150px;
     }
@@ -402,13 +408,13 @@ p.custom-payment-infos {
 }
 .cart_item .variation {
     dt, dd {
-        display: none;
+        display: block;
     }
     .variation-Extras {
         display: block;
     }
     dt.variation-Extras {
-        display: none;
+        display: block;
     }
 }
 table.woocommerce-checkout-review-order-table {

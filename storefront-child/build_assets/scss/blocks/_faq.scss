@@ -28,6 +28,10 @@
     }
     &__text {
 
+        &__container {
+            margin-bottom: 24px;
+        }
+
         &__title {
             &.ui-accordion-header {
                 padding: 0;
@@ -40,7 +44,7 @@
                 border-radius: 10px;
                 padding: 16px;
                 background-color: $light-mercury !important;
-                margin-bottom: 24px;
+                // margin-bottom: 24px;
 
                 p {
                     font-weight: 500 !important;
@@ -95,7 +99,7 @@
                 opacity: 1 !important;
                 transition: opacity 0.3s ease-in;
                 background-color: $light-mercury;
-                margin-bottom: 24px;
+                // margin-bottom: 24px;
                 border-radius: 0 0 10px 10px;
             }
         }

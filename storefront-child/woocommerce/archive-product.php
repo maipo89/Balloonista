@@ -142,7 +142,7 @@ get_header( 'shop' );
         $product_categories = get_terms(array(
             'taxonomy'   => 'product_cat',
             'hide_empty' => false, // Keep empty categories visible
-            'orderby' => 'term_id'
+            'orderby'    => 'terms_id',
         ));
     ?>
     <?php

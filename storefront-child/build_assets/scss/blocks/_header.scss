@@ -5,8 +5,11 @@
     align-items: center;
     position: fixed;
     z-index: 97;
-    background-color: $white;
+    background-color: $mercury;
     border-bottom: 1px solid transparent;
+    @media (max-width: 1024px) {
+        background-color: white;
+    }
 
     &.menu-mobile {
         border-bottom: 1px solid #f3f3f3;
@@ -170,7 +173,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: white;
+        background-color: $mercury;
         max-width: 1400px;
         width: 100%;
         margin: 0 auto;
@@ -178,6 +181,10 @@
 
         @media (max-width: $desktop) {
             padding: 0 32px;
+        }
+
+        @media (max-width: 1024px) {
+            background-color: white;
         }
 
         @media (max-width: $mobile) {
@@ -236,6 +243,11 @@
 
             svg {
                 cursor: pointer;
+                &:hover {
+                    path {
+                       fill: $seaFoam;
+                    }
+                }
             }
             p{
                 position: absolute;
@@ -272,7 +284,7 @@
 
                 li {
                     font-size: $p-regular;
-                    margin-right: 47px;
+                    margin-right: 3px;
                     position: relative;
 
                     a {
@@ -281,24 +293,36 @@
                         text-decoration: none;
                         font-family: $montserrat;
                         font-weight: $p-regular-weight;
+                        padding: 10px 22px;
+                        @media (max-width: 1092px) {
+                            padding: 10px 16px;
+                        }
+                        &:hover {
+                            background-color: white;
+                            padding: 10px 22px;
+                            border-radius: 12px;
+                            @media (max-width: 1092px) {
+                                padding: 10px 16px;
+                            }
+                        }
                     }
 
                     &:last-child {
                         margin-right: 0;
                     }
 
-                    &:hover {
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            top: 22px;
-                            background-color: $seaFoam;
-                            width: 100%;
-                            height: 4px;
-                            display: block;
-                            border-radius: 16px;
-                        }
-                    }
+                    // &:hover {
+                    //     &::after {
+                    //         content: '';
+                    //         position: absolute;
+                    //         top: 22px;
+                    //         background-color: $seaFoam;
+                    //         width: 100%;
+                    //         height: 4px;
+                    //         display: block;
+                    //         border-radius: 16px;
+                    //     }
+                    // }
 
                     .sub-menu {
                         display: none;
@@ -308,11 +332,12 @@
                             width: 100%;
                             display: flex;
                             justify-content: center;
-                            padding: 6px 0 6px 0;
+                            padding: 6px 20px;
                             border-radius: 8px;
 
                             &:hover {
                                 background-color: $mercury;
+                                padding: 6px 20px;
                             }
 
                             a {
@@ -320,6 +345,11 @@
                                 font-weight: $p-ligth-weight;
                                 color: $black;
                                 align-items: center;
+                                padding: 0;
+                                &:hover {
+                                    background-color: initial;
+                                    padding: 0;
+                                }
                             }
                         }
                     }
@@ -327,50 +357,44 @@
 
                 .menu-item-has-children {
                     &:hover {
-
+                        a {
+                            background-color: white;
+                            border-radius: 12px;
+                        }
                         .sub-menu {
                             display: block;
                             position: absolute;
                             height: fit-content;
-                            width: 178px;
-                            top: 32px;
+                            width: 220px;
+                            top: 40px;
                             display: block;
                             left: 50%;
                             transform: translate(-50%, 0);
-                            border-radius: 0px 0px 16px 16px;
+                            border-radius: 16px;
                             padding: 8px;
                             background-color: $white;
-                            border: 3px solid $seaFoam;
-                            border-top: none;
-
-                            &::after {
-                                content: '';
-                                background-color: white;
-                                width: 178px;
-                                height: 30px;
-                                position: absolute;
-                                z-index: -1;
-                                top: 0;
-                                left: -3px;
+                            border: 3px solid $mercury;
+                            a {
+                                background-color: initial;
                             }
-                            
-
-                            li {
-
-                                &:hover {
-                                    &::after {
-                                        display: none;
-                                    }
-                                }
-                            }
+                            // &::after {
+                            //     content: '';
+                            //     background-color: white;
+                            //     width: 178px;
+                            //     height: 30px;
+                            //     position: absolute;
+                            //     z-index: -1;
+                            //     top: 0;
+                            //     left: -3px;
+                            // }
 
                             &::before {
-                                content: '';
-                                height: 15px;
-                                width: 171px;
+                                content: "";
+                                height: 20px;
+                                width: 100%;
                                 display: block;
                                 position: absolute;
-                                top: -15px;
+                                top: -22px;
                             }
                         }
 

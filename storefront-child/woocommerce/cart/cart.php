@@ -95,6 +95,8 @@ do_action( 'woocommerce_before_cart' ); ?>
 										echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', sprintf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $_product->get_name() ), $cart_item, $cart_item_key ) );
 									}
 
+									
+
 									do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
 									
 									echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); 
@@ -186,8 +188,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 		<?php do_action( 'woocommerce_after_cart_table' ); ?>
 	</form>
 
-	<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
-
 	<div class="cart-collaterals">
 		<?php
 			/**
@@ -201,4 +201,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 	</div>
 
 	<?php do_action( 'woocommerce_after_cart' ); ?>
+
 </div>
+<?php include get_stylesheet_directory() . '/flexibleBlocks.php'; ?>
+<?php get_footer(); ?> <!-- Include footer here -->

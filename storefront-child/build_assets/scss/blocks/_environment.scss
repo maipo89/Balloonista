@@ -85,7 +85,7 @@
                         border-radius: 10px;
                         padding: 16px;
                         background-color: $light-mercury !important;
-                        margin-bottom: 24px;
+                        // margin-bottom: 24px;
 
                         &:focus {
                             outline: none !important;
@@ -120,6 +120,10 @@
                     }
                 }
 
+                &__option-mobile {
+                    margin-bottom: 24px;
+                }
+
                 .ui-accordion-header-icon {
                     display: none;
                 }
@@ -140,7 +144,7 @@
                         opacity: 1 !important;
                         transition: opacity 0.3s ease-in;
                         background-color: $light-mercury;
-                        margin-bottom: 24px;
+                        // margin-bottom: 24px;
                         border-radius: 0 0 10px 10px;
                     }
                 }

@@ -18,12 +18,12 @@
 <?php $buttonLinkProducts = get_sub_field('button_link_products'); ?>
 
 <div class="hero__container">
-    <div class="hero <?php echo($featuredProducts? '' : 'child-pages')?> <?php echo($blogPage ? 'blog-pages' : '')?>">
+    <div class="hero <?php echo($featuredProducts ? '' : 'child-pages')?> <?php echo($blogPage ? 'blog-pages' : '')?>">
         <div class="hero__wrapper">
             <?php if($breadcrumb): ?>
                 <div class="hero__wrapper__breadcrumb">
                     <a href="<?php echo get_home_url(); ?>">Home</a>
-                    <a href="<?php echo get_home_url(); ?>/shop">Shop</a>
+                    <a href="<?php echo get_home_url(); ?>/blogs">Blogs</a>
                     <p><?php echo $title ?></p>
                 </div>
             <?php 
@@ -54,17 +54,22 @@
             ?>
         </div>
         <!-- <div class="hero__space"></div> -->
-        <?php if( have_rows('gallery') ): ?>
-            <div class="hero__gallery">
-                <?php 
-                while( have_rows('gallery') ) : the_row();
-                $image = get_sub_field('image');
-                ?>
-                    <img class="hero__gallery__image" src="<?php echo($image["sizes"]["onqor-large"]) ?>" alt="<?php echo($image["alt"]) ?>"/>
-                <?php 
-                endwhile;
-                ?>
-            </div>
+        <?php if( !$staticImage ): ?>
+            <?php if( have_rows('gallery') ): ?>
+                <div class="hero__gallery">
+                    <?php 
+                    while( have_rows('gallery') ) : the_row();
+                    $image = get_sub_field('image');
+                    ?>
+                        <div class="hero__gallery__image" style="background-image: url(<?php echo($image["sizes"]["onqor-large"]) ?>)">
+                        </div>
+                    <?php 
+                    endwhile;
+                    ?>
+                </div>
+            <?php 
+            endif;
+            ?>
         <?php 
         endif;
         ?>
