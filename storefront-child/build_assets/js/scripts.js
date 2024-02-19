@@ -991,23 +991,23 @@ if (!localStorage.getItem('cookiesAccepted')) {
         })
     });
 
-    var titleParagraphs = gsap.utils.toArray(".title-paragraph");
+    // var titleParagraphs = gsap.utils.toArray(".title-paragraph");
 
-    titleParagraphs.forEach((block) => {
-        gsap.set(block, { opacity: 0, y: 50 });
-    });
+    // titleParagraphs.forEach((block) => {
+    //     gsap.set(block, { opacity: 0, y: 50 });
+    // });
 
-    titleParagraphs.forEach((block) => {
-        gsap.to(block, {
-            scrollTrigger: {
-                trigger: block,
-                start: "-200px center",
-                onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
-                onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
-                onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
-            }
-        })
-    });
+    // titleParagraphs.forEach((block) => {
+    //     gsap.to(block, {
+    //         scrollTrigger: {
+    //             trigger: block,
+    //             start: "-200px center",
+    //             onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+    //             onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
+    //             onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
+    //         }
+    //     })
+    // });
 
 
     var ProductTestimonial = gsap.utils.toArray(".featured-products__testimonial");

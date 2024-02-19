@@ -229,7 +229,7 @@ add_filter('request', function( $vars ) {
 
 // CART HOOKS
 
-add_action( 'wp_print_scripts', 'custom_cart_script' );
+add_action( 'wp_footer', 'custom_cart_script' );
 function custom_cart_script() {
     if ( is_cart() ) {
         ?>
@@ -238,7 +238,34 @@ function custom_cart_script() {
             if (typeof jQuery !== 'undefined') {
                 // jQuery is loaded, run your script
                 jQuery(function($){
-                    console.log('condolllllll');
+                    $('.onqor-product-detials .variation dt').each(function() {
+                        // Creating a div element for wrapping
+                        var wrapper = $('<div class="variation-item"></div>');
+                        
+                        // Moving the dt and its sibling dd into the wrapper
+                        $(this).nextUntil('.onqor-product-detials .variation dt').addBack().wrapAll(wrapper);
+                    });
+                    $('.variation-item dt').each(function() {
+                        // Get the text content of the dt element
+                        var text = $(this).text();
+                        // Remove the last character
+                        var newText = text.slice(0, -1);
+                        // Set the updated text content
+                        $(this).text(newText);
+                    });
+                    $('.onqor-product-detials .product-name a').wrap('<div class="title-container"></div>');
+                    $('.variation-item dt').each(function() {
+                        // Get the text content of the dt element
+                        var text = $(this).text().trim();
+                        console.log(text)
+                        // Capitalize the first letter
+                        var newText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+                        console.log(newText)
+
+                        // Set the updated text content
+                        $(this).text(newText);
+                    });
+
                 });
             } else {
                 // jQuery is not loaded, handle the error or load jQuery
@@ -338,12 +365,6 @@ function custom_content_after_proceed_to_checkout() {
     echo '<img src="' . esc_url(get_stylesheet_directory_uri() . '/assets/images/credit-cards/maestro.svg') . '" alt="Maestro">';
     // Add more credit card images as needed
     echo '</div>';
-
-    // Add "Edit Basket" button
-    echo '<div class="edit-basket-container"><a href="' . esc_url(wc_get_shop_url()) . '" class="button">Edit Basket</a></div>';
-
-    // Add additional content
-    echo '<p>Your additional content after the "Proceed to Checkout" button.</p>';
 }
 
 add_action('woocommerce_after_cart_totals', 'custom_content_after_proceed_to_checkout');

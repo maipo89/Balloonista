@@ -660,10 +660,11 @@
 
 .baloon-colums__slider-clients {
     &__wrapper {
-        height: 40px;
+        height: 90px;
         width: 100%;
         position: relative;
         overflow: hidden;
+        bottom: 20px;
     }
     &__inner {
         position: relative;

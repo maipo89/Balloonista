@@ -515,8 +515,9 @@ div.product-addon-totals ul li{
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.32px;
+    transition: 0.25s;
     &:hover {
-        background-color: $mercury !important;
+        box-shadow: inset 0 0 0 2em $mercury !important;
     }
     &:focus {
         outline: none !important;
@@ -692,9 +693,6 @@ div.product-addon-totals ul li{
             width: 45%;
             height: 275px;
         }
-        @media (max-width: 630px) {
-            width: 70%;
-        }
         @media (max-width: 450px) {
             width: 30%;
             height: 128px;
@@ -719,22 +717,16 @@ div.product-addon-totals ul li{
         .variation {
             display: flex;
             flex-wrap: wrap;
+            position: relative;
+            .variation-item {
+                display: flex;
+                flex-wrap: wrap;
+            }
             dt {
                 width: fit-content;
                 position: relative;
-                text-transform: lowercase;
                 font-size: 16px;
                 margin-right: 5px;
-            }
-            dt::after {
-                content: '';
-                position: absolute;
-                display: block;
-                width: 2px;
-                height: 100%;
-                top: 0;
-                right: 0;
-                background-color: white;
             }
             dd {
                 margin-right: 20px;
@@ -749,6 +741,17 @@ div.product-addon-totals ul li{
     .onqor-product-detials{
         position: relative;
         width: 65%;
+        @media (max-width: 450px) {
+            width: 100%;
+        }
+    }
+    .product-name .title-container {
+        @media (max-width: 450px) {
+            position: absolute;
+            top: -124px;
+            right: 46px;
+            width: 51%;
+        }
     }
     .product-name a{
         color: #000;
@@ -763,6 +766,10 @@ div.product-addon-totals ul li{
         @media (max-width: 1060px) {
             font-size: 22px;
         }
+        @media (max-width: 450px) {
+            font-size: 19px;
+            height: 200px !important;
+        }
     }
     .product-name span {
         font-size: 16px;
@@ -771,6 +778,10 @@ div.product-addon-totals ul li{
         font-family: $montserrat;
         @media (max-width: 1024px) {
             margin-top: 15px;
+        }
+        @media (max-width: 1024px) {
+            margin-top: 0;
+            padding-top: 10px;
         }
     }
     // .shop_table tbody{
@@ -788,6 +799,11 @@ div.product-addon-totals ul li{
         top:0px;
         width: 30px;
         height: 30px;
+        @media (max-width: 450px) {
+            top: -131px;
+            width: 30px;
+            height: 30px;
+        }
     }
     tbody{
         position: relative;
@@ -917,6 +933,12 @@ div.product-addon-totals ul li{
                     font-weight: 400;
                     width: 100%;
                     left: 0;
+                    @media (max-width: 1060px) {
+                        font-size: 16px;
+                        left: 40px;
+                        top: 16px;
+                        width: 200px;
+                    }
                 }
             }
         }
@@ -940,6 +962,11 @@ div.product-addon-totals ul li{
         }
         .hentry .entry-content a.button {
             margin-top: 10px;
+            transition: 0.25s;
+            &:hover {
+                box-shadow: inset 0 0 0 2em $white !important;
+                color: $seaFoam;
+            }
         }
         h2, .le-form {
             display: none;
@@ -1009,7 +1036,7 @@ div.product-addon-totals ul li{
         }
         .order-total th {
             @media (max-width: 1060px) {
-                width: 60%;
+                width: 210px;
                 background-color: white !important;
                 font-size: 16px;
                 font-weight: 400;
@@ -1042,6 +1069,15 @@ div.product-addon-totals ul li{
                 margin-right: 40px;
                 position: relative;
                 bottom: 10px;
+                .order-total {
+                    td {
+                        padding: 16px 0 12px 0;
+                    }
+                }
+            }
+            @media (max-width: 640px) {
+                margin-right: 20px;
+                bottom: 0px;
             }
             @media (max-width: 555px) {
                 width: initial;
@@ -1080,6 +1116,10 @@ div.product-addon-totals ul li{
                     top: initial;
                     right: initial;
                 }
+                &:hover {
+                    text-decoration: underline;
+                    text-underline-offset: 5px;
+                }
             }
         }
         .credit-card-images {
@@ -1096,6 +1136,9 @@ div.product-addon-totals ul li{
             @media (max-width: 1090px) {
                 width: 82%;
             }
+            @media (max-width: 640px) {
+                padding-top: 60px;
+            }
             @media (max-width: 555px) {
                 padding-top: 35px;
                 width: 60%;
@@ -1106,10 +1149,10 @@ div.product-addon-totals ul li{
             }
             @media (max-width: 450px) {
                 padding-top: 35px;
-                width: 60%;
+                width: 100%;
             }
             @media (max-width: 375px) {
-                width: 65%;
+                width: 100%;
             }
             img {
                 width: 45px;
@@ -1161,6 +1204,40 @@ div.product-addon-totals ul li{
     flex-direction: row;
     width: 100%;
     margin-bottom: 20px;
+    @media (max-width: 450px) {
+        position: relative;
+        display: block;
+    }
+}
+
+.woocommerce-cart .content-area {
+    margin-bottom: 0;
+}
+
+.woocommerce-cart .hentry {
+    margin-bottom: 0;
+}
+
+.woocommerce-cart .site-main {
+    margin-bottom: 0;
+}
+
+.woocommerce-cart .woocommerce {
+    padding-bottom: 67px;
+    @media (max-width: 1024px) {
+        padding-bottom: 70px;
+    }
+    @media (max-width: 768px) {
+        padding-bottom: 32px;
+    }
+}
+.woocommerce-cart {
+    .delivery-banner {
+        margin-top: 29px;
+        @media (max-width: 768px) {
+            margin-top: 64px;
+        }
+    }
 }
 
 .woocommerce-cart-form {

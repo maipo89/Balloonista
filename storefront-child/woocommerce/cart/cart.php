@@ -24,7 +24,7 @@ do_action( 'woocommerce_before_cart' ); ?>
     <?php $cart_total_excluding_delivery = WC()->cart->get_cart_contents_total(); ?>
     
     <div class="cart-total-excluding-delivery">
-       <p>Total (excluding delivery): <?php echo wc_price($cart_total_excluding_delivery); ?></p>
+       <p>Total (Excluding delivery): <?php echo wc_price($cart_total_excluding_delivery); ?></p>
     </div>
 
     <div class="proceed-to-checkout-button">
