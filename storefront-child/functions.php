@@ -28,6 +28,11 @@ function my_child_theme_enqueue_styles() {
             wp_get_theme()->get('Version'),
             true // Set to true to load the script in the footer
         );
+        wp_localize_script('storefront-child-script', 'wc_cart_params', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'security' => wp_create_nonce('update-cart-item-quantity'),
+            // You can add other parameters here as needed
+        ));
     }
 }
 add_action( 'wp_enqueue_scripts', 'my_child_theme_enqueue_styles' );
@@ -473,6 +478,7 @@ function custom_checkout_script( ){
         $('.orddd-checkout-fields').before(deliveryAccordion);
 
         var additionalAccordion = $('<div class="additional-accordion"><h3>Additional option</h3><p id="view-additional">View</p></div>');
+        
         $('.woocommerce-additional-fields').before(additionalAccordion);
 
         $('#view-delivery').click(function() {
@@ -506,7 +512,10 @@ function custom_checkout_script( ){
            }
            $('.woocommerce-additional-fields').toggleClass('open');
         });
+        
+
     });
+
     </script>
     <?php
 }
@@ -599,5 +608,30 @@ function add_basket_info_and_view_button() {
     echo '</div>';
 }
 
+add_action('wp_ajax_update_cart_item_quantity', 'update_cart_item_quantity');
+add_action('wp_ajax_nopriv_update_cart_item_quantity', 'update_cart_item_quantity');
+
+function update_cart_item_quantity() {
+    check_ajax_referer('update-cart-item-quantity', 'security');
+
+    $cart_item_key = sanitize_text_field($_POST['cart_item_key']);
+    $quantity = intval($_POST['quantity']);
+
+    if ($cart_item_key && $quantity >= 0) {
+        WC()->cart->set_quantity($cart_item_key, $quantity, false);
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false]);
+    }
+
+    wp_die(); // to avoid 0 in the response
+}
+
 add_action( 'woocommerce_before_checkout_form', 'add_basket_info_and_view_button', 10 );
 
+// function my_enqueue_scripts() {
+//     if (is_cart() || is_checkout()) {
+//         wp_enqueue_script('jquery-blockui', 'path_to_jquery_blockui.js', array('jquery'), '1', true);
+//     }
+// }
+// add_action('wp_enqueue_scripts', 'my_enqueue_scripts');

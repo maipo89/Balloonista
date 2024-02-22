@@ -536,7 +536,7 @@ div.product-addon-totals ul li{
     display: flex;
     align-items: center;
 }
-.quantity{
+.single_variation_wrap .quantity{
     display: none !important;
 }
 
@@ -1260,6 +1260,23 @@ div.product-addon-totals ul li{
 
 .woocommerce-checkout .StripeElement {
     width: 100%;
+}
+
+// .woocommerce-cart-form__cart-item .quantity{
+ 
+// }
+.title-billing-address h3, .title-delivery-address h3, .woocommerce-additional-fields h3, .title-payment h3{
+    display: none !important;
+}
+// .woocommerce-cart-form button{
+//     display: none;
+// }
+.return-to-shop {
+    text-align: center;
+    height: 45vh;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 @media only screen and (max-width: 1200px){

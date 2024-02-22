@@ -1513,7 +1513,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
     });
 
     // Hero text overflowing
-
+    
     $(window).on('resize load', function() {
         if ($(window).width() > 1000) {
             if ($('.hero').hasClass('child-pages')) {
@@ -1550,6 +1550,29 @@ if (!localStorage.getItem('cookiesAccepted')) {
             $('.hero__wrapper').css('padding-bottom', '0px');
         }
     });
+    $(document).on('change', 'input.qty', function() {
+        var item_key = $(this).closest('.woocommerce-cart-form__cart-item').data('cart_item_key');
+        var quantity = $(this).val();
 
-
+        $.ajax({
+            type: 'POST',
+            url: wc_cart_params.ajax_url,
+            data: {
+                action: 'update_cart_item_quantity',
+                cart_item_key: item_key,
+                quantity: quantity,
+                security: '<?php echo wp_create_nonce("update-cart-item-quantity"); ?>'
+            },
+            success: function(response) {
+                if (response && response.success) {
+                    // Refresh the page to show updated totals
+                    window.location.reload();
+                }
+            },
+            error: function(error){
+                // alert(response);
+                console.log('response', error);
+            }
+        });
+    });
 });
