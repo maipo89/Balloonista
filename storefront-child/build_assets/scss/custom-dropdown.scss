@@ -152,7 +152,11 @@
     visibility: visible;
     pointer-events: all;
     max-height: 500px;
-    transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
+    transition: max-height 0.5s ease-in-out;
+    span{
+        opacity: 1.0;
+        transition: opacity 0.5s 0.3s;
+    }   
 }
 
 .select .custom-options {
@@ -160,6 +164,9 @@
     visibility: hidden;
     pointer-events: none;
     max-height: 1px;
+    span{
+        opacity: 0.0;
+    }
 }
 
 .select.open .select__trigger {

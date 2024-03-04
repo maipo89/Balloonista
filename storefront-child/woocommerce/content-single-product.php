@@ -76,9 +76,7 @@ if ( post_password_required() ) {
 							</div>
 						<?php
 						}
-					} else {
-						echo 'No terms found for this product.';
-					}
+					} 
 				?>
 			</div>
 			<div class="product-image__feature-slider">

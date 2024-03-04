@@ -28,11 +28,6 @@
         z-index: 96;
         bottom: 0;
         transition: left 0.3s ease;
-
-        &.open {
-            left: 0px;
-        }
-
         &__scrollable {
             overflow-y: auto;
             height: calc(100vh - 196px);
@@ -167,6 +162,22 @@
                 padding: 15px 16px;
             }
         }
+        &__overlay{
+            height: 100vh;
+            width: calc(100vw - 280px);
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 0px;
+        }
+        &.open {
+            left: 0px;
+            .mobile-menu__overlay{
+                left: 280px;
+                cursor: pointer;
+                pointer-events: all;
+            }
+        }
     }
 
     &__wrapper {
@@ -215,7 +226,7 @@
                         cursor: pointer;
                         display: block;
                         position: relative;
-                        bottom: 5px;
+                        bottom: 0px;
                     }
                 }
             }
@@ -417,10 +428,14 @@
         bottom: 0;
         right: 0;
         left: 0;
-        display: none;
+        pointer-events: none;
+        opacity: 0.0;
 
         &.open {
             display: block;
+            opacity: .8;
+            pointer-events: all;
+            transition: opacity 0.7s;
         }
     }
 
@@ -430,12 +445,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 99;
-        display: none;
-
+        pointer-events: none;
+        opacity: 0.0;
         &.open {
             display: block;
+            opacity: 1;
+            pointer-events: all;
+            transition: opacity 0.7s;
         }
-
         p {
             text-align: center;
             font-size: 22px;

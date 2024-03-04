@@ -47,6 +47,7 @@
 			?>
 			<a class="search-option">Search</a>
 		</div>
+		<div class="mobile-menu__overlay"></div>
 	</div>
 
 	<div class="header__wrapper">

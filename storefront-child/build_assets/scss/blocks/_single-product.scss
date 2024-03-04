@@ -218,7 +218,7 @@
     display: flex;
     flex-direction: row;
     gap: 22px;
-    margin-top: 72px;
+    margin-top: 40px;
     @media (max-width: 930px) {
         margin-top: 40px;
     }
@@ -374,6 +374,18 @@ div.product-addon-totals ul li{
 .wc-pao-addon-image-swatch-select{
     display: none !important;
 }
+.form-row.woocommerce-invalid input {
+    box-shadow: none !important;
+    border: solid 2px #e2401c !important;
+}
+input[type="tel"]:focus,input[type="email"]:focus{
+    outline-color:#70b095 !important;
+}
+.woocommerce-error{
+    width: 50%;
+    display: none !important;
+    position: absolute !important;
+}
 .variations.active{
     display: flex !important;
     flex-direction: row;
@@ -390,9 +402,26 @@ div.product-addon-totals ul li{
     }
     tr{
         padding: 0 10px;
-        width: 50%;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    td{
+        position: relative;
+        &:after{
+            content: "";
+            position: absolute;
+            right: 12px;
+            width: 12px;
+            height: 20px;
+            top: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-image: url('../../assets/images/UI/chevron.svg');
+        }
     }
     select{
+        appearance: none;
         max-width: 100% !important;
         height: 42px;
         width: 100%;
@@ -409,6 +438,7 @@ div.product-addon-totals ul li{
         font-weight: 400;
         line-height: 20px; /* 125% */
         letter-spacing: -0.64px;
+        position: relative;
         &:focus-visible {
             outline: none !important;
         }
@@ -523,8 +553,19 @@ div.product-addon-totals ul li{
         outline: none !important;
     }
 }
-.woocommerce-variation {
-    display: none !important;
+.woocommerce-variation .woocommerce-Price-amount bdi{
+    display: flex;
+    justify-content: center;
+    &:before{
+        content:'Total:';
+        display: block;
+        position: relative;
+        width: min-content;
+    }
+}
+.woocommerce-variation-description{
+    max-width: 456px;
+    margin: 0 auto;
 }
 .woocommerce-variation-add-to-cart{
     margin: 0 auto; 
@@ -1232,8 +1273,11 @@ div.product-addon-totals ul li{
     }
 }
 .woocommerce-cart {
+    .woocommerce{
+        padding-bottom: 0px !important;
+    }
     .delivery-banner {
-        margin-top: 29px;
+        margin-top: 0px !important;
         @media (max-width: 768px) {
             margin-top: 64px;
         }

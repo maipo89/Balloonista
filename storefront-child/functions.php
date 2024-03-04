@@ -28,10 +28,9 @@ function my_child_theme_enqueue_styles() {
             wp_get_theme()->get('Version'),
             true // Set to true to load the script in the footer
         );
-        wp_localize_script('storefront-child-script', 'wc_cart_params', array(
+        wp_localize_script( 'custom-qty', 'wc_cart_params', array(
             'ajax_url' => admin_url('admin-ajax.php'),
-            'security' => wp_create_nonce('update-cart-item-quantity'),
-            // You can add other parameters here as needed
+            'update_cart_nonce' => wp_create_nonce('update-cart')
         ));
     }
 }
@@ -279,6 +278,7 @@ function custom_cart_script() {
         </script>
         <?php
     }
+    
 }
 
 
@@ -520,6 +520,12 @@ function custom_checkout_script( ){
     <?php
 }
 
+add_filter('woocommerce_add_to_cart_redirect', 'redirect_to_cart_after_add_to_cart');
+function redirect_to_cart_after_add_to_cart() {
+    return wc_get_cart_url();
+}
+
+
 function add_content_before_billing_fields() {
     echo '<div class="billing-address-accordion">';
         echo '<h3>Billing details</h3>';
@@ -611,23 +617,23 @@ function add_basket_info_and_view_button() {
 add_action('wp_ajax_update_cart_item_quantity', 'update_cart_item_quantity');
 add_action('wp_ajax_nopriv_update_cart_item_quantity', 'update_cart_item_quantity');
 
-function update_cart_item_quantity() {
-    check_ajax_referer('update-cart-item-quantity', 'security');
+// function update_cart_item_quantity() {
+//     check_ajax_referer('update-cart-item-quantity', 'security');
 
-    $cart_item_key = sanitize_text_field($_POST['cart_item_key']);
-    $quantity = intval($_POST['quantity']);
+//     $cart_item_key = sanitize_text_field($_POST['cart_item_key']);
+//     $quantity = intval($_POST['quantity']);
 
-    if ($cart_item_key && $quantity >= 0) {
-        WC()->cart->set_quantity($cart_item_key, $quantity, false);
-        echo json_encode(['success' => true]);
-    } else {
-        echo json_encode(['success' => false]);
-    }
+//     if ($cart_item_key && $quantity >= 0) {
+//         WC()->cart->set_quantity($cart_item_key, $quantity, false);
+//         echo json_encode(['success' => true]);
+//     } else {
+//         echo json_encode(['success' => false]);
+//     }
 
-    wp_die(); // to avoid 0 in the response
-}
+//     wp_die(); // to avoid 0 in the response
+// }
 
-add_action( 'woocommerce_before_checkout_form', 'add_basket_info_and_view_button', 10 );
+// add_action( 'woocommerce_before_checkout_form', 'add_basket_info_and_view_button', 10 );
 
 // function my_enqueue_scripts() {
 //     if (is_cart() || is_checkout()) {
@@ -635,3 +641,46 @@ add_action( 'woocommerce_before_checkout_form', 'add_basket_info_and_view_button
 //     }
 // }
 // add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+
+function custom_enable_update_cart() {
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            setInterval(function(){
+                var updateCartBtn = $('button[name="update_cart"]');
+                if (updateCartBtn.prop('disabled', true)) {
+                    updateCartBtn.prop('disabled', false);
+                }
+            }, 1000); // Check every second
+        });
+    </script>
+    <?php
+}
+add_action('wp_footer', 'custom_enable_update_cart');
+function woocommerce_ajax_update_cart() {
+    if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+        return;
+    }
+
+    if ( is_null( WC()->cart ) ) {
+        wc_load_cart();
+    }
+
+    $cart_totals = isset( $_POST['cart'] ) ? $_POST['cart'] : '';
+
+    if ( ! wp_verify_nonce( $_REQUEST['update_cart_nonce'], 'update-cart' ) || ! isset( $_POST['cart'] ) ) {
+        wp_send_json( array( 'success' => false ) );
+    }
+
+    foreach ( $cart_totals as $cart_item_key => $cart_item ) {
+        if ( isset( $cart_item['qty'] ) ) {
+            WC()->cart->set_quantity( $cart_item_key, $cart_item['qty'], false );
+        }
+    }
+
+    WC()->cart->calculate_totals();
+
+    wp_send_json( array( 'success' => true ) );
+}
+add_action( 'wp_ajax_woocommerce_update_cart_action', 'woocommerce_ajax_update_cart' );
+add_action( 'wp_ajax_nopriv_woocommerce_update_cart_action', 'woocommerce_ajax_update_cart' );

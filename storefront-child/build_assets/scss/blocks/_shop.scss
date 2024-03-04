@@ -28,6 +28,9 @@
         margin: 0 auto;
         max-width: 1400px;
         padding: 0 40px;
+        input[type=checkbox]:hover:not(:checked){
+            background-color: #70b095 !important;
+        }
 
         @media (max-width: 1150px) {
             column-gap: 20px;
@@ -510,7 +513,7 @@
                     column-gap: 8px;
                     z-index: 2;
                     li {
-                        font-size: 6px;
+                        font-size: 10px;
                         font-weight: 400;
                         font-family: $montserrat;
                         list-style: none;
@@ -630,4 +633,92 @@
         }
 
     }
+}
+// .quantity .qty {
+//     text-align: center;
+//     width: 36px !important;
+//     height: 36px !important;
+//     flex-shrink: 0;
+//     border-radius: 6px;
+//     padding: 0px !important;
+//     background-color: #fff;
+//     border: 2px solid  #ACBCB5;
+//     -webkit-appearance: none;
+//     &:focus{
+//         border: 2px solid  #ACBCB5;
+//     }
+// }
+.onqor-qunaity{
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    vertical-align: center;
+    width: 70px;
+    -ms-flex-pack: distribute!important;
+    justify-content: space-around!important;
+    position: absolute;
+    right: 15px;
+    bottom: 0px;
+    .onqor-qty-number{
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+        border-radius: 6px;
+        color:#70B095;
+        border: 2px solid #ACBCB5;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .onqor-qty-btn{
+        font-size: 25px;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        color: #D9E7E1;
+        height: auto;
+        line-height: 35px !important;
+        cursor: pointer;
+    }
+}
+.product-quantity{
+    width: 0px;
+    height: 0px;
+    opacity: 0.0;
+}
+.woocommerce-cart {
+    .woocommerce-notices-wrapper{
+        display: none;
+    }
+    // .woocommerce{
+    //     padding-bottom: 0px !important;
+    // }
+}
+.woocommerce-cart-form .actions button.button{
+    display: inline-flex;
+    height: 42px;
+    padding: 16px 24px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #70B095;
+    color: #FFF;
+    text-align: center;
+    /* Interactive 1 - Montserrat Regular - 16px */
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.32px;
+    transition: all 0.3s;
+    float: right;
+    margin-right: 16px;
+    &:hover{
+        background:#D9E7E1;
+        transition: all 0.3s;
+    }
+}
+.im-disabled{
+    pointer-events: none;
 }
