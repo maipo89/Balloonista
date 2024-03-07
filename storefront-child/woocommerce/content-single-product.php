@@ -102,21 +102,27 @@ if ( post_password_required() ) {
 		</div>
 		<div class="product-image__controls">
 			<?php
-				// Check rows exists.
-				if( have_rows('product_gallery', $product_id) ):
-					// Loop through rows.
-					while( have_rows('product_gallery', $product_id) ) : the_row();
-						// Load sub field value.
-						$sub_value = get_sub_field('product_image');
-						$imageId = get_sub_field('link_to_variation');
-							
-						?>
-						<div class="product-image__controls-item" id="<?php echo 'attribute_' . $imageId ?>">
-							<img src="<?php echo $sub_value['url'] ?>" alt="">';
-						</div>
-					<?php // End loop.
-					endwhile;
-				endif; 
+				// Check if rows exist.
+				if (have_rows('product_gallery', $product_id)):
+					// Count the number of rows.
+					$row_count = count(get_field('product_gallery', $product_id));
+
+					// Check if there's more than one row.
+					if ($row_count > 1):
+						// Loop through rows.
+						while (have_rows('product_gallery', $product_id)) : the_row();
+							// Load sub field value.
+							$sub_value = get_sub_field('product_image');
+							$imageId = get_sub_field('link_to_variation');
+			?>
+							<div class="product-image__controls-item" id="<?php echo 'attribute_' . $imageId ?>">
+								<img src="<?php echo $sub_value['url'] ?>" alt="">
+							</div>
+			<?php
+						// End loop.
+						endwhile;
+					endif;
+				endif;
 			?>
 		</div>
 	</div>

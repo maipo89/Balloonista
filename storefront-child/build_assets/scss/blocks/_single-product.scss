@@ -703,6 +703,9 @@ input[type="tel"]:focus,input[type="email"]:focus{
     @media (max-width: 450px) {
         padding: 0 20px;
     }
+    .woocommerce-shipping-totals {
+        display: none !important;
+    }
     .coupon {
         display: none !important;
     }
@@ -1165,17 +1168,17 @@ input[type="tel"]:focus,input[type="email"]:focus{
         }
         .credit-card-images {
             padding-top: 31px;
-            width: 95%;
+            width: 80%;
             flex-wrap: wrap;
             display: flex;
             justify-content: center;
             gap: 20px;
             margin: 0 auto;
             @media (max-width: 1350px) {
-                width: 80%;
+                width: 60%;
             }
             @media (max-width: 1090px) {
-                width: 82%;
+                width: 70%;
             }
             @media (max-width: 640px) {
                 padding-top: 60px;

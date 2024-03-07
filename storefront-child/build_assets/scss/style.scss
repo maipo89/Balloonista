@@ -236,7 +236,7 @@ input[type=text], textarea {
 
 // Checkboxes
 
-input[type=checkbox] {
+input[type=checkbox], input[type=radio] {
     width: initial;
     height: initial;
     -webkit-appearance: button;
@@ -255,7 +255,7 @@ input[type=checkbox] {
     -webkit-appearance: none;
 
     &:hover:not(:checked) { 
-        background-color: $seaFoam;
+        background-color: $seaFoam !important;
 
         &:before {
             display: none;
@@ -263,15 +263,15 @@ input[type=checkbox] {
     }
 }
 
-input[type=checkbox]:checked {
+input[type=checkbox]:checked, input[type=radio]:checked {
     background-color: $seaFoam;
 }
 
-input[type=checkbox]:not(:checked) {
+input[type=checkbox]:not(:checked), input[type=radio]:not(:checked) {
     background-color: white !important;
 }
 
-input[type=checkbox]:before {
+input[type=checkbox]:before, input[type=radio]:before {
     content: "";
     position: absolute;
     right: 52%;

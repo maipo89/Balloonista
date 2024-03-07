@@ -365,7 +365,6 @@ function custom_content_after_proceed_to_checkout() {
     echo '<div class="credit-card-images">';
     echo '<img src="' . esc_url(get_stylesheet_directory_uri() . '/assets/images/credit-cards/amex.svg') . '" alt="Amex">';
     echo '<img src="' . esc_url(get_stylesheet_directory_uri() . '/assets/images/credit-cards/mastercard.svg') . '" alt="MasterCard">';
-    echo '<img src="' . esc_url(get_stylesheet_directory_uri() . '/assets/images/credit-cards/paypal.svg') . '" alt="PayPal">';
     echo '<img src="' . esc_url(get_stylesheet_directory_uri() . '/assets/images/credit-cards/visa.svg') . '" alt="Visa">';
     echo '<img src="' . esc_url(get_stylesheet_directory_uri() . '/assets/images/credit-cards/maestro.svg') . '" alt="Maestro">';
     // Add more credit card images as needed
@@ -468,6 +467,9 @@ function custom_checkout_script( ){
             $('#view-billing').text('View');
            }else{
             $('#view-billing').text('Hide');
+            $('html, body').animate({
+                scrollTop: $('#view-billing').offset().top - 98
+            }, 1000);
            }
            $('.woocommerce-billing-fields__field-wrapper').toggleClass('open');
            $('.title-billing-address').toggleClass('open');
@@ -477,14 +479,25 @@ function custom_checkout_script( ){
         // Insert the deliveryAccordion element before the orddd-checkout-fields section
         $('.orddd-checkout-fields').before(deliveryAccordion);
 
+        var paymentAccordion = $('<div class="payment-accordion"><h3>Payment details</h3><p id="view-payment">View</p></div><div class="title-payment"><h3>Payment details</h3></div>');
+
+        $('#payment').before(paymentAccordion);
+
         var additionalAccordion = $('<div class="additional-accordion"><h3>Additional option</h3><p id="view-additional">View</p></div>');
         
         $('.woocommerce-additional-fields').before(additionalAccordion);
+
+        var addressDelivery = $('<div class="delivery-address"><h3>Delivery Address</h3><p id="delivery-address">View</p></div>');
+
+        $('.woocommerce-shipping-fields').before(addressDelivery);
 
         $('#view-delivery').click(function() {
            $('#view-delivery').toggleClass('open');
            if ($('#view-delivery').hasClass('open')) {
             $('#view-delivery').text('Hide');
+            $('html, body').animate({
+                scrollTop: $('#view-delivery').offset().top - 98
+            }, 1000);
            }else{
             $('#view-delivery').text('View');
            }
@@ -496,6 +509,9 @@ function custom_checkout_script( ){
            $('#view-payment').toggleClass('open');
            if ($('#view-payment').hasClass('open')) {
             $('#view-payment').text('Hide');
+            $('html, body').animate({
+                scrollTop: $('#view-payment').offset().top - 98
+            }, 1000);
            }else{
             $('#view-payment').text('View');
            }
@@ -507,13 +523,146 @@ function custom_checkout_script( ){
            $('#view-additional').toggleClass('open');
            if ($('#view-additional').hasClass('open')) {
             $('#view-additional').text('Hide');
+            $('html, body').animate({
+                scrollTop: $('#view-additional').offset().top - 98
+            }, 1000);
            }else{
             $('#view-additional').text('View');
            }
            $('.woocommerce-additional-fields').toggleClass('open');
         });
+
+        $('#delivery-address').click(function() {
+           $('#delivery-address').toggleClass('open');
+           if ($('#delivery-address').hasClass('open')) {
+            $('#delivery-address').text('Hide');
+            console.log($('#delivery-address').offset().top)
+            $('html, body').animate({
+                scrollTop: $('#delivery-address').offset().top - 98
+            }, 1000);
+           }else{
+            $('#delivery-address').text('View');
+           }
+           $('.woocommerce-shipping-fields').toggleClass('open');
+        });
         
 
+        var deliveryRadio = $("#orddd_order_type_delivery");
+        var pickupRadio = $("#orddd_order_type_pickup");
+
+        // Get the element to change
+        var deliveryOption = $(".delivery-address-accordion h3");
+        var titleDeliveryAddress = $('.title-delivery-address p');
+        var deliveryAddress = $('.delivery-address');
+
+        if (pickupRadio.is(":checked")) {
+
+            deliveryOption.text("Collection option");
+            titleDeliveryAddress.text("Please select a day for collection:");
+            deliveryAddress.hide();
+        
+        } else {
+
+            deliveryOption.text("Delivery option");
+            titleDeliveryAddress.text("Please select a day for delivery:");
+            deliveryAddress.show();
+
+        }
+
+        // Add change event handlers to radio inputs
+        deliveryRadio.change(function() {
+            // If Delivery radio is selected, hide delivery option
+            if (deliveryRadio.is(":checked")) {
+                deliveryOption.text("Delivery option");
+                titleDeliveryAddress.text("Please select a day for delivery:");
+                deliveryAddress.show();
+            }
+        });
+
+        pickupRadio.change(function() {
+            // If Pickup radio is selected, change delivery option to Collection option
+            if (pickupRadio.is(":checked")) {
+                deliveryOption.text("Collection option");
+                titleDeliveryAddress.text("Please select a day for collection:");
+                deliveryAddress.hide();
+            }
+        });
+
+        var checkoutContainerHeight = $('.checkout-review-order__container').height();
+
+        document.documentElement.style.setProperty('--heightCheckoutWindow', checkoutContainerHeight + 'px');
+
+        var newHeight = checkoutContainerHeight + 563;
+
+        $('.checkout.woocommerce-checkout').css('height', 'calc(' + newHeight + 'px)');
+
+        function addFilledClassToAccordion() {
+            var inputs = $('.woocommerce-billing-fields__field-wrapper input[type="text"], .woocommerce-billing-fields__field-wrapper input[type="tel"], .woocommerce-billing-fields__field-wrapper input[type="email"], .woocommerce-billing-fields__field-wrapper select').not('#billing_company');
+
+            var allFilled = true;
+            inputs.each(function() {
+                if ($(this).val() === '') {
+                    allFilled = false;
+                    return false; // Exit the loop early if any input is empty
+                }
+            });
+
+            if (allFilled) {
+                $('.billing-address-accordion').addClass('filled');
+            } else {
+                $('.billing-address-accordion').removeClass('filled');
+            }
+        }
+
+        addFilledClassToAccordion();
+
+        // Trigger the function whenever an input value changes
+        $('.woocommerce-billing-fields__field-wrapper input[type="text"], .woocommerce-billing-fields__field-wrapper input[type="tel"], .woocommerce-billing-fields__field-wrapper input[type="email"], .woocommerce-billing-fields__field-wrapper select').on('input', addFilledClassToAccordion);
+
+        function addFilledClassToDeliveryAddress() {
+            var inputs = $('.woocommerce-shipping-fields__field-wrapper input[type="text"], .woocommerce-shipping-fields__field-wrapper input[type="tel"], .woocommerce-shipping-fields__field-wrapper input[type="email"], .woocommerce-shipping-fields__field-wrapper select').not('#shipping_company');
+
+            var allFilled = true;
+            inputs.each(function() {
+                if ($(this).val() === '') {
+                    allFilled = false;
+                    return false; // Exit the loop early if any input is empty
+                }
+            });
+
+            if (allFilled) {
+                $('.delivery-address').addClass('filled');
+            } else {
+                $('.delivery-address').removeClass('filled');
+            }
+        }
+
+        addFilledClassToDeliveryAddress();
+
+        // Trigger the function whenever an input value changes
+        $('.woocommerce-shipping-fields__field-wrapper input[type="text"], .woocommerce-shipping-fields__field-wrapper input[type="tel"], .woocommerce-shipping-fields__field-wrapper input[type="email"], .woocommerce-shipping-fields__field-wrapper select').on('input', addFilledClassToDeliveryAddress);
+
+        function addFilledClassToAdditionalAccordion() {
+            var textarea = $('#order_comments');
+            var additionalAccordion = $('.additional-accordion');
+
+            if (textarea.val().trim() !== '') {
+                additionalAccordion.addClass('filled');
+            } else {
+                additionalAccordion.removeClass('filled');
+            }
+        }
+
+        addFilledClassToAdditionalAccordion();
+
+        // Trigger the function whenever the textarea value changes
+        $('#order_comments').on('input', addFilledClassToAdditionalAccordion);
+        
+
+        // Attach change event handlers to relevant input fields
+        $('#e_deliverydate_0').on('input', function() {
+            console.log('inpit')
+        });
     });
 
     </script>
@@ -574,31 +723,11 @@ function add_review_order_section_with_images_after_submit() {
     
     // Output total amount
     echo '<div class="line"></div>';
-    echo '<div class="total-checkout-product">';
-        echo '<p>Basket Total:</p>';
-        echo '<p>' . WC()->cart->get_cart_total() . '</p>';
-    echo '</div>';
     
     // Output "Back to Basket" button
-    echo '<div class="button-container">';
-        echo '<a href="' . wc_get_cart_url() . '" class="button wc-backward">Edit Basket</a>';
-    echo '</div>';
     echo '</div>';
     echo '</div>';
 }
-
-// Add a payment heading before the payment section in WooCommerce checkout page
-function custom_payment_heading_before_payment() {
-    echo '<div class="payment-accordion">';
-        echo '<h3>Payment details</h3>';
-        echo '<p id="view-payment">View</p>';
-    echo '</div>';
-    echo '<div class="title-payment">';
-        echo '<h3>Payment details</h3>';
-        echo '<p>Please fill out your payment address:</p>';
-    echo '</div>';
-}
-add_action('woocommerce_review_order_before_payment', 'custom_payment_heading_before_payment');
 
 function add_basket_info_and_view_button() {
     // Get the number of items in the cart
@@ -684,3 +813,14 @@ function woocommerce_ajax_update_cart() {
 }
 add_action( 'wp_ajax_woocommerce_update_cart_action', 'woocommerce_ajax_update_cart' );
 add_action( 'wp_ajax_nopriv_woocommerce_update_cart_action', 'woocommerce_ajax_update_cart' );
+
+
+add_action('woocommerce_review_order_after_order_total', 'add_edit_basket_button');
+
+function add_edit_basket_button() {
+    // Get the cart URL
+    $cart_url = wc_get_cart_url();
+    
+    // Output the "Edit Basket" button
+    echo '<tr class="edit-basket-row"><td colspan="2"><div class="button-container"><a href="' . esc_url($cart_url) . '" class="button wc-backward">Edit Basket</a></div></td></tr>';
+}
