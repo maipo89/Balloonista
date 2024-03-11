@@ -16,7 +16,7 @@
           <p><?php echo $text ?></p>
           <?php if($button) : ?>
             <div class="text-image__text__button">
-                <a class="primary-button" href="<?php echo $customLink ? get_home_url() . $linkSlug : $buttonLink; ?>"><?php echo $buttonText ?></a>
+                <a class="primary-button" href="<?php echo $customLink ? $linkSlug["url"] : $buttonLink; ?>"><?php echo $buttonText ?></a>
             </div>
           <?php endif; ?>
       </div>
