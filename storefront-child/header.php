@@ -115,7 +115,7 @@
 			</div>
             
 			<div class="search__container__searching">
-				<p class="heading">Related Pages</p>
+				<p class="heading-pages">Related Pages</p>
 				<div class="pages-container">
 					<?php
 						$args = array(
@@ -138,7 +138,7 @@
 						}
 					?>
 				</div>
-				<p class="heading">Related Products</p>
+				<p class="heading-products">Related Products</p>
 				<div class="product-container">
 					<?php
 					$args = array(
@@ -162,26 +162,7 @@
 										?>
 										<div class="product-name__image">
 											<div style="background-image: url('<?php echo esc_url($image_url); ?>')" class="product-name__image__img"></div>
-											<?php
-												// Get the badges for the current product
-												$product_terms = get_the_terms(get_the_ID(), 'badge_taxonomy');
-
-												if ($product_terms && ! is_wp_error($product_terms)) {
-													?>
-													<div class="badge-container">
-														<?php
-														$count = 0;
-														foreach ($product_terms as $term) {
-															if ($count < 2) { // Display only the first two badges
-																echo '<span class="badge">' . $term->name . '</span>';
-																$count++;
-															}
-														}
-														?>
-													</div>
-													<?php
-												}
-												?>
+											<p class="primary-button">View</p>
 										</div>
 										<?php
 									}

@@ -129,7 +129,20 @@ if ( post_password_required() ) {
 	<div class="product__options">
 		<div class="product__options-head">
 			<h1><?php echo $title; ?></h1>
-			<p><?php echo $price; ?></p>
+			<?php if (strpos($price, '&ndash;') !== false) {
+				// Split the price range into an array
+				$price_parts = explode('&ndash;', $price);
+				
+				// Trim whitespace from each part
+				$price_parts = array_map('trim', $price_parts);
+				
+				// Output the smaller price first
+				echo '<p>From' . ' ' . $price_parts[0] . '</p>';
+			} else {
+				// If it's not a range, just output the price
+				echo '<p>' . $price . '</p>';
+			}
+			?></p>
 	
 			<div class="product__option-buttons">
 				<?php 

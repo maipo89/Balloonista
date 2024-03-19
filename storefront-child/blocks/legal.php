@@ -1,8 +1,9 @@
 <?php $title = get_sub_field('title');
-      $cookieTitle = get_sub_field('cookie_title');
+      $sustainableTitle = get_sub_field('sustainable_title');
       $termsTitle = get_sub_field('terms_title');
       $privacyTitle = get_sub_field('privacy_title');
       $paragraph = get_sub_field('paragraph');
+      $salesTitle = get_sub_field('sales_title');
       $higherMargins = get_sub_field('higher_margin_bottom');
 ?>
 
@@ -20,13 +21,10 @@
                     </svg>
                 </div>
                     <div class="custom-options">
-                        <?php if( have_rows('pages') ): ?>
-                            <?php while( have_rows('pages') ): the_row(); 
-                                $pageName = get_sub_field('page_name');
-                                ?>
-                                <span class="custom-option" data-value="<?php echo $pageName ?>"><?php echo $pageName ?></span>
-                            <?php endwhile; ?>
-                        <?php endif; ?>
+                        <span class="custom-option" data-value="<?php echo $privacyTitle ?>"><?php echo $privacyTitle ?></span>
+                        <span class="custom-option" data-value="<?php echo $termsTitle ?>"><?php echo $termsTitle ?></span>
+                        <span class="custom-option" data-value="<?php echo $sustainableTitle ?>"><?php echo $sustainableTitle ?></span>
+                        <span class="custom-option" data-value="<?php echo $salesTitle ?>"><?php echo $salesTitle ?></span>
                     </div>
             </div>
         </div>
@@ -67,14 +65,32 @@
             <?php endwhile; ?>
         <?php endif; ?>
     </div>
-    <div class="legal__cookie">
-       <h2 class="legal__cookie__title"><?php echo $cookieTitle ?></h2>
-        <?php if( have_rows('cookie') ): ?>
-            <?php while( have_rows('cookie') ): the_row(); 
+    <div class="legal__sustainable">
+       <h2 class="legal__sustainable__title"><?php echo $sustainableTitle ?></h2>
+        <?php if( have_rows('sustainable') ): ?>
+            <?php while( have_rows('sustainable') ): the_row(); 
                 $title = get_sub_field('title');
                 $text = get_sub_field('text');
                 ?>
-                <div class="legal__cookie__text">
+                <div class="legal__sustainable__text">
+                    <?php if($title): ?>
+                        <h2><?php echo($title) ?></h2>
+                    <?php endif; ?>
+                    <?php if($text): ?>
+                        <?php echo($text) ?>
+                    <?php endif; ?>
+                </div>
+            <?php endwhile; ?>
+        <?php endif; ?>
+    </div>
+    <div class="legal__sales">
+       <h2 class="legal__sales__title"><?php echo $salesTitle ?></h2>
+        <?php if( have_rows('sales') ): ?>
+            <?php while( have_rows('sales') ): the_row(); 
+                $title = get_sub_field('title');
+                $text = get_sub_field('text');
+                ?>
+                <div class="legal__sales__text">
                     <?php if($title): ?>
                         <h2><?php echo($title) ?></h2>
                     <?php endif; ?>

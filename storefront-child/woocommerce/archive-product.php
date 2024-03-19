@@ -47,6 +47,22 @@ get_header( 'shop' );
             'post_type'      => 'product',
             'posts_per_page' => 12,
             'paged'          => $paged,
+            'tax_query'      => array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'product_visibility',
+                    'field'    => 'name',
+                    'terms'    => array('exclude-from-catalog', 'exclude-from-search'),
+                    'operator' => 'NOT IN',
+                ),
+                array(
+                    'taxonomy' => 'product_visibility',
+                    'field'    => 'name',
+                    'terms'    => array('shop', 'shop-and-search'),
+                    'operator' => 'IN',
+                ),
+            ),
+        
         );
 
         if ($term instanceof WP_Term && 'product_cat' === $term->taxonomy) {
@@ -141,7 +157,7 @@ get_header( 'shop' );
 
         $product_categories = get_terms(array(
             'taxonomy'   => 'product_cat',
-            'hide_empty' => false, // Keep empty categories visible
+            'hide_empty' => true, // Keep empty categories visible
             'orderby'    => 'terms_id',
         ));
     ?>
@@ -155,6 +171,12 @@ get_header( 'shop' );
         <?php
         if (!empty($product_categories) && !is_wp_error($product_categories)) {
             // Create an array to store categories grouped by parent
+            $desired_order = array(
+                "Balloon type",
+                "Occasion",
+                "By Product",
+                "Colour"
+            );
             $grouped_categories = array();
 
             // Group categories by parent
@@ -165,6 +187,12 @@ get_header( 'shop' );
                 }
                 $grouped_categories[$parent_id][] = $category;
             }
+
+            uksort($grouped_categories, function($a, $b) use ($desired_order) {
+                $a_index = array_search(get_term($a)->name, $desired_order);
+                $b_index = array_search(get_term($b)->name, $desired_order);
+                return $a_index - $b_index;
+            });
 
             // Loop through each group
             foreach ($grouped_categories as $parent_id => $categories) {
@@ -388,6 +416,7 @@ get_header( 'shop' );
                         <a href="<?php the_permalink() ?>">
                             <div class="shop__card__image">
                                 <div class="shop__card__image__img" style="background-image: url('<?php echo esc_url($image[0]); ?>');"></div>
+                                <p class="primary-button">View</p>
                                 <ul>
                                     <?php
                                         // Display only the first two badges
@@ -426,7 +455,9 @@ get_header( 'shop' );
                     'mid_size'  => 2,
                     'prev_text'  => '<svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L1.78885 6.10557C1.05181 6.4741 1.05181 7.5259 1.78885 7.89443L12 13" stroke="#D9E7E1" stroke-width="2" stroke-linecap="round"/></svg>',
                     'next_text'  => '<svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.999999 13L11.2111 7.89443C11.9482 7.5259 11.9482 6.4741 11.2111 6.10557L1 0.999999" stroke="#D9E7E1" stroke-width="2" stroke-linecap="round"/></svg>',
+                    
                 ));
+
                 ?>
             </div>
         </div>

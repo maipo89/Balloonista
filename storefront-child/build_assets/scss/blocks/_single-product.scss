@@ -364,11 +364,13 @@ div.product-addon-totals ul li{
         display: flex;
         justify-content: center;
         align-items: center;
+        color: black !important;
     }
     .woocommerce-Price-amount{
         display: flex !important;
         flex-direction: row;
         color: black;
+        margin-left: 5px !important;
     }
 }
 .wc-pao-addon-image-swatch-select{
@@ -759,8 +761,7 @@ input[type="tel"]:focus,input[type="email"]:focus{
         padding-top: 0px;
         width: 90%;
         .variation {
-            display: flex;
-            flex-wrap: wrap;
+            display: block;
             position: relative;
             .variation-item {
                 display: flex;
@@ -771,13 +772,14 @@ input[type="tel"]:focus,input[type="email"]:focus{
                 position: relative;
                 font-size: 16px;
                 margin-right: 5px;
+                color: black;
             }
             dd {
                 margin-right: 20px;
                 p {
                     font-size: 15px;
                     font-weight: 300;
-                    color: black;
+                    color: $gray;
                 }
             }
         }

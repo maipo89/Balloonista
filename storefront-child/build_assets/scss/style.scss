@@ -94,7 +94,7 @@ body {
     }
 
     &:active, &:focus {
-        box-shadow: inset 0 0 0 2em $mercury;
+        background-color: $seaFoam;
     }
 }
 
@@ -114,7 +114,7 @@ body {
     }
 
     &:active, &:focus, &.active {
-        box-shadow: inset 0 0 0 2em $mercury;
+        background-color: $mercury;
         border: 2px $mercury solid;
     }
 }

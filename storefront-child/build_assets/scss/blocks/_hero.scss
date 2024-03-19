@@ -1,7 +1,7 @@
 .hero__container { 
     .hero {
         background-color: $mercury;
-        height: 696px;
+        height: fit-content;
         width: 100%;
         margin-top: 96px;
         margin-bottom: 264px;
@@ -54,7 +54,7 @@
             margin: 0 auto;
             padding: 0 40px;
             padding-top: 212px;
-            padding-bottom: 40px;
+            padding-bottom: 125px;
 
             @media (max-width: 1380px) {
                 padding-top: 130px;
@@ -216,7 +216,7 @@
         }
 
         &__gallery {
-            width: 987px;
+            width: 1350px;
             height: 842px;
             position: absolute !important;
             right: 0;
@@ -225,10 +225,29 @@
             border-radius: 40px 0px 0px 40px;
             z-index: 1;
 
-            @media (max-width: 1980px) {
-                width: 50%;
+            @media (max-width: 2600px) {
+                width: 1200px;
             }
 
+            @media (max-width: 2300px) {
+                width: 987px;
+            }
+
+            @media (max-width: 1980px) {
+                width: 850px;
+            }
+            @media (max-width: 1600px) {
+                width: 800px;
+            }
+            @media (max-width: 1500px) {
+                width: 750px;
+            }
+            @media (max-width: 1400px) {
+                width: 700px;
+            }
+            @media (max-width: 1320px) {
+                width: 650px;
+            }
             @media (max-width: 1280px) {
                 height: auto;
                 bottom: -100px;
@@ -238,7 +257,15 @@
                 top: 150px;
                 bottom: unset;
             }
-
+            @media (max-width: 1220px) {
+                width: 600px;
+            }
+            @media (max-width: 1120px) {
+                width: 550px;
+            }
+            @media (max-width: 1030px) {
+                width: 500px;
+            }
             @media (max-width: 1000px) {
                 width: 80%;
                 height: 578px;
@@ -277,7 +304,7 @@
             // }
 
             &__image {
-                width: 987px;
+                width: 1350px;
                 height: 842px;
                 background-size: cover;
                 background-position: center center;
@@ -285,9 +312,39 @@
                 // @media (max-width: 1600px) {
                 //     width: 842px;
                 // }
+                @media (max-width: 2600px) {
+                    width: 1200px;
+                }
+                @media (max-width: 2300px) {
+                    width: 987px;
+                }
+                @media (max-width: 1980px) {
+                    width: 850px;
+                }
+                @media (max-width: 1600px) {
+                    width: 800px;
+                }
+                @media (max-width: 1500px) {
+                    width: 750px;
+                }
+                @media (max-width: 1400px) {
+                    width: 700px;
+                }
+                @media (max-width: 1320px) {
+                    width: 650px;
+                }
+                @media (max-width: 1220px) {
+                    width: 600px;
+                }
                 @media (max-width: 1280px) {
                     width: 730px;
                     height: 640px;
+                }
+                @media (max-width: 1120px) {
+                    width: 550px;
+                }
+                @media (max-width: 1030px) {
+                    width: 500px;
                 }
                 @media (max-width: 1000px) {
                     height: 578px;
@@ -458,9 +515,26 @@
 
             .hero__gallery {
                 top: 130px;
-                width: 954px;
+                width: 1350px;
                 height: 614px;
                 position: relative;
+
+
+                @media (max-width: 2600px) {
+                    width: 1250px;
+                }
+
+                @media (max-width: 2400px) {
+                    width: 1150px;
+                }
+
+                @media (max-width: 2200px) {
+                    width: 1050px;
+                }
+
+                @media (max-width: 2000px) {
+                    width: 954px;
+                }
 
                 @media (max-width: 1800px) {
                     width: 50%;
@@ -496,8 +570,24 @@
                 }
 
                 .slick-slide {
-                    width: 954px;
+                    width: 1350px;
                     height: 614px;
+                    @media (max-width: 2600px) {
+                        width: 1250px;
+                    }
+    
+                    @media (max-width: 2400px) {
+                        width: 1150px;
+                    }
+    
+                    @media (max-width: 2200px) {
+                        width: 1050px;
+                    }
+    
+                    @media (max-width: 2000px) {
+                        width: 954px;
+                    }
+
                     @media (max-width: 1300px) {
                         width: 690px;
                         height: 541px;
@@ -533,7 +623,7 @@
             }
 
             .hero__image {
-                width: 954px;
+                width: 1350px;
                 height: 614px;
                 position: absolute;
                 bottom: initial;
@@ -541,6 +631,22 @@
                 border-radius: 40px 0 0 40px;
                 right: 0;
                 z-index: 1;
+
+                @media (max-width: 2600px) {
+                    width: 1250px;
+                }
+
+                @media (max-width: 2400px) {
+                    width: 1150px;
+                }
+
+                @media (max-width: 2200px) {
+                    width: 1050px;
+                }
+
+                @media (max-width: 2000px) {
+                    width: 954px;
+                }
     
                 @media (max-width: 1800px) {
                     width: 50%;
@@ -897,6 +1003,7 @@
                 height: 200px;
                 border-radius: 20px;
                 position: relative;
+                margin-bottom: 10px;
 
                 &__img {
                     position: absolute;

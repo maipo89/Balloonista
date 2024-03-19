@@ -84,9 +84,20 @@ $(document).ready(function() {
         enableBodyScroll(); // Call the function to enable scrolling when modal closes
     });
 
+    // Get the Data from PHP functions.php to retrieve productCategories
+
+    var productCategories = dataFromPHP.productCategories;
+    var productData = dataFromPHP.productData;
+    var pageData = dataFromPHP.pageData;
+
+    console.log(productCategories)
+    console.log(productData)
+    console.log(pageData)
+
 
     $('#search-input').on('input', function() {
         var searchText = $(this).val().toLowerCase().trim();
+        var matchFound = false;
 
         if (searchText.length > 0) {
 
@@ -95,15 +106,23 @@ $(document).ready(function() {
 
                 if (pageText.includes(searchText)) {
                     $(this).addClass('open');
+                    matchFound = true;
                 } else {
                     $(this).removeClass('open');
                 }
             });
 
+            if (matchFound) {
+                $('.search__container__searching .heading-pages').addClass('open');
+            } else {
+                $('.search__container__searching .heading-pages').removeClass('open');
+            }
+
         }else{
             $('.pages-container p').each(function() {
                 $(this).removeClass('open');
             });
+            $('.search__container__searching .heading-pages').removeClass('open');
         };
     });
 
@@ -124,6 +143,7 @@ $(document).ready(function() {
         var searchText = document.getElementById('search-input').value.trim().toLowerCase();
         var showMoreButton = document.getElementById('show-more-btn');
         var numToShow = 0;
+        var hasImageMatch = false
     
         if (searchText.length > 0) {
     
@@ -186,10 +206,23 @@ $(document).ready(function() {
                     showMoreButton.style.display = 'none';
                 }
             }
+            document.querySelectorAll('.header .product-container .product-name').forEach(function(product) {
+                var title = product.querySelector('h2').textContent.toLowerCase();
+                if (title.includes(searchText)) {
+                    hasImageMatch = true;
+                }
+            });
+            if (hasImageMatch) {
+                $('.search__container__searching .heading-products').addClass('open');
+            } else {
+                $('.search__container__searching .heading-products').removeClass('open');
+            }
+            
         } else {
             numToShow = 0;
             showProducts(0); // Reset to 0 initially
             showMoreButton.style.display = 'none';
+            $('.search__container__searching .heading-products').removeClass('open');
         }
     }
     
@@ -220,7 +253,7 @@ $(document).ready(function() {
         });
 
         if (categoryFound !== '') {
-            $viewMoreLink.attr('href', window.location.origin + '/product-category/' + categoryFound.toLowerCase());
+            $viewMoreLink.attr('href', window.location.origin + '/shop/product-category/' + categoryFound.toLowerCase());
         } else {
             $viewMoreLink.attr('href', window.location.origin + '/shop');
         }
@@ -230,40 +263,47 @@ $(document).ready(function() {
     // Carousel Hero
 
     if ($(window).width() > 450) {
-        $('.hero__gallery').slick({
+        $('.hero__gallery__container').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
             infinite: true,
             dots: true,
-            variableWidth: true
+            variableWidth: true,
+            autoplay: true,
+            autoplaySpeed: 4000,
         });
     }else{
-        $('.hero__gallery').slick({
+        $('.hero__gallery__container').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
             infinite: true,
             dots: true,
+            autoplay: true,
+            autoplaySpeed: 4000,
         });
     }
 
     $(window).on('resize orientationchange', function () {
         // Adjust Slick slider on resize or orientation change
         if ($(window).width() > 450) {
-            $('.hero__gallery').slick('unslick');
-            $('.hero__gallery').slick({
+            $('.hero__gallery__container').slick('unslick');
+            $('.hero__gallery__container').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 infinite: true,
                 dots: true,
-                variableWidth: true
+                autoplay: true,
+                autoplaySpeed: 4000,
             });
         } else {
-            $('.hero__gallery').slick('unslick');
-            $('.hero__gallery').slick({
+            $('.hero__gallery__container').slick('unslick');
+            $('.hero__gallery__container').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 infinite: true,
                 dots: true,
+                autoplay: true,
+                autoplaySpeed: 4000,
             });
         }
     });
@@ -276,6 +316,8 @@ $(document).ready(function() {
         slidesToScroll: 1,
         infinite: true,
         dots: true,
+        autoplay: true,
+        autoplaySpeed: 4000,
         adaptiveHeight: true
     });
 
@@ -391,6 +433,7 @@ $(document).ready(function() {
     // Slider Clients
 
     $(window).on('load resize orientationchange', function() {
+        console.log('orientation')
 
         const recalculateSlider = function() {
 
@@ -1217,6 +1260,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
     //       },
     // });
 
+
     // Filter shop page
     
     $('.filter-button__button').on('click', function () {
@@ -1267,7 +1311,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
         var selectedOption = $(this).data('value');
         
         if (selectedOption) {
-            var shopUrl = window.location.origin + '/shop/';
+            var shopUrl = window.location.href;
             
 
             var newUrl = updateUrlParameter('orderby', selectedOption, shopUrl);
@@ -1394,7 +1438,11 @@ if (!localStorage.getItem('cookiesAccepted')) {
             slidesToShow: 5,
             slidesToScroll: 1,
             dots: true,       
-            arrows: false      
+            arrows: true,
+            autoplay: true,
+            autoplaySpeed: 4000, 
+            nextArrow: '<svg class="prev-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.00001 68L67.1056 36.4472C67.4741 36.2629 67.4741 35.737 67.1056 35.5528L4.00001 4" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',
+            prevArrow: '<svg class="next-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M67 4L3.89443 35.5528C3.5259 35.737 3.5259 36.263 3.89443 36.4472L67 68" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',       
         });
     }
     if($(window).width() < 1260 ){
@@ -1406,7 +1454,11 @@ if (!localStorage.getItem('cookiesAccepted')) {
                 centerMode: true,
                 variableWidth: true,
                 dots: true,       
-                arrows: false      
+                arrows: true,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                nextArrow: '<svg class="prev-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.00001 68L67.1056 36.4472C67.4741 36.2629 67.4741 35.737 67.1056 35.5528L4.00001 4" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',
+                prevArrow: '<svg class="next-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M67 4L3.89443 35.5528C3.5259 35.737 3.5259 36.263 3.89443 36.4472L67 68" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',             
             });
         } else {
             $('.global-featured-products__container').slick({
@@ -1416,7 +1468,11 @@ if (!localStorage.getItem('cookiesAccepted')) {
                 centerMode: true,
                 variableWidth: true,
                 dots: true,       
-                arrows: false      
+                arrows: true,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                nextArrow: '<svg class="prev-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.00001 68L67.1056 36.4472C67.4741 36.2629 67.4741 35.737 67.1056 35.5528L4.00001 4" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',
+                prevArrow: '<svg class="next-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M67 4L3.89443 35.5528C3.5259 35.737 3.5259 36.263 3.89443 36.4472L67 68" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',      
             });
         }
     }
@@ -1452,7 +1508,11 @@ if (!localStorage.getItem('cookiesAccepted')) {
                         centerMode: true,
                         variableWidth: true,
                         dots: true,       
-                        arrows: false      
+                        arrows: true,
+                        autoplay: true,
+                        autoplaySpeed: 4000,
+                        nextArrow: '<svg class="prev-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.00001 68L67.1056 36.4472C67.4741 36.2629 67.4741 35.737 67.1056 35.5528L4.00001 4" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',
+                        prevArrow: '<svg class="next-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M67 4L3.89443 35.5528C3.5259 35.737 3.5259 36.263 3.89443 36.4472L67 68" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',         
                     });
                 } else {
                     $('.global-featured-products__container').slick({
@@ -1462,7 +1522,11 @@ if (!localStorage.getItem('cookiesAccepted')) {
                         centerMode: true,
                         variableWidth: true,
                         dots: true,       
-                        arrows: false      
+                        arrows: true,
+                        autoplay: true,
+                        autoplaySpeed: 4000,
+                        nextArrow: '<svg class="prev-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.00001 68L67.1056 36.4472C67.4741 36.2629 67.4741 35.737 67.1056 35.5528L4.00001 4" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',
+                        prevArrow: '<svg class="next-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M67 4L3.89443 35.5528C3.5259 35.737 3.5259 36.263 3.89443 36.4472L67 68" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',      
                     });
                 }
             }else{
@@ -1474,8 +1538,11 @@ if (!localStorage.getItem('cookiesAccepted')) {
                         centerMode: true,
                         variableWidth: true,
                         dots: true,       
-                        arrows: false      
-                    });
+                        arrows: true,
+                        autoplay: true,
+                        autoplaySpeed: 4000,
+                        nextArrow: '<svg class="prev-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.00001 68L67.1056 36.4472C67.4741 36.2629 67.4741 35.737 67.1056 35.5528L4.00001 4" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',
+                        prevArrow: '<svg class="next-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M67 4L3.89443 35.5528C3.5259 35.737 3.5259 36.263 3.89443 36.4472L67 68" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',                        });
                 } else {
                     $('.global-featured-products__container').slick({
                         infinite: true,
@@ -1484,8 +1551,11 @@ if (!localStorage.getItem('cookiesAccepted')) {
                         centerMode: true,
                         variableWidth: true,
                         dots: true,       
-                        arrows: false      
-                    });
+                        arrows: true,
+                        autoplay: true,
+                        autoplaySpeed: 4000,
+                        nextArrow: '<svg class="prev-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.00001 68L67.1056 36.4472C67.4741 36.2629 67.4741 35.737 67.1056 35.5528L4.00001 4" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',
+                        prevArrow: '<svg class="next-arrow" width="71" height="72" viewBox="0 0 71 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M67 4L3.89443 35.5528C3.5259 35.737 3.5259 36.263 3.89443 36.4472L67 68" stroke="#70B095" stroke-width="7" stroke-linecap="round"/></svg>',                        });
                 }
             }
         } else {
@@ -1514,15 +1584,19 @@ if (!localStorage.getItem('cookiesAccepted')) {
         if (clickedPage === $('.legal__privacy__title').text()) {
             // Show the corresponding legal section
             $('.legal__privacy').show();
-            $('.legal__terms, .legal__cookie').hide();
+            $('.legal__terms, .legal__sustainable, .legal__sales').hide();
         } else if (clickedPage === $('.legal__terms__title').text()) {
             // Show the corresponding legal section
             $('.legal__terms').show();
-            $('.legal__privacy, .legal__cookie').hide();
-        } else if (clickedPage === $('.legal__cookie__title').text()) {
+            $('.legal__privacy, .legal__sustainable, .legal__sales').hide();
+        } else if (clickedPage === $('.legal__sustainable__title').text()) {
             // Show the corresponding legal section
-            $('.legal__cookie').show();
-            $('.legal__privacy, .legal__terms').hide();
+            $('.legal__sustainable').show();
+            $('.legal__privacy, .legal__terms, .legal__sales').hide();
+        } else if (clickedPage === $('.legal__sales__title').text()) {
+            // Show the corresponding legal section
+            $('.legal__sales').show();
+            $('.legal__privacy, .legal__terms, .legal__sustainable').hide();
         }
     });
 

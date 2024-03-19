@@ -25,10 +25,10 @@
     &__privacy {
         display: block;
     }
-    &__terms, &__cookie {
+    &__terms, &__sustainable, &__sales {
         display: none;
     }
-    &__privacy, &__terms, &__cookie {
+    &__privacy, &__terms, &__sustainable, &__sales {
         &__title {
             padding: 0px 40px;
             margin: 0 auto;

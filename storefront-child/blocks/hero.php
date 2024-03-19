@@ -57,15 +57,17 @@
         <?php if( !$staticImage ): ?>
             <?php if( have_rows('gallery') ): ?>
                 <div class="hero__gallery">
-                    <?php 
-                    while( have_rows('gallery') ) : the_row();
-                    $image = get_sub_field('image');
-                    ?>
-                        <div class="hero__gallery__image" style="background-image: url(<?php echo($image["sizes"]["onqor-large"]) ?>)">
-                        </div>
-                    <?php 
-                    endwhile;
-                    ?>
+                    <div class="hero__gallery__container">
+                        <?php 
+                        while( have_rows('gallery') ) : the_row();
+                        $image = get_sub_field('image');
+                        ?>
+                            <div class="hero__gallery__image" style="background-image: url(<?php echo($image["sizes"]["onqor-large"]) ?>)">
+                            </div>
+                        <?php 
+                        endwhile;
+                        ?>
+                    </div>
                 </div>
             <?php 
             endif;

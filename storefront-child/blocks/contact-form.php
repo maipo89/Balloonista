@@ -91,7 +91,7 @@
                 </div>
                 <div class="newsletter__checkbox">
                     <input type="checkbox" id="newsletter" name="newsletter"/>
-                    <label for="newsletter">If you would not like to receive the Balloonista newsletter, then please ticket here</label>
+                    <label for="newsletter">If you would not like to receive the Balloonista newsletter, then please tick here</label>
                 </div>
             </div>            
             <p class="policy"><?php echo($dataText) ?> <a href="<?php echo($dataLink)?>"><?php echo($dataLink) ?></a></p>

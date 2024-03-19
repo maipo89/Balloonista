@@ -343,23 +343,25 @@
                             width: 100%;
                             display: flex;
                             justify-content: center;
-                            padding: 6px 20px;
                             border-radius: 8px;
 
                             &:hover {
                                 background-color: $mercury;
-                                padding: 6px 20px;
                             }
 
                             a {
                                 font-size: $p-light;
                                 font-weight: $p-ligth-weight;
                                 color: $black;
-                                align-items: center;
                                 padding: 0;
+                                width: 100%;
+                                text-align: center;
+                                padding: 6px 20px;
                                 &:hover {
                                     background-color: initial;
                                     padding: 0;
+                                    background-color: $mercury;
+                                    padding: 6px 20px;
                                 }
                             }
                         }
@@ -511,11 +513,15 @@
 
             &__searching {
 
-                .heading {
+                .heading-pages, .heading-products {
                     text-align: left;
                     font-size: 16px;
                     font-weight: 600;
                     margin-bottom: 23px;
+                    display: none;
+                    &.open {
+                        display: block;
+                    }
                 }
 
                 .product-container{
@@ -544,35 +550,56 @@
                                 left: 0;
                                 right: 0;
                                 bottom: 0;
+                            }
+
+                            p {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                z-index: 0;
+                                font-size: 12px;
+                                font-weight: 500;
+                                width: 60%;
+                                color: white;
+                                opacity: 0;
+                                transition: 0.5s ease opacity;
                                 &:hover {
-                                    filter: grayscale(100%);
+                                    color: black;
                                 }
                             }
 
-                            .badge-container {
-                                position: absolute;
-                                z-index: 2;
-                                width: fit-content;
-                                position: absolute;
-                                bottom: 15px;
-                                left: 50%; /* Position at 50% from the left */
-                                transform: translate(-50%);
-
-                                .badge {
-                                    padding: 10px 6px;
-                                    background-color: $mercury;
-                                    border-radius: 44px;
-                                    font-size: 6px;
-                                    font-weight: 400;
-                                    color: $black;
-                                    margin-right: 8px;
-
-                                    &:last-child {
-                                        margin-right: 0px;
-                                    }
+                            &:hover {
+                                p {
+                                    z-index: 2;
+                                    opacity: 1;
                                 }
-
                             }
+
+                            // .badge-container {
+                            //     position: absolute;
+                            //     z-index: 2;
+                            //     width: fit-content;
+                            //     position: absolute;
+                            //     bottom: 15px;
+                            //     left: 50%; /* Position at 50% from the left */
+                            //     transform: translate(-50%);
+
+                            //     .badge {
+                            //         padding: 3px 6px;
+                            //         font-size: 9px;
+                            //         background-color: $mercury;
+                            //         border-radius: 44px;
+                            //         font-weight: 400;
+                            //         color: $black;
+                            //         margin-right: 8px;
+
+                            //         &:last-child {
+                            //             margin-right: 0px;
+                            //         }
+                            //     }
+
+                            // }
                         }
         
                         h2 {

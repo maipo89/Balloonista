@@ -12,6 +12,22 @@
     @media (max-width: 768px) {
         padding: 32px 0;
     }
+    svg {
+        width: 20px;
+    }
+    .next-arrow {
+        position: absolute;
+        top: 84%;
+        left: 39%;
+        z-index: 10;
+        cursor: pointer;
+    }
+    .prev-arrow {
+        position: absolute;
+        right: 39%;
+        z-index: 10;
+        cursor: pointer;
+    }
     &__container{
         width: 100;
         display: flex;
