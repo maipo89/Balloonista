@@ -165,7 +165,7 @@ body {
 
 // Inputs 
 
-input[type=text], textarea {
+input[type=text], input[type=tel], input[type=email], textarea {
     color: black;
     background-color: white;
     border: 2px solid $mercury;

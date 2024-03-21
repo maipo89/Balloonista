@@ -224,7 +224,6 @@
                 height: 494px !important;
                 margin-right: 16px;
                 outline: none!important;
-                cursor: pointer;
                 border-radius: 40px;
                 @media (max-width: 1400px) {
                     width: 93px;
@@ -337,6 +336,9 @@
 
         &__item {
             display: none;
+            &.active {
+                display: block !important;
+            }
         }
     }
 
@@ -360,7 +362,6 @@
             display: none;
         }
         &__image {
-            cursor: pointer;
             width: 128px;
             height: 494px;
             transition: width 0.7s ease-in-out;
@@ -465,7 +466,6 @@
             width: 128px;
             height: 494px !important;
             outline: none!important;
-            cursor: pointer;
             border-radius: 40px;
             transition: width 0.5s ease-in-out;
             @media (max-width: 1400px) {
@@ -514,7 +514,9 @@
 
             &.width {
                 width: 744px;
-                transition: width 0.5s ease-in-out;
+                opacity: 0;
+                
+                opacity: 1;
 
                 @media (max-width: 1400px) {
                     width: 700px;
@@ -765,4 +767,73 @@
     //     }
     //     }
     // }
+}
+
+.baloon-colums2 {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    &__slider {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        height: fit-content;
+        &__main {
+            width: 744px;
+            height: 494px;
+            margin-right: 8px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+            }
+        }
+
+        &__gallery {
+            position: relative;
+            overflow: hidden;
+            width: 560px;
+            margin-left: 8px;
+            .slick-list {
+                position: relative;
+                left: -144px;
+                width: 704px;
+            }
+            &__slide {
+                width: 128px;
+                height: 494px !important;
+                margin-right: 16px;
+                outline: none!important;
+                cursor: pointer;
+                border-radius: 40px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center center;
+                    border-radius: 40px;
+                    z-index: -1;
+                }
+                &.slick-current.slick-active {
+                    outline: none!important;
+                }
+            }
+        }
+        .slick-arrow {
+            position: absolute;
+            top: 50%;
+            z-index: 50;
+            margin-top: -12px;
+        }
+
+        .slick-prev {
+            left: 0;
+        }
+        .slick-next {
+            right: 0;
+        }
+    }
+ 
 }

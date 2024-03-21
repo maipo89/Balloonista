@@ -19,18 +19,6 @@
            <?php endwhile; ?>
         <?php endif; ?>
 
-        <!-- title top !-->
-        <?php if( have_rows('slider') ) : $index = 0;  ?>
-            <?php while( have_rows('slider') ): the_row(); 
-                $titleTop = get_sub_field('title_top');
-            ?>
-                <?php if ($titleTop) : ?>
-                    <h2 data-index="<?php echo $index; ?>" class="baloon-colums__slider-container__top-title"><?php echo $titleTop ?></h2>
-                <?php endif; ?>
-            <?php $index++; ?>
-            <?php endwhile; ?>
-        <?php endif; ?>
-
         <!-- slider gallery mobile !-->
         <div class="baloon-colums__slider">
 

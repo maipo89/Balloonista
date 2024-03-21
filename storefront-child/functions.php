@@ -500,7 +500,7 @@ function custom_checkout_script( ){
            }else{
             $('#view-billing').text('Hide');
             $('html, body').animate({
-                scrollTop: $('#view-billing').offset().top
+                scrollTop: $('#view-billing').offset().top - 150
             }, 1000);
            }
            $('.woocommerce-billing-fields__field-wrapper').toggleClass('open');
@@ -528,7 +528,7 @@ function custom_checkout_script( ){
            if ($('#view-delivery').hasClass('open')) {
             $('#view-delivery').text('Hide');
             $('html, body').animate({
-                scrollTop: $('#view-delivery').offset().top
+                scrollTop: $('#view-delivery').offset().top - 150
             }, 1000);
            }else{
             $('#view-delivery').text('View');
@@ -543,7 +543,7 @@ function custom_checkout_script( ){
            if ($('#view-payment').hasClass('open')) {
             $('#view-payment').text('Hide');
             $('html, body').animate({
-                scrollTop: $('.payment-accordion').offset().top
+                scrollTop: $('.payment-accordion').offset().top - 142
             }, 1000);
            }else{
             $('#view-payment').text('View');
@@ -557,7 +557,7 @@ function custom_checkout_script( ){
            if ($('#view-additional').hasClass('open')) {
             $('#view-additional').text('Hide');
             $('html, body').animate({
-                scrollTop: $('#view-additional').offset().top
+                scrollTop: $('#view-additional').offset().top - 150
             }, 1000);
            }else{
             $('#view-additional').text('View');
@@ -569,9 +569,8 @@ function custom_checkout_script( ){
            $('#delivery-address').toggleClass('open');
            if ($('#delivery-address').hasClass('open')) {
             $('#delivery-address').text('Hide');
-            console.log($('#delivery-address').offset().top)
             $('html, body').animate({
-                scrollTop: $('#delivery-address').offset().top
+                scrollTop: $('#delivery-address').offset().top - 150
             }, 1000);
            }else{
             $('#delivery-address').text('View');

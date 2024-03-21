@@ -127,11 +127,13 @@
         width: 100%;
         z-index: 3;
         display: flex;
+        flex-wrap: wrap;
         bottom: 0px;
         flex-direction: row;
         &__item{
             padding: 4px 6px;
             margin-right: 12px;
+            margin-top: 10px;
             background:#D9E7E1;
             border-radius: 44px;
             p{
