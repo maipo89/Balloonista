@@ -114,11 +114,8 @@
 
 			<div class="footer__form">
 				<p>Sign up to our newsletter:</p>
-				<form>
-					<input class="name" type="text" placeholder="Name"/>
-					<input class="email" type="text" placeholder="Email"/>
-					<button type="submit">Send</button>
-				</form>
+				<div id="form3" class="_form_3"></div>
+				<script src="https://balloonista.activehosted.com/f/embed.php?id=3" charset="utf-8"></script>
 			</div>
 
 			<div class="footer__legal">

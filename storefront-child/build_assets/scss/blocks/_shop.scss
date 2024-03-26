@@ -638,6 +638,9 @@
                 &:hover {
                     border: 2px solid $seaFoam;
                 }
+                &.dots {
+                    border: none !important;
+                }
             }
 
             .next, .prev {

@@ -155,21 +155,48 @@ get_header( 'shop' );
             $object_ids = array();
         }
 
+        $args_without_pagination = $args;
+        $args_without_pagination['posts_per_page'] = -1; // Retrieve all posts
+        $query_without_pagination = new WP_Query($args_without_pagination);
+        
+        // Extract IDs of all products from the query without pagination
+        $all_product_ids = wp_list_pluck($query_without_pagination->posts, 'ID');
+
         $product_categories = get_terms(array(
             'taxonomy'   => 'product_cat',
             'hide_empty' => true, // Keep empty categories visible
             'orderby'    => 'terms_id',
         ));
+
+        $relevant_categories = array_filter($product_categories, function($category) use ($all_product_ids) {
+            $category_products = get_posts(array(
+                'post_type'      => 'product',
+                'posts_per_page' => -1,
+                'tax_query'      => array(
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field'    => 'term_id',
+                        'terms'    => $category->term_id,
+                    ),
+                ),
+                'fields'         => 'ids',
+            ));
+        
+            // Check if the category has any products from the main query
+            return !empty(array_intersect($category_products, $all_product_ids));
+        });
+
     ?>
     <?php
     ?>
+
 
     <div class="shop">
 
         <div class="shop__filter">
 
         <?php
-        if (!empty($product_categories) && !is_wp_error($product_categories)) {
+        if (!empty($relevant_categories) && !is_wp_error($relevant_categories)) {
             // Create an array to store categories grouped by parent
             $desired_order = array(
                 "Balloon type",
@@ -180,7 +207,7 @@ get_header( 'shop' );
             $grouped_categories = array();
 
             // Group categories by parent
-            foreach ($product_categories as $category) {
+            foreach ($relevant_categories as $category) {
                 $parent_id = $category->parent;
                 if (!isset($grouped_categories[$parent_id])) {
                     $grouped_categories[$parent_id] = array();
@@ -286,12 +313,12 @@ get_header( 'shop' );
                 </div>
                 <div class="filter-button__filters">
                     <?php
-                    if (!empty($product_categories) && !is_wp_error($product_categories)) {
+                    if (!empty($relevant_categories) && !is_wp_error($relevant_categories)) {
                         // Create an array to store categories grouped by parent
                         $grouped_categories = array();
 
                         // Group categories by parent
-                        foreach ($product_categories as $category) {
+                        foreach ($relevant_categories as $category) {
                             $parent_id = $category->parent;
                             if (!isset($grouped_categories[$parent_id])) {
                                 $grouped_categories[$parent_id] = array();

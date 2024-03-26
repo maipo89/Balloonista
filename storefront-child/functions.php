@@ -881,3 +881,14 @@ function my_custom_shipping_table_update( $fragments ) {
 
     return $fragments;
 }
+
+
+// Popup Message
+
+
+add_filter( 'woocommerce_get_script_data', 'change_alert_text', 10, 2 );
+function change_alert_text( $params, $handle ) {
+    if ( $handle === 'wc-add-to-cart-variation' )
+    $params['i18n_make_a_selection_text'] = __( 'One or more product options are yet to be selected...', 'domain' );
+    return $params;
+}
