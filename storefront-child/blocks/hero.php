@@ -123,6 +123,7 @@
                                 <div>
                                     <div class="featured-products__product__image">
                                         <div class="featured-products__product__image__img" style="background-image: url(<?php echo $image_url; ?>);"></div>
+                                        <p class="primary-button">View</p>
                                         <ul>
                                             <?php
                                                 // Display only the first two badges

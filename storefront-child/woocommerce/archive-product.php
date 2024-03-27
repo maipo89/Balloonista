@@ -287,7 +287,7 @@ get_header( 'shop' );
             </div>
             <?php if($button): ?>
                 <div class="shop__container__button-mobile">
-                    <a class="primary-button" ><?php echo $buttonText ?></a>
+                    <a id="categoryButtonMobile" class="primary-button" data-value="<?php echo $buttonCategory[0]->slug ?>"><?php echo $buttonText ?></a>
                 </div>
             <?php endif; ?>
             <div class="shadow"></div>

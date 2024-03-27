@@ -695,6 +695,37 @@ function custom_checkout_script( ){
         $('#e_deliverydate_0').on('input', function() {
             console.log('inpit')
         });
+
+        // Hamburger Menu
+
+        $('.header__wrapper__hamburger').on('click', function() {
+            $('body').toggleClass('modal-open');
+            $('.mobile-menu').toggleClass('open');
+            $('.close').toggleClass('show');
+            $('.hamburger').toggleClass('hide');
+            $('.header').toggleClass('menu-mobile');
+        });
+
+        $('.mobile-menu__overlay').on('click', function(){
+            $('body').removeClass('modal-open');
+            $('.mobile-menu').removeClass('open');
+            $('.close').removeClass('show');
+            $('.hamburger').removeClass('hide');
+            $('.header').removeClass('menu-mobile');
+        });
+
+        // Menu Mobile 
+
+        $('.menu-item-has-children .svg-container').on('click', function(e) {
+            e.preventDefault();
+            var $parentElement = $(this).closest('.menu-item-has-children');
+
+            $('.menu-item-has-children').not($parentElement).each(function() {
+                $(this).removeClass('open');
+            });
+
+            $parentElement.toggleClass('open');
+        });
     });
 
     </script>

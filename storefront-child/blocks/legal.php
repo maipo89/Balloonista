@@ -14,7 +14,7 @@
                 <input class="category-input" type="text" name="referral" value=""/>
                 <div class="select__trigger">
                     <span>
-                        Category
+                        <?php echo $privacyTitle ?>
                     </span>
                     <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.999999 1.5L6.62037 8.0571C6.81992 8.28991 7.18008 8.28991 7.37963 8.0571L13 1.5" stroke="#D9E7E1" stroke-width="2" stroke-linecap="round"/>

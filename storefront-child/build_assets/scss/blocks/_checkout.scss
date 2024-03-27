@@ -138,7 +138,10 @@ li.select2-results__option.select2-results__option--highlighted {
     @media (max-width: 767px) {
         width: calc(100% - 64px) !important;
         left: 32px;
-        top: 0 !important;
+    }
+    @media (max-width: 450px) {
+        width: calc(100% - 40px) !important;
+        left: 20px;
     }
     tfoot {
         border-radius: 24px !important;
@@ -151,14 +154,10 @@ li.select2-results__option.select2-results__option--highlighted {
                     width: calc(100% - 64px) !important;
                     left: 32px;
                     top: 0 !important;
-                    border-radius: 0 24px 0 0!important;
                 }
             }
             th {
                 padding: 38px 0 24px 24px;
-                @media (max-width: 767px) {
-                    border-radius: 20px 0 0 0 !important;
-                }
             }
         }
         .fee {
@@ -348,6 +347,10 @@ input {
             }
             @media (max-width: 900px) {
                 font-size: 12px;
+            }
+
+            @media (max-width: 370px) {
+                font-size: 10px;
             }
         }
     }
@@ -628,7 +631,7 @@ table.woocommerce-checkout-review-order-table .product-name {
     }
     @media (max-width: 767px) {
         width: 100% !important;
-        margin-top: 200px;
+        margin-top: calc(var(--heightCheckoutWindow) + 250px);
     }
 }
 .woocommerce-additional-fields h3 {
@@ -653,6 +656,12 @@ table.woocommerce-checkout-review-order-table .product-total {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 40px;
+    @media (max-width: 767px) {
+        padding: 0 32px;
+    }
+    @media (max-width: 450px) {
+        padding: 0 20px;
+    }
     &__container {
         position: relative;
         z-index: 1;
@@ -672,7 +681,7 @@ table.woocommerce-checkout-review-order-table .product-total {
             width: 260px;
         }
         @media (max-width: 767px) {
-            display: none;
+            width: 100%;
         }
     }
 }
@@ -875,9 +884,11 @@ tfoot .cart-subtotal {
     line-height: normal;
     letter-spacing: -0.32px;
     transition: 0.25s;
-    &:hover {
-        box-shadow: inset 0 0 0 2em $white !important;
-        color: $seaFoam;
+    @media (min-width: 768px) {
+        &:hover {
+            box-shadow: inset 0 0 0 2em $white !important;
+            color: $seaFoam;
+        }
     }
 }
 // .select2-dropdown.select2-dropdown--below {
@@ -903,8 +914,10 @@ tfoot .cart-subtotal {
         p {
             background-color: white;
             color: black;
-            &:hover {
-                box-shadow: inset 0 0 0 2em $mercury !important;
+            @media (min-width: 768px) {
+                &:hover {
+                    box-shadow: inset 0 0 0 2em $mercury !important;
+                }
             }
         }
     }

@@ -1168,22 +1168,22 @@ if (!localStorage.getItem('cookiesAccepted')) {
 
         var HeroWrapper = gsap.utils.toArray(".hero__wrapper");
         HeroWrapper.forEach((block) => {
-            timeline.fromTo(block, { x: -1000, opacity: 0 }, { x: 0, opacity: 1, duration: 1 });
+            timeline.fromTo(block, { x: -1000, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6 });
         });
 
         var ProductsContainer = gsap.utils.toArray(".featured-products__general-container");
         ProductsContainer.forEach((block) => {
-            timeline.fromTo(block, { x: -1000, opacity: 0 }, { x: 0, opacity: 1, duration: 1 });
+            timeline.fromTo(block, { x: -1000, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6 }, 0);
         });
 
         var HeroSliders = gsap.utils.toArray(".hero__gallery");
         HeroSliders.forEach((block) => {
-            timeline.fromTo(block, { x: 1372, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, '+=0.2');
+            timeline.fromTo(block, { x: 1372, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6 }, 0);
         });
 
         var HeroImages = gsap.utils.toArray(".hero__image");
         HeroImages.forEach((block) => {
-            timeline.fromTo(block, { x: 1372, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, '+=0.2');
+            timeline.fromTo(block, { x: 1372, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6 }, 0);
         });
 
     }
@@ -1411,6 +1411,18 @@ if (!localStorage.getItem('cookiesAccepted')) {
     // Filter Button Category
 
     $('#categoryButton').on('click', function () {
+        // Get the category slug and path from the data attributes
+        var categorySlug = $(this).data('value');
+    
+        // Build the new URL with base URL, path, and category parameter
+        var baseUrl = window.location.origin;
+        var newUrl = baseUrl + '/' + 'shop' + '/?category=' + categorySlug;
+    
+        // Redirect to the new URL
+        window.location.href = newUrl;
+    });
+
+    $('#categoryButtonMobile').on('click', function () {
         // Get the category slug and path from the data attributes
         var categorySlug = $(this).data('value');
     
