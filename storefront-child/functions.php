@@ -885,10 +885,20 @@ function my_custom_shipping_table_update( $fragments ) {
 
 // Popup Message
 
-
 add_filter( 'woocommerce_get_script_data', 'change_alert_text', 10, 2 );
 function change_alert_text( $params, $handle ) {
     if ( $handle === 'wc-add-to-cart-variation' )
     $params['i18n_make_a_selection_text'] = __( 'One or more product options are yet to be selected...', 'domain' );
     return $params;
 }
+
+// Pagination Blogs
+
+function custom_rewrite_rules($rules) {
+  $new_rules = array(
+      'blogs/([^/]+)/([^/]+)/page/([0-9]+)/?$' => 'index.php?category_name=$matches[1]&name=$matches[2]&paged=$matches[3]',
+      'blogs/([^/]+)/page/([0-9]+)/?$' => 'index.php?category_name=$matches[1]&paged=$matches[2]',
+  );
+  return $new_rules + $rules;
+}
+add_filter('rewrite_rules_array', 'custom_rewrite_rules');

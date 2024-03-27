@@ -32,8 +32,6 @@ if (!empty($post_name)) {
 $query = new WP_Query($args);
 ?>
 		<div class="blogs">
-			<h1>HELLLOOO</h1>
-			<p><?php var_dump($query->max_num_pages) ?></p>
 			<div class="blogs__inputs">
 			    <div class="blogs__inputs__container">
 

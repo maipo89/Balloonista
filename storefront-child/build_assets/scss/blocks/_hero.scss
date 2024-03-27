@@ -1126,3 +1126,9 @@
 
     }
 }
+
+.home {
+    .hero__wrapper, .featured-products__general-container, .hero__gallery, .hero__image {
+        opacity: 0;
+    }
+}
