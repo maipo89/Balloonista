@@ -17,16 +17,80 @@
     }
     .next-arrow {
         position: absolute;
+        left: 35%;
         top: 84%;
-        left: 39%;
         z-index: 10;
         cursor: pointer;
+
+        @media (max-width: 1260px) {
+            top: 81%;
+        }
+
+        @media (max-width: 1200px) {
+            left: 28%;
+        }
+
+        @media (max-width: 870px) {
+            left: 24%;
+        }
+
+        @media (max-width: 750px) {
+            left: 20%;
+        }
+
+        @media (max-width: 550px) {
+            left: 15%;
+        }
+
+        @media (max-width: 450px) {
+            left: 10%;
+            top: 86%;
+        }
+
+        @media (max-width: 400px) {
+            left: 6%;
+            top: 95%;
+        }
     }
     .prev-arrow {
         position: absolute;
-        right: 39%;
+        right: 35%;
+        top: 84%;
         z-index: 10;
         cursor: pointer;
+
+        @media (max-width: 1260px) {
+            top: 81%;
+        }
+
+        @media (max-width: 1200px) {
+            right: 28%;
+        }
+
+        @media (max-width: 870px) {
+            right: 24%;
+        }
+
+        @media (max-width: 750px) {
+            right: 20%;
+        }
+
+
+        @media (max-width: 550px) {
+            right: 15%;
+        }
+
+
+        @media (max-width: 450px) {
+            right: 10%;
+            top: 86%;
+        }
+
+
+        @media (max-width: 400px) {
+            right: 6%;
+            top: 95%;
+        }
     }
     &__container{
         width: 100;

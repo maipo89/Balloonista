@@ -103,7 +103,7 @@
 				<?php while ( have_rows( 'social', 'options' ) ) : the_row(); ?>
 				<?php $linkSocial = get_sub_field( 'link' ); ?>
 				<?php $imageSocial = get_sub_field( 'image' ); ?>
-					<a href="<?php echo($linkSocial) ?>">
+					<a target="_blank" href="<?php echo($linkSocial) ?>">
 						<img alt="<?php echo($imageSocial["alt"]) ?>" src="<?php echo($imageSocial["sizes"]["onqor-large"]) ?>" />
 					</a>
 				<?php endwhile; ?>

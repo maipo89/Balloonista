@@ -1321,6 +1321,21 @@ input[type="tel"]:focus,input[type="email"]:focus{
 // .woocommerce-cart-form button{
 //     display: none;
 // }
+p.stock.out-of-stock {
+    text-align: center;
+}
+p.stock.available-on-backorder {
+    text-align: center;
+}
+.single_variation_wrap .woocommerce-Price-amount {
+    font-family: $montserrat !important;
+    color: $black !important;
+    font-size: 16px !important;
+}
+bdi::before {
+    margin-right: 5px;
+}
+
 .return-to-shop {
     text-align: center;
     height: 45vh;

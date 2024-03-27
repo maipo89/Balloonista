@@ -32,6 +32,8 @@ if (!empty($post_name)) {
 $query = new WP_Query($args);
 ?>
 		<div class="blogs">
+			<h1>HELLLOOO</h1>
+			<p><?php var_dump($query->max_num_pages) ?></p>
 			<div class="blogs__inputs">
 			    <div class="blogs__inputs__container">
 
@@ -83,7 +85,6 @@ $query = new WP_Query($args);
                 </a>
                 <div class="blogs__card__description">
                     <h2><?php the_title(); ?></h2>
-					sdfsdfsd
                     <p><?php echo get_the_excerpt() ?></p>
                 </div>
                 <div class="blogs__card__button">

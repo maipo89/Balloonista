@@ -252,6 +252,11 @@
                 position: relative;
             }
 
+            svg.search-icon {
+                width: 19px;
+                height: 25px;
+            }
+
             svg {
                 cursor: pointer;
                 &:hover {

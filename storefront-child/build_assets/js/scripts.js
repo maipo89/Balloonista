@@ -635,54 +635,65 @@ $(document).ready(function() {
             $('.baloon-colums__swiper').slick('slickGoTo', 0);
         }
     });
-
-    $('.baloon-colums__swiper__slide').on('mouseenter', function() {
-        // On hover, remove slick-current class from all slides
-        $('.baloon-colums__swiper__slide.slick-current').removeClass('width');
-        $('.baloon-colums__swiper__slide').removeClass('slick-current');
-        // Add slick-current class to the hovered slide
-        $(this).addClass('width slick-current');
     
-        // Check if the current slide's index matches the data-index of the corresponding baloon-colums__text__item
-        var currentSlideIndex = $(this).data('slick-index');
-        $('.baloon-colums__text__item').each(function() {
-            var dataIndex = $(this).data('index');
-            if (currentSlideIndex === dataIndex) {
-                $(this).show();
-            }else{
-                $(this).hide();
+    var isiPadOrTablet = navigator.userAgent.match(/iPad|iPhone|Android|Touch/i) !== null || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+    console.log(isiPadOrTablet, 'detectedddd')
+
+    if (!isiPadOrTablet) {
+        
+        $('.baloon-colums__swiper__slide').on('mouseenter', function() {
+            // On hover, remove slick-current class from all slides
+            $('.baloon-colums__swiper__slide.slick-current').removeClass('width');
+            $('.baloon-colums__swiper__slide').removeClass('slick-current');
+            // Add slick-current class to the hovered slide
+            $(this).addClass('width slick-current');
+        
+            // Check if the current slide's index matches the data-index of the corresponding baloon-colums__text__item
+            var currentSlideIndex = $(this).data('slick-index');
+            $('.baloon-colums__text__item').each(function() {
+                var dataIndex = $(this).data('index');
+                if (currentSlideIndex === dataIndex) {
+                    $(this).show();
+                }else{
+                    $(this).hide();
+                }
+            });
+        });
+
+    }
+
+    if (!isiPadOrTablet) {
+
+        $('.baloon-colums__slider-container').on('mouseleave ', function (e) {
+            // Check if the mouse leave event is triggexred by the slider container,
+            // not the next or prev arrows inside baloon-colums__swiper
+            if (!$(e.target).hasClass('next-arrow') && !$(e.target).hasClass('prev-arrow')) {
+                // On mouse leave baloon-colums__slider-container, remove class width slick-current
+                $('.baloon-colums__swiper__slide.slick-current').removeClass('width slick-current');
+
+                var visibleSlideIndex = $('.baloon-colums__swiper__slide.slick-active').first().data('slick-index');
+        
+                // Add 'width' class to the first visible slide on mouse leave
+                $('.baloon-colums__swiper__slide.slick-active').first().addClass('width slick-current');
+        
+                // Check if the first visible slide's index matches the data-index of the corresponding baloon-colums__text__item
+                // $('.baloon-colums__text__item').each(function () {
+
+                //     var dataIndex = $(this).data('index');
+
+                //     if (visibleSlideIndex === dataIndex) {
+                //         $(this).show();
+                //         console.log(true)
+                //     } else {
+                //         $(this).hide();
+                //     }
+                // });
+                $('.baloon-colums__text__item').hide();
+                $('.baloon-colums__text__item[data-index="' + visibleSlideIndex + '"]').show();
             }
         });
-    });
 
-    $('.baloon-colums__slider-container').on('mouseleave ', function (e) {
-        // Check if the mouse leave event is triggexred by the slider container,
-        // not the next or prev arrows inside baloon-colums__swiper
-        if (!$(e.target).hasClass('next-arrow') && !$(e.target).hasClass('prev-arrow')) {
-            // On mouse leave baloon-colums__slider-container, remove class width slick-current
-            $('.baloon-colums__swiper__slide.slick-current').removeClass('width slick-current');
-
-            var visibleSlideIndex = $('.baloon-colums__swiper__slide.slick-active').first().data('slick-index');
-    
-            // Add 'width' class to the first visible slide on mouse leave
-            $('.baloon-colums__swiper__slide.slick-active').first().addClass('width slick-current');
-    
-            // Check if the first visible slide's index matches the data-index of the corresponding baloon-colums__text__item
-            // $('.baloon-colums__text__item').each(function () {
-
-            //     var dataIndex = $(this).data('index');
-
-            //     if (visibleSlideIndex === dataIndex) {
-            //         $(this).show();
-            //         console.log(true)
-            //     } else {
-            //         $(this).hide();
-            //     }
-            // });
-            $('.baloon-colums__text__item').hide();
-            $('.baloon-colums__text__item[data-index="' + visibleSlideIndex + '"]').show();
-        }
-    });
+    }
 
     $('.baloon-colums__swiper').on('beforeChange', function(event, slick, currentSlide, nextSlide){
         // Add the class to the next slidex
@@ -1362,7 +1373,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
         var selectedCategories = [];
 
         // Retrieve existing categories from the URL
-        var currentUrl = window.location.href;
+        var currentUrl = window.location.origin + '/shop/';
         var existingCategories = getParameterByName('category', currentUrl);
         if (existingCategories) {
             selectedCategories = existingCategories.split(',');
@@ -1388,7 +1399,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
         // Update the URL with the selected categories
         console.log('currentUrl',currentUrl);
         var newUrl = updateUrlParameter('category', selectedCategories.join(','), currentUrl);
-        // window.location.href = newUrl;
+        window.location.href = newUrl;
     });
 
     // Helper function to get URL parameters

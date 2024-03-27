@@ -242,6 +242,11 @@
                 @media (max-width: 740px) {
                     width: 100% !important;
                 }
+
+                &:hover {
+                    box-shadow: inset 0 0 0 2em $white;
+                    color: $seaFoam !important;
+                }
             }
             ._inline-style._x12360387 {
                 @media (min-width: 320px) and (max-width: 667px) {
@@ -282,6 +287,10 @@
             @media (max-width: 740px) {
                 width: 100% !important;
             }
+
+            &:hover, &:focus {
+                border: 2px solid $seaFoam !important;
+            }
         }
 
         ._form_element._x12360387 {
@@ -311,6 +320,10 @@
 
             @media (max-width: 740px) {
                 width: 100% !important;
+            }
+
+            &:hover, &:focus {
+                border: 2px solid $seaFoam !important;
             }
         }
 
