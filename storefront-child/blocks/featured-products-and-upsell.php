@@ -33,6 +33,7 @@
                     <div class="global-featured-products__item">
                         <div class="global-featured-products__image">
                             <img src="<?php echo $image[0] ?>" />
+                            <p class="primary-button">View</p>
                             <div class="global-featured-products__terms">
                             <?php 
                                 $termsTwo = get_the_terms( $product_post_object->ID , 'badge_taxonomy' ); 

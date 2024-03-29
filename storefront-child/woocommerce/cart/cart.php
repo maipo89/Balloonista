@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 do_action( 'woocommerce_before_cart' ); ?>
 
 <h1 class="basket-title">Basket</h1>
-<div class="basket-info-mobile">
+<!-- <div class="basket-info-mobile">
     <?php $cart_total_excluding_delivery = WC()->cart->get_cart_contents_total(); ?>
     
     <div class="cart-total-excluding-delivery">
@@ -30,7 +30,7 @@ do_action( 'woocommerce_before_cart' ); ?>
     <div class="proceed-to-checkout-button">
         <a href="<?php echo esc_url(wc_get_checkout_url()); ?>" class="button">Proceed to Checkout</a>
     </div>
-</div>
+</div> -->
 <div class="onqor-cart">
 	<form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 		<?php do_action( 'woocommerce_before_cart_table' ); ?>

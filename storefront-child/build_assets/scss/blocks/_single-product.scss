@@ -911,6 +911,12 @@ input[type="tel"]:focus,input[type="email"]:focus{
             display: none !important;
         }
     }
+    .cart-collaterals.mobile{
+        display: none;
+        @media (max-width: 1060px) {
+            display: block;
+        }
+    }
     .cart_totals{
         width: 100% !important;
         background-color: #D9E7E1;
