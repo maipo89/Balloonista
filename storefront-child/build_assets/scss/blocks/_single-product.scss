@@ -915,6 +915,9 @@ input[type="tel"]:focus,input[type="email"]:focus{
         display: none;
         @media (max-width: 1060px) {
             display: block;
+            .credit-card-images {
+                opacity: 0;
+            }
         }
     }
     .cart_totals{

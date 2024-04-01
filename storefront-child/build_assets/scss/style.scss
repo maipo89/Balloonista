@@ -119,6 +119,10 @@ body {
             border: 2px $mercury solid;
         }
     }
+    &.active {
+        background-color: $mercury;
+        border: 2px $mercury solid;
+    }
 }
 
 .tertiary-button {

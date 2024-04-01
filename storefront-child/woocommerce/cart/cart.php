@@ -34,6 +34,17 @@ do_action( 'woocommerce_before_cart' ); ?>
 <div class="onqor-cart">
 	<form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 		<?php do_action( 'woocommerce_before_cart_table' ); ?>
+		<div class="cart-collaterals mobile">
+			<?php
+				/**
+				 * Cart collaterals hook.
+				 *
+				 * @hooked woocommerce_cross_sell_display
+				 * @hooked woocommerce_cart_totals - 10
+				 */
+				do_action( 'woocommerce_cart_collaterals' );
+			?>
+		</div>
 
 		<div class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
 			<!-- <div>

@@ -1701,20 +1701,20 @@ if (!localStorage.getItem('cookiesAccepted')) {
         $('.product__option-buttons button').addClass('im-disabled');
     }
 
-    // // Contact Form 7
-    // $('.contact-form__get-a-quote .custom-option').on('click', function() {
-    //     // Get the value of the clicked option
-    //     var selectedOption = $(this).data('value');
+    // Contact Form 7
+    $('.contact-form__get-a-quote .custom-option').on('click', function() {
+        // Get the value of the clicked option
+        var selectedOption = $(this).data('value');
         
-    //     // Update the input field with the selected option value
-    //     $('.contact-form__get-a-quote #dropdown-quote').val(selectedOption);
-    // });
-    // $('.get-a-quote__get-a-quote .custom-option').on('click', function() {
-    //     // Get the value of the clicked option
-    //     var selectedOption = $(this).data('value');
+        // Update the input field with the selected option value
+        $('.contact-form__get-a-quote #dropdown-quote').val(selectedOption);
+    });
+    $('.get-a-quote__get-a-quote .custom-option').on('click', function() {
+        // Get the value of the clicked option
+        var selectedOption = $(this).data('value');
         
-    //     // Update the input field with the selected option value
-    //     $('.get-a-quote__get-a-quote #dropdown-quote').val(selectedOption);
-    // });
+        // Update the input field with the selected option value
+        $('.get-a-quote__get-a-quote #dropdown-quote').val(selectedOption);
+    });
 
 });
