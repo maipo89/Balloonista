@@ -114,8 +114,10 @@ $(document).ready(function() {
 
             if (matchFound) {
                 $('.search__container__searching .heading-pages').addClass('open');
+                $('.search__container__searching .pages-container').addClass('open');
             } else {
                 $('.search__container__searching .heading-pages').removeClass('open');
+                $('.search__container__searching .pages-container').removeClass('open');
             }
 
         }else{
@@ -123,6 +125,7 @@ $(document).ready(function() {
                 $(this).removeClass('open');
             });
             $('.search__container__searching .heading-pages').removeClass('open');
+            $('.search__container__searching .pages-container').removeClass('open');
         };
     });
 
