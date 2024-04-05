@@ -522,6 +522,7 @@
 
                 ul {
                     display: flex;
+                    flex-wrap: wrap;
                     width: fit-content;
                     position: absolute;
                     bottom: 12px;
@@ -539,6 +540,7 @@
                         border-radius: 44px;
                         line-height: 10px;
                         color: black;
+                        margin: 5px;
                     }
                 }
             }

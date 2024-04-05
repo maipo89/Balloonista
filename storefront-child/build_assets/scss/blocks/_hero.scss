@@ -802,19 +802,19 @@
                     position: absolute;
                     top: 0;
                     bottom: 0;
-                    width: 20%; /* Adjust the width as needed */
+                    width: 18%; /* Adjust the width as needed */
                     z-index: 1;
                 }
 
                 /* Left gradient */
                 &:before {
-                    left: -10px;
+                    left: 0px;
                     background: linear-gradient(to left, rgba(255,255,255,0) 0%, #FFFFFF 100%);
                 }
 
                 /* Right gradient */
                 &:after {
-                    right: -10px;
+                    right: 0px;
                     background: linear-gradient(to right, rgba(255,255,255,0) 0%, #FFFFFF 100%);
                 }
         }
