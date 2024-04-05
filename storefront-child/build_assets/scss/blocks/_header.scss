@@ -488,6 +488,10 @@
                 width: 280px;
             }
 
+            @media (max-height: 450px) {
+                padding: 16px 24px;
+            }
+
             .close-icon {
                cursor: pointer;
                &:hover {
@@ -511,6 +515,10 @@
                     width: 80%;
                 }
 
+                @media (max-height: 450px) {
+                    margin-bottom: 13px;
+                }
+
                 input {
                     width: 100%;
                 }
@@ -527,6 +535,9 @@
                     &.open {
                         display: block;
                     }
+                    @media (max-height: 450px) {
+                        margin-bottom: 8px;
+                    }
                 }
 
                 .product-container{
@@ -542,6 +553,11 @@
                             width: 136px;
                             border-radius: 12px;
                             position: relative;
+                            @media (max-height: 450px) {
+                                height: 110px;
+                                width: 110px;
+                                margin-left: 13px;
+                            }
 
                             &__img {
                                 height: 136px;
@@ -555,6 +571,10 @@
                                 left: 0;
                                 right: 0;
                                 bottom: 0;
+                                @media (max-height: 450px) {
+                                    height: 110px;
+                                    width: 110px;
+                                }
                             }
 
                             p {
@@ -569,6 +589,9 @@
                                 color: white;
                                 opacity: 0;
                                 transition: 0.5s ease opacity;
+                                @media (max-height: 450px) {
+                                    padding: 9px 12px;
+                                }
                                 &:hover {
                                     color: black;
                                 }
@@ -670,17 +693,19 @@
                         a {
                             position: relative;
                         }
-                        &:hover {
-                            a::after {
-                                content: '';
-                                width: 100%;
-                                height: 2px;
-                                display: block;
-                                background-color: $seaFoam;
-                                position: absolute;
-                                top: 20px;
-                                border-radius: 7px;
-                            }
+                        @media (min-width: 450px) {
+                            &:hover {
+                                a::after {
+                                    content: '';
+                                    width: 100%;
+                                    height: 2px;
+                                    display: block;
+                                    background-color: $seaFoam;
+                                    position: absolute;
+                                    top: 20px;
+                                    border-radius: 7px;
+                                }
+                            }  
                         }
 
                         &.open {
