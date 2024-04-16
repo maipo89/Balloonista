@@ -26,7 +26,7 @@ function my_child_theme_enqueue_styles() {
             get_stylesheet_directory_uri() . '/dist/scripts/all.min.min.js',
             array(), // Add any script dependencies here, for example, array('jquery')
             wp_get_theme()->get('Version'),
-            true // Set to true to load the script in the footer
+            false // Set to true to load the script in the footer
         );
         wp_localize_script( 'custom-qty', 'wc_cart_params', array(
             'ajax_url' => admin_url('admin-ajax.php'),
@@ -103,8 +103,7 @@ add_action('init', 'badge_taxonomy');
 
 // Categories 
 
-wp_enqueue_script('my-scripts', get_template_directory_uri() . 'build_assets/js/scripts.js', array('jquery'), '1.0', true);
-
+wp_enqueue_script('my-scripts', get_template_directory_uri() . 'build_assets/js/scripts.js', array('jquery'), '1.0', false);
 
 function add_products_and_pages_to_js() {
     // Retrieve product categories
@@ -515,7 +514,7 @@ function custom_checkout_script( ){
 
         $('#payment').before(paymentAccordion);
 
-        var additionalAccordion = $('<div class="additional-accordion"><h3>Additional option</h3><p id="view-additional">View</p></div>');
+        var additionalAccordion = $('<div class="additional-accordion"><h3>Order notes</h3><p id="view-additional">View</p></div>');
         
         $('.woocommerce-additional-fields').before(additionalAccordion);
 
@@ -726,6 +725,14 @@ function custom_checkout_script( ){
 
             $parentElement.toggleClass('open');
         });
+
+        // Order Type H3
+
+        $('.order-type h3').text('Choose one of the options below:');
+
+        // Placeholder order notes 
+                
+        $("#order_comments").attr("placeholder", "Notes about your order, e.g. colour requests or special notes for delivery driver.");
     });
 
     </script>

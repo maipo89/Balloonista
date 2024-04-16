@@ -3,9 +3,13 @@
 <?php $button = get_sub_field('button'); ?>
 <?php $buttonText = get_sub_field('button_text'); ?>
 <?php $buttonLink = get_sub_field('button_link'); ?>
+<?php $secondButton = get_sub_field('second_button'); ?>
+<?php $secondButtonText = get_sub_field('second_button_text'); ?>
+<?php $secondButtonLink = get_sub_field('second_button_link'); ?>
 <?php $gallery = get_sub_field('gallery'); ?>
 <?php $staticImage = get_sub_field('image'); ?>
 <?php $heroImage = get_sub_field('hero_image'); ?>
+<?php $imageTopMobile = get_sub_field('image_top_mobile'); ?>
 <?php $breadcrumb = get_sub_field('breadcrumb'); ?>
 <?php $blogPage = get_sub_field('blog_page'); ?>
 <?php $title = get_the_title(); ?>
@@ -16,9 +20,10 @@
 <?php $productsTitle = get_sub_field('products_title'); ?>
 <?php $buttonTextProducts = get_sub_field('button_text_products'); ?>
 <?php $buttonLinkProducts = get_sub_field('button_link_products'); ?>
+<?php $sliderClients = get_sub_field('slider_clients'); ?>
 
 <div class="hero__container">
-    <div class="hero <?php echo($featuredProducts ? '' : 'child-pages')?> <?php echo($blogPage ? 'blog-pages' : '')?>">
+    <div class="hero <?php echo($featuredProducts ? '' : 'child-pages')?> <?php echo($blogPage ? 'blog-pages' : '')?> <?php echo($imageTopMobile ? 'image-top-mobile' : '')?>">
         <div class="hero__wrapper">
             <?php if($breadcrumb): ?>
                 <div class="hero__wrapper__breadcrumb">
@@ -45,13 +50,22 @@
                 endif;
                 ?>
             </div>
-            <?php if($button): ?>
-                <div class="hero__wrapper__button">
-                    <a class="primary-button" href="<?php echo($buttonLink) ?>"><?php echo($buttonText) ?></a>
-                </div>
-            <?php 
-            endif;
-            ?>
+            <div class="hero__wrapper__buttons">
+                <?php if($button): ?>
+                    <div class="hero__wrapper__button">
+                        <a class="primary-button" href="<?php echo($buttonLink) ?>"><?php echo($buttonText) ?></a>
+                    </div>
+                <?php 
+                endif;
+                ?>
+                <?php if($secondButton): ?>
+                    <div class="hero__wrapper__button">
+                        <a class="primary-button" href="<?php echo($secondButtonLink) ?>"><?php echo($secondButtonText) ?></a>
+                    </div>
+                <?php 
+                endif;
+                ?>
+            </div>
         </div>
         <!-- <div class="hero__space"></div> -->
         <?php if( !$staticImage ): ?>
@@ -83,6 +97,23 @@
         ?>
         
     </div>
+
+    <?php if($sliderClients) : ?>
+        <?php if( have_rows('clients') ): ?>
+            <div class="hero__slider-clients__wrapper">
+                <div class="hero__slider-clients__inner">
+                    <?php while( have_rows('clients') ): the_row(); 
+                        $image = get_sub_field('image');
+                        ?>
+                        <div class="hero__slider-clients__image">
+                            <img src="<?php echo esc_url($image['sizes']['onqor-large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
     <?php if( $featuredProducts ): ?>
         <div class="featured-products">
             

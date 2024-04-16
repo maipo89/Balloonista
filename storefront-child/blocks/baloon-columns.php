@@ -4,10 +4,31 @@
 <?php $buttonText = get_sub_field('button_text'); ?>
 <?php $buttonLink = get_sub_field('button_link'); ?>
 <?php $sliderClients = get_sub_field('slider_clients'); ?>
+<?php $sliderClientsTop = get_sub_field('slider_clients_top'); ?>
 <?php $slider = get_sub_field('slider'); ?>
 <?php $marginBottom = get_sub_field('higher_margin_bottom'); ?>
 
+<!-- slider clients !-->
+<?php if($sliderClientsTop) : ?>
+    <?php if($sliderClients) : ?>
+        <?php if( have_rows('clients') ): ?>
+            <div class="baloon-colums__slider-clients__wrapper top">
+                <div class="baloon-colums__slider-clients__inner">
+                    <?php while( have_rows('clients') ): the_row(); 
+                        $image = get_sub_field('image');
+                        ?>
+                        <div class="baloon-colums__slider-clients__image">
+                            <img src="<?php echo esc_url($image['sizes']['onqor-large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>
+
 <div class="baloon-colums <?php echo($marginBottom ? 'higher-margins' : '') ?>">
+
         <!-- title mobile !-->
         <?php if( have_rows('slider') ) : $index = 0;  ?>
             <?php while( have_rows('slider') ): the_row(); 
@@ -125,19 +146,21 @@
 </div> 
 
 <!-- slider clients !-->
-<?php if($sliderClients) : ?>
-    <?php if( have_rows('clients') ): ?>
-        <div class="baloon-colums__slider-clients__wrapper">
-            <div class="baloon-colums__slider-clients__inner">
-                <?php while( have_rows('clients') ): the_row(); 
-                    $image = get_sub_field('image');
-                    ?>
-                    <div class="baloon-colums__slider-clients__image">
-                        <img src="<?php echo esc_url($image['sizes']['onqor-large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
-                    </div>
-                <?php endwhile; ?>
+<?php if(!$sliderClientsTop) : ?>
+    <?php if($sliderClients) : ?>
+        <?php if( have_rows('clients') ): ?>
+            <div class="baloon-colums__slider-clients__wrapper">
+                <div class="baloon-colums__slider-clients__inner">
+                    <?php while( have_rows('clients') ): the_row(); 
+                        $image = get_sub_field('image');
+                        ?>
+                        <div class="baloon-colums__slider-clients__image">
+                            <img src="<?php echo esc_url($image['sizes']['onqor-large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                        </div>
+                    <?php endwhile; ?>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
     <?php endif; ?>
 <?php endif; ?>
 

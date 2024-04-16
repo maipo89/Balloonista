@@ -1,4 +1,5 @@
-.hero__container { 
+.hero__container {
+    position: relative;
     .hero {
         background-color: $mercury;
         height: fit-content;
@@ -197,6 +198,18 @@
                             color: black;
                         }
                     }
+                }
+            }
+
+            &__buttons {
+                display: flex;
+                flex-wrap: wrap;
+                column-gap: 20px;
+                @media (max-width: 1000px) {
+                    justify-content: center;
+                }
+                @media (max-width: 380px) {
+                    display: block;
                 }
             }
         }
@@ -714,6 +727,30 @@
                 }
             }
         }
+        &.image-top-mobile {
+            @media (max-width: 450px) {
+                flex-direction: column-reverse;
+
+                &::after {
+                    display: none;
+                }
+
+                .hero__wrapper {
+                    padding-top: 40px;
+                    padding-bottom: 64px !important;
+                }
+
+                .hero__gallery {
+                    margin-top: 50px !important;
+                    bottom: 0 !important;
+                }
+
+                &.child-pages .hero__image {
+                    bottom: 0 !important;
+                    margin-top: 40px !important;
+                }
+            }
+        }
         &::after {
             content: '';
             position: absolute;
@@ -734,6 +771,53 @@
             @media (max-width: 680px) {
                 display: block;
                 height: 30px;
+            }
+        }
+    }
+    .hero__slider-clients {
+        &__wrapper {
+            height: 90px;
+            width: 100%;
+            position: absolute;
+            overflow: hidden;
+            bottom: -110px;
+
+            @media (max-width: 1300px) {
+                position: relative;
+                bottom: 0px;
+            }
+    
+            &.top {
+                bottom: 0px;
+                padding-top: 48px;
+                @media (max-width: 768px) {
+                    padding: 32px;
+                }
+            }
+        }
+        &__inner {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        &__image {
+            height: 100%;
+            flex: 0 0 auto;
+            white-space: nowrap;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            img {
+                padding-left: 26px;
+                padding-right: 26px;
+                height: 40px;
+                width: auto;
+    
+                @media (max-width: 450px) {
+                    width: auto;
+                }
             }
         }
     }

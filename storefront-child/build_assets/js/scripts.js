@@ -379,36 +379,18 @@ $(document).ready(function() {
     // Accordion Environment Block
 
     function initializeAccordion() {
-        $(".environment__text-mobile__option-mobile").accordion({
+        $(".environment__text__option-mobile").accordion({
             collapsible: true,
             active: false,
             heightStyle: 'content',
         });
     }
 
-    // Check screen width on document ready
-    var screenWidth = $(window).width();
-    if (screenWidth <= 768) {
-        initializeAccordion();
-    }
+    initializeAccordion();
 
-    // Resize event handler
-    $(window).on('resize', function () {
-        var screenWidth = $(window).width();
+    $('.environment__text__title p a').on('click', function(event) {
 
-        // Check if the screen width is less than 768 pixels
-        if (screenWidth <= 768) {
-            // Reinitialize accordion
-            initializeAccordion();
-        } else {
-            // Destroy accordion if the screen width is 768 pixels or more
-            var accordionElement = $(".environment__text-mobile");
-
-            // Check if the accordion is initialized before calling destroy
-            if (accordionElement.hasClass("ui-accordion")) {
-                accordionElement.accordion("destroy");
-            }
-        }
+        event.stopPropagation();
     });
 
 
@@ -443,6 +425,63 @@ $(document).ready(function() {
             const $wrapper = $('.baloon-colums__slider-clients__wrapper');
             const $inner = $('.baloon-colums__slider-clients__inner');
             const $items = $('.baloon-colums__slider-clients__image');
+            
+            let wrapWidth = 0;
+            let viewWidth = 0;
+            let widths = [];
+            
+            // Check if wrapper exists before accessing its width
+            if ($wrapper.length > 0) {
+                viewWidth = $wrapper.width();
+            }
+            
+            // get total wrap width, and set items at initial positions
+            $items.each(function() {
+                const $item = $(this);
+                const width = $item.width();
+                const widthBefore = wrapWidth;
+                widths.push(width);
+                
+                $item.css('transform', 'translateX(' + widthBefore + 'px)');
+                
+                wrapWidth += width;
+            });
+            
+            // get longest width of item widths and set inner position based off value
+            const longestWidth = Math.max(...widths);
+            $inner.css('left', -longestWidth);
+            
+            // setup animation
+            const animation = gsap.to($items, 60, {
+                x: "+=" + wrapWidth,
+                ease: 'none',
+                paused: false,
+                repeat: -1, // Infinite repeat
+                modifiers: {
+                    x: function(x, target) {
+                        x = parseFloat(x) % wrapWidth;
+                        
+                        $(target).css('visibility', x - longestWidth > viewWidth ? 'hidden' : 'visible');
+                        
+                        return x + 'px';
+                    }
+                }
+            });
+
+        };
+
+        recalculateSlider();
+
+    });
+
+    $(window).on('load resize orientationchange', function() {
+        console.log('orientation')
+
+        const recalculateSlider = function() {
+
+            const $wrapper = $('.hero__slider-clients__wrapper');
+            const $inner = $('.hero__slider-clients__inner');
+            const $items = $('.hero__slider-clients__image');
             
             let wrapWidth = 0;
             let viewWidth = 0;
@@ -604,7 +643,7 @@ $(document).ready(function() {
             slidesToScroll: 1,
             arrows: true,
             variableWidth: true,
-            infinite: false,
+            infinite: true,
             cssEase: 'ease',
             nextArrow: '<svg class="next-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 24L19.3019 13.4266C19.6209 13.2317 19.6209 12.7683 19.3019 12.5734L2 2" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
             prevArrow: '<svg class="prev-arrow" width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 2L2.69814 12.5734C2.37911 12.7683 2.37911 13.2317 2.69814 13.4266L20 24" stroke="#70B095" stroke-width="4" stroke-linecap="round"/></svg>',
@@ -700,21 +739,41 @@ $(document).ready(function() {
 
     $('.baloon-colums__swiper').on('beforeChange', function(event, slick, currentSlide, nextSlide){
         // Add the class to the next slidex
-        if (nextSlide > currentSlide) {
+        if (nextSlide > currentSlide || (nextSlide === 0 && (slick.slideCount - 1) === currentSlide)) {
             // Remove the class from all slides
                 $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').addClass('width');
                 $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('width');
+                console.log(nextSlide, 'nextslide')
+                console.log(currentSlide, 'currentslide')
+                // if(nextSlide >= slick.slideCount - 5) {
+                //     console.log(true)
+                //     $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').removeClass('width');
+                //     $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('width');
+                // }
+                if (nextSlide === 0 && ((slick.slideCount - 1) === currentSlide)) {
+                    $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').removeClass('width');
+                    $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('target');
+                    $('.baloon-colums__swiper .slick-list').addClass('opacity');
+              
+                }
+                
         }else{
             // var currentElement = $('.baloon-colums__swiper .slick-current');
             // var firstActive = document.querySelectorAll(".baloon-colums__swiper .slick-active")[0];
             // console.log(currentElement)
             $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').removeClass('width');
         }
-        console.log('clicked')
 
     });
 
     $('.baloon-colums__swiper').on('afterChange', function(event, slick, currentSlide){
+        if(currentSlide === 0) {
+            $('.baloon-colums__swiper .slick-slide').not('[data-slick-index="' + currentSlide + '"]').removeClass('width');
+            $('.slick-slide').removeClass('target');
+            setTimeout(function() {
+                $('.baloon-colums__swiper .slick-list').removeClass('opacity');
+            }, 600);
+        }
         var firstActive = document.querySelectorAll(".baloon-colums__swiper .slick-active")[0];
         if (!firstActive.classList.contains('slick-current')) {
             $('.baloon-colums__swiper .slick-slide.slick-current').removeClass('width');

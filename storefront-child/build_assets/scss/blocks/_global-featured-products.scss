@@ -216,6 +216,11 @@
             left:0px;
         }
         &--custom{
+            a {
+                position: relative;
+                top: initial;
+                left: initial;
+            }
             p{
                 text-align: center;
             }

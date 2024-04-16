@@ -16,11 +16,12 @@
                     $customItem = get_sub_field('custom_item');
                     ?>
                     <div class="global-featured-products__item global-featured-products__item--custom">
-                        <div class="global-featured-products__image">
-                            <img src="<?php echo $customItem["image"]["sizes"]["medium"]; ?>" />
-                        </div>
-                        <p><?php echo $customItem['title'] ?></p>
-                        <a href="<?php echo $customItem['page']['url'] ?>"></a>
+                        <a href="<?php echo $customItem['page']['url'] ?>">
+                            <div class="global-featured-products__image">
+                                <img src="<?php echo $customItem["image"]["sizes"]["medium"]; ?>" />
+                            </div>
+                            <p><?php echo $customItem['title'] ?></p>
+                        </a>
                     </div> <?php
                 } else { 
                     $product_post_object = get_sub_field('products');

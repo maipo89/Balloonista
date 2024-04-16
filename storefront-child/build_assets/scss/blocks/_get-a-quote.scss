@@ -70,7 +70,7 @@
                 }
             }
         }
-        input[type=text], input[type=email], input[type=tel] {
+        input[type=text], input[type=email], input[type=tel], input[type=date] {
             width: 232px !important;
             margin-right: 25px;
             margin-top: 24px;
@@ -173,6 +173,10 @@
             display: flex;
             margin-top: 24px;
 
+            @media (max-width: 690px) {
+                flex-wrap: wrap;
+            }
+
             @media (max-width: 500px) {
                 display: block;
             }
@@ -254,6 +258,23 @@
 
             .wpcf7-form-control-wrap {
                 margin-right: 16px;
+            }
+
+            .event-capture {
+                span {
+                    margin-right: 24px;
+                    @media (max-width: 690px) {
+                        margin-top: 24px;
+                    }
+                }
+                p {
+                    @media (max-width: 510px) {
+                        display: block;
+                        input {
+                            margin-top: 20px;
+                        }
+                    }
+                }
             }
         }
         .submit-container {

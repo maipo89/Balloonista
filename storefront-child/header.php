@@ -45,7 +45,9 @@
 				
 
 			?>
-			<a class="search-option">Search</a>
+			<div class="search-option__container">
+			   <a class="search-option">Search</a>
+			</div>
 		</div>
 		<div class="mobile-menu__overlay"></div>
 	</div>

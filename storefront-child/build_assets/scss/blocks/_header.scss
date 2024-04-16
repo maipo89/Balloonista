@@ -49,8 +49,9 @@
             li {
                 font-size: 16px;
                 font-weight: 400;
-                padding: 15px 0 15px 0;
                 position: relative;
+                border-radius: 20px;
+                margin-top: 10px;
 
                 &::after {
                     content: '';
@@ -61,6 +62,7 @@
                     position: relative;
                     top: 15px;
                     border-radius: 7px;
+                    display: none;
                 }
 
                 .sub-menu {
@@ -73,9 +75,27 @@
                     li {
                         opacity: 0;
                         transition: opacity 0.5s ease;
+                        margin-top: 0;
                         &::after {
                             display: none;
                         }
+                    }
+                }
+
+                a {
+                    width: 100%;
+                    display: block;
+                    padding: 15px 0 15px 0;
+                    padding-left: 15px;
+                    border-radius: 20px;
+                    border: 1px solid $mercury;
+
+                    @media (max-width: 450px) {
+                        width: 95%;
+                    }
+
+                    &:hover, &:focus, &:active {
+                        background-color: $mercury;
                     }
                 }
 
@@ -88,14 +108,32 @@
 
                 a {
                     transition: font-weight 0.1s ease;
+                    width: 100%;
+                    display: block;
+                    padding: 15px 0 15px 0;
+                    padding-left: 15px;
+                    border-radius: 20px;
+                    border: 1px solid $mercury;
+
+                    @media (max-width: 450px) {
+                        width: 95%;
+                    }
+
+                    &:hover, &:focus, &:active {
+                        background-color: $mercury;
+                    }
                 }
                 .svg-container {
-                    width: 40%;
+                    width: 10%;
                     height: 100%;
                     position: absolute;
                     display: block;
-                    right: 0;
+                    right: -20px;
                     top: 0;
+
+                    @media (max-width: 450px) {
+                        right: -10px;
+                    }
                 }
                 svg {
                     transition: transform 0.3s ease;
@@ -109,22 +147,31 @@
                 &.open {
                     a {
                         font-weight: 600;
+                        background-color: $mercury;
                     }
                     svg {
                         transform: rotate(180deg);
                     }
                     .sub-menu {
-                        padding-top: 15px;
-                        max-height: 500px;
+                        max-height: 700px;
                         opacity: 1;
                         pointer-events: initial;
 
                         li {
                             opacity: 1;
-                            padding: 12px 0;
+                            margin-top: 10px;
 
                             a {
                                 font-weight: 300;
+                                background-color: $white;
+
+                                @media (max-width: 450px) {
+                                    width: 95%;
+                                }
+
+                                &:hover, &:focus, &:active {
+                                    background-color: $mercury;
+                                }
                             }
                         }
 
@@ -135,31 +182,41 @@
                 }
             }
         }
-
-        .search-option {
+        .search-option__container {
             display: none;
 
             @media (max-width: $mobile) {
                 display: block;
-                padding: 15px 20px;
+                padding: 0 20px;
+                margin-top: 10px;
+                width: 100%;
+                height: fit-content;
+            }
+            .search-option {
+                padding: 15px 0 15px 0;
+                padding-left: 15px;
+                border-radius: 20px;
+                border: 1px solid $mercury;
                 color: $black;
                 font-weight: 400;
                 margin-bottom: 50px;
+                display: block;
+                width: 95%;
 
                 &::after {
                     content: '';
                     width: 100%;
                     height: 2px;
-                    display: block;
+                    display: none;
                     background-color: $light-mercury;
                     position: relative;
                     top: 15px;
                     border-radius: 7px;
                 }
-            }
 
-            @media (max-width: $smaller-screen) {
-                padding: 15px 16px;
+                @media (max-width: $smaller-screen) {
+                    padding: 15px 16px;
+                }
             }
         }
         &__overlay{

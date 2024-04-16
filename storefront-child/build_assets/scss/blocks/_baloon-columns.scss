@@ -557,10 +557,10 @@
             display: block;
         }
         
-        &__slide.slick-current {
+        &__slide.slick-current, &__slide.target {
             width: 744px;
             height: 494px;
-            transition: width 1s ease-in-out;
+            transition: width 0.7s ease-in-out !important;
 
             @media (max-width: 1400px) {
                 width: 700px;
@@ -611,14 +611,22 @@
         /* the parent */
         .slick-list {
             margin: 0 -8px;
-            transition: width 0.7s ease-in-out;
+            opacity: 1;
+            transition: width 0.7s ease-in-out, opacity 0.5s ease-in-out;
             @media (max-width: 1000px) {
                 margin: 0 -6px;
+            }
+            &.opacity {
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
             }
         }
 
         .slick-track {
             left: 10px;
+            // &.no-transform {
+            //     transform: none !important;
+            // }
         }
 
         .slick-arrow {
@@ -667,6 +675,14 @@
         position: relative;
         overflow: hidden;
         bottom: 20px;
+
+        &.top {
+            bottom: 0px;
+            padding-top: 48px;
+            @media (max-width: 768px) {
+                padding: 32px;
+            }
+        }
     }
     &__inner {
         position: relative;
