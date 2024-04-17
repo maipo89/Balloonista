@@ -109,9 +109,17 @@ get_header( 'shop' );
         }
 
         else if (isset($_GET['orderby']) && $_GET['orderby'] === 'featured') {
-            $args['meta_key']   = '_featured';
-            $args['meta_value'] = 'yes';
-            $args['order']      = 'desc';
+            $tax_query[] = array(
+                'taxonomy' => 'product_visibility',
+                'field'    => 'name',
+                'terms'    => 'featured',
+                'operator' => 'IN', // or 'NOT IN' to exclude feature products
+            );
+            
+            // The query
+            $args = array(
+                'tax_query' => $tax_query
+            );
         }
 
         else if (isset($_GET['orderby']) && $_GET['orderby'] === 'name_a_to_z') {
