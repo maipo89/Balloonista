@@ -158,13 +158,14 @@ if ( post_password_required() ) {
 			?>
 	
 			<div class="product__option-buttons">
-				<?php 
 
+				<?php 
 				// Get add-ons data from the product meta
 				$add_ons = get_post_meta($product_id, '_product_addons', true);
 
 				// Check if there are any add-ons
-				if (!empty($add_ons)) { ?>
+				// if (!empty($add_ons)) { 
+				?>
 					<button class="options" data-count="0">
 						<p>Options</p>
 					</button>
@@ -174,11 +175,11 @@ if ( post_password_required() ) {
 					<button class="summary" data-count="2">
 						<p>Summary</p>
 					</button>
-				<?php } else { ?>
-					<button class="options" data-count="0">
+				
+					<!-- <button class="options" data-count="0">
 						<p>Options</p>
-					</button>
-				<?php } ?> 
+					</button> -->
+				
 			</div>
 		</div>
 		<?php
@@ -197,13 +198,9 @@ if ( post_password_required() ) {
 			do_action( 'woocommerce_single_product_summary' );
 		?>
 		<!-- <?php echo woocommerce_quantity_input(); ?> -->
-		<?php if (!empty($add_ons)) { ?>
 			<button class="product-next-step">
 				<p>Next</p>
 			</button>
-		<?php }else{ ?>
-
-		<?php } ?>
 	</div>
 
 	<?php

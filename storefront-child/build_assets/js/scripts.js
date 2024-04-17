@@ -507,6 +507,7 @@ $(document).ready(function() {
             // get longest width of item widths and set inner position based off value
             const longestWidth = Math.max(...widths);
             $inner.css('left', -longestWidth);
+            $inner.addClass('opacity');
             
             // setup animation
             const animation = gsap.to($items, 60, {
