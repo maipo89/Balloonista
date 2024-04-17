@@ -136,7 +136,7 @@
 					<div class="cookie-banner__content">
 						<div>
 							<h5>Our use of cookies</h5>
-							<p>ballonista.com uses cookies, some are necessary for the operation of the website and some are designed to improve your experience. For more information, <a href="<?php echo get_home_url(); ?>/cookie-policy">click here</a>.</p>
+							<p>ballonista.com uses cookies, some are necessary for the operation of the website and some are designed to improve your experience. For more information, <a href="<?php echo get_home_url(); ?>/privacy-policy/">click here</a>.</p>
 						</div>
 						<div>
 							<h5>Necessary cookies</h5>
