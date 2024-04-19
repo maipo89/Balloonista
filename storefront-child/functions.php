@@ -729,6 +729,7 @@ function custom_checkout_script( ){
         // Order Type H3
 
         $('.order-type h3').text('Choose one of the options below:');
+        $('.woocommerce-order-details p .orddd_order_type').text('Choose one of the options below:');
 
         // Placeholder order notes 
                 
@@ -940,3 +941,13 @@ function custom_rewrite_rules($rules) {
   return $new_rules + $rules;
 }
 add_filter('rewrite_rules_array', 'custom_rewrite_rules');
+
+// Remove shipping from Basket
+
+function disable_shipping_calc_on_cart( $show_shipping ) {
+    if( is_cart() ) {
+        return false;
+    }
+    return $show_shipping;
+}
+add_filter( 'woocommerce_cart_ready_to_calc_shipping', 'disable_shipping_calc_on_cart', 99 );

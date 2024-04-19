@@ -1250,3 +1250,109 @@ input[type=radio]:before, input[type=checkbox]:before {
 .woocommerce-message {
     display: none;
 }
+
+.woocommerce-order {
+    .woocommerce-thankyou-order-received {
+        padding-left: 40px;
+        margin-top: 150px;
+        color: black;
+        @media (min-width: 1024px) {
+            padding-left: 32px;
+        }
+    }
+
+
+    .order_details {
+        background-color: $mercury;
+    }
+
+    ul.order_details li {
+        padding: 1em 3.618em;
+        font-family: $montserrat;
+        color: black;
+
+        strong {
+            font-weight: 500;
+        }
+    }
+
+    h2.woocommerce-order-details__title {
+        padding-left: 40px;
+        @media (min-width: 1024px) {
+            padding-left: 32px;
+        }
+    }
+
+    .woocommerce-order-details {
+        font-family: $montserrat;
+        color: black;
+    }
+
+    .woocommerce-table__product-name {
+        padding-left: 40px;
+
+        @media (min-width: 1024px) {
+            padding-left: 32px;
+        }
+    }
+
+    tfoot {
+        th {
+            padding-left: 40px;
+            @media (min-width: 1024px) {
+                padding-left: 32px;
+            }
+        }
+    }
+
+    .add_to_calendar {
+        padding-left: 40px;
+        margin-bottom: 20px;
+
+        @media (min-width: 1024px) {
+            padding-left: 32px;
+        }
+
+        #calendar-toggle {
+            background-color: $seaFoam;
+            color: $white;
+            border-radius: 10px;
+            font-size: $p-regular;
+            font-weight: $p-regular-weight;
+            padding: 9px 24px;
+            display: block;
+            width: fit-content;
+            transition: 0.25s;
+            @media (min-width: 768px) {
+                &:hover {
+                    box-shadow: inset 0 0 0 2em $mercury;
+                }
+            
+                &:active, &:focus {
+                    background-color: $seaFoam;
+                }
+            }
+        }
+    }
+
+    .orddd_order_type, .orddd_delivery_date, .orddd_delivery_time {
+        padding-left: 40px !important;
+        margin-bottom: 10px !important;
+
+        @media (min-width: 1024px) {
+            padding-left: 32px !important;
+        }
+    }
+
+    .woocommerce-customer-details {
+        padding-top: 50px;
+        .woocommerce-columns {
+            padding-left: 40px !important;
+            color: black;
+    
+            @media (min-width: 1024px) {
+                padding-left: 32px !important;
+            }
+        }
+    }
+}

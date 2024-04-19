@@ -1780,4 +1780,9 @@ if (!localStorage.getItem('cookiesAccepted')) {
         $('.get-a-quote__get-a-quote #dropdown-quote').val(selectedOption);
     });
 
+    // detect IE8 and above, and edge
+if (document.documentMode || /Edge/.test(navigator.userAgent)) {
+    alert('Hello Microsoft User!');
+}
+
 });

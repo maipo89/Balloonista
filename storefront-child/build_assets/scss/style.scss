@@ -28,6 +28,45 @@
 @import 'blocks/checkout.scss';
 
 
+@supports (-ms-ime-align:auto) {
+    @media (prefers-color-scheme: dark) {
+        @media (max-width: 800px) {
+            body {
+                color: $white;
+                }
+                .header {
+                    svg {
+                        path, rect {
+                            fill: white;
+                        }
+                    }
+                }
+            
+                h1, h2, h3, p {
+                    color: white;
+                }
+                .mobile-menu {
+                    .svg-container {
+                        svg {
+                            path {
+                                fill: #242525;
+                            }
+                        }
+                    }
+                }
+                .footer {
+                    a {
+                        color: white;
+                    }
+            
+                    input {
+                        color: white;
+                    }
+                }
+        }
+    }
+}
+
 h1 {
     font-size: 54px;
     font-family: $montserrat;
