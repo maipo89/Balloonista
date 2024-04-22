@@ -637,8 +637,10 @@ $(document).ready(function() {
     });
 
     // Slider Clients
+
+    var swiperCarousel;
     function initSlick() {
-        $('.baloon-colums__swiper').slick({
+        swiperCarousel = $('.baloon-colums__swiper').slick({
             dots: false,
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -692,15 +694,32 @@ $(document).ready(function() {
             $(this).addClass('width slick-current');
         
             // Check if the current slide's index matches the data-index of the corresponding baloon-colums__text__item
-            var currentSlideIndex = $(this).data('slick-index');
-            $('.baloon-colums__text__item').each(function() {
-                var dataIndex = $(this).data('index');
-                if (currentSlideIndex === dataIndex) {
-                    $(this).show();
-                }else{
-                    $(this).hide();
-                }
-            });
+            if ($(this).hasClass('slick-cloned')) {
+                var currentSlideIndex = $(this).data('slick-index');
+                $('.baloon-colums__text__item').each(function() {
+                    var totalSlides = swiperCarousel.slick('getSlick').slideCount;
+                    var dataIndex = $(this).data('index');
+                    var clonedSlides = currentSlideIndex - totalSlides;
+                    console.log(clonedSlides, 'data')
+                    if (clonedSlides === dataIndex) {
+                        $(this).show();
+                    }else{
+                        $(this).hide();
+                    }
+                });
+            } else {
+                var currentSlideIndex = $(this).data('slick-index');
+                $('.baloon-colums__text__item').each(function() {
+                    var dataIndex = $(this).data('index');
+                    console.log(dataIndex)
+                    console.log(currentSlideIndex)
+                    if (currentSlideIndex === dataIndex) {
+                        $(this).show();
+                    }else{
+                        $(this).hide();
+                    }
+                });
+            }
         });
 
     }

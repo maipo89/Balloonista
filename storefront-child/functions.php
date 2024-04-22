@@ -726,11 +726,6 @@ function custom_checkout_script( ){
             $parentElement.toggleClass('open');
         });
 
-        // Order Type H3
-
-        $('.order-type h3').text('Choose one of the options below:');
-        $('.woocommerce-order-details p .orddd_order_type').text('Choose one of the options below:');
-
         // Placeholder order notes 
                 
         $("#order_comments").attr("placeholder", "Notes about your order, e.g. colour requests or special notes for delivery driver.");
