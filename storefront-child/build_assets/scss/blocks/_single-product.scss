@@ -344,10 +344,10 @@ div.product-addon-totals ul li{
     font-family: 'montserrat';
     font-size: 16px !important;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300 !important;
     line-height: 20px; /* 125% */
     letter-spacing: -0.64px;
-    padding: 10px 0 10px 0;
+    padding: 10px 0 10px 0 !important;
     strong, .amount {
         font-weight: 300 !important;
         font-family: 'montserrat';
@@ -500,29 +500,14 @@ input[type="tel"]:focus,input[type="email"]:focus{
     width: 130px;
     height: 100px;
     border-radius: 16px;
-    border: 3px solid $seaFoam;
     overflow: hidden;
-    @media (max-width: 975px) {
-        margin-right: 5px;
-        margin-left: 5px;
-        width: 118px;
-    }
-    @media (max-width: 935px) {
-        width: 113px;
-    }
     @media (max-width: 930px) {
-        width: 127px;
+        width: 88px;
+        height: 74px;
     }
     @media (max-width: 508px) {
         width: 30%;
-    }
-    @media (max-width: 420px) {
-        width: 29%;
-        height: 70px;
-    }
-    @media (max-width: 340px) {
-        width: 28%;
-        height: 70px;
+        height: 74px;
     }
     img{
         max-width: 100%;
@@ -534,6 +519,7 @@ input[type="tel"]:focus,input[type="email"]:focus{
 }
 .wc-pao-addon-image-swatch.selected {
     outline-color: #70B095;
+    border: 3px solid $seaFoam;
     outline-width: 3px;
 }
 .wc-pao-addon label.wc-pao-addon-name {
@@ -1423,4 +1409,173 @@ bdi::before {
         width: 329px;
         height: 400px;
     }
+}
+
+.addon-slider {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    position: relative;
+  
+    .wc-pao-addon-image-swatch {
+        flex: 0 0 auto;
+        margin-right: 5px;
+        margin-left: 5px;
+        margin-top: 10px;
+        font-family: $montserrat;
+        font-size: 10px;
+        color: black;
+        @media (max-width: 508px) {
+            margin-right: 6px;
+            margin-left: 6px;
+        }
+    }
+}
+
+.addon-slider-container {
+    position: relative;
+
+    .wc-pao-addon-image-swatch-selected-swatch {
+        position: relative;
+        font-family: $montserrat;
+        font-size: 14px;
+        color: black;
+        bottom: -5px;
+        @media (max-width: 508px) {
+            font-size: 10px;
+        }
+    }
+
+    .wc-pao-addon-image-swatch-price, .wc-pao-addon-price {
+        display: flex;
+        font-family: $montserrat;
+        font-size: 14px;
+        color: black;
+        @media (max-width: 508px) {
+            font-size: 10px;
+        }
+    }
+
+    .woocommerce-Price-amount {
+        display: block !important;
+        font-family: $montserrat;
+        font-size: 14px !important;
+        color: black;
+        @media (max-width: 508px) {
+            font-size: 10px !important;
+        }
+    }
+}
+
+.wc-pao-addon-image-swatch {
+    display: inline-block;
+    outline: 1px solid #ddd;
+    padding: 0 !important;
+    margin-bottom: 2px;
+    border-radius: 16px;
+    overflow: hidden;
+    outline: 1px solid $seaFoam;
+    font-family: $montserrat;
+    font-size: 14px;
+    color: black;
+}
+  
+.addon-slider {
+    height: 130px;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    @media (max-width: 768px) {
+        height: 100px;
+        -webkit-overflow-scrolling: auto;
+    }
+}
+
+.addon-slider:not(.active)::-webkit-scrollbar {
+    display: none;
+}
+
+.addon-slider.active::-webkit-scrollbar {
+    display: block;
+}
+
+.wc-pao-addon-container {
+    position: relative;
+
+    .nextButton {
+        right: 0;
+        position: absolute;
+        bottom: -20px;
+    }
+
+    .prevButton {
+        left: 0;
+        position: absolute;
+        bottom: -20px;
+    }
+}
+
+/* Style for scrollbar */
+.addon-slider::-webkit-scrollbar {
+    width: 5px; /* Set the width of the scrollbar */
+    border-radius: 8px;
+    height: 10px;
+}
+
+/* Track styles */
+.addon-slider::-webkit-scrollbar-track {
+    background: $mercury; /* Set the color of the track */
+    border-radius: 8px;
+    width: 5px;
+    height: 10px;
+}
+
+/* Handle styles */
+.addon-slider::-webkit-scrollbar-thumb {
+    background: $seaFoam; /* Set the color of the handle */
+    border-radius: 8px;
+    width: 5px;
+    height: 10px;
+}
+
+/* Handle on hover */
+.addon-slider::-webkit-scrollbar-thumb:hover {
+    background: $seaFoam; /* Set the color of the handle on hover */
+    border-radius: 8px;
+}
+
+.wc-pao-addons-container {
+    @media (max-width: 1055px) {
+        max-width: 281px;
+    }
+    @media (max-width: 930px) {
+        max-width: 688px; 
+    }
+    @media (max-width: 508px) {
+        max-width: 100%;
+    }
+}
+
+.wc-pao-addon-description {
+    font-style: normal !important;
+    p {
+        font-size: 12px;
+        @media (max-width: 508px) {
+            font-size: 10px;
+        }
+    }
+}
+
+.wc-pao-addon-name {
+    @media (max-width: 1055px) {
+        text-align: left !important;
+        font-size: 14px !important;
+    }
+    @media (max-width: 930px) {
+        font-size: 16px !important;
+    }
+    @media (max-width: 508px) {
+        font-size: 14px !important;
+        margin-left: 0 !important;
+    }
+
 }

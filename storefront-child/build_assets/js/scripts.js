@@ -453,15 +453,20 @@ $(document).ready(function() {
             
             // setup animation
             const animation = gsap.to($items, 60, {
-                x: "+=" + wrapWidth,
+                x: "-=" + wrapWidth,
                 ease: 'none',
                 paused: false,
                 repeat: -1, // Infinite repeat
                 modifiers: {
                     x: function(x, target) {
                         x = parseFloat(x) % wrapWidth;
-                        
-                        $(target).css('visibility', x - longestWidth > viewWidth ? 'hidden' : 'visible');
+                        // Check if item is completely outside the viewport
+                        if (x < -longestWidth) {
+                            x += wrapWidth;
+                        }
+
+                        // Toggle visibility based on position
+                        $(target).css('visibility', Math.abs(x) - longestWidth > viewWidth ? 'hidden' : 'visible');
                         
                         return x + 'px';
                     }
@@ -511,15 +516,20 @@ $(document).ready(function() {
             
             // setup animation
             const animation = gsap.to($items, 60, {
-                x: "+=" + wrapWidth,
+                x: "-=" + wrapWidth,
                 ease: 'none',
                 paused: false,
                 repeat: -1, // Infinite repeat
                 modifiers: {
                     x: function(x, target) {
                         x = parseFloat(x) % wrapWidth;
-                        
-                        $(target).css('visibility', x - longestWidth > viewWidth ? 'hidden' : 'visible');
+                        // Check if item is completely outside the viewport
+                        if (x < -longestWidth) {
+                            x += wrapWidth;
+                        }
+
+                        // Toggle visibility based on position
+                        $(target).css('visibility', Math.abs(x) - longestWidth > viewWidth ? 'hidden' : 'visible');
                         
                         return x + 'px';
                     }
@@ -1314,7 +1324,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
         console.log('this o0', $(this));
         if ($(this).has('a').length > 0) {
             console.log('this', $(this));
-            $(this).addClass('addon-slider');
+            $(this).addClass('addon-slider-container');
         }
     });
     $('.product__option-buttons button').on('click', function() {
@@ -1799,9 +1809,72 @@ if (!localStorage.getItem('cookiesAccepted')) {
         $('.get-a-quote__get-a-quote #dropdown-quote').val(selectedOption);
     });
 
-    // detect IE8 and above, and edge
-if (document.documentMode || /Edge/.test(navigator.userAgent)) {
-    alert('Hello Microsoft User!');
-}
+    //slider addons
+    $('.addon-slider-container').each(function() {
+        var sliderAddons = $(this);
+        var slidesAddons = sliderAddons.find('a');
+        slidesAddons.wrapAll('<div class="addon-slider"></div>');
+        var sliderContAddons = sliderAddons.find('.addon-slider');
+        
+        // Check if the number of slides is more than 3
+        $(window).on('resize load', function() {
+            var prevButton = $('<svg class="prevButton" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L1.78885 6.10557C1.05181 6.4741 1.05181 7.5259 1.78885 7.89443L12 13" stroke="#D9E7E1" stroke-width="2" stroke-linecap="round"/></svg>');
+            var nextButton = $('<svg class="nextButton" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.999999 13L11.2111 7.89443C11.9482 7.5259 11.9482 6.4741 11.2111 6.10557L1 0.999999" stroke="#D9E7E1" stroke-width="2" stroke-linecap="round"/></svg>');
+            function adjustSlider() {
+                if (slidesAddons.length > 3 && window.innerWidth > 930) {
+                    sliderContAddons.addClass('active');
+                    prevButton.on('click', function() {
+                        sliderContAddons.animate({ scrollLeft: '-=140px' }, 'slow');
+                    });
+                    sliderAddons.after(prevButton);
+                    
+                    nextButton.on('click', function() {
+                        sliderContAddons.animate({ scrollLeft: '+=140px' }, 'slow');
+                    });
+                    sliderAddons.after(nextButton);
+                } else {
+                    prevButton.hide();
+                    nextButton.hide();
+                }
+        
+                if (slidesAddons.length > 7 && window.innerWidth < 930 && window.innerWidth >= 508) {
+                    sliderContAddons.addClass('active');
+                    prevButton.on('click', function() {
+                        var scrollAmount = sliderContAddons.scrollLeft() - 98;
+                        sliderContAddons.animate({ scrollLeft: scrollAmount }, 'slow');
+                    });
+                    sliderAddons.after(prevButton);
+                    nextButton.on('click', function() {
+                        var scrollAmount = sliderContAddons.scrollLeft() + 98;
+                        sliderContAddons.animate({ scrollLeft: scrollAmount }, 'slow');
+                    });
+                    sliderAddons.after(nextButton);
+                    prevButton.show();
+                    nextButton.show();
+                }
+
+                if (slidesAddons.length > 3 && window.innerWidth < 508) {
+                    sliderContAddons.addClass('active');
+                    prevButton.on('click', function() {
+                        var width = $('.wc-pao-addon-image-swatch img').width();
+                        var scrollAmount = sliderContAddons.scrollLeft() - (width + 12);
+                        sliderContAddons.animate({ scrollLeft: scrollAmount }, 'slow');
+                    });
+                    sliderAddons.after(prevButton);
+                    nextButton.on('click', function() {
+                        var width = $('.wc-pao-addon-image-swatch img').width();
+                        var scrollAmount = sliderContAddons.scrollLeft() + (width + 12)
+                        sliderContAddons.animate({ scrollLeft: scrollAmount }, 'slow');
+                    });
+                    sliderAddons.after(nextButton);
+                    prevButton.show();
+                    nextButton.show();
+                }
+            }
+        
+            $(window).on('resize load', adjustSlider);
+            adjustSlider(); // Call once initially
+        });
+    });
 
 });
