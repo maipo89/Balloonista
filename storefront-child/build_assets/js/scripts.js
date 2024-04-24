@@ -1309,6 +1309,9 @@ if (!localStorage.getItem('cookiesAccepted')) {
             // $('.product__option-buttons button').removeClass('active');
             $('.summary').addClass('active');
             $('.product-next-step').hide();
+            $('html, body').animate({
+                scrollTop: $('.product__options-head').offset().top - 98
+            }, 'slow');
         }
     });
 
