@@ -782,7 +782,9 @@ $(document).ready(function() {
                 // }
                 if (nextSlide === 0 && ((slick.slideCount - 1) === currentSlide)) {
                     $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').removeClass('width');
-                    $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('target');
+                    setTimeout(function() {
+                        $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('target');
+                    }, 300);
                     $('.baloon-colums__swiper .slick-list').addClass('opacity');
               
                 }
