@@ -884,58 +884,69 @@
                     height: 30px;
                     padding-top: 20px;
                 }
+                .slick-list{
+                    position: relative;
+                    &:before,
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        width: 18%; /* Adjust the width as needed */
+                        z-index: 1;
+                        height: 100%;
+                    }
 
-                &:before,
-                &:after {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    width: 18%; /* Adjust the width as needed */
-                    z-index: 1;
-                }
+                    /* Left gradient */
+                    &:before {
+                        left: 0px;
+                        background: linear-gradient(to left, rgba(255,255,255,0) 0%, #FFFFFF 100%);
+                    }
 
-                /* Left gradient */
-                &:before {
-                    left: 0px;
-                    background: linear-gradient(to left, rgba(255,255,255,0) 0%, #FFFFFF 100%);
-                }
-
-                /* Right gradient */
-                &:after {
-                    right: 0px;
-                    background: linear-gradient(to right, rgba(255,255,255,0) 0%, #FFFFFF 100%);
+                    /* Right gradient */
+                    &:after {
+                        right: 0px;
+                        background: linear-gradient(to right, rgba(255,255,255,0) 0%, #FFFFFF 100%);
+                    }
                 }
         }
 
 
         @media (max-width: $tablet) {
-
-                &:before,
-                &:after {
-                    display: none;
-                    width: 25%;
-                }
+            .slick-list{
+                position: relative;
+                    &:before,
+                    &:after {
+                        display: none;
+                        width: 25%;
+                        height: 100%;
+                    }
+            }
         }
 
         @media (max-width: $mobile) {
             margin-bottom: 0px;
+            .slick-list {
+                position: relative;
+                    &:before,
+                    &:after {
+                        display: block;
+                        height: 100%;
+                    }
+                } 
+            }
 
-                &:before,
-                &:after {
-                    display: block;
-                }
-
-                .slick-dots {
-                    top: -20px;
-                }
+            .slick-dots {
+                top: -20px;
             }
 
             @media (max-width: $smaller-screen) {
-
-                &:before,
-                &:after {
-                    display: none;
+                .slick-list {
+                    position: relative;
+                    &:before,
+                    &:after {
+                        display: none;
+                    }
                 }
             }
 

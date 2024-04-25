@@ -19,6 +19,20 @@
         text-align: left;
     }
 
+    p, li, h2, h3, h4, h5, cite {
+        font-family: $montserrat;
+        color: black;
+        line-height: 20px;
+    }
+
+    h4, h5 {
+        margin: 20px 0 20px 0;
+    }
+
+    li {
+        margin-bottom: 20px;
+    }
+
     h2 {
         margin: 0 0 32px 0;
         font-size: 36px;

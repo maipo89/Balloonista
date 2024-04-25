@@ -822,6 +822,12 @@ input[type="tel"]:focus,input[type="email"]:focus{
             padding-top: 10px;
         }
     }
+    .product-name .woocommerce-Price-amount {
+        @media (max-width: 1024px) {
+            margin-top: 0;
+            padding-top: 0px !important;
+        }
+    }
     // .shop_table tbody{
     //     display: flex;
     //     flex-direction: row;
@@ -1012,7 +1018,7 @@ input[type="tel"]:focus,input[type="email"]:focus{
             transition: 0.25s;
             @media (min-width: 768px) {
                 &:hover {
-                    box-shadow: inset 0 0 0 2em $white !important;
+                    box-shadow: inset 0 0 0 2em $mercury !important;
                     color: $seaFoam;
                 }
             }

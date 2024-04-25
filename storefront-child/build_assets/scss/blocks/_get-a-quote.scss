@@ -32,7 +32,7 @@
     }
 
     &__get-a-quote {
-                h3 {
+        h3 {
             margin: 0;
             margin-top: 32px;
             @media (max-width: $desktop) {
@@ -72,13 +72,11 @@
         }
         input[type=text], input[type=email], input[type=tel], input[type=date] {
             width: 232px !important;
-            margin-right: 25px;
             margin-top: 24px;
             @media (max-width: 1200px) {
                 width: 180px !important;
             }
             @media (max-width: 650px) {
-                width: 100% !important;
                 min-width: 100%;
             }
             &:nth-child(3) {
@@ -88,25 +86,6 @@
                 margin: 0;
                 margin-top: 0;
             }
-        }
-        span.wpcf7-not-valid-tip {
-            margin-top: 0px !important;
-            width: 100% !important;
-            text-align: left;
-            font-size: 0.6em !important;
-            margin-right: 0 !important;
-        }
-        .wpcf7-not-valid {
-            border: 2px solid #D80101 !important;
-            &.wpcf7-recaptcha {
-                border: initial !important;
-            }
-        }
-        .container-captcha .wpcf7-not-valid-tip {
-            width: 100% !important;
-            font-family: $montserrat !important;
-            font-size: 0.7em !important;
-            font-weight: normal !important;
         }
         .inputs-container {
             p {
@@ -130,6 +109,25 @@
                 }
             }
         }
+        span.wpcf7-not-valid-tip {
+            margin-top: 0px !important;
+            width: 100% !important;
+            text-align: left;
+            font-size: 0.6em !important;
+            margin-right: 0 !important;
+        }
+        .wpcf7-not-valid {
+            border: 2px solid #D80101 !important;
+            &.wpcf7-recaptcha {
+                border: initial !important;
+            }
+        }
+        .container-captcha .wpcf7-not-valid-tip {
+            width: 100% !important;
+            font-family: $montserrat !important;
+            font-size: 0.7em !important;
+            font-weight: normal !important;
+        }
         .requirements {
             width: 70%;
             color: black;
@@ -137,6 +135,10 @@
             @media (max-width: 890px) {
                 width: 100%;
             }
+        }
+
+        .event-date {
+            margin-top: 24px;
         }
 
         textarea {
@@ -214,8 +216,9 @@
                 width: 234px;
                 margin-right: 25px;
 
-                @media (max-width: 500px) {
+                @media (max-width: 567px) {
                     width: 100%;
+                    margin-right: 0;
                 }
 
                 p {
@@ -270,16 +273,18 @@
             .event-capture {
                 span {
                     margin-right: 24px;
-                    @media (max-width: 690px) {
-                        margin-top: 24px;
-                    }
                 }
                 p {
-                    @media (max-width: 510px) {
+                    @media (max-width: 567px) {
                         display: block;
                         input {
                             margin-top: 20px;
                         }
+                    }
+                }
+                input {
+                    @media (max-width: 1200px) {
+                        width: 220px !important;
                     }
                 }
             }
@@ -304,6 +309,10 @@
                 width: fit-content !important;
                 transition: .25s;
                 margin-right: 0;
+
+                &:focus {
+                    outline: none !important;
+                }
             }
         }
         .newsletter {
@@ -380,7 +389,6 @@
             text-align: center;
             font-family: $montserrat;
         }
-        
     }
     button[type=submit] {
         margin: 0 auto;

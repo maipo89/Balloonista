@@ -52,6 +52,10 @@
             margin-right: 17px;
             outline: none;
 
+            @media (max-width: 412px) {
+                margin-bottom: 10px;
+            }
+
             @media (max-width: 375px) {
                 margin-right: 0;
             }
@@ -233,6 +237,10 @@
                 width: fit-content !important;
                 transition: .25s;
                 margin-right: 0;
+
+                &:focus {
+                    outline: none !important;
+                }
             }
         }
         .inputs-container {
@@ -305,7 +313,6 @@
                 width: 180px !important;
             }
             @media (max-width: 650px) {
-                width: 100% !important;
                 min-width: 100%;
             }
             &:nth-child(3) {
@@ -364,6 +371,10 @@
             @media (max-width: 890px) {
                 width: 100%;
             }
+        }
+
+        .event-date {
+            margin-top: 24px;
         }
 
         textarea {
@@ -441,8 +452,9 @@
                 width: 234px;
                 margin-right: 25px;
 
-                @media (max-width: 500px) {
+                @media (max-width: 567px) {
                     width: 100%;
+                    margin-right: 0;
                 }
 
                 p {
@@ -497,16 +509,18 @@
             .event-capture {
                 span {
                     margin-right: 24px;
-                    @media (max-width: 690px) {
-                        margin-top: 24px;
-                    }
                 }
                 p {
-                    @media (max-width: 510px) {
+                    @media (max-width: 567px) {
                         display: block;
                         input {
                             margin-top: 20px;
                         }
+                    }
+                }
+                input {
+                    @media (max-width: 1200px) {
+                        width: 220px !important;
                     }
                 }
             }
@@ -531,6 +545,10 @@
                 width: fit-content !important;
                 transition: .25s;
                 margin-right: 0;
+
+                &:focus {
+                    outline: none !important;
+                }
             }
         }
         .newsletter {
