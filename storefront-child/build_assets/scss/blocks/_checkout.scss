@@ -914,7 +914,7 @@ tfoot .cart-subtotal {
     transition: 0.25s;
     @media (min-width: 768px) {
         &:hover {
-            box-shadow: inset 0 0 0 2em $mercury !important;
+            box-shadow: inset 0 0 0 2em $white !important;
             color: $seaFoam;
         }
     }
