@@ -1092,7 +1092,7 @@ if (!localStorage.getItem('cookiesAccepted')) {
             scrollTrigger: {
                 trigger: block,
                 start: "top bottom",
-                end: "1500px 50%",
+                end: "2300px 50%",
                 onEnter: () => { gsap.to(block, { opacity: 1, y: 0 }); },
                 onLeave: () => { gsap.to(block, { opacity: 0, y: -50 }); },
                 onEnterBack: () => { gsap.to(block, { opacity: 1, y: 0 }); },
