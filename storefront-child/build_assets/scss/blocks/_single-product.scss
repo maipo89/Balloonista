@@ -870,7 +870,7 @@ input[type="tel"]:focus,input[type="email"]:focus{
         letter-spacing: -0.6px;
     }
     dd p{
-        display: flex;
+        display: -webkit-inline-box;
     }
     a.remove::before{
        background-color: #fff !important;
@@ -1572,6 +1572,7 @@ bdi::before {
 }
 
 .wc-pao-addon-name {
+    display: inline-block !important;
     @media (max-width: 1055px) {
         text-align: left !important;
         font-size: 14px !important;
@@ -1584,4 +1585,11 @@ bdi::before {
         margin-left: 0 !important;
     }
 
+}
+
+.wc-pao-addon-price {
+    display: flex !important;
+    .woocommerce-Price-amount {
+        display: block !important;
+    }
 }

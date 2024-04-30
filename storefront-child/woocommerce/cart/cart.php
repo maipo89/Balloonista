@@ -167,10 +167,12 @@ do_action( 'woocommerce_before_cart' ); ?>
 										);
 									?>
 								</div>
-								<div class="onqor-qunaity">
-									<p class="onqor-qty-btn onqor-qty-btn-minus">-</p>
-									<p class="onqor-qty-number">1</p>
-									<p class="onqor-qty-btn onqor-qty-btn-pluss">+</p>
+								<div class="onqor-quantity-container">
+									<div class="onqor-qunaity">
+										<p class="onqor-qty-btn onqor-qty-btn-minus">-</p>
+										<p class="onqor-qty-number">1</p>
+										<p class="onqor-qty-btn onqor-qty-btn-pluss">+</p>
+									</div>
 								</div>
 							</div>
 						</div>

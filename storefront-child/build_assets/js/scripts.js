@@ -781,11 +781,9 @@ $(document).ready(function() {
                 //     $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('width');
                 // }
                 if (nextSlide === 0 && ((slick.slideCount - 1) === currentSlide)) {
-                    $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').removeClass('width');
-                    setTimeout(function() {
-                        $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').addClass('target');
-                    }, 300);
-                    $('.baloon-colums__swiper .slick-list').addClass('opacity');
+                    console.log(currentSlide, 'currrrrreeeeenett')
+                        $('.baloon-colums__swiper .slick-slide[data-slick-index="' + (currentSlide + 1) + '"]').addClass('target');
+                    // $('.baloon-colums__swiper .slick-list').addClass('opacity');
               
                 }
                 
@@ -802,21 +800,22 @@ $(document).ready(function() {
         if(currentSlide === 0) {
             $('.baloon-colums__swiper .slick-slide').not('[data-slick-index="' + currentSlide + '"]').removeClass('width');
             $('.slick-slide').removeClass('target');
+            // $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').addClass('width');
             setTimeout(function() {
-                $('.baloon-colums__swiper .slick-list').removeClass('opacity');
+                // $('.baloon-colums__swiper .slick-list').removeClass('opacity');
             }, 600);
         }
         var firstActive = document.querySelectorAll(".baloon-colums__swiper .slick-active")[0];
-        if (!firstActive.classList.contains('slick-current')) {
-            $('.baloon-colums__swiper .slick-slide.slick-current').removeClass('width');
-            $('.baloon-colums__swiper .slick-slide.slick-current').removeClass('slick-current');
+        // if (!firstActive.classList.contains('slick-current')) {
+        //     $('.baloon-colums__swiper .slick-slide.slick-current').removeClass('width');
+        //     $('.baloon-colums__swiper .slick-slide.slick-current').removeClass('slick-current');
 
-            // Add 'slick-current' class to firstActive
-            var firstActive = $('.baloon-colums__swiper .slick-active').eq(0);
-            firstActive.addClass('width');
-            firstActive.addClass('slick-current');
+        //     // Add 'slick-current' class to firstActive
+        //     var firstActive = $('.baloon-colums__swiper .slick-active').eq(0);
+        //     firstActive.addClass('width');
+        //     firstActive.addClass('slick-current');
             
-        }
+        // }
         var slickCurrentIndex = currentSlide;
         
         // Assuming baloon-colums__text__item has a common class, adjust the selector accordingly
