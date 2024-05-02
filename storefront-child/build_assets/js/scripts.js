@@ -157,18 +157,16 @@ $(document).ready(function() {
                     var title = product.querySelector('h2').textContent.toLowerCase();
                     console.log(title.includes(searchText))
                     if (title.includes(searchText)) {
-                        if (numToShow < 3) {
                             product.style.display = 'block';
                             numToShow++;
-                        }
                     } else {
                         product.style.display = 'none';
                     }
                 });
-                if (numToShow > 0 && numToShow <= 3) {
-                    showMoreButton.style.display = 'block';
-                } else {
+                if (numToShow >= 0 && numToShow <= 3) {
                     showMoreButton.style.display = 'none';
+                } else {
+                    showMoreButton.style.display = 'block';
                 }
             } else if (screenWidth <= 768 && screenWidth >= 480) {
                 numToShow = 0;
@@ -176,18 +174,16 @@ $(document).ready(function() {
                 document.querySelectorAll('.header .product-container .product-name').forEach(function(product) {
                     var title = product.querySelector('h2').textContent.toLowerCase();
                     if (title.includes(searchText)) {
-                        if(numToShow < 2) {
                             product.style.display = 'block';
                             numToShow++;
-                        }
                     } else {
                         product.style.display = 'none';
                     }
                 });
-                if (numToShow > 0 && numToShow <= 2) {
-                    showMoreButton.style.display = 'block';
-                } else {
+                if (numToShow >= 0 && numToShow <= 2) {
                     showMoreButton.style.display = 'none';
+                } else {
+                    showMoreButton.style.display = 'block';
                 }
             } else if (screenWidth < 480) {
                 numToShow = 0;
@@ -195,18 +191,16 @@ $(document).ready(function() {
                 document.querySelectorAll('.header .product-container .product-name').forEach(function(product) {
                     var title = product.querySelector('h2').textContent.toLowerCase();
                     if (title.includes(searchText)) {
-                        if (numToShow < 1) {
                         product.style.display = 'block';
                         numToShow++;
-                        }
                     } else {
                         product.style.display = 'none';
                     }
                 });
-                if (numToShow > 0 && numToShow <= 1) {
-                    showMoreButton.style.display = 'block';
-                } else {
+                if (numToShow >= 0 && numToShow <= 1) {
                     showMoreButton.style.display = 'none';
+                } else {
+                    showMoreButton.style.display = 'block';
                 }
             }
             document.querySelectorAll('.header .product-container .product-name').forEach(function(product) {
@@ -782,40 +776,31 @@ $(document).ready(function() {
                 // }
                 if (nextSlide === 0 && ((slick.slideCount - 1) === currentSlide)) {
                     console.log(currentSlide, 'currrrrreeeeenett')
+                        $('.baloon-colums__swiper .slick-slide[data-slick-index="' + (nextSlide) + '"]').addClass('width');
+                        $('.baloon-colums__swiper .slick-slide[data-slick-index="' + (currentSlide) + '"]').removeClass('width');
                         $('.baloon-colums__swiper .slick-slide[data-slick-index="' + (currentSlide + 1) + '"]').addClass('target');
                     // $('.baloon-colums__swiper .slick-list').addClass('opacity');
               
                 }
                 
-        }else{
-            // var currentElement = $('.baloon-colums__swiper .slick-current');
+        }
+        if (nextSlide < currentSlide || (nextSlide === (slick.slideCount - 1) && currentSlide === 0)) {
+            // var currentElement = $('.baloon-colums__swiper .slick-current');x
             // var firstActive = document.querySelectorAll(".baloon-colums__swiper .slick-active")[0];
             // console.log(currentElement)
+            $('.baloon-colums__swiper .slick-slide[data-slick-index="' + nextSlide + '"]').removeClass('width');
             $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').removeClass('width');
+            if (nextSlide === (slick.slideCount - 1) && currentSlide === 0) {
+                $('.baloon-colums__swiper .slick-slide[data-slick-index="-1"]').addClass('target-back');
+            }
         }
 
     });
 
     $('.baloon-colums__swiper').on('afterChange', function(event, slick, currentSlide){
-        if(currentSlide === 0) {
-            $('.baloon-colums__swiper .slick-slide').not('[data-slick-index="' + currentSlide + '"]').removeClass('width');
-            $('.slick-slide').removeClass('target');
-            // $('.baloon-colums__swiper .slick-slide[data-slick-index="' + currentSlide + '"]').addClass('width');
-            setTimeout(function() {
-                // $('.baloon-colums__swiper .slick-list').removeClass('opacity');
-            }, 600);
-        }
-        var firstActive = document.querySelectorAll(".baloon-colums__swiper .slick-active")[0];
-        // if (!firstActive.classList.contains('slick-current')) {
-        //     $('.baloon-colums__swiper .slick-slide.slick-current').removeClass('width');
-        //     $('.baloon-colums__swiper .slick-slide.slick-current').removeClass('slick-current');
-
-        //     // Add 'slick-current' class to firstActive
-        //     var firstActive = $('.baloon-colums__swiper .slick-active').eq(0);
-        //     firstActive.addClass('width');
-        //     firstActive.addClass('slick-current');
-            
-        // }
+        $('.baloon-colums__swiper .slick-slide').not('[data-slick-index="' + currentSlide + '"]').removeClass('width');
+        $('.slick-slide').removeClass('target-back');
+        $('.slick-slide').removeClass('target');
         var slickCurrentIndex = currentSlide;
         
         // Assuming baloon-colums__text__item has a common class, adjust the selector accordingly

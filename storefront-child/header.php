@@ -141,55 +141,57 @@
 					?>
 				</div>
 				<p class="heading-products">Related Products</p>
-				<div class="product-container">
-					<?php
-					$args = array(
-						'post_type'      => 'product',
-						'posts_per_page' => -1, // Retrieve all products
-					);
+				<div class="products-container">
+					<div class="product-container">
+						<?php
+						$args = array(
+							'post_type'      => 'product',
+							'posts_per_page' => -1, // Retrieve all products
+						);
 
-					$products = new WP_Query($args);
+						$products = new WP_Query($args);
 
-					if ($products->have_posts()) {
-						while ($products->have_posts()) : $products->the_post();
-							global $product;
-							?>
-							<div class="product-name">
-							<a href="<?php echo get_permalink(); ?>">
-								<?php
-								$image_id = $product->get_image_id();
-								if ($image_id) {
-									$image_url = wp_get_attachment_image_url($image_id, 'medium'); // Change 'medium' to the desired image size
-									if ($image_url) {
-										?>
-										<div class="product-name__image">
-											<div style="background-image: url('<?php echo esc_url($image_url); ?>')" class="product-name__image__img"></div>
-											<p class="primary-button">View</p>
-										</div>
-										<?php
-									}
-								}
+						if ($products->have_posts()) {
+							while ($products->have_posts()) : $products->the_post();
+								global $product;
 								?>
-								<h2><?php echo get_the_title(); ?></h2>
-								<span class="product-name__price">
+								<div class="product-name">
+								<a href="<?php echo get_permalink(); ?>">
 									<?php
-										$price = $product->get_price();
-
-										if ($price) {
-											echo 'from £' . number_format($price, 2);
+									$image_id = $product->get_image_id();
+									if ($image_id) {
+										$image_url = wp_get_attachment_image_url($image_id, 'medium'); // Change 'medium' to the desired image size
+										if ($image_url) {
+											?>
+											<div class="product-name__image">
+												<div style="background-image: url('<?php echo esc_url($image_url); ?>')" class="product-name__image__img"></div>
+												<p class="primary-button">View</p>
+											</div>
+											<?php
 										}
+									}
 									?>
-                                </span>
-							</a>
-							</div>
-							<?php
-						endwhile;
+									<h2><?php echo get_the_title(); ?></h2>
+									<span class="product-name__price">
+										<?php
+											$price = $product->get_price();
 
-						wp_reset_postdata();
-					}
-					?>
+											if ($price) {
+												echo 'from £' . number_format($price, 2);
+											}
+										?>
+									</span>
+								</a>
+								</div>
+								<?php
+							endwhile;
+
+							wp_reset_postdata();
+						}
+						?>
+					</div>
 					<div class="button-container"><a href="<?php echo get_home_url(); ?>/basket">
-						<a href="<?php echo get_home_url(); ?>/shop" class="tertiary-button" id="show-more-btn">View More</a>
+						<a href="<?php echo get_home_url(); ?>/shop" class="tertiary-button" id="show-more-btn">View Shop</a>
 					</div>
 				</div>
 			</div>

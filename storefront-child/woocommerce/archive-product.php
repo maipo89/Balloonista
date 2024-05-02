@@ -151,12 +151,6 @@ get_header( 'shop' );
             }
         
             $args['tax_query'] = $tax_query;
-            
-            if (!isset($_GET['orderby'])) {
-                $args['orderby']  = 'meta_value_num';
-                $args['meta_key'] = 'total_sales';
-                $args['order']    = 'desc';
-            }
         }
 
         $query = new WP_Query($args);
@@ -215,7 +209,7 @@ get_header( 'shop' );
             $desired_order = array(
                 "Balloon type",
                 "Occasion",
-                "By Product",
+                "Product",
                 "Colour"
             );
             $grouped_categories = array();
