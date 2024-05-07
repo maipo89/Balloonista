@@ -232,7 +232,7 @@ input[type=text], input[type=tel], input[type=email], input[type=number], input[
     &:active, &:focus {
         border: 2px solid $seaFoam;
         outline: none;
-        background-color: $white;
+        background-color: $white !important;
     }
 }
 

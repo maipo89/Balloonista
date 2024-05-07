@@ -83,7 +83,7 @@ $query = new WP_Query($args);
                 </a>
                 <div class="blogs__card__description">
                     <h2><?php the_title(); ?></h2>
-                    <p><?php echo get_the_excerpt() ?></p>
+                    <!-- <p><?php echo get_the_excerpt() ?></p> -->
                 </div>
                 <div class="blogs__card__button">
                     <a class="button primary-button" href="<?php the_permalink() ?>">Read More</a>

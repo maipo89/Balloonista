@@ -616,24 +616,24 @@ input[type="tel"]:focus,input[type="email"]:focus{
     max-width: 1400px;
     width: 100%;
     margin: 0 auto;
-    padding: 72px 40px 96px 40px;
+    padding: 216px 40px 96px 40px;
     @media (max-width: 1020px) {
         font-size: 36px;
-        padding: 72px 40px 64px 40px;
+        padding: 216px 40px 64px 40px;
     }
     @media (max-width: $tablet) {
         max-width: 100%;
-        padding: 56px 32px 28px 32px;
+        padding: 200px 32px 28px 32px;
     }
 
     @media (max-width: $mobile) {
         font-size: 32px;
-        padding: 32px 20px 32px 20px;
+        padding: 190px 20px 32px 20px;
     }
 
     @media (max-width: $smaller-screen) {
         font-size: 32px;
-        padding: 32px 16px 32px 16px;
+        padding: 190px 16px 32px 16px;
     }
 }
 .basket-info-mobile {
@@ -1422,6 +1422,7 @@ bdi::before {
     flex-wrap: nowrap;
     overflow-x: auto;
     position: relative;
+    padding-right: 2.5px;
   
     .wc-pao-addon-image-swatch {
         flex: 0 0 auto;
@@ -1550,6 +1551,9 @@ bdi::before {
 }
 
 .wc-pao-addons-container {
+    textarea {
+        box-shadow: none !important;
+    }
     @media (max-width: 1055px) {
         max-width: 281px;
     }
@@ -1591,5 +1595,36 @@ bdi::before {
     display: flex !important;
     .woocommerce-Price-amount {
         display: block !important;
+    }
+}
+
+.woocommerce-cart .delivery-banner, .single-product .delivery-banner {
+    width: 100%;
+    margin-top: 96px;
+    position: fixed;
+    z-index: 60;
+}
+
+.single-product .breadcrumb {
+    padding: 216px 0 48px 0;
+
+    @media (max-width: $desktop) {
+        padding: 216px 0 32px 0;
+    }
+
+    @media (max-width: $tablet) {
+        padding: 190px 0 48px 0;
+    }
+
+    @media (max-width: $mobile) {
+        padding: 190px 0 48px 0;
+    }
+
+    @media (max-width: 340) {
+        padding: 210px 0 48px 0;
+    }
+
+    @media (max-width: $smaller-screen) {
+        padding: 210px 0 32px 0;
     }
 }
