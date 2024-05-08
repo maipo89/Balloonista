@@ -463,6 +463,33 @@ input[type="tel"]:focus,input[type="email"]:focus{
 .wc-pao-addon-container{
     margin-bottom: 32px;
 }
+.wc-pao-addon-wrap {
+    select{
+        margin-top: 20px;
+        min-width: 100% !important;
+        appearance: none;
+        max-width: 100% !important;
+        height: 42px;
+        width: 100%;
+        border-radius: 10px;
+        border: 2px solid #D9E7E1;
+        overflow: hidden;
+        color: #000;
+        text-overflow: ellipsis;
+        /* Body 1 - Montserrat Regular - 16px */
+        font-family: Montserrat;
+        font-size: 16px;
+        font-style: normal;
+        padding: 0px 12px;
+        font-weight: 400;
+        line-height: 20px; /* 125% */
+        letter-spacing: -0.64px;
+        position: relative;
+        &:focus-visible {
+            outline: none !important;
+        }
+    }
+}
 .wc-pao-addons-container{
     max-width: 422px;
     width: 100%;
