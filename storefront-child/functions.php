@@ -729,6 +729,41 @@ function custom_checkout_script( ){
         // Placeholder order notes 
                 
         $("#order_comments").attr("placeholder", "Notes about your order, e.g. colour requests or special notes for delivery driver.");
+
+        
+        // Function to show products based on search input
+
+        function preventBodyScroll() {
+            $('body').addClass('modal-open'); // Add a class to the body to disable scrolling
+        }
+        
+        // Function to enable scrolling
+        function enableBodyScroll() {
+            $('body').removeClass('modal-open'); // Remove the class to enable scrolling
+        }
+
+        $('.search-icon').on('click', function() {
+            $('.background-search').addClass('open');
+            $('.search').addClass('open');
+            const input = document.getElementById('search-input');
+            input.focus();
+            preventBodyScroll(); // Call the function to prevent scrolling when modal opens
+        });
+
+        $('.search-option').on('click', function() {
+            $('.background-search').addClass('open');
+            $('.search').addClass('open');
+            preventBodyScroll(); // Call the function to prevent scrolling when modal opens
+        });
+
+        $('.search__container .close-icon').on('click', function() {
+            $('.background-search').removeClass('open');
+            $('.search').removeClass('open');
+            $('.mobile-menu').removeClass('open');
+            $('.close').removeClass('show');
+            $('.hamburger').removeClass('hide');
+            enableBodyScroll(); // Call the function to enable scrolling when modal closes
+        });
     });
 
     </script>
