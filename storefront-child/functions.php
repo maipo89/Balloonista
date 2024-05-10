@@ -946,3 +946,208 @@ function disable_shipping_calc_on_cart( $show_shipping ) {
     return $show_shipping;
 }
 add_filter( 'woocommerce_cart_ready_to_calc_shipping', 'disable_shipping_calc_on_cart', 99 );
+
+
+// AJAX handler for product search
+
+add_action('wp_ajax_my_product_search', 'my_product_search');
+add_action('wp_ajax_nopriv_my_product_search', 'my_product_search'); // For non-logged in users
+
+function my_product_search() {
+    $search_term = isset($_POST['search_term']) ? sanitize_text_field($_POST['search_term']) : '';
+
+    $args = array(
+        'post_type'      => 'product',
+        'posts_per_page' => -1,
+        's'              => $search_term,
+    );
+
+    $products = new WP_Query($args);
+
+    if ($products->have_posts()) {
+        while ($products->have_posts()) : $products->the_post();
+            global $product;
+            ?>
+            <div class="product-name">
+            <a href="<?php echo get_permalink(); ?>">
+                <?php
+                $image_id = $product->get_image_id();
+                if ($image_id) {
+                    $image_url = wp_get_attachment_image_url($image_id, 'medium'); // Change 'medium' to the desired image size
+                    if ($image_url) {
+                        ?>
+                        <div class="product-name__image">
+                            <div style="background-image: url('<?php echo esc_url($image_url); ?>')" class="product-name__image__img"></div>
+                            <p class="primary-button">View</p>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+                <h2><?php echo get_the_title(); ?></h2>
+                <span class="product-name__price">
+                    <?php
+                        $price = $product->get_price();
+
+                        if ($price) {
+                            echo 'from £' . number_format($price, 2);
+                        }
+                    ?>
+                </span>
+            </a>
+            </div>
+            <?php
+        endwhile;
+
+        wp_reset_postdata();
+    }
+
+    die(); // Always end with die() to avoid extra output
+}
+
+add_action('wp_ajax_get_pages', 'get_pages_callback');
+add_action('wp_ajax_nopriv_get_pages', 'get_pages_callback');
+
+function get_pages_callback() {
+    $search_term = isset($_POST['search_term']) ? sanitize_text_field($_POST['search_term']) : '';
+
+    $args = array(
+        'post_type' => 'page',
+        'posts_per_page' => -1,
+        's' => $search_term, // Use the search term to filter pages
+    );
+
+    $pages = new WP_Query($args);
+
+    if ($pages->have_posts()) {
+        while ($pages->have_posts()) {
+            $pages->the_post();
+            echo '<p><a href="' . get_permalink() . '">' . get_the_title() . '</a></p>';
+        }
+        wp_reset_postdata(); // Reset the query
+    }
+
+    wp_die(); // Always include this line to terminate the script
+}
+
+add_action('wp_footer', 'my_product_search_script');
+
+function my_product_search_script() {
+    ?>
+    <script>
+    jQuery(document).ready(function($) {
+        var typingTimer; // Timer identifier
+        var doneTypingInterval = 500; // Time in milliseconds (0.2 seconds)
+
+        $('#search-input').on('keyup', function() {
+            clearTimeout(typingTimer); // Clear the previous timer
+
+            // Start a new timer
+            typingTimer = setTimeout(function() {
+                var search_term = $('#search-input').val();
+
+                // Check if the search term is empty
+                if (search_term.trim() === '') {
+                    // Clear the search results
+                    $('.product-container').html('');
+                    $('.pages-container').html('');
+                    $('.pages-container').removeClass('open');
+                    $('.search__container .heading-pages').hide();
+                    $('.search__container .heading-products').hide();
+                    $('#show-more-btn').hide();
+                } else {
+                    // Make the AJAX request
+                    $.ajax({
+                        url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                        type: 'POST',
+                        data: {
+                            action: 'my_product_search',
+                            search_term: search_term,
+                        },
+                        success: function(response) {
+                            $('.product-container').html(response);
+                            
+                            if ($('.product-container .product-name').length > 0) {
+                                $('.search__container .heading-products').show();
+                            } else {
+                                $('.search__container .heading-products').hide();
+                            }
+
+                            // Perform additional logic for the view more link button
+                            const inputValue = search_term.toLowerCase();
+                            var productCategories = dataFromPHP.productCategories;
+                            let categoryFound = '';
+
+                            $.each(productCategories, function(index, category) {
+                                if (category.toLowerCase().includes(inputValue)) {
+                                    categoryFound = category;
+                                    return false; // Break the loop once a match is found
+                                }
+                            });
+
+                            let numResults = $('.product-container .product-name').length;
+                            if (numResults >= 3 && $(window).width() > 768) {
+                                if (categoryFound !== '') {
+                                    $('#show-more-btn').attr('href', window.location.origin + '/shop/product-category/' + categoryFound.toLowerCase());
+                                } else {
+                                    $('#show-more-btn').attr('href', window.location.origin + '/shop');
+                                }
+                                $('#show-more-btn').css('display', 'block');
+                            } else if (numResults >= 2 && $(window).width() <= 768 && $(window).width() >= 480) {
+                                if (categoryFound !== '') {
+                                    $('#show-more-btn').attr('href', window.location.origin + '/shop/product-category/' + categoryFound.toLowerCase());
+                                } else {
+                                    $('#show-more-btn').attr('href', window.location.origin + '/shop');
+                                }
+                                $('#show-more-btn').css('display', 'block');
+                            } else if (numResults >= 1 && $(window).width() < 480) {
+                                if (categoryFound !== '') {
+                                    $('#show-more-btn').attr('href', window.location.origin + '/shop/product-category/' + categoryFound.toLowerCase());
+                                } else {
+                                    $('#show-more-btn').attr('href', window.location.origin + '/shop');
+                                }
+                                $('#show-more-btn').css('display', 'block');
+                            } else {
+                                $('#show-more-btn').hide();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(status + ': ' + error);
+                        }
+                    });
+                            
+                    // Second AJAX call for pages
+                    $.ajax({
+                        url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                        type: 'POST',
+                        data: {
+                            action: 'get_pages',
+                            search_term: search_term,
+                        },
+                        success: function(response) {
+                            // Append the retrieved pages to a container
+                            $('.pages-container').html(response);
+
+                            if (response.trim() === '') {
+                                $('.pages-container').removeClass('open');
+                            } else {
+                                $('.pages-container').addClass('open');
+                            }
+
+                            if ($('.pages-container p').length > 0) {
+                                $('.search__container .heading-pages').show();
+                            } else {
+                                $('.search__container .heading-pages').hide();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(status + ': ' + error);
+                        }
+                    });
+                }
+            }, doneTypingInterval);
+        });
+    });
+    </script>
+    <?php
+}

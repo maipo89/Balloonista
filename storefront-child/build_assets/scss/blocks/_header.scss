@@ -624,7 +624,6 @@
         
                         .product-name {
                             flex: 0 0 auto;
-                            display: none;
                             width: 136px;
                             margin-bottom: 20px;
         
@@ -776,9 +775,8 @@
                 }
 
                 .pages-container {
-                    display: flex;
-                    flex-wrap: wrap;
                     display: none;
+                    flex-wrap: wrap;
                     height: 90px;
                     overflow: auto;
                     &.open {
@@ -795,7 +793,7 @@
                         font-size: 15px;
                         font-weight: 300;
                         margin-bottom: 24px;
-                        display: none;
+                        display: block;
                         @media (max-width: 768px) {
                             text-align: left;
                         }
@@ -819,10 +817,6 @@
                                     border-radius: 7px;
                                 }
                             }  
-                        }
-
-                        &.open {
-                            display: block;
                         }
                     }
                 }
